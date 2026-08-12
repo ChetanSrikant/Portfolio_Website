@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BackgroundBeams from "./BackgroundBeams.jsx";
 import styles from "./HomeCompletionSections.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -114,71 +115,6 @@ function ProofStrip() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-function BeamsInterlude() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      const media = gsap.matchMedia();
-
-      media.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.to(`.${styles.beamForward}`, {
-          xPercent: 18,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "clamp(top bottom)",
-            end: "clamp(bottom top)",
-            scrub: 1.2,
-          },
-        });
-
-        gsap.to(`.${styles.beamReverse}`, {
-          xPercent: -16,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "clamp(top bottom)",
-            end: "clamp(bottom top)",
-            scrub: 1.4,
-          },
-        });
-      });
-
-      return () => media.revert();
-    }, sectionRef);
-
-    return () => context.revert();
-  }, []);
-
-  return (
-    <section
-      id="creative-interlude"
-      ref={sectionRef}
-      className={styles.beamsInterlude}
-      data-gundam-stage-anchor="creative"
-      aria-labelledby="beams-heading"
-    >
-      <div className={styles.beams} aria-hidden="true">
-        <span className={`${styles.beam} ${styles.beamForward}`} />
-        <span className={`${styles.beam} ${styles.beamReverse}`} />
-        <span className={`${styles.beam} ${styles.beamForward}`} />
-        <span className={`${styles.beam} ${styles.beamReverse}`} />
-      </div>
-      <div className={styles.beamCopy}>
-        <span className="eyebrow">Between disciplines</span>
-        <h2 id="beams-heading" className={styles.beamHeadline}>
-          I build where AI, software, and imagination meet.
-        </h2>
-        <p className={styles.beamSupport}>
-          From experiments to usable products, I turn ideas into things people
-          can actually interact with.
-        </p>
       </div>
     </section>
   );
@@ -380,7 +316,12 @@ export default function HomeCompletionSections() {
   return (
     <div className={styles.completion}>
       <ProofStrip />
-      <BeamsInterlude />
+      <BackgroundBeams
+        id="creative-interlude"
+        stageAnchor="creative"
+        eyebrow="Between disciplines"
+        title="I build where AI, software, and imagination meet."
+      />
       <SelectedWork />
       <VelocityDivider />
       <CurrentFocus />

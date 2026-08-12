@@ -64,11 +64,6 @@ export const HOME_STAGE = Object.freeze({
   }),
 });
 
-/**
- * The Intro -> Philosophy crossing is the only automatic Lifter flight.
- * Every later stage change uses the damped transform system while remaining
- * in Idle. The same boundary remains meaningful when crossed in reverse.
- */
 export const HOME_CHOREOGRAPHY = Object.freeze({
   flightBoundaryIndexes: Object.freeze([1]),
   stageHysteresis: 0.006,
@@ -90,8 +85,8 @@ const GUNDAM_KEYFRAMES = Object.freeze([
   frame(0.105, -1.88, 0, 0, 1.3, 11, 1, 0.52),
 
   frame(0.12, -1.6, 0.2, 0, 1.12, 18, 0.95, 0.35),
-  frame(0.185, 1.6, 0.22, 0, 1, 34, 0.86, 0.3),
-  frame(0.225, 1.88, 0.04, 0, 1.02, 28, 0.82, 0.42),
+  frame(0.15, 1.9, 0.22, 0, 1, 34, 0.86, 0.3),
+  frame(0.225, 2.15, 0.04, 0, 1.02, 28, 0.82, 0.42),
 
   frame(0.27, 2.25, 0.08, 0, 0.78, 22, 0.72, 0.25),
   frame(0.315, 2.25, 0.1, 0, 0.76, 22, 0.72, 0.24),
@@ -114,7 +109,7 @@ const GUNDAM_KEYFRAMES = Object.freeze([
 
 const REDUCED_MOTION_TRANSFORMS = Object.freeze({
   intro: frame(0, -1.88, 0, 0, 1.3, 11, 1, 0.52),
-  philosophy: frame(0, 1.88, 0.06, 0, 1.08, 28, 0.78, 0.42),
+  philosophy: frame(0, 2.15, 0.06, 0, 1.08, 28, 0.78, 0.42),
   skills: frame(0, 2.25, 0.08, 0, 0.78, 22, 0.6, 0.25),
   creative: frame(0, 0.6, 0.5, 0, 0.92, 48, 0.8, 0.18),
   projects: frame(0, 2.5, 0.12, 0, 0.66, 17, 0.52, 0.18),
@@ -232,7 +227,9 @@ function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {
 }
 
 function adaptTransformForViewport(transform, stageKey, viewportWidth) {
-  if (!Number.isFinite(viewportWidth)) return transform;
+  if (!Number.isFinite(viewportWidth)) {
+    return { ...transform, scale: transform.scale * 1.12 };
+  }
 
   if (viewportWidth <= 720) {
     const playground = stageKey === HOME_STAGE_KEYS.PLAYGROUND;
@@ -242,7 +239,7 @@ function adaptTransformForViewport(transform, stageKey, viewportWidth) {
         ? 0
         : Math.min(0.3, Math.max(-0.3, transform.x * 0.12)),
       y: transform.y + (playground ? 0.92 : 0.78),
-      scale: transform.scale * (playground ? 0.56 : 0.58),
+      scale: transform.scale * (playground ? 0.59 : 0.61),
     };
   }
 
@@ -251,11 +248,11 @@ function adaptTransformForViewport(transform, stageKey, viewportWidth) {
       ...transform,
       x: transform.x * 0.72,
       y: transform.y + 0.04,
-      scale: transform.scale * 0.86,
+      scale: transform.scale * 0.93,
     };
   }
 
-  return transform;
+  return { ...transform, scale: transform.scale * 1.12 };
 }
 
 function degreesToRadians(degrees) {

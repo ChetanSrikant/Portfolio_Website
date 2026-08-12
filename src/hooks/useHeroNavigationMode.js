@@ -10,7 +10,7 @@ export default function useHeroNavigationMode() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setCondensed(entry.intersectionRatio < HERO_NAV_THRESHOLD),
-      { threshold: [0, HERO_NAV_THRESHOLD, 1] }
+      { threshold: [0, 0.1, HERO_NAV_THRESHOLD, 0.5, 1] }
     );
 
     observer.observe(hero);

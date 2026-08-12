@@ -89,80 +89,6 @@
   line-height: 1.65;
 }
 
-.beamsInterlude {
-  position: relative;
-  min-height: clamp(560px, 78vh, 820px);
-  display: grid;
-  place-items: center;
-  isolation: isolate;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-  padding: var(--section-pad-y) var(--edge-pad-x);
-  background:
-    radial-gradient(circle at 50% 48%, rgba(201, 162, 75, 0.07), transparent 36%),
-    rgba(9, 9, 9, 0.76);
-}
-
-.beams {
-  position: absolute;
-  inset: -25% -18%;
-  z-index: -1;
-  transform: rotate(-13deg);
-  opacity: 0.68;
-}
-
-.beam {
-  position: absolute;
-  left: -15%;
-  width: 130%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--accent-line) 46%, transparent 100%);
-  box-shadow: 0 0 28px rgba(201, 162, 75, 0.13);
-  will-change: transform;
-}
-
-.beam:nth-child(1) {
-  top: 28%;
-}
-
-.beam:nth-child(2) {
-  top: 43%;
-  opacity: 0.5;
-}
-
-.beam:nth-child(3) {
-  top: 61%;
-  height: 2px;
-  opacity: 0.78;
-}
-
-.beam:nth-child(4) {
-  top: 75%;
-  opacity: 0.32;
-}
-
-.beamCopy {
-  width: min(100%, 940px);
-  text-align: center;
-}
-
-.beamHeadline {
-  margin-top: 24px;
-  font-size: clamp(38px, 6vw, 82px);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
-}
-
-.beamSupport {
-  max-width: 56ch;
-  margin: 30px auto 0;
-  color: var(--text-secondary);
-  font-size: clamp(14px, 1.3vw, 17px);
-  line-height: 1.75;
-  text-wrap: pretty;
-}
-
 .selectedWork,
 .currentFocus {
   padding: var(--section-pad-y) var(--edge-pad-x);
@@ -575,17 +501,11 @@
 @media (max-width: 520px) {
   .proof,
   .selectedWork,
-  .currentFocus,
-  .beamsInterlude {
+  .currentFocus {
     padding-right: 20px;
     padding-left: 20px;
   }
 
-  .beamsInterlude {
-    min-height: 620px;
-  }
-
-  .beamHeadline,
   .sectionTitle {
     font-size: clamp(34px, 11vw, 50px);
   }
@@ -638,7 +558,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .beam,
   .velocityRow,
   .projectDetails summary,
   .editorialCta a {

@@ -62,6 +62,17 @@ function useViewportWidth() {
   return viewportWidth;
 }
 
+function crossedFlightBoundary(previousIndex, currentIndex) {
+  if (previousIndex === currentIndex) return false;
+
+  const direction = currentIndex > previousIndex ? 1 : -1;
+  return HOME_CHOREOGRAPHY.flightBoundaryIndexes.some((boundaryIndex) =>
+    direction > 0
+      ? boundaryIndex > previousIndex && boundaryIndex <= currentIndex
+      : boundaryIndex <= previousIndex && boundaryIndex > currentIndex
+  );
+}
+
 function Lighting() {
   return (
     <>
@@ -88,17 +99,6 @@ function ModelLoading() {
         Initializing unit
       </div>
     </Html>
-  );
-}
-
-function crossedFlightBoundary(previousIndex, currentIndex) {
-  if (previousIndex === currentIndex) return false;
-
-  const direction = currentIndex > previousIndex ? 1 : -1;
-  return HOME_CHOREOGRAPHY.flightBoundaryIndexes.some((boundaryIndex) =>
-    direction > 0
-      ? boundaryIndex > previousIndex && boundaryIndex <= currentIndex
-      : boundaryIndex <= previousIndex && boundaryIndex > currentIndex
   );
 }
 
@@ -191,6 +191,10 @@ export default function GundamStage({ gundamApiRef, children }) {
   const playgroundActive =
     currentStage.key === HOME_STAGE_KEYS.PLAYGROUND &&
     playgroundOpacity > 0.4;
+  const basicInteractionActive =
+    (currentStage.key === HOME_STAGE_KEYS.INTRO && introOpacity > 0.4) ||
+    (currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
+      philosophyOpacity > 0.4);
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -212,7 +216,8 @@ export default function GundamStage({ gundamApiRef, children }) {
           className={styles.canvasLayer}
           style={{
             opacity: transform.opacity,
-            pointerEvents: playgroundActive ? "auto" : "none",
+            pointerEvents:
+              playgroundActive || basicInteractionActive ? "auto" : "none",
           }}
           aria-hidden="true"
         >
@@ -234,8 +239,19 @@ export default function GundamStage({ gundamApiRef, children }) {
                 targetPosition={[transform.x, transform.y, transform.z]}
                 targetScale={transform.scale}
                 interactive={playgroundActive}
+                basicInteractive={basicInteractionActive}
                 onReady={handleModelReady}
-                onSingleClick={() => gundamApiRef.current?.play(CLIPS.SABER)}
+                onSingleClick={() => {
+                  if (currentStage.key === HOME_STAGE_KEYS.INTRO) {
+                    gundamApiRef.current?.playSequence([
+                      CLIPS.SABER,
+                      CLIPS.SABER,
+                    ]);
+                    return;
+                  }
+
+                  gundamApiRef.current?.play(CLIPS.SABER);
+                }}
                 onDoubleClick={() => gundamApiRef.current?.play(CLIPS.SHIELD)}
               />
               <ContactShadows

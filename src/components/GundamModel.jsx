@@ -34,6 +34,7 @@ const GundamModel = forwardRef(function GundamModel(
     positionDampFactor = 3,
     scaleDampFactor = 3,
     interactive = false,
+    basicInteractive = false,
     onReady,
     onSingleClick,
     onDoubleClick,
@@ -58,14 +59,22 @@ const GundamModel = forwardRef(function GundamModel(
     captureTarget: null,
   });
   const manualRotationTargetY = useRef(0);
+  const clickEnabled = interactive || basicInteractive;
+  const dragEnabled = interactive || basicInteractive;
 
   useEffect(() => {
-    if (interactive) return;
+    if (clickEnabled) return;
 
     if (pendingSingleClick.current) {
       clearTimeout(pendingSingleClick.current);
       pendingSingleClick.current = null;
     }
+
+    lastClickTime.current = 0;
+  }, [clickEnabled]);
+
+  useEffect(() => {
+    if (interactive) return;
 
     const pointer = drag.current;
     if (pointer.active && pointer.pointerId !== null) {
@@ -79,7 +88,6 @@ const GundamModel = forwardRef(function GundamModel(
       distance: 0,
       captureTarget: null,
     };
-    lastClickTime.current = 0;
     document.body.style.cursor = "auto";
     onHoverChange?.(false);
   }, [interactive, onHoverChange]);
@@ -280,8 +288,9 @@ const GundamModel = forwardRef(function GundamModel(
   });
 
   const handleClick = (e) => {
-    if (!interactive) return;
+    if (!clickEnabled) return;
     e.stopPropagation();
+
     if (drag.current.distance >= DRAG_THRESHOLD_PX) return;
 
     const now = performance.now();
@@ -303,7 +312,7 @@ const GundamModel = forwardRef(function GundamModel(
   };
 
   const handlePointerDown = (e) => {
-    if (!interactive) return;
+    if (!dragEnabled) return;
     e.stopPropagation();
     drag.current = {
       active: true,
@@ -318,7 +327,7 @@ const GundamModel = forwardRef(function GundamModel(
   };
 
   const handlePointerMove = (e) => {
-    if (!interactive) return;
+    if (!dragEnabled) return;
     if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
     e.stopPropagation();
 
@@ -339,7 +348,7 @@ const GundamModel = forwardRef(function GundamModel(
   };
 
   const finishDrag = (e) => {
-    if (!interactive) return;
+    if (!dragEnabled) return;
     if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
     e.stopPropagation();
     e.target.releasePointerCapture?.(e.pointerId);
@@ -353,19 +362,21 @@ const GundamModel = forwardRef(function GundamModel(
     <group
       ref={group}
       {...props}
-      onClick={interactive ? handleClick : undefined}
-      onPointerDown={interactive ? handlePointerDown : undefined}
-      onPointerMove={interactive ? handlePointerMove : undefined}
-      onPointerUp={interactive ? finishDrag : undefined}
-      onPointerCancel={interactive ? finishDrag : undefined}
+      onClick={clickEnabled ? handleClick : undefined}
+      onPointerDown={dragEnabled ? handlePointerDown : undefined}
+      onPointerMove={dragEnabled ? handlePointerMove : undefined}
+      onPointerUp={dragEnabled ? finishDrag : undefined}
+      onPointerCancel={dragEnabled ? finishDrag : undefined}
       onPointerOver={(e) => {
-        if (!interactive) return;
+        if (!clickEnabled) return;
         e.stopPropagation();
-        if (!drag.current.active) document.body.style.cursor = "grab";
+        if (!drag.current.active) {
+          document.body.style.cursor = dragEnabled ? "grab" : "pointer";
+        }
         onHoverChange?.(true);
       }}
       onPointerOut={(e) => {
-        if (!interactive) return;
+        if (!clickEnabled) return;
         if (!drag.current.active) document.body.style.cursor = "auto";
         onHoverChange?.(false);
       }}
