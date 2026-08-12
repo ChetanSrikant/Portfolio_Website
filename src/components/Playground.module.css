@@ -1,80 +1,196 @@
 .wrap {
   width: 100%;
-  max-width: 760px;
+  max-width: 620px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 18px;
+  border: 1px solid var(--border-strong);
+  padding: clamp(22px, 3vw, 34px);
+  background:
+    linear-gradient(rgba(201, 162, 75, 0.025), rgba(201, 162, 75, 0)),
+    rgba(12, 12, 12, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 24px 70px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.screenHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 13px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .label {
-  text-align: center;
+  text-align: left;
 }
 
 .hint {
-  font-family: var(--font-mono);
-  font-size: 12px;
+  max-width: 52ch;
+  margin-top: 7px;
   color: var(--text-tertiary);
-  margin-top: 6px;
-  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  text-align: left;
+  text-wrap: pretty;
 }
 
 .dock {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(19, 19, 19, 0.72);
-  backdrop-filter: blur(10px);
+  background: rgba(19, 19, 19, 0.5);
 }
 
-.pill {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.03em;
-  color: var(--text-secondary);
-  background: transparent;
+.control {
+  min-height: 44px;
   border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 9px 16px;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  padding: 0 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  text-align: left;
   white-space: nowrap;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
-.pill:hover {
-  color: var(--text-primary);
+.control:hover {
   border-color: var(--border-strong);
   background: var(--bg-elevated-2);
+  color: var(--text-primary);
 }
 
-.pillAccent {
-  color: var(--bg);
+.control:active,
+.utilityButton:active,
+.motionButton:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.controlAccent {
+  grid-column: 1 / -1;
   background: var(--accent);
-  font-weight: 600;
+  color: var(--bg);
+  font-weight: 700;
+  text-align: center;
 }
 
-.pillAccent:hover {
-  color: var(--bg);
-  background: var(--accent-bright);
+.controlAccent:hover {
   border-color: var(--accent-bright);
+  background: var(--accent-bright);
+  color: var(--bg);
+}
+
+.utilityRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 22px;
+}
+
+.utilityButton,
+.motionButton {
+  border: 0;
+  border-bottom: 1px solid var(--border-strong);
+  padding: 5px 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.utilityButton:hover,
+.motionButton:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
 }
 
 .motionRow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-tertiary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.45;
+  text-align: left;
 }
 
 .motionButton {
   color: var(--accent);
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 4px 12px;
-  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    max-width: 100%;
+    gap: 11px;
+    padding: 16px;
+  }
+
+  .screenHeader {
+    display: none;
+  }
+
+  .hint {
+    max-width: 40ch;
+    font-size: 9.5px;
+  }
+
+  .dock {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 7px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .dock::-webkit-scrollbar {
+    display: none;
+  }
+
+  .control,
+  .controlAccent {
+    flex: 0 0 auto;
+  }
+
+  .motionRow {
+    max-width: 42ch;
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control,
+  .utilityButton,
+  .motionButton {
+    transition: none;
+  }
 }

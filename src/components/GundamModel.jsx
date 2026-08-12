@@ -46,6 +46,7 @@ const GundamModel = forwardRef(function GundamModel(
 
   const lastClickTime = useRef(0);
   const pendingSingleClick = useRef(null);
+  const activeFinishedHandler = useRef(null);
   const drag = useRef({
     active: false,
     pointerId: null,
@@ -58,9 +59,12 @@ const GundamModel = forwardRef(function GundamModel(
   useEffect(() => {
     return () => {
       if (pendingSingleClick.current) clearTimeout(pendingSingleClick.current);
+      if (activeFinishedHandler.current) {
+        mixer.removeEventListener("finished", activeFinishedHandler.current);
+      }
       document.body.style.cursor = "auto";
     };
-  }, []);
+  }, [mixer]);
 
   // Normalize scale/position regardless of the glb's authored units, and
   // tune materials (grounded shadows, punchy beam-saber glow).
@@ -126,6 +130,11 @@ const GundamModel = forwardRef(function GundamModel(
     const idle = actions[CLIPS.IDLE];
     if (!target) return;
 
+    if (activeFinishedHandler.current) {
+      mixer.removeEventListener("finished", activeFinishedHandler.current);
+      activeFinishedHandler.current = null;
+    }
+
     Object.entries(actions).forEach(([name, action]) => {
       if (name !== clipName) action?.fadeOut(0.3);
     });
@@ -135,17 +144,25 @@ const GundamModel = forwardRef(function GundamModel(
     target.clampWhenFinished = true;
     target.fadeIn(0.25).play();
 
+    if (clipName === CLIPS.STATIC) return;
+
     const handleFinished = (e) => {
       if (e.action === target) {
         mixer.removeEventListener("finished", handleFinished);
+        activeFinishedHandler.current = null;
         idle?.reset().fadeIn(0.5).play();
         target.fadeOut(0.5);
       }
     };
+    activeFinishedHandler.current = handleFinished;
     mixer.addEventListener("finished", handleFinished);
   };
 
   const playIdle = () => {
+    if (activeFinishedHandler.current) {
+      mixer.removeEventListener("finished", activeFinishedHandler.current);
+      activeFinishedHandler.current = null;
+    }
     Object.entries(actions).forEach(([name, action]) => {
       if (name !== CLIPS.IDLE) action?.fadeOut(0.3);
     });
@@ -156,6 +173,9 @@ const GundamModel = forwardRef(function GundamModel(
     play: playOnce,
     playIdle,
     clipNames: names,
+    resetRotation: () => {
+      manualRotationTargetY.current = 0;
+    },
   }));
 
   // Smoothly damp toward the externally-driven target rotation & position
@@ -240,6 +260,13 @@ const GundamModel = forwardRef(function GundamModel(
       drag.current.distance,
       Math.abs(e.clientX - drag.current.startX)
     );
+    if (
+      drag.current.distance >= DRAG_THRESHOLD_PX &&
+      pendingSingleClick.current
+    ) {
+      clearTimeout(pendingSingleClick.current);
+      pendingSingleClick.current = null;
+    }
     manualRotationTargetY.current += deltaX * DRAG_RADIANS_PER_PX;
   };
 

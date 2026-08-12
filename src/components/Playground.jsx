@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CLIPS } from "./GundamModel.jsx";
 import styles from "./Playground.module.css";
 
@@ -13,69 +13,98 @@ const MOVES = [
 
 const SHAKE_COOLDOWN_MS = 1100;
 const SHAKE_ACCEL_THRESHOLD = 17;
-const MOUSE_VELOCITY_THRESHOLD = 2.6; // px/ms
+const MOUSE_VELOCITY_THRESHOLD = 2.6;
 
 export default function PlaygroundContent({ gundamApiRef, active }) {
   const [motionSupported, setMotionSupported] = useState(false);
   const [motionEnabled, setMotionEnabled] = useState(false);
+  const [motionDenied, setMotionDenied] = useState(false);
   const [needsMotionPermission, setNeedsMotionPermission] = useState(false);
   const lastShakeRef = useRef(0);
   const lastMouse = useRef(null);
 
-  const trigger = (key) => {
-    if (key === CLIPS.IDLE) gundamApiRef.current?.playIdle();
-    else gundamApiRef.current?.play(key);
-  };
+  const trigger = useCallback(
+    (key) => {
+      if (key === CLIPS.IDLE) gundamApiRef.current?.playIdle();
+      else gundamApiRef.current?.play(key);
+    },
+    [gundamApiRef]
+  );
 
   useEffect(() => {
-    const supported = typeof window !== "undefined" && "DeviceMotionEvent" in window;
+    const supported =
+      typeof window !== "undefined" && "DeviceMotionEvent" in window;
     setMotionSupported(supported);
     setNeedsMotionPermission(
-      supported && typeof window.DeviceMotionEvent.requestPermission === "function"
+      supported &&
+        typeof window.DeviceMotionEvent.requestPermission === "function"
     );
   }, []);
 
   const enableMotion = async () => {
+    setMotionDenied(false);
     if (needsMotionPermission) {
       try {
-        const res = await window.DeviceMotionEvent.requestPermission();
-        if (res === "granted") setMotionEnabled(true);
+        const result = await window.DeviceMotionEvent.requestPermission();
+        if (result === "granted") setMotionEnabled(true);
+        else setMotionDenied(true);
       } catch {
-        /* user declined — silently ignore */
+        setMotionDenied(true);
       }
-    } else {
-      setMotionEnabled(true);
+      return;
     }
+    setMotionEnabled(true);
   };
 
-  // Real device shake, once permission is granted.
   useEffect(() => {
-    if (!motionEnabled) return;
-    const onMotion = (e) => {
-      const acc = e.accelerationIncludingGravity || e.acceleration;
-      if (!acc) return;
-      const magnitude = Math.abs(acc.x || 0) + Math.abs(acc.y || 0) + Math.abs(acc.z || 0);
-      const now = Date.now();
-      if (magnitude > SHAKE_ACCEL_THRESHOLD && now - lastShakeRef.current > SHAKE_COOLDOWN_MS) {
+    if (!active || !motionEnabled) return undefined;
+
+    const onMotion = (event) => {
+      const acceleration =
+        event.accelerationIncludingGravity || event.acceleration;
+      if (!acceleration) return;
+
+      const magnitude =
+        Math.abs(acceleration.x || 0) +
+        Math.abs(acceleration.y || 0) +
+        Math.abs(acceleration.z || 0);
+      const now = performance.now();
+
+      if (
+        magnitude > SHAKE_ACCEL_THRESHOLD &&
+        now - lastShakeRef.current > SHAKE_COOLDOWN_MS
+      ) {
         lastShakeRef.current = now;
         trigger(CLIPS.BOOMERANG);
       }
     };
+
     window.addEventListener("devicemotion", onMotion);
     return () => window.removeEventListener("devicemotion", onMotion);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [motionEnabled]);
+  }, [active, motionEnabled, trigger]);
 
-  // Desktop stand-in: rapid mouse movement while the Playground is in view.
   useEffect(() => {
-    if (!active) return;
-    const onMove = (e) => {
+    if (!active) {
+      lastMouse.current = null;
+      return undefined;
+    }
+
+    const onMove = (event) => {
+      if (event.buttons !== 0 || event.target.closest?.("button, a")) {
+        lastMouse.current = null;
+        return;
+      }
+
       const now = performance.now();
       if (lastMouse.current) {
-        const dt = now - lastMouse.current.t;
-        if (dt > 0) {
-          const dist = Math.hypot(e.clientX - lastMouse.current.x, e.clientY - lastMouse.current.y);
-          const velocity = dist / dt;
+        const elapsed = now - lastMouse.current.time;
+        if (elapsed > 0) {
+          const distance = Math.hypot(
+            event.clientX - lastMouse.current.x,
+            event.clientY - lastMouse.current.y
+          );
+          const velocity = distance / elapsed;
+
           if (
             velocity > MOUSE_VELOCITY_THRESHOLD &&
             now - lastShakeRef.current > SHAKE_COOLDOWN_MS
@@ -85,50 +114,80 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
           }
         }
       }
-      lastMouse.current = { x: e.clientX, y: e.clientY, t: now };
+      lastMouse.current = { x: event.clientX, y: event.clientY, time: now };
     };
-    window.addEventListener("pointermove", onMove);
+
+    window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
+  }, [active, trigger]);
 
   return (
     <div className={styles.wrap}>
+      <div className={styles.screenHeader} aria-hidden="true">
+        <span>Control surface / live</span>
+        <span>07 authored actions</span>
+      </div>
       <div className={styles.label}>
         <span className="eyebrow">Gundam Playground</span>
         <p className={styles.hint}>
-          Drag the Gundam to inspect every side. Click for saber,
-          double-click for shield, shake your mouse (or phone) for the
-          boomerang — or pick a move below.
+          Drag to inspect. Click for saber, double-click for shield, or choose
+          an authored movement below.
         </p>
       </div>
 
-      <div className={styles.dock}>
-        {MOVES.map((m) => (
+      <div className={styles.dock} role="group" aria-label="Gundam movements">
+        {MOVES.map((move) => (
           <button
-            key={m.key}
+            key={move.key}
             type="button"
-            className={styles.pill}
-            onClick={() => trigger(m.key)}
+            className={styles.control}
+            onClick={() => trigger(move.key)}
           >
-            {m.label}
+            {move.label}
           </button>
         ))}
         <button
           type="button"
-          className={`${styles.pill} ${styles.pillAccent}`}
+          className={`${styles.control} ${styles.controlAccent}`}
           onClick={() => trigger(CLIPS.BOOMERANG)}
         >
           Shake
         </button>
       </div>
 
+      <div className={styles.utilityRow}>
+        <button
+          type="button"
+          className={styles.utilityButton}
+          onClick={() => gundamApiRef.current?.playIdle()}
+        >
+          Return to idle
+        </button>
+        <button
+          type="button"
+          className={styles.utilityButton}
+          onClick={() => gundamApiRef.current?.resetRotation()}
+        >
+          Reset view
+        </button>
+      </div>
+
       {motionSupported && !motionEnabled && (
         <div className={styles.motionRow}>
-          Enable motion for real shake-to-throw on this device
-          <button type="button" className={styles.motionButton} onClick={enableMotion}>
-            Enable
-          </button>
+          <span>
+            {motionDenied
+              ? "Motion access was not enabled. Explicit controls still work."
+              : "Enable device motion for shake-to-throw."}
+          </span>
+          {!motionDenied && (
+            <button
+              type="button"
+              className={styles.motionButton}
+              onClick={enableMotion}
+            >
+              Enable motion
+            </button>
+          )}
         </div>
       )}
     </div>

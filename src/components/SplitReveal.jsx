@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export default function SplitReveal({
   text,
   as: Tag = "span",
+  id,
   className,
   delay = 0,
   stagger = 0.045,
@@ -38,7 +39,7 @@ export default function SplitReveal({
   };
 
   return (
-    <Tag className={className} style={{ display: "block" }}>
+    <Tag id={id} className={className} style={{ display: "block" }}>
       <motion.span
         style={{ display: "inline" }}
         variants={container}
