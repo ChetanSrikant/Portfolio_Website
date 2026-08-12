@@ -1,0 +1,135 @@
+:root {
+  /* ---- Canvas & elevation (Three.js-token-system derived) ---- */
+  --bg: #0a0a0a;
+  --bg-elevated: #131313;
+  --bg-elevated-2: #1b1b1b;
+  --border: #242424;
+  --border-strong: #34322c;
+
+  /* ---- Text ---- */
+  --text-primary: #f5f3ee;
+  --text-secondary: #9c988e;
+  --text-tertiary: #625e54;
+
+  /* ---- Signature accent: gold / bronze ----
+     Placeholder, tune to taste — swap this one value and the whole
+     site re-tints. */
+  --accent: #c9a24b;
+  --accent-bright: #e0bb63;
+  --accent-dim: rgba(201, 162, 75, 0.14);
+  --accent-line: rgba(201, 162, 75, 0.32);
+  --accent-glow: rgba(201, 162, 75, 0.45);
+
+  /* ---- Type ---- */
+  --font-display: "Unbounded", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ---- Layout ---- */
+  --content-width: 1280px;
+  --section-pad-y: clamp(72px, 12vw, 160px);
+  --edge-pad-x: clamp(24px, 6vw, 96px);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  /* NOTE: overflow-x:hidden here would implicitly force overflow-y:auto
+     per spec, turning <body> into its own scroll container and breaking
+     every position:sticky element below it (the whole Gundam stage).
+     overflow-x:clip avoids that side effect. */
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100vh;
+}
+
+#root {
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent-line);
+  color: var(--text-primary);
+}
+
+/* Visible keyboard focus, per accessibility floor */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: var(--section-pad-y) var(--edge-pad-x);
+}
+
+.section-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

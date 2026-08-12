@@ -1,0 +1,131 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, #141414 0%, #0a0a0a 65%);
+}
+
+.canvasLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 220px 40px rgba(0, 0, 0, 0.65);
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(24px, 6vw, 96px);
+  pointer-events: none;
+}
+
+.panelRight {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.panelCenterBottom {
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: clamp(28px, 5vw, 64px);
+}
+
+.introBlock {
+  max-width: 22ch;
+}
+
+.introHeadline {
+  font-size: clamp(30px, 4.2vw, 56px);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.introHeadline .accent {
+  color: var(--accent);
+}
+
+.quoteBlock {
+  max-width: 30ch;
+  font-family: var(--font-mono);
+}
+
+.quoteLabel {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.quoteLine {
+  font-size: clamp(18px, 2.2vw, 27px);
+  line-height: 1.55;
+  color: var(--text-primary);
+  border-left: 1px solid var(--accent-line);
+  padding-left: 20px;
+}
+
+.hud {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.hudTopRight {
+  top: 28px;
+  right: clamp(24px, 6vw, 96px);
+  text-align: right;
+  line-height: 1.7;
+}
+
+.hudTopRight .stage {
+  color: var(--accent);
+}
+
+.hudBottomBar {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+
+.hudBottomBarFill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  transform-origin: left;
+  transition: transform 0.05s linear;
+}
+
+@media (max-width: 720px) {
+  .panelRight {
+    justify-content: center;
+    text-align: center;
+  }
+  .introBlock,
+  .quoteBlock {
+    max-width: 90vw;
+  }
+  .hudTopRight {
+    display: none;
+  }
+}

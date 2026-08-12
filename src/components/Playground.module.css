@@ -1,0 +1,80 @@
+.wrap {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.label {
+  text-align: center;
+}
+
+.hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.dock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(19, 19, 19, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 9px 16px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--bg-elevated-2);
+}
+
+.pillAccent {
+  color: var(--bg);
+  background: var(--accent);
+  font-weight: 600;
+}
+
+.pillAccent:hover {
+  color: var(--bg);
+  background: var(--accent-bright);
+  border-color: var(--accent-bright);
+}
+
+.motionRow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.motionButton {
+  color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: transparent;
+}

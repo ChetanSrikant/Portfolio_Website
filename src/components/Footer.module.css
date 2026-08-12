@@ -1,0 +1,33 @@
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 40px clamp(24px, 6vw, 96px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.left {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.right {
+  display: flex;
+  gap: 22px;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--accent);
+}
