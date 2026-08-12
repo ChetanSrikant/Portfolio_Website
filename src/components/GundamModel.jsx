@@ -28,6 +28,7 @@ const DRAG_RADIANS_PER_PX = 0.009;
 const GundamModel = forwardRef(function GundamModel(
   {
     targetRotationY = 0,
+    targetRotationZ = 0,
     targetPosition = [0, 0, 0],
     targetScale = 1,
     dampFactor = 4,
@@ -35,6 +36,9 @@ const GundamModel = forwardRef(function GundamModel(
     scaleDampFactor = 3,
     interactive = false,
     basicInteractive = false,
+    scrubbedLifterProgress = 0,
+    scrubbedLifterActive = false,
+    reducedMotion = false,
     onReady,
     onSingleClick,
     onDoubleClick,
@@ -59,6 +63,7 @@ const GundamModel = forwardRef(function GundamModel(
     captureTarget: null,
   });
   const manualRotationTargetY = useRef(0);
+  const scrubState = useRef({ active: false });
   const clickEnabled = interactive || basicInteractive;
   const dragEnabled = interactive || basicInteractive;
 
@@ -74,7 +79,7 @@ const GundamModel = forwardRef(function GundamModel(
   }, [clickEnabled]);
 
   useEffect(() => {
-    if (interactive) return;
+    if (dragEnabled) return;
 
     const pointer = drag.current;
     if (pointer.active && pointer.pointerId !== null) {
@@ -90,7 +95,7 @@ const GundamModel = forwardRef(function GundamModel(
     };
     document.body.style.cursor = "auto";
     onHoverChange?.(false);
-  }, [interactive, onHoverChange]);
+  }, [dragEnabled, onHoverChange]);
 
   useEffect(() => {
     return () => {
@@ -254,34 +259,90 @@ const GundamModel = forwardRef(function GundamModel(
   // (scroll-linked turn + reposition between stops).
   useFrame((_, delta) => {
     if (!group.current) return;
+
+    const lifter = actions[CLIPS.LIFTER];
+    const idle = actions[CLIPS.IDLE];
+    const shouldScrub =
+      scrubbedLifterActive && !reducedMotion && lifter && idle;
+
+    if (shouldScrub) {
+      if (!scrubState.current.active) {
+        removeFinishedHandler();
+        Object.entries(actions).forEach(([name, action]) => {
+          if (name !== CLIPS.IDLE && name !== CLIPS.LIFTER) action?.stop();
+        });
+
+        idle.enabled = true;
+        idle.setLoop(THREE.LoopRepeat, Infinity).play();
+        lifter.reset().setLoop(THREE.LoopOnce, 1).play();
+        lifter.paused = true;
+        manualRotationTargetY.current = 0;
+        scrubState.current.active = true;
+      }
+
+      const scrubProgress = THREE.MathUtils.clamp(
+        scrubbedLifterProgress,
+        0,
+        1
+      );
+      const blendIn = THREE.MathUtils.smoothstep(scrubProgress, 0, 0.08);
+      const blendOut =
+        1 - THREE.MathUtils.smoothstep(scrubProgress, 0.92, 1);
+      const lifterWeight = Math.min(blendIn, blendOut);
+
+      lifter.enabled = true;
+      lifter.paused = true;
+      lifter.time = lifter.getClip().duration * scrubProgress;
+      lifter.setEffectiveWeight(lifterWeight);
+      idle.enabled = true;
+      idle.setEffectiveWeight(1 - lifterWeight);
+      mixer.update(0);
+    } else if (scrubState.current.active) {
+      lifter?.stop();
+      if (idle) {
+        idle.enabled = true;
+        idle.setEffectiveWeight(1);
+        idle.setEffectiveTimeScale(1);
+        idle.setLoop(THREE.LoopRepeat, Infinity).play();
+      }
+      scrubState.current.active = false;
+      mixer.update(0);
+    }
+
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
       targetRotationY + manualRotationTargetY.current,
       dampFactor,
       delta
     );
+    group.current.rotation.z = THREE.MathUtils.damp(
+      group.current.rotation.z,
+      targetRotationZ,
+      shouldScrub ? Math.max(dampFactor, 7) : dampFactor,
+      delta
+    );
     group.current.position.x = THREE.MathUtils.damp(
       group.current.position.x,
       targetPosition[0],
-      positionDampFactor,
+      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     group.current.position.y = THREE.MathUtils.damp(
       group.current.position.y,
       targetPosition[1],
-      positionDampFactor,
+      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     group.current.position.z = THREE.MathUtils.damp(
       group.current.position.z,
       targetPosition[2],
-      positionDampFactor,
+      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     const dampedScale = THREE.MathUtils.damp(
       group.current.scale.x,
       targetScale,
-      scaleDampFactor,
+      shouldScrub ? Math.max(scaleDampFactor, 6) : scaleDampFactor,
       delta
     );
     group.current.scale.setScalar(dampedScale);

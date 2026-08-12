@@ -8,10 +8,15 @@ import React, {
 } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
+import * as THREE from "three";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GundamModel, { CLIPS } from "./GundamModel.jsx";
 import useScrollProgress, { mapRange } from "../hooks/useScrollProgress.js";
 import {
   getGundamTransform,
+  getIntroToPhilosophyTransform,
+  getIntroToPhilosophyPathPoints,
   getHomeStageIndex,
   HOME_CHOREOGRAPHY,
   HOME_STAGE,
@@ -19,7 +24,24 @@ import {
   HOME_STAGES,
 } from "../config/home.js";
 import PlaygroundContent from "./Playground.jsx";
+import DriftWall from "./DriftWall.jsx";
+import DecryptedText from "./DecryptedText.jsx";
 import styles from "./GundamStage.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const DRIFT_WALL_ITEMS = [
+  { image: "/images/drift-wall/drift-01.jpeg", focalPoint: "50% 30%" },
+  { image: "/images/drift-wall/drift-02.jpeg", focalPoint: "50% 38%" },
+  { image: "/images/drift-wall/drift-03.jpeg", focalPoint: "50% 14%" },
+  { image: "/images/drift-wall/drift-04.jpeg", focalPoint: "50% 54%" },
+  { image: "/images/drift-wall/drift-05.jpeg", focalPoint: "50% 15%" },
+  { image: "/images/drift-wall/drift-06.jpeg", focalPoint: "50% 62%" },
+  { image: "/images/drift-wall/drift-07.jpeg", focalPoint: "50% 59%" },
+  { image: "/images/drift-wall/drift-08.jpeg", focalPoint: "50% 57%" },
+  { image: "/images/drift-wall/drift-09.jpeg", focalPoint: "50% 50%" },
+  { image: "/images/drift-wall/drift-10.jpeg", focalPoint: "50% 57%" },
+];
 
 function panelOpacity(progress, [start, visibleStart, visibleEnd, end]) {
   if (progress <= start || progress >= end) return 0;
@@ -62,17 +84,6 @@ function useViewportWidth() {
   return viewportWidth;
 }
 
-function crossedFlightBoundary(previousIndex, currentIndex) {
-  if (previousIndex === currentIndex) return false;
-
-  const direction = currentIndex > previousIndex ? 1 : -1;
-  return HOME_CHOREOGRAPHY.flightBoundaryIndexes.some((boundaryIndex) =>
-    direction > 0
-      ? boundaryIndex > previousIndex && boundaryIndex <= currentIndex
-      : boundaryIndex <= previousIndex && boundaryIndex > currentIndex
-  );
-}
-
 function Lighting() {
   return (
     <>
@@ -102,17 +113,39 @@ function ModelLoading() {
   );
 }
 
+function TransitionPathDebug({ viewportWidth }) {
+  const geometry = useMemo(() => {
+    const points = getIntroToPhilosophyPathPoints(viewportWidth, 80);
+    return new THREE.BufferGeometry().setFromPoints(points);
+  }, [viewportWidth]);
+
+  useEffect(() => () => geometry.dispose(), [geometry]);
+
+  return (
+    <line
+      geometry={geometry}
+      visible={
+        import.meta.env.DEV &&
+        import.meta.env.VITE_DEBUG_GUNDAM_PATH === "true"
+      }
+    >
+      <lineBasicMaterial color="#c9a24b" transparent opacity={0.72} />
+    </line>
+  );
+}
+
 export default function GundamStage({ gundamApiRef, children }) {
   const wrapperRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const viewportWidth = useViewportWidth();
   const [modelReady, setModelReady] = useState(false);
+  const [introToPhilosophyProgress, setIntroToPhilosophyProgress] = useState(0);
+  const transitionProgressRef = useRef(0);
   const choreography = useRef({
     initialized: false,
     stageIndex: 0,
     previousProgress: 0,
     direction: 1,
-    lastFlightAt: -Infinity,
     introSequencePlayed: false,
   });
   const progress = useScrollProgress(wrapperRef);
@@ -121,14 +154,81 @@ export default function GundamStage({ gundamApiRef, children }) {
     choreography.current.initialized ? choreography.current.stageIndex : null
   );
   const currentStage = HOME_STAGES[currentStageIndex];
-  const transform = useMemo(
-    () => getGundamTransform(progress, { reducedMotion, viewportWidth }),
-    [progress, reducedMotion, viewportWidth]
-  );
+  const transitionRange = HOME_CHOREOGRAPHY.introToPhilosophy;
+  const transitionOwnsTransform =
+    !reducedMotion &&
+    progress >= transitionRange.start &&
+    (introToPhilosophyProgress < 0.999 ||
+      currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY);
+  const transitionInFlight =
+    !reducedMotion &&
+    progress >= transitionRange.start &&
+    introToPhilosophyProgress > 0.001 &&
+    introToPhilosophyProgress < 0.999;
+  const transform = useMemo(() => {
+    if (transitionOwnsTransform) {
+      return getIntroToPhilosophyTransform(introToPhilosophyProgress, {
+        reducedMotion,
+        viewportWidth,
+      });
+    }
+
+    return getGundamTransform(progress, { reducedMotion, viewportWidth });
+  }, [
+    introToPhilosophyProgress,
+    progress,
+    reducedMotion,
+    transitionOwnsTransform,
+    viewportWidth,
+  ]);
 
   const handleModelReady = useCallback(() => {
     setModelReady(true);
   }, []);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return undefined;
+
+    const philosophySection = wrapper.querySelector(
+      transitionRange.landingSelector
+    );
+    if (!philosophySection) return undefined;
+
+    const context = gsap.context(() => {
+      const transition = { progress: 0 };
+      const updateProgress = (value) => {
+        const travelRange = 1 - transitionRange.landingHold;
+        const scrubbedProgress = value >= travelRange ? 1 : value / travelRange;
+        const next = Math.min(1, Math.max(0, scrubbedProgress));
+        if (Math.abs(next - transitionProgressRef.current) < 0.0005) return;
+        transitionProgressRef.current = next;
+        setIntroToPhilosophyProgress(next);
+      };
+      const scrollPositionFor = (fraction) => {
+        const scrollableDistance = wrapper.offsetHeight - window.innerHeight;
+        return wrapper.offsetTop + scrollableDistance * fraction;
+      };
+
+      gsap.to(transition, {
+        progress: 1,
+        ease: "none",
+        scrollTrigger: {
+          id: "intro-to-philosophy-lifter-scrub",
+          trigger: wrapper,
+          start: () => scrollPositionFor(transitionRange.start),
+          endTrigger: philosophySection,
+          end: "center center",
+          scrub: true,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => updateProgress(self.progress),
+          onRefresh: (self) => updateProgress(self.progress),
+        },
+      });
+    }, wrapper);
+
+    return () => context.revert();
+  }, [transitionRange.landingHold, transitionRange.start]);
 
   useEffect(() => {
     const state = choreography.current;
@@ -157,32 +257,17 @@ export default function GundamStage({ gundamApiRef, children }) {
     const changedStage = currentStageIndex !== state.stageIndex;
 
     if (changedStage) {
-      const now = performance.now();
-      const shouldFly = crossedFlightBoundary(
-        state.stageIndex,
-        currentStageIndex
-      );
-
-      if (
-        shouldFly &&
-        !reducedMotion &&
-        now - state.lastFlightAt >= HOME_CHOREOGRAPHY.flightCooldownMs
-      ) {
-        gundamApiRef.current?.play(CLIPS.LIFTER);
-        state.lastFlightAt = now;
-      }
-
       state.stageIndex = currentStageIndex;
       state.direction = direction;
     }
 
     state.previousProgress = progress;
-  }, [currentStageIndex, gundamApiRef, progress, reducedMotion]);
+  }, [currentStageIndex, progress]);
 
   const introOpacity = panelOpacity(progress, HOME_STAGE.panelFades.intro);
-  const philosophyOpacity = panelOpacity(
+  const skillsBackdropOpacity = panelOpacity(
     progress,
-    HOME_STAGE.panelFades.philosophy
+    HOME_STAGE.panelFades.skillsBackdrop
   );
   const playgroundOpacity = panelOpacity(
     progress,
@@ -192,9 +277,13 @@ export default function GundamStage({ gundamApiRef, children }) {
     currentStage.key === HOME_STAGE_KEYS.PLAYGROUND &&
     playgroundOpacity > 0.4;
   const basicInteractionActive =
-    (currentStage.key === HOME_STAGE_KEYS.INTRO && introOpacity > 0.4) ||
+    !transitionInFlight &&
+    ((currentStage.key === HOME_STAGE_KEYS.INTRO && introOpacity > 0.4) ||
     (currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
-      philosophyOpacity > 0.4);
+      introToPhilosophyProgress >= 0.999));
+  const philosophyLanded =
+    currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
+    introToPhilosophyProgress >= 0.999;
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -212,6 +301,46 @@ export default function GundamStage({ gundamApiRef, children }) {
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
+        <DriftWall
+          items={DRIFT_WALL_ITEMS}
+          columns={5}
+          tileWidth={200}
+          tileHeight={132}
+          gap={18}
+          tilt={16}
+          turn={-14}
+          perspective={1200}
+          depth={120}
+          speed={42}
+          direction="up"
+          variance={0.45}
+          parallax={0.6}
+          lift={64}
+          fade={0.6}
+          dim={0.55}
+          overlayColor="#060010"
+          active={skillsBackdropOpacity > 0.02}
+          opacity={skillsBackdropOpacity}
+        />
+        {skillsBackdropOpacity > 0.18 && (
+          <div
+            className={styles.skillsBackdropCaption}
+            style={{ opacity: skillsBackdropOpacity }}
+          >
+            <span className={styles.skillsBackdropMeta}>PERSONAL ARCHIVE / 10 FRAMES</span>
+            <DecryptedText
+              text="NOT EVERYTHING I BUILD LIVES IN CODE."
+              speed={42}
+              maxIterations={18}
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>"
+              animateOn="view"
+              revealDirection="center"
+              className={styles.decryptedRevealed}
+              parentClassName={styles.decryptedText}
+              encryptedClassName={styles.decryptedEncrypted}
+            />
+          </div>
+        )}
         <div
           className={styles.canvasLayer}
           style={{
@@ -236,10 +365,14 @@ export default function GundamStage({ gundamApiRef, children }) {
               <GundamModel
                 ref={gundamApiRef}
                 targetRotationY={transform.rotationY}
+                targetRotationZ={transform.rotationZ || 0}
                 targetPosition={[transform.x, transform.y, transform.z]}
                 targetScale={transform.scale}
                 interactive={playgroundActive}
                 basicInteractive={basicInteractionActive}
+                scrubbedLifterProgress={introToPhilosophyProgress}
+                scrubbedLifterActive={transitionInFlight}
+                reducedMotion={reducedMotion}
                 onReady={handleModelReady}
                 onSingleClick={() => {
                   if (currentStage.key === HOME_STAGE_KEYS.INTRO) {
@@ -254,6 +387,7 @@ export default function GundamStage({ gundamApiRef, children }) {
                 }}
                 onDoubleClick={() => gundamApiRef.current?.play(CLIPS.SHIELD)}
               />
+              <TransitionPathDebug viewportWidth={viewportWidth} />
               <ContactShadows
                 position={[0, 0.01, 0]}
                 opacity={transform.shadowOpacity}
@@ -274,6 +408,12 @@ export default function GundamStage({ gundamApiRef, children }) {
           UNIT / ZGMF-X09A
           <br />
           HEADING / {rotationDeg}°
+          {philosophyLanded && (
+            <>
+              <br />
+              <span className={styles.landedStatus}>LIFTER / LANDED</span>
+            </>
+          )}
         </div>
         <div className={`${styles.hud} ${styles.hudBottomBar}`} aria-hidden="true">
           <div
@@ -295,22 +435,6 @@ export default function GundamStage({ gundamApiRef, children }) {
             </h2>
             <p className={styles.introCopy}>
               One rig, seven authored movements, and a scroll-linked mission path.
-            </p>
-          </div>
-        </div>
-
-        <div
-          className={`${styles.panel} ${styles.panelSplit} ${styles.panelPhilosophy}`}
-          data-gundam-panel="philosophy"
-          style={{ opacity: philosophyOpacity }}
-          aria-hidden={philosophyOpacity < 0.5}
-        >
-          <div className={styles.quoteBlock}>
-            <span className={`eyebrow ${styles.quoteLabel}`}>// philosophy.md</span>
-            <p className={styles.quoteLine}>
-              Build systems that move with intent, adapt under pressure, and
-              stay understandable when complexity rises. AI supplies leverage.
-              Judgment gives it direction.
             </p>
           </div>
         </div>

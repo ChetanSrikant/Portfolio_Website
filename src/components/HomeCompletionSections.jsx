@@ -120,6 +120,34 @@ function ProofStrip() {
   );
 }
 
+function PhilosophySection() {
+  return (
+    <section
+      id="philosophy"
+      className={styles.philosophy}
+      data-gundam-stage-anchor="philosophy"
+      aria-labelledby="philosophy-heading"
+    >
+      <div className={`${styles.inner} ${styles.philosophyGrid}`}>
+        <div className={styles.philosophyCopy}>
+          <span className={`eyebrow ${styles.philosophyLabel}`}>
+            // philosophy.md
+          </span>
+          <h2 id="philosophy-heading" className={styles.srOnly}>
+            Philosophy
+          </h2>
+          <p className={styles.philosophyStatement}>
+            Build systems that move with intent, adapt under pressure, and stay
+            understandable when complexity rises. AI supplies leverage.
+            Judgment gives it direction.
+          </p>
+        </div>
+        <div className={styles.philosophyModelSpace} aria-hidden="true" />
+      </div>
+    </section>
+  );
+}
+
 function WorkflowVisual({ project }) {
   return (
     <figure className={styles.workflow}>
@@ -322,6 +350,7 @@ export default function HomeCompletionSections() {
         eyebrow="Between disciplines"
         title="I build where AI, software, and imagination meet."
       />
+      <PhilosophySection />
       <SelectedWork />
       <VelocityDivider />
       <CurrentFocus />

@@ -89,6 +89,63 @@
   line-height: 1.65;
 }
 
+.philosophy {
+  position: relative;
+  min-height: clamp(620px, 100dvh, 920px);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  padding: clamp(104px, 12vw, 170px) var(--edge-pad-x);
+  background:
+    linear-gradient(90deg, rgba(9, 9, 9, 0.94) 0 49%, rgba(9, 9, 9, 0.14) 66%, transparent 100%),
+    rgba(9, 9, 9, 0.18);
+  pointer-events: none;
+}
+
+.philosophy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(201, 162, 75, 0.08), transparent 1px) top / 100% 1px no-repeat,
+    radial-gradient(circle at 76% 48%, rgba(201, 162, 75, 0.055), transparent 30%);
+}
+
+.philosophyGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(48px, 7vw, 120px);
+}
+
+.philosophyCopy {
+  width: 100%;
+  max-width: 620px;
+  font-family: var(--font-mono);
+}
+
+.philosophyLabel {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.philosophyStatement {
+  border-left: 1px solid var(--accent-line);
+  padding-left: 24px;
+  color: var(--text-primary);
+  font-size: clamp(20px, 2.15vw, 30px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.philosophyModelSpace {
+  min-height: min(62dvh, 560px);
+}
+
 .selectedWork,
 .currentFocus {
   padding: var(--section-pad-y) var(--edge-pad-x);
@@ -496,10 +553,28 @@
     border-left: 0;
     padding: 32px 0;
   }
+
+  .philosophy {
+    min-height: 110dvh;
+    align-items: end;
+    padding-top: 52dvh;
+    background:
+      linear-gradient(180deg, transparent 0 36%, rgba(9, 9, 9, 0.78) 58%, rgba(9, 9, 9, 0.96) 100%),
+      rgba(9, 9, 9, 0.12);
+  }
+
+  .philosophyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophyModelSpace {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {
   .proof,
+  .philosophy,
   .selectedWork,
   .currentFocus {
     padding-right: 20px;

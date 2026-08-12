@@ -4,6 +4,7 @@
  * Progress is normalized across the single sticky Gundam wrapper. Keep stage
  * ranges, transform keyframes, HUD labels, and navigation targets coordinated.
  */
+import * as THREE from "three";
 
 export const INTRO_HEADING_DEG = 11;
 export const HERO_NAV_THRESHOLD = 0.25;
@@ -21,22 +22,27 @@ export const HOME_STAGE_KEYS = Object.freeze({
 export const HOME_STAGES = Object.freeze([
   Object.freeze({ key: HOME_STAGE_KEYS.INTRO, label: "INTRO", start: 0, end: 0.105 }),
   Object.freeze({
-    key: HOME_STAGE_KEYS.PHILOSOPHY,
-    label: "PHILOSOPHY",
+    key: HOME_STAGE_KEYS.SKILLS,
+    label: "SKILLS",
     start: 0.105,
-    end: 0.225,
+    end: 0.215,
   }),
-  Object.freeze({ key: HOME_STAGE_KEYS.SKILLS, label: "SKILLS", start: 0.225, end: 0.315 }),
   Object.freeze({
     key: HOME_STAGE_KEYS.CREATIVE,
     label: "CREATIVE",
-    start: 0.315,
-    end: 0.405,
+    start: 0.215,
+    end: 0.295,
+  }),
+  Object.freeze({
+    key: HOME_STAGE_KEYS.PHILOSOPHY,
+    label: "PHILOSOPHY",
+    start: 0.295,
+    end: 0.38,
   }),
   Object.freeze({
     key: HOME_STAGE_KEYS.PROJECTS,
     label: "PROJECTS",
-    start: 0.405,
+    start: 0.38,
     end: 0.745,
   }),
   Object.freeze({
@@ -59,43 +65,56 @@ export const HOME_STAGE = Object.freeze({
   ),
   panelFades: Object.freeze({
     intro: Object.freeze([0, 0.008, 0.085, 0.105]),
-    philosophy: Object.freeze([0.105, 0.12, 0.205, 0.225]),
+    skillsBackdrop: Object.freeze([0.105, 0.125, 0.195, 0.215]),
     playground: Object.freeze([0.895, 0.91, 1.01, 1.02]),
   }),
 });
 
 export const HOME_CHOREOGRAPHY = Object.freeze({
-  flightBoundaryIndexes: Object.freeze([1]),
   stageHysteresis: 0.006,
-  flightCooldownMs: 1400,
+  introToPhilosophy: Object.freeze({
+    start: HOME_STAGE.panelFades.intro[2],
+    landingSelector: "#philosophy",
+    landingHold: 0.14,
+  }),
 });
 
 export const HOME_TARGETS = Object.freeze({
-  philosophy: 0.15,
-  skills: 0.27,
-  creative: 0.36,
-  work: 0.48,
-  experience: 0.82,
+  philosophy: 0.335,
+  skills: 0.189,
+  creative: 0.244,
+  work: 0.43,
+  experience: 0.803,
   contact: 0.865,
   playground: 0.955,
 });
+
+const PHILOSOPHY_LANDING_TRANSFORM = frame(
+  HOME_TARGETS.philosophy,
+  2.15,
+  0.04,
+  0,
+  1.02,
+  28,
+  0.82,
+  0.42
+);
 
 const GUNDAM_KEYFRAMES = Object.freeze([
   frame(0, -1.88, 0, 0, 1.3, 11, 1, 0.52),
   frame(0.105, -1.88, 0, 0, 1.3, 11, 1, 0.52),
 
-  frame(0.12, -1.6, 0.2, 0, 1.12, 18, 0.95, 0.35),
-  frame(0.15, 1.9, 0.22, 0, 1, 34, 0.86, 0.3),
-  frame(0.225, 2.15, 0.04, 0, 1.02, 28, 0.82, 0.42),
+  frame(0.189, 2.25, 0.08, 0, 0.78, 22, 0.72, 0.25),
+  frame(0.215, 2.25, 0.1, 0, 0.76, 22, 0.72, 0.24),
 
-  frame(0.27, 2.25, 0.08, 0, 0.78, 22, 0.72, 0.25),
-  frame(0.315, 2.25, 0.1, 0, 0.76, 22, 0.72, 0.24),
+  frame(0.235, 2.05, 0.36, 0, 0.78, 38, 0.82, 0.2),
+  frame(0.265, 0.6, 0.5, 0, 0.86, 52, 1, 0.16),
+  frame(0.295, -0.15, 0.34, 0, 0.82, 44, 0.9, 0.2),
 
-  frame(0.335, 2.05, 0.36, 0, 0.78, 38, 0.82, 0.2),
-  frame(0.37, 0.6, 0.5, 0, 0.86, 52, 1, 0.16),
-  frame(0.405, -0.15, 0.34, 0, 0.82, 44, 0.9, 0.2),
+  PHILOSOPHY_LANDING_TRANSFORM,
+  frame(0.38, 2.15, 0.04, 0, 1.02, 28, 0.82, 0.42),
 
-  frame(0.445, 2.55, 0.15, 0, 0.68, 18, 0.68, 0.18),
+  frame(0.43, 2.55, 0.15, 0, 0.68, 18, 0.68, 0.18),
   frame(0.7, 2.45, 0.1, 0, 0.64, 16, 0.62, 0.18),
   frame(0.745, 2.35, 0.28, 0, 0.72, 22, 0.68, 0.2),
 
@@ -188,6 +207,64 @@ export function getGundamTransform(
   }, stage.key, viewportWidth);
 }
 
+export function getIntroToPhilosophyTransform(
+  transitionProgress,
+  { reducedMotion = false, viewportWidth = null } = {}
+) {
+  const t = clamp01(transitionProgress);
+  const intro = GUNDAM_KEYFRAMES[1];
+  const philosophy = PHILOSOPHY_LANDING_TRANSFORM;
+  const path = createIntroToPhilosophyPath(viewportWidth);
+  const current = path.getPointAt(t);
+  const lookAhead = path.getPointAt(Math.min(t + 0.018, 1));
+  const lookBehind = path.getPointAt(Math.max(t - 0.018, 0));
+  const direction = lookAhead.clone().sub(current).normalize();
+  const beforeDirection = current.clone().sub(lookBehind).normalize();
+  const bend = beforeDirection.x * direction.y - beforeDirection.y * direction.x;
+  const stabilization = endpointFade(t, 0.1, 0.84);
+  const baseHeading = lerp(intro.rotationY, philosophy.rotationY, smoothStep(t));
+  const travelHeading = Math.atan2(direction.x, Math.max(0.35, Math.abs(direction.y))) * 0.16;
+  const pathHeading = baseHeading - travelHeading * stabilization;
+  const bankLimit = degreesToRadians(viewportWidth <= 720 ? 5 : viewportWidth <= 1040 ? 7 : 9);
+  const bank = reducedMotion
+    ? 0
+    : THREE.MathUtils.clamp(-bend * 2.6, -bankLimit, bankLimit) * stabilization;
+  const recede = reducedMotion ? 0 : Math.sin(t * Math.PI) * 0.045;
+
+  return adaptTransformForViewport(
+    {
+      progress: t,
+      x: current.x,
+      y: current.y,
+      z: current.z,
+      scale: lerp(intro.scale, philosophy.scale, smoothStep(t)) - recede,
+      rotationY: t <= 0 ? intro.rotationY : t >= 1 ? philosophy.rotationY : pathHeading,
+      rotationZ: t <= 0 || t >= 1 ? 0 : bank,
+      opacity: lerp(intro.opacity, philosophy.opacity, smoothStep(t)),
+      shadowOpacity: lerp(
+        intro.shadowOpacity,
+        philosophy.shadowOpacity,
+        smoothStep(t)
+      ),
+    },
+    HOME_STAGE_KEYS.PHILOSOPHY,
+    viewportWidth
+  );
+}
+
+export function getIntroToPhilosophyPathPoints(viewportWidth, divisions = 64) {
+  return createIntroToPhilosophyPath(viewportWidth)
+    .getPoints(divisions)
+    .map((point) => {
+      const adapted = adaptTransformForViewport(
+        { x: point.x, y: point.y, z: point.z, scale: 1 },
+        HOME_STAGE_KEYS.PHILOSOPHY,
+        viewportWidth
+      );
+      return new THREE.Vector3(adapted.x, adapted.y, adapted.z);
+    });
+}
+
 export function getStageLabel(progress) {
   return getHomeStage(progress).label;
 }
@@ -224,6 +301,55 @@ function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {
     opacity,
     shadowOpacity,
   });
+}
+
+function createIntroToPhilosophyPath(viewportWidth) {
+  const desktop = !Number.isFinite(viewportWidth) || viewportWidth > 1040;
+  const mobile = Number.isFinite(viewportWidth) && viewportWidth <= 720;
+
+  const points = mobile
+    ? [
+        [-1.88, 0, 0],
+        [-1.46, 0.13, -0.02],
+        [-0.88, 0.26, -0.05],
+        [-0.2, 0.32, -0.07],
+        [0.52, 0.22, -0.05],
+        [1.35, 0.12, -0.02],
+        [2.15, 0.04, 0],
+      ]
+    : desktop
+      ? [
+          [-1.88, 0, 0],
+          [-1.58, 0.26, -0.04],
+          [-0.92, 0.56, -0.12],
+          [-0.08, 0.7, -0.18],
+          [0.72, 0.48, -0.15],
+          [1.22, 0.66, -0.1],
+          [1.68, 0.36, -0.05],
+          [2.15, 0.04, 0],
+        ]
+      : [
+          [-1.88, 0, 0],
+          [-1.52, 0.2, -0.03],
+          [-0.86, 0.43, -0.09],
+          [-0.06, 0.52, -0.13],
+          [0.68, 0.36, -0.1],
+          [1.34, 0.44, -0.06],
+          [2.15, 0.04, 0],
+        ];
+
+  return new THREE.CatmullRomCurve3(
+    points.map(([x, y, z]) => new THREE.Vector3(x, y, z)),
+    false,
+    "centripetal",
+    0.42
+  );
+}
+
+function endpointFade(progress, fadeInEnd, fadeOutStart) {
+  const inWeight = smoothStep(progress / fadeInEnd);
+  const outWeight = 1 - smoothStep((progress - fadeOutStart) / (1 - fadeOutStart));
+  return Math.min(inWeight, outWeight);
 }
 
 function adaptTransformForViewport(transform, stageKey, viewportWidth) {

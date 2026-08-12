@@ -74,11 +74,6 @@
   justify-self: end;
 }
 
-.panelPhilosophy .quoteBlock {
-  grid-column: 1;
-  justify-self: start;
-}
-
 .panelPlayground {
   padding-top: 86px;
   padding-bottom: max(108px, calc(env(safe-area-inset-bottom) + 86px));
@@ -122,26 +117,6 @@
   line-height: 1.65;
 }
 
-.quoteBlock {
-  width: 100%;
-  max-width: 620px;
-  font-family: var(--font-mono);
-}
-
-.quoteLabel {
-  display: block;
-  margin-bottom: 20px;
-}
-
-.quoteLine {
-  border-left: 1px solid var(--accent-line);
-  padding-left: 24px;
-  color: var(--text-primary);
-  font-size: clamp(20px, 2.15vw, 30px);
-  line-height: 1.5;
-  text-wrap: pretty;
-}
-
 .hud {
   position: absolute;
   z-index: 4;
@@ -162,6 +137,73 @@
 
 .stage {
   color: var(--accent);
+}
+
+.skillsBackdropCaption {
+  position: absolute;
+  top: clamp(112px, 15vh, 154px);
+  left: var(--edge-pad-x);
+  z-index: 3;
+  width: min(410px, 35vw);
+  pointer-events: none;
+  transition: opacity 240ms ease;
+}
+
+.skillsBackdropMeta {
+  display: block;
+  margin-bottom: 13px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.decryptedText {
+  display: block;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.1vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.9);
+}
+
+.decryptedRevealed {
+  color: var(--text-primary);
+}
+
+.decryptedEncrypted {
+  color: var(--accent-bright);
+  font-family: var(--font-mono);
+}
+
+.landedStatus {
+  color: var(--accent);
+  animation: landedSignal 900ms steps(2, end) 1;
+}
+
+@keyframes landedSignal {
+  0%,
+  34% {
+    opacity: 0;
+  }
+
+  35%,
+  67% {
+    opacity: 1;
+  }
+
+  68%,
+  82% {
+    opacity: 0.4;
+  }
+
+  83%,
+  100% {
+    opacity: 1;
+  }
 }
 
 .hudBottomBar {
@@ -231,6 +273,16 @@
 }
 
 @media (max-width: 720px) {
+  .skillsBackdropCaption {
+    top: 92px;
+    left: 20px;
+    width: min(270px, 72vw);
+  }
+
+  .decryptedText {
+    font-size: clamp(18px, 6vw, 25px);
+  }
+
   .panelSplit {
     display: flex;
     align-items: flex-end;
@@ -268,6 +320,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .landedStatus {
+    animation: none;
+  }
+
   .modelLoading span {
     animation: none;
   }
