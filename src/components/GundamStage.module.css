@@ -23,7 +23,7 @@
 }
 
 .leadSpacer {
-  height: 450vh;
+  height: 250vh;
 }
 
 .editorialLayer {
@@ -32,13 +32,14 @@
 }
 
 .landingSpacer {
-  min-height: 125vh;
+  min-height: 190vh;
 }
 
 .canvasLayer {
   position: absolute;
   inset: 0;
   z-index: 1;
+  will-change: opacity;
 }
 
 .canvasLayer canvas {

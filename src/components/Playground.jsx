@@ -25,10 +25,11 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
 
   const trigger = useCallback(
     (key) => {
+      if (!active) return;
       if (key === CLIPS.IDLE) gundamApiRef.current?.playIdle();
       else gundamApiRef.current?.play(key);
     },
-    [gundamApiRef]
+    [active, gundamApiRef]
   );
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
   }, []);
 
   const enableMotion = async () => {
+    if (!active) return;
     setMotionDenied(false);
     if (needsMotionPermission) {
       try {
@@ -122,7 +124,10 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
   }, [active, trigger]);
 
   return (
-    <div className={styles.wrap}>
+    <div
+      className={styles.wrap}
+      style={{ pointerEvents: active ? "auto" : "none" }}
+    >
       <div className={styles.screenHeader} aria-hidden="true">
         <span>Control surface / live</span>
         <span>07 authored actions</span>
@@ -141,6 +146,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
             key={move.key}
             type="button"
             className={styles.control}
+            disabled={!active}
             onClick={() => trigger(move.key)}
           >
             {move.label}
@@ -149,6 +155,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
         <button
           type="button"
           className={`${styles.control} ${styles.controlAccent}`}
+          disabled={!active}
           onClick={() => trigger(CLIPS.BOOMERANG)}
         >
           Shake
@@ -159,6 +166,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
         <button
           type="button"
           className={styles.utilityButton}
+          disabled={!active}
           onClick={() => gundamApiRef.current?.playIdle()}
         >
           Return to idle
@@ -166,6 +174,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
         <button
           type="button"
           className={styles.utilityButton}
+          disabled={!active}
           onClick={() => gundamApiRef.current?.resetRotation()}
         >
           Reset view
@@ -183,6 +192,7 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
             <button
               type="button"
               className={styles.motionButton}
+              disabled={!active}
               onClick={enableMotion}
             >
               Enable motion

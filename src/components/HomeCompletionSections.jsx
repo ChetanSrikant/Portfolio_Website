@@ -93,7 +93,12 @@ const FOCUS_ITEMS = [
 
 function ProofStrip() {
   return (
-    <section className={styles.proof} aria-labelledby="proof-heading">
+    <section
+      id="skills-proof"
+      className={styles.proof}
+      data-gundam-stage-anchor="skills"
+      aria-labelledby="proof-heading"
+    >
       <div className={styles.inner}>
         <h2 id="proof-heading" className={styles.srOnly}>
           Areas of practice
@@ -153,8 +158,10 @@ function BeamsInterlude() {
 
   return (
     <section
+      id="creative-interlude"
       ref={sectionRef}
       className={styles.beamsInterlude}
+      data-gundam-stage-anchor="creative"
       aria-labelledby="beams-heading"
     >
       <div className={styles.beams} aria-hidden="true">
@@ -210,6 +217,7 @@ function SelectedWork() {
     <section
       id="selected-work"
       className={styles.selectedWork}
+      data-gundam-stage-anchor="projects"
       aria-labelledby="selected-work-heading"
     >
       <div className={styles.inner}>
@@ -310,8 +318,10 @@ function VelocityDivider() {
 
   return (
     <section
+      id="experience-transition"
       ref={sectionRef}
       className={styles.velocity}
+      data-gundam-stage-anchor="experience"
       aria-label="AI and development practice"
     >
       <p className={styles.srOnly}>{rowOne} {rowTwo}</p>
@@ -329,7 +339,12 @@ function VelocityDivider() {
 
 function CurrentFocus() {
   return (
-    <section className={styles.currentFocus} aria-labelledby="focus-heading">
+    <section
+      id="current-focus"
+      className={styles.currentFocus}
+      data-gundam-stage-anchor="experience"
+      aria-labelledby="focus-heading"
+    >
       <div className={styles.inner}>
         <header className={styles.focusHeader}>
           <span className="eyebrow">Current direction</span>

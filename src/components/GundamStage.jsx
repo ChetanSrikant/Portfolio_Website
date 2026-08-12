@@ -1,22 +1,65 @@
-import React, { Suspense, useEffect, useMemo, useRef } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
 import GundamModel, { CLIPS } from "./GundamModel.jsx";
 import useScrollProgress, { mapRange } from "../hooks/useScrollProgress.js";
 import {
   getGundamTransform,
-  getStageLabel,
+  getHomeStageIndex,
+  HOME_CHOREOGRAPHY,
   HOME_STAGE,
+  HOME_STAGE_KEYS,
+  HOME_STAGES,
 } from "../config/home.js";
 import PlaygroundContent from "./Playground.jsx";
-import CTADockContent from "./CTADock.jsx";
 import styles from "./GundamStage.module.css";
 
-function panelOpacity(p, [a, b, c, d]) {
-  if (p <= a || p >= d) return 0;
-  if (p < b) return mapRange(p, a, b, 0, 1);
-  if (p < c) return 1;
-  return mapRange(p, c, d, 1, 0);
+function panelOpacity(progress, [start, visibleStart, visibleEnd, end]) {
+  if (progress <= start || progress >= end) return 0;
+  if (progress < visibleStart) {
+    return mapRange(progress, start, visibleStart, 0, 1);
+  }
+  if (progress < visibleEnd) return 1;
+  return mapRange(progress, visibleEnd, end, 1, 0);
+}
+
+function usePrefersReducedMotion() {
+  const [reducedMotion, setReducedMotion] = useState(() =>
+    typeof window === "undefined"
+      ? false
+      : window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(query.matches);
+    update();
+    query.addEventListener?.("change", update);
+    return () => query.removeEventListener?.("change", update);
+  }, []);
+
+  return reducedMotion;
+}
+
+function useViewportWidth() {
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window === "undefined" ? 1440 : window.innerWidth
+  );
+
+  useEffect(() => {
+    const update = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return viewportWidth;
 }
 
 function Lighting() {
@@ -48,71 +91,93 @@ function ModelLoading() {
   );
 }
 
+function crossedFlightBoundary(previousIndex, currentIndex) {
+  if (previousIndex === currentIndex) return false;
+
+  const direction = currentIndex > previousIndex ? 1 : -1;
+  return HOME_CHOREOGRAPHY.flightBoundaryIndexes.some((boundaryIndex) =>
+    direction > 0
+      ? boundaryIndex > previousIndex && boundaryIndex <= currentIndex
+      : boundaryIndex <= previousIndex && boundaryIndex > currentIndex
+  );
+}
+
 export default function GundamStage({ gundamApiRef, children }) {
   const wrapperRef = useRef(null);
-  const latestProgress = useRef(0);
+  const reducedMotion = usePrefersReducedMotion();
+  const viewportWidth = useViewportWidth();
+  const [modelReady, setModelReady] = useState(false);
   const choreography = useRef({
-    boomerang: false,
-    lifter: false,
-    rifle: false,
-    landing: false,
-    rifleTimer: null,
-    landingTimer: null,
+    initialized: false,
+    stageIndex: 0,
+    previousProgress: 0,
+    direction: 1,
+    lastFlightAt: -Infinity,
+    introSequencePlayed: false,
   });
   const progress = useScrollProgress(wrapperRef);
-  const transform = useMemo(() => getGundamTransform(progress), [progress]);
+  const currentStageIndex = getHomeStageIndex(
+    progress,
+    choreography.current.initialized ? choreography.current.stageIndex : null
+  );
+  const currentStage = HOME_STAGES[currentStageIndex];
+  const transform = useMemo(
+    () => getGundamTransform(progress, { reducedMotion, viewportWidth }),
+    [progress, reducedMotion, viewportWidth]
+  );
 
-  latestProgress.current = progress;
-
-  useEffect(() => {
-    const state = choreography.current;
-    const model = gundamApiRef.current;
-    if (!model) return undefined;
-
-    if (progress >= 0.055 && progress < 0.1 && !state.boomerang) {
-      state.boomerang = true;
-      model.play(CLIPS.BOOMERANG);
-    }
-
-    if (progress >= 0.1 && progress < 0.21 && !state.lifter) {
-      state.lifter = true;
-      model.play(CLIPS.LIFTER);
-      state.rifleTimer = window.setTimeout(() => {
-        const current = latestProgress.current;
-        if (current >= 0.1 && current < 0.21 && !state.rifle) {
-          state.rifle = true;
-          gundamApiRef.current?.play(CLIPS.RIFLE);
-        }
-        state.rifleTimer = null;
-      }, 900);
-    }
-
-    if (progress >= 0.21 && state.rifleTimer) {
-      window.clearTimeout(state.rifleTimer);
-      state.rifleTimer = null;
-    }
-
-    if (progress >= 0.89 && progress < 0.985 && !state.landing) {
-      state.landing = true;
-      model.play(CLIPS.LIFTER);
-      state.landingTimer = window.setTimeout(() => {
-        if (latestProgress.current >= 0.91) {
-          gundamApiRef.current?.playIdle();
-        }
-        state.landingTimer = null;
-      }, 1250);
-    }
-
-    return undefined;
-  }, [gundamApiRef, progress]);
-
-  useEffect(() => {
-    const state = choreography.current;
-    return () => {
-      if (state.rifleTimer) window.clearTimeout(state.rifleTimer);
-      if (state.landingTimer) window.clearTimeout(state.landingTimer);
-    };
+  const handleModelReady = useCallback(() => {
+    setModelReady(true);
   }, []);
+
+  useEffect(() => {
+    const state = choreography.current;
+    const introVisibleAt = HOME_STAGE.panelFades.intro[1];
+    if (!modelReady || state.introSequencePlayed) return;
+    if (currentStage.key !== HOME_STAGE_KEYS.INTRO) return;
+    if (progress < introVisibleAt) return;
+
+    state.introSequencePlayed = true;
+    if (reducedMotion) return;
+
+    gundamApiRef.current?.playSequence([CLIPS.SABER, CLIPS.RIFLE]);
+  }, [currentStage.key, gundamApiRef, modelReady, progress, reducedMotion]);
+
+  useEffect(() => {
+    const state = choreography.current;
+
+    if (!state.initialized) {
+      state.initialized = true;
+      state.stageIndex = currentStageIndex;
+      state.previousProgress = progress;
+      return;
+    }
+
+    const direction = progress >= state.previousProgress ? 1 : -1;
+    const changedStage = currentStageIndex !== state.stageIndex;
+
+    if (changedStage) {
+      const now = performance.now();
+      const shouldFly = crossedFlightBoundary(
+        state.stageIndex,
+        currentStageIndex
+      );
+
+      if (
+        shouldFly &&
+        !reducedMotion &&
+        now - state.lastFlightAt >= HOME_CHOREOGRAPHY.flightCooldownMs
+      ) {
+        gundamApiRef.current?.play(CLIPS.LIFTER);
+        state.lastFlightAt = now;
+      }
+
+      state.stageIndex = currentStageIndex;
+      state.direction = direction;
+    }
+
+    state.previousProgress = progress;
+  }, [currentStageIndex, gundamApiRef, progress, reducedMotion]);
 
   const introOpacity = panelOpacity(progress, HOME_STAGE.panelFades.intro);
   const philosophyOpacity = panelOpacity(
@@ -123,16 +188,9 @@ export default function GundamStage({ gundamApiRef, children }) {
     progress,
     HOME_STAGE.panelFades.playground
   );
-  const contactOpacity = panelOpacity(progress, HOME_STAGE.panelFades.contact);
-  const playgroundActive = playgroundOpacity > 0.4;
-  let modelOpacity = 1;
-  if (progress >= 0.2 && progress < 0.25) {
-    modelOpacity = mapRange(progress, 0.2, 0.25, 1, 0.32);
-  } else if (progress >= 0.25 && progress < 0.89) {
-    modelOpacity = 0.32;
-  } else if (progress >= 0.89 && progress < 0.94) {
-    modelOpacity = mapRange(progress, 0.89, 0.94, 0.32, 1);
-  }
+  const playgroundActive =
+    currentStage.key === HOME_STAGE_KEYS.PLAYGROUND &&
+    playgroundOpacity > 0.4;
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -143,14 +201,18 @@ export default function GundamStage({ gundamApiRef, children }) {
       id="gundam-wrapper"
       ref={wrapperRef}
       className={styles.wrapper}
+      data-gundam-stage={currentStage.key}
+      data-gundam-direction={
+        choreography.current.direction > 0 ? "forward" : "reverse"
+      }
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
         <div
           className={styles.canvasLayer}
           style={{
-            opacity: modelOpacity,
-            pointerEvents: modelOpacity > 0.08 ? "auto" : "none",
+            opacity: transform.opacity,
+            pointerEvents: playgroundActive ? "auto" : "none",
           }}
           aria-hidden="true"
         >
@@ -169,14 +231,16 @@ export default function GundamStage({ gundamApiRef, children }) {
               <GundamModel
                 ref={gundamApiRef}
                 targetRotationY={transform.rotationY}
-                targetPosition={[transform.x, 0, 0]}
+                targetPosition={[transform.x, transform.y, transform.z]}
                 targetScale={transform.scale}
+                interactive={playgroundActive}
+                onReady={handleModelReady}
                 onSingleClick={() => gundamApiRef.current?.play(CLIPS.SABER)}
                 onDoubleClick={() => gundamApiRef.current?.play(CLIPS.SHIELD)}
               />
               <ContactShadows
                 position={[0, 0.01, 0]}
-                opacity={0.55}
+                opacity={transform.shadowOpacity}
                 scale={12}
                 blur={2.4}
                 far={4}
@@ -189,7 +253,7 @@ export default function GundamStage({ gundamApiRef, children }) {
         <div className={styles.vignette} aria-hidden="true" />
 
         <div className={`${styles.hud} ${styles.hudTopRight}`} aria-hidden="true">
-          <span className={styles.stage}>{getStageLabel(progress)}</span>
+          <span className={styles.stage}>{currentStage.label}</span>
           <br />
           UNIT / ZGMF-X09A
           <br />
@@ -204,6 +268,7 @@ export default function GundamStage({ gundamApiRef, children }) {
 
         <div
           className={`${styles.panel} ${styles.panelSplit} ${styles.panelIntro}`}
+          data-gundam-panel="intro"
           style={{ opacity: introOpacity }}
           aria-hidden={introOpacity < 0.5}
         >
@@ -220,6 +285,7 @@ export default function GundamStage({ gundamApiRef, children }) {
 
         <div
           className={`${styles.panel} ${styles.panelSplit} ${styles.panelPhilosophy}`}
+          data-gundam-panel="philosophy"
           style={{ opacity: philosophyOpacity }}
           aria-hidden={philosophyOpacity < 0.5}
         >
@@ -234,21 +300,11 @@ export default function GundamStage({ gundamApiRef, children }) {
         </div>
 
         <div
-          className={`${styles.panel} ${styles.panelCenterBottom}`}
-          style={{
-            opacity: contactOpacity,
-            pointerEvents: contactOpacity > 0.4 ? "auto" : "none",
-          }}
-          aria-hidden={contactOpacity < 0.4}
-        >
-          <CTADockContent />
-        </div>
-
-        <div
           className={`${styles.panel} ${styles.panelSplit} ${styles.panelPlayground}`}
+          data-gundam-panel="playground"
           style={{
             opacity: playgroundOpacity,
-            pointerEvents: playgroundActive ? "auto" : "none",
+            pointerEvents: "none",
           }}
           aria-hidden={!playgroundActive}
         >
@@ -262,7 +318,12 @@ export default function GundamStage({ gundamApiRef, children }) {
       <div className={styles.journeyContent}>
         <div className={styles.leadSpacer} aria-hidden="true" />
         <div className={styles.editorialLayer}>{children}</div>
-        <div id="final-playground" className={styles.landingSpacer} aria-hidden="true" />
+        <div
+          id="final-playground"
+          className={styles.landingSpacer}
+          data-gundam-stage-anchor="playground"
+          aria-hidden="true"
+        />
       </div>
     </section>
   );

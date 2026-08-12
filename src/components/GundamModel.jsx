@@ -33,6 +33,8 @@ const GundamModel = forwardRef(function GundamModel(
     dampFactor = 4,
     positionDampFactor = 3,
     scaleDampFactor = 3,
+    interactive = false,
+    onReady,
     onSingleClick,
     onDoubleClick,
     onHoverChange,
@@ -53,14 +55,45 @@ const GundamModel = forwardRef(function GundamModel(
     startX: 0,
     lastX: 0,
     distance: 0,
+    captureTarget: null,
   });
   const manualRotationTargetY = useRef(0);
+
+  useEffect(() => {
+    if (interactive) return;
+
+    if (pendingSingleClick.current) {
+      clearTimeout(pendingSingleClick.current);
+      pendingSingleClick.current = null;
+    }
+
+    const pointer = drag.current;
+    if (pointer.active && pointer.pointerId !== null) {
+      pointer.captureTarget?.releasePointerCapture?.(pointer.pointerId);
+    }
+    drag.current = {
+      active: false,
+      pointerId: null,
+      startX: 0,
+      lastX: 0,
+      distance: 0,
+      captureTarget: null,
+    };
+    lastClickTime.current = 0;
+    document.body.style.cursor = "auto";
+    onHoverChange?.(false);
+  }, [interactive, onHoverChange]);
 
   useEffect(() => {
     return () => {
       if (pendingSingleClick.current) clearTimeout(pendingSingleClick.current);
       if (activeFinishedHandler.current) {
         mixer.removeEventListener("finished", activeFinishedHandler.current);
+      }
+      if (drag.current.active && drag.current.pointerId !== null) {
+        drag.current.captureTarget?.releasePointerCapture?.(
+          drag.current.pointerId
+        );
       }
       document.body.style.cursor = "auto";
     };
@@ -124,53 +157,84 @@ const GundamModel = forwardRef(function GundamModel(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actions]);
 
-  // Crossfade helper: play a clip once, then settle back to idle.
-  const playOnce = (clipName) => {
-    const target = actions[clipName];
-    const idle = actions[CLIPS.IDLE];
-    if (!target) return;
+  useEffect(() => {
+    if (actions[CLIPS.IDLE]) onReady?.();
+  }, [actions, onReady]);
 
-    if (activeFinishedHandler.current) {
-      mixer.removeEventListener("finished", activeFinishedHandler.current);
-      activeFinishedHandler.current = null;
-    }
-
-    Object.entries(actions).forEach(([name, action]) => {
-      if (name !== clipName) action?.fadeOut(0.3);
-    });
-
-    target.reset();
-    target.setLoop(THREE.LoopOnce, 1);
-    target.clampWhenFinished = true;
-    target.fadeIn(0.25).play();
-
-    if (clipName === CLIPS.STATIC) return;
-
-    const handleFinished = (e) => {
-      if (e.action === target) {
-        mixer.removeEventListener("finished", handleFinished);
-        activeFinishedHandler.current = null;
-        idle?.reset().fadeIn(0.5).play();
-        target.fadeOut(0.5);
-      }
-    };
-    activeFinishedHandler.current = handleFinished;
-    mixer.addEventListener("finished", handleFinished);
+  const removeFinishedHandler = () => {
+    if (!activeFinishedHandler.current) return;
+    mixer.removeEventListener("finished", activeFinishedHandler.current);
+    activeFinishedHandler.current = null;
   };
 
   const playIdle = () => {
-    if (activeFinishedHandler.current) {
-      mixer.removeEventListener("finished", activeFinishedHandler.current);
-      activeFinishedHandler.current = null;
-    }
+    removeFinishedHandler();
     Object.entries(actions).forEach(([name, action]) => {
       if (name !== CLIPS.IDLE) action?.fadeOut(0.3);
     });
-    actions[CLIPS.IDLE]?.reset().fadeIn(0.4).play();
+    const idle = actions[CLIPS.IDLE];
+    idle?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.4).play();
   };
+
+  // Plays authored one-shots in order, then returns to the repeating Idle.
+  // A new play/playSequence/playIdle request safely interrupts the sequence.
+  const playSequence = (clipNames) => {
+    const queue = clipNames.filter(
+      (clipName) => clipName !== CLIPS.IDLE && actions[clipName]
+    );
+    if (!queue.length) {
+      playIdle();
+      return;
+    }
+
+    removeFinishedHandler();
+
+    const playAt = (index) => {
+      const clipName = queue[index];
+      const target = actions[clipName];
+      if (!target) return;
+
+      Object.entries(actions).forEach(([name, action]) => {
+        if (name !== clipName) action?.fadeOut(0.3);
+      });
+
+      target.reset();
+      target.setLoop(THREE.LoopOnce, 1);
+      target.clampWhenFinished = true;
+      target.fadeIn(0.25).play();
+
+      if (clipName === CLIPS.STATIC) return;
+
+      const handleFinished = (event) => {
+        if (event.action !== target) return;
+
+        mixer.removeEventListener("finished", handleFinished);
+        activeFinishedHandler.current = null;
+
+        const nextIndex = index + 1;
+        if (nextIndex < queue.length) {
+          target.fadeOut(0.3);
+          playAt(nextIndex);
+          return;
+        }
+
+        target.fadeOut(0.5);
+        const idle = actions[CLIPS.IDLE];
+        idle?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.5).play();
+      };
+
+      activeFinishedHandler.current = handleFinished;
+      mixer.addEventListener("finished", handleFinished);
+    };
+
+    playAt(0);
+  };
+
+  const playOnce = (clipName) => playSequence([clipName]);
 
   useImperativeHandle(ref, () => ({
     play: playOnce,
+    playSequence,
     playIdle,
     clipNames: names,
     resetRotation: () => {
@@ -216,6 +280,7 @@ const GundamModel = forwardRef(function GundamModel(
   });
 
   const handleClick = (e) => {
+    if (!interactive) return;
     e.stopPropagation();
     if (drag.current.distance >= DRAG_THRESHOLD_PX) return;
 
@@ -238,6 +303,7 @@ const GundamModel = forwardRef(function GundamModel(
   };
 
   const handlePointerDown = (e) => {
+    if (!interactive) return;
     e.stopPropagation();
     drag.current = {
       active: true,
@@ -245,12 +311,14 @@ const GundamModel = forwardRef(function GundamModel(
       startX: e.clientX,
       lastX: e.clientX,
       distance: 0,
+      captureTarget: e.target,
     };
     e.target.setPointerCapture?.(e.pointerId);
     document.body.style.cursor = "grabbing";
   };
 
   const handlePointerMove = (e) => {
+    if (!interactive) return;
     if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
     e.stopPropagation();
 
@@ -271,11 +339,13 @@ const GundamModel = forwardRef(function GundamModel(
   };
 
   const finishDrag = (e) => {
+    if (!interactive) return;
     if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
     e.stopPropagation();
     e.target.releasePointerCapture?.(e.pointerId);
     drag.current.active = false;
     drag.current.pointerId = null;
+    drag.current.captureTarget = null;
     document.body.style.cursor = "grab";
   };
 
@@ -283,17 +353,19 @@ const GundamModel = forwardRef(function GundamModel(
     <group
       ref={group}
       {...props}
-      onClick={handleClick}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={finishDrag}
-      onPointerCancel={finishDrag}
+      onClick={interactive ? handleClick : undefined}
+      onPointerDown={interactive ? handlePointerDown : undefined}
+      onPointerMove={interactive ? handlePointerMove : undefined}
+      onPointerUp={interactive ? finishDrag : undefined}
+      onPointerCancel={interactive ? finishDrag : undefined}
       onPointerOver={(e) => {
+        if (!interactive) return;
         e.stopPropagation();
         if (!drag.current.active) document.body.style.cursor = "grab";
         onHoverChange?.(true);
       }}
       onPointerOut={(e) => {
+        if (!interactive) return;
         if (!drag.current.active) document.body.style.cursor = "auto";
         onHoverChange?.(false);
       }}
