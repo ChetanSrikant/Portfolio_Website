@@ -35,15 +35,11 @@ export function getGundamTransform(progress) {
   if (p < 0.08) x = remap(p, 0, 0.08, -5.5, -1.85);
   else if (p < 0.17) x = -1.85;
   else if (p < 0.23) x = remap(p, 0.17, 0.23, -1.85, 1.85);
-  else if (p < 0.74) x = 1.85;
-  else if (p < 0.82) x = remap(p, 0.74, 0.82, 1.85, -2.2);
-  else x = -2.4;
+  else x = 1.85;
 
   let scale;
   if (p < 0.08) scale = remap(p, 0, 0.08, 1.02, 1.3);
-  else if (p < 0.74) scale = 1.3;
-  else if (p < 0.82) scale = remap(p, 0.74, 0.82, 1.3, 1);
-  else scale = 1;
+  else scale = 1.3;
 
   return {
     x,

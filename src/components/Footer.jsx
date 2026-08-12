@@ -8,6 +8,7 @@ const SOCIALS = [
     href: "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/",
   },
   { label: "Email", href: "mailto:chetansrikantmandiga@gmail.com" },
+  { label: "Résumé", href: "/resume.pdf" },
 ];
 
 export default function Footer() {

@@ -3,6 +3,7 @@ import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import FloatingDock from "./components/FloatingDock.jsx";
 import GundamStage from "./components/GundamStage.jsx";
+import HomeCompletionSections from "./components/HomeCompletionSections.jsx";
 import Footer from "./components/Footer.jsx";
 import useHeroNavigationMode from "./hooks/useHeroNavigationMode.js";
 
@@ -22,6 +23,7 @@ export default function App() {
       <main id="main-content">
         <Hero />
         <GundamStage gundamApiRef={gundamApiRef} />
+        <HomeCompletionSections />
       </main>
       <Footer />
     </>

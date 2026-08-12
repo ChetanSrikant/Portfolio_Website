@@ -118,6 +118,8 @@ export default function GundamStage({ gundamApiRef }) {
   );
   const contactOpacity = ctaOpacity(progress);
   const playgroundActive = playgroundOpacity > 0.4;
+  const modelOpacity =
+    progress < 0.76 ? 1 : mapRange(progress, 0.76, 0.82, 1, 0);
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -132,7 +134,14 @@ export default function GundamStage({ gundamApiRef }) {
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
-        <div className={styles.canvasLayer} aria-hidden="true">
+        <div
+          className={styles.canvasLayer}
+          style={{
+            opacity: modelOpacity,
+            pointerEvents: modelOpacity > 0.08 ? "auto" : "none",
+          }}
+          aria-hidden="true"
+        >
           <Canvas
             shadows
             dpr={[1, 1.8]}
