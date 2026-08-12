@@ -6,11 +6,33 @@
 .sticky {
   position: sticky;
   top: 0;
+  z-index: 1;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
   background: radial-gradient(ellipse 90% 70% at 50% 30%, #141414 0%, #0a0a0a 65%);
+}
+
+.journeyContent {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+  margin-top: -100dvh;
+  pointer-events: none;
+}
+
+.leadSpacer {
+  height: 450vh;
+}
+
+.editorialLayer {
+  position: relative;
+  pointer-events: auto;
+}
+
+.landingSpacer {
+  min-height: 125vh;
 }
 
 .canvasLayer {

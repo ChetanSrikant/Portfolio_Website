@@ -1,5 +1,5 @@
 import React from "react";
-import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";
+import { scrollToFinalPlayground } from "../config/home.js";
 import styles from "./CTADock.module.css";
 
 export default function CTADockContent() {
@@ -20,9 +20,9 @@ export default function CTADockContent() {
         <button
           type="button"
           className={styles.secondary}
-          onClick={() => scrollToStageProgress(HOME_TARGETS.work)}
+          onClick={scrollToFinalPlayground}
         >
-          Replay the playground
+          Go to playground
         </button>
         <a
           href="/resume.pdf"

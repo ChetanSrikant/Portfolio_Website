@@ -19,13 +19,6 @@ function panelOpacity(p, [a, b, c, d]) {
   return mapRange(p, c, d, 1, 0);
 }
 
-function ctaOpacity(p) {
-  const [start, end] = HOME_STAGE.panelFades.contact;
-  if (p <= start) return 0;
-  if (p < end) return mapRange(p, start, end, 0, 1);
-  return 1;
-}
-
 function Lighting() {
   return (
     <>
@@ -55,14 +48,16 @@ function ModelLoading() {
   );
 }
 
-export default function GundamStage({ gundamApiRef }) {
+export default function GundamStage({ gundamApiRef, children }) {
   const wrapperRef = useRef(null);
   const latestProgress = useRef(0);
   const choreography = useRef({
     boomerang: false,
     lifter: false,
     rifle: false,
+    landing: false,
     rifleTimer: null,
+    landingTimer: null,
   });
   const progress = useScrollProgress(wrapperRef);
   const transform = useMemo(() => getGundamTransform(progress), [progress]);
@@ -74,17 +69,17 @@ export default function GundamStage({ gundamApiRef }) {
     const model = gundamApiRef.current;
     if (!model) return undefined;
 
-    if (progress >= 0.08 && progress < 0.19 && !state.boomerang) {
+    if (progress >= 0.055 && progress < 0.1 && !state.boomerang) {
       state.boomerang = true;
       model.play(CLIPS.BOOMERANG);
     }
 
-    if (progress >= 0.19 && progress < 0.41 && !state.lifter) {
+    if (progress >= 0.1 && progress < 0.21 && !state.lifter) {
       state.lifter = true;
       model.play(CLIPS.LIFTER);
       state.rifleTimer = window.setTimeout(() => {
         const current = latestProgress.current;
-        if (current >= 0.19 && current < 0.41 && !state.rifle) {
+        if (current >= 0.1 && current < 0.21 && !state.rifle) {
           state.rifle = true;
           gundamApiRef.current?.play(CLIPS.RIFLE);
         }
@@ -92,9 +87,20 @@ export default function GundamStage({ gundamApiRef }) {
       }, 900);
     }
 
-    if (progress >= 0.41 && state.rifleTimer) {
+    if (progress >= 0.21 && state.rifleTimer) {
       window.clearTimeout(state.rifleTimer);
       state.rifleTimer = null;
+    }
+
+    if (progress >= 0.89 && progress < 0.985 && !state.landing) {
+      state.landing = true;
+      model.play(CLIPS.LIFTER);
+      state.landingTimer = window.setTimeout(() => {
+        if (latestProgress.current >= 0.91) {
+          gundamApiRef.current?.playIdle();
+        }
+        state.landingTimer = null;
+      }, 1250);
     }
 
     return undefined;
@@ -104,6 +110,7 @@ export default function GundamStage({ gundamApiRef }) {
     const state = choreography.current;
     return () => {
       if (state.rifleTimer) window.clearTimeout(state.rifleTimer);
+      if (state.landingTimer) window.clearTimeout(state.landingTimer);
     };
   }, []);
 
@@ -116,10 +123,16 @@ export default function GundamStage({ gundamApiRef }) {
     progress,
     HOME_STAGE.panelFades.playground
   );
-  const contactOpacity = ctaOpacity(progress);
+  const contactOpacity = panelOpacity(progress, HOME_STAGE.panelFades.contact);
   const playgroundActive = playgroundOpacity > 0.4;
-  const modelOpacity =
-    progress < 0.76 ? 1 : mapRange(progress, 0.76, 0.82, 1, 0);
+  let modelOpacity = 1;
+  if (progress >= 0.2 && progress < 0.25) {
+    modelOpacity = mapRange(progress, 0.2, 0.25, 1, 0.32);
+  } else if (progress >= 0.25 && progress < 0.89) {
+    modelOpacity = 0.32;
+  } else if (progress >= 0.89 && progress < 0.94) {
+    modelOpacity = mapRange(progress, 0.89, 0.94, 0.32, 1);
+  }
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -130,7 +143,6 @@ export default function GundamStage({ gundamApiRef }) {
       id="gundam-wrapper"
       ref={wrapperRef}
       className={styles.wrapper}
-      style={{ height: `${HOME_STAGE.wrapperHeightVh}vh` }}
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
@@ -222,6 +234,17 @@ export default function GundamStage({ gundamApiRef }) {
         </div>
 
         <div
+          className={`${styles.panel} ${styles.panelCenterBottom}`}
+          style={{
+            opacity: contactOpacity,
+            pointerEvents: contactOpacity > 0.4 ? "auto" : "none",
+          }}
+          aria-hidden={contactOpacity < 0.4}
+        >
+          <CTADockContent />
+        </div>
+
+        <div
           className={`${styles.panel} ${styles.panelSplit} ${styles.panelPlayground}`}
           style={{
             opacity: playgroundOpacity,
@@ -234,17 +257,12 @@ export default function GundamStage({ gundamApiRef }) {
             active={playgroundActive}
           />
         </div>
+      </div>
 
-        <div
-          className={`${styles.panel} ${styles.panelCenterBottom}`}
-          style={{
-            opacity: contactOpacity,
-            pointerEvents: contactOpacity > 0.4 ? "auto" : "none",
-          }}
-          aria-hidden={contactOpacity < 0.4}
-        >
-          <CTADockContent />
-        </div>
+      <div className={styles.journeyContent}>
+        <div className={styles.leadSpacer} aria-hidden="true" />
+        <div className={styles.editorialLayer}>{children}</div>
+        <div id="final-playground" className={styles.landingSpacer} aria-hidden="true" />
       </div>
     </section>
   );

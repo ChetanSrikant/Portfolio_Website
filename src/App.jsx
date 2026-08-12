@@ -22,8 +22,9 @@ export default function App() {
       <FloatingDock visible={navigationCondensed} />
       <main id="main-content">
         <Hero />
-        <GundamStage gundamApiRef={gundamApiRef} />
-        <HomeCompletionSections />
+        <GundamStage gundamApiRef={gundamApiRef}>
+          <HomeCompletionSections />
+        </GundamStage>
       </main>
       <Footer />
     </>

@@ -1,7 +1,7 @@
 .completion {
   position: relative;
   overflow: clip;
-  background: var(--bg);
+  background: transparent;
 }
 
 .inner {
@@ -27,7 +27,7 @@
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 0 var(--edge-pad-x);
-  background: #0c0c0c;
+  background: rgba(12, 12, 12, 0.86);
 }
 
 .proofGrid {
@@ -100,7 +100,7 @@
   padding: var(--section-pad-y) var(--edge-pad-x);
   background:
     radial-gradient(circle at 50% 48%, rgba(201, 162, 75, 0.07), transparent 36%),
-    #090909;
+    rgba(9, 9, 9, 0.76);
 }
 
 .beams {
@@ -171,7 +171,7 @@
 .selectedWork {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 16%),
-    var(--bg);
+    rgba(10, 10, 10, 0.82);
 }
 
 .sectionHeader {
@@ -384,7 +384,7 @@
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: clamp(52px, 8vw, 96px) 0;
-  background: #0d0d0d;
+  background: rgba(13, 13, 13, 0.88);
 }
 
 .velocityViewport {
@@ -419,7 +419,7 @@
   padding-bottom: clamp(144px, 16vw, 220px);
   background:
     radial-gradient(circle at 82% 22%, rgba(201, 162, 75, 0.055), transparent 26%),
-    var(--bg);
+    rgba(10, 10, 10, 0.82);
 }
 
 .focusHeader {
