@@ -22,6 +22,8 @@ export const CLIPS = {
 };
 
 const DOUBLE_CLICK_MS = 280;
+const DRAG_THRESHOLD_PX = 6;
+const DRAG_RADIANS_PER_PX = 0.009;
 
 const GundamModel = forwardRef(function GundamModel(
   {
@@ -44,6 +46,21 @@ const GundamModel = forwardRef(function GundamModel(
 
   const lastClickTime = useRef(0);
   const pendingSingleClick = useRef(null);
+  const drag = useRef({
+    active: false,
+    pointerId: null,
+    startX: 0,
+    lastX: 0,
+    distance: 0,
+  });
+  const manualRotationTargetY = useRef(0);
+
+  useEffect(() => {
+    return () => {
+      if (pendingSingleClick.current) clearTimeout(pendingSingleClick.current);
+      document.body.style.cursor = "auto";
+    };
+  }, []);
 
   // Normalize scale/position regardless of the glb's authored units, and
   // tune materials (grounded shadows, punchy beam-saber glow).
@@ -147,7 +164,7 @@ const GundamModel = forwardRef(function GundamModel(
     if (!group.current) return;
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
-      targetRotationY,
+      targetRotationY + manualRotationTargetY.current,
       dampFactor,
       delta
     );
@@ -180,6 +197,8 @@ const GundamModel = forwardRef(function GundamModel(
 
   const handleClick = (e) => {
     e.stopPropagation();
+    if (drag.current.distance >= DRAG_THRESHOLD_PX) return;
+
     const now = performance.now();
     const sinceLast = now - lastClickTime.current;
     lastClickTime.current = now;
@@ -198,18 +217,57 @@ const GundamModel = forwardRef(function GundamModel(
     }
   };
 
+  const handlePointerDown = (e) => {
+    e.stopPropagation();
+    drag.current = {
+      active: true,
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      lastX: e.clientX,
+      distance: 0,
+    };
+    e.target.setPointerCapture?.(e.pointerId);
+    document.body.style.cursor = "grabbing";
+  };
+
+  const handlePointerMove = (e) => {
+    if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
+    e.stopPropagation();
+
+    const deltaX = e.clientX - drag.current.lastX;
+    drag.current.lastX = e.clientX;
+    drag.current.distance = Math.max(
+      drag.current.distance,
+      Math.abs(e.clientX - drag.current.startX)
+    );
+    manualRotationTargetY.current += deltaX * DRAG_RADIANS_PER_PX;
+  };
+
+  const finishDrag = (e) => {
+    if (!drag.current.active || drag.current.pointerId !== e.pointerId) return;
+    e.stopPropagation();
+    e.target.releasePointerCapture?.(e.pointerId);
+    drag.current.active = false;
+    drag.current.pointerId = null;
+    document.body.style.cursor = "grab";
+  };
+
   return (
     <group
       ref={group}
       {...props}
       onClick={handleClick}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={finishDrag}
+      onPointerCancel={finishDrag}
       onPointerOver={(e) => {
         e.stopPropagation();
-        document.body.style.cursor = "pointer";
+        if (!drag.current.active) document.body.style.cursor = "grab";
         onHoverChange?.(true);
       }}
       onPointerOut={(e) => {
-        document.body.style.cursor = "auto";
+        if (!drag.current.active) document.body.style.cursor = "auto";
         onHoverChange?.(false);
       }}
     >

@@ -97,8 +97,9 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
       <div className={styles.label}>
         <span className="eyebrow">Gundam Playground</span>
         <p className={styles.hint}>
-          Click for saber, double-click for shield, shake your mouse (or
-          phone) for the boomerang — or pick a move below.
+          Drag the Gundam to inspect every side. Click for saber,
+          double-click for shield, shake your mouse (or phone) for the
+          boomerang — or pick a move below.
         </p>
       </div>
 
