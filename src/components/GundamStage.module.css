@@ -46,6 +46,103 @@
   touch-action: pan-y;
 }
 
+.initialization {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.initializationFrame {
+  position: absolute;
+  top: 13%;
+  left: 5%;
+  width: min(44vw, 650px);
+  height: 72%;
+  opacity: 0;
+  background:
+    linear-gradient(rgba(201, 162, 75, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 75, .04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(90deg, transparent, #000 12% 88%, transparent);
+}
+
+.initCorner {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-color: rgba(201, 162, 75, .66);
+  border-style: solid;
+}
+
+.initCorner:nth-child(1) { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.initCorner:nth-child(2) { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.initCorner:nth-child(3) { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+.initCorner:nth-child(4) { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+
+.scanLine {
+  position: absolute;
+  z-index: 2;
+  top: 8%;
+  right: 4%;
+  left: 4%;
+  height: 2px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--accent) 16% 84%, transparent);
+  box-shadow:
+    0 0 10px rgba(201, 162, 75, .8),
+    0 16px 32px rgba(201, 162, 75, .16),
+    0 -16px 32px rgba(201, 162, 75, .12);
+}
+
+.scanLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  background: linear-gradient(0deg, rgba(201, 162, 75, .13), transparent);
+}
+
+.corePulse {
+  position: absolute;
+  top: 46%;
+  left: 47%;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 22px 5px rgba(201, 162, 75, .56);
+}
+
+.initReadout {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-align: right;
+}
+
+.initReadout span,
+.initReadout strong {
+  opacity: 0;
+}
+
+.initReadout strong {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .vignette {
   position: absolute;
   inset: 0;
@@ -273,6 +370,18 @@
 }
 
 @media (max-width: 720px) {
+  .initializationFrame {
+    top: 15%;
+    left: 5%;
+    width: 90%;
+    height: 60%;
+  }
+
+  .initReadout {
+    right: 12px;
+    bottom: 12px;
+  }
+
   .skillsBackdropCaption {
     top: 92px;
     left: 20px;
@@ -320,6 +429,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .initialization {
+    display: none;
+  }
+
   .landedStatus {
     animation: none;
   }

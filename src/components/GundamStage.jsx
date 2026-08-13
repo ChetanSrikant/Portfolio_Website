@@ -139,9 +139,12 @@ function TransitionPathDebug({ viewportWidth }) {
 
 export default function GundamStage({ gundamApiRef, children }) {
   const wrapperRef = useRef(null);
+  const canvasLayerRef = useRef(null);
+  const initializationRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const viewportWidth = useViewportWidth();
   const [modelReady, setModelReady] = useState(false);
+  const [initializationComplete, setInitializationComplete] = useState(false);
   const [introToPhilosophyProgress, setIntroToPhilosophyProgress] = useState(0);
   const transitionProgressRef = useRef(0);
   const choreography = useRef({
@@ -159,6 +162,9 @@ export default function GundamStage({ gundamApiRef, children }) {
   );
   const currentStage = HOME_STAGES[currentStageIndex];
   const transitionRange = HOME_CHOREOGRAPHY.introToPhilosophy;
+  const introEntered =
+    currentStage.key === HOME_STAGE_KEYS.INTRO &&
+    progress >= HOME_STAGE.panelFades.intro[1];
   const transitionOwnsTransform =
     !reducedMotion &&
     progress >= transitionRange.start &&
@@ -208,6 +214,58 @@ export default function GundamStage({ gundamApiRef, children }) {
   }, []);
 
   useEffect(() => {
+    if (!modelReady || !introEntered || initializationComplete) return undefined;
+
+    if (reducedMotion) {
+      setInitializationComplete(true);
+      return undefined;
+    }
+
+    const context = gsap.context(() => {
+      const timeline = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        onComplete: () => setInitializationComplete(true),
+      });
+
+      timeline
+        .set(canvasLayerRef.current, {
+          filter: "brightness(0.07) saturate(0.2) contrast(1.25)",
+        })
+        .set("[data-init-frame]", { opacity: 1 })
+        .fromTo(
+          "[data-init-status]",
+          { opacity: 0, x: -8 },
+          { opacity: 1, x: 0, duration: 0.18, stagger: 0.12 },
+          0.08
+        )
+        .fromTo(
+          "[data-init-scan]",
+          { yPercent: -120, opacity: 0 },
+          { yPercent: 520, opacity: 1, duration: 1.05, ease: "power1.inOut" },
+          0.2
+        )
+        .to(
+          canvasLayerRef.current,
+          {
+            keyframes: [
+              { filter: "brightness(0.18) saturate(0.35) contrast(1.35)", duration: 0.12 },
+              { filter: "brightness(0.07) saturate(0.2) contrast(1.25)", duration: 0.08 },
+              { filter: "brightness(0.55) saturate(0.7) contrast(1.18)", duration: 0.14 },
+              { filter: "brightness(0.2) saturate(0.45) contrast(1.25)", duration: 0.08 },
+              { filter: "brightness(1) saturate(1) contrast(1)", duration: 0.34 },
+            ],
+          },
+          0.72
+        )
+        .to("[data-init-core]", { opacity: 1, scale: 1.7, duration: 0.18 }, 1.16)
+        .to("[data-init-core]", { opacity: 0, scale: 3.2, duration: 0.34 }, 1.34)
+        .to("[data-init-frame]", { opacity: 0, duration: 0.3 }, 1.55);
+    }, initializationRef);
+
+    return () => context.revert();
+  }, [initializationComplete, introEntered, modelReady, reducedMotion]);
+
+  useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return undefined;
 
@@ -254,7 +312,7 @@ export default function GundamStage({ gundamApiRef, children }) {
   useEffect(() => {
     const state = choreography.current;
     const introVisibleAt = HOME_STAGE.panelFades.intro[1];
-    if (!modelReady || state.introSequencePlayed) return;
+    if (!modelReady || !initializationComplete || state.introSequencePlayed) return;
     if (currentStage.key !== HOME_STAGE_KEYS.INTRO) return;
     if (progress < introVisibleAt) return;
 
@@ -262,7 +320,14 @@ export default function GundamStage({ gundamApiRef, children }) {
     if (reducedMotion) return;
 
     gundamApiRef.current?.playSequence([CLIPS.SABER, CLIPS.RIFLE]);
-  }, [currentStage.key, gundamApiRef, modelReady, progress, reducedMotion]);
+  }, [
+    currentStage.key,
+    gundamApiRef,
+    initializationComplete,
+    modelReady,
+    progress,
+    reducedMotion,
+  ]);
 
   useEffect(() => {
     const state = choreography.current;
@@ -402,6 +467,7 @@ export default function GundamStage({ gundamApiRef, children }) {
           </div>
         )}
         <div
+          ref={canvasLayerRef}
           className={styles.canvasLayer}
           style={{
             opacity: transform.opacity,
@@ -460,6 +526,25 @@ export default function GundamStage({ gundamApiRef, children }) {
             </Suspense>
           </Canvas>
         </div>
+
+        {!initializationComplete && modelReady && introEntered && (
+          <div ref={initializationRef} className={styles.initialization} aria-live="polite">
+            <div className={styles.initializationFrame} data-init-frame>
+              <span className={styles.initCorner} />
+              <span className={styles.initCorner} />
+              <span className={styles.initCorner} />
+              <span className={styles.initCorner} />
+              <span className={styles.scanLine} data-init-scan />
+              <span className={styles.corePulse} data-init-core />
+              <div className={styles.initReadout}>
+                <span data-init-status>UNIT / ZGMF-X09A</span>
+                <strong data-init-status>INITIALIZING</strong>
+                <span data-init-status>ARMOR BUS · ONLINE</span>
+                <span data-init-status>OPTICS · SYNCED</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className={styles.vignette} aria-hidden="true" />
 
