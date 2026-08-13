@@ -1,0 +1,110 @@
+.glitch {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.alwaysOn::before,
+.alwaysOn::after,
+.hoverOnly:hover::before,
+.hoverOnly:hover::after,
+.hoverOnly:focus-visible::before,
+.hoverOnly:focus-visible::after,
+.triggered::before,
+.triggered::after {
+  opacity: .92;
+}
+
+.alwaysOn,
+.hoverOnly:hover,
+.hoverOnly:focus-visible,
+.triggered {
+  animation: glitchBody var(--glitch-speed) steps(2, end) infinite;
+}
+
+.alwaysOn::before,
+.hoverOnly:hover::before,
+.hoverOnly:focus-visible::before,
+.triggered::before {
+  color: var(--accent);
+  animation: glitchUpper var(--glitch-speed) steps(2, end) infinite;
+}
+
+.alwaysOn::after,
+.hoverOnly:hover::after,
+.hoverOnly:focus-visible::after,
+.triggered::after {
+  color: #b9e3dc;
+  animation: glitchLower var(--glitch-speed-alt) steps(2, end) infinite reverse;
+}
+
+.shadows:hover,
+.shadows:focus-visible,
+.shadows.alwaysOn,
+.shadows.triggered {
+  text-shadow: 4px 0 rgba(201, 162, 75, .55), -4px 0 rgba(185, 227, 220, .4);
+}
+
+@keyframes glitchBody {
+  0%, 68%, 100% { transform: translate(0) skewX(0); filter: none; }
+  70% { transform: translate(-2px, 1px) skewX(-1.5deg); }
+  72% { transform: translate(3px, -1px) skewX(1deg); filter: contrast(1.18); }
+  74% { transform: translate(-1px) skewX(0); }
+  88% { transform: translate(2px) skewX(1.2deg); }
+  90% { transform: translate(-3px, 1px) skewX(-.8deg); }
+  92% { transform: translate(0) skewX(0); }
+}
+
+@keyframes glitchUpper {
+  0%, 62%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  64% { clip-path: inset(6% 0 66% 0); transform: translate(-6px, -1px); }
+  68% { clip-path: inset(38% 0 36% 0); transform: translate(7px, 1px); }
+  72% { clip-path: inset(18% 0 62% 0); transform: translate(-4px); }
+  84% { clip-path: inset(72% 0 8% 0); transform: translate(5px, 1px); }
+  90% { clip-path: inset(28% 0 50% 0); transform: translate(-7px); }
+  95% { clip-path: inset(4% 0 80% 0); transform: translate(3px); }
+}
+
+@keyframes glitchLower {
+  0%, 58%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+  61% { clip-path: inset(58% 0 16% 0); transform: translate(6px, 1px); }
+  66% { clip-path: inset(76% 0 5% 0); transform: translate(-7px, -1px); }
+  71% { clip-path: inset(46% 0 34% 0); transform: translate(4px); }
+  82% { clip-path: inset(12% 0 70% 0); transform: translate(-5px); }
+  89% { clip-path: inset(63% 0 17% 0); transform: translate(7px, 1px); }
+  94% { clip-path: inset(34% 0 43% 0); transform: translate(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before,
+  .glitch::after {
+    display: none;
+    animation: none;
+  }
+
+  .alwaysOn,
+  .hoverOnly:hover,
+  .hoverOnly:focus-visible,
+  .triggered {
+    animation: none;
+    transform: none;
+    filter: none;
+  }
+
+  .shadows:hover,
+  .shadows:focus-visible,
+  .shadows.alwaysOn {
+    text-shadow: none;
+  }
+}

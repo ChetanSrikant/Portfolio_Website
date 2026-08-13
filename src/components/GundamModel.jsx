@@ -38,6 +38,7 @@ const GundamModel = forwardRef(function GundamModel(
     basicInteractive = false,
     scrubbedLifterProgress = 0,
     scrubbedLifterActive = false,
+    scrubbedLifterLandingMode = false,
     reducedMotion = false,
     onReady,
     onSingleClick,
@@ -63,7 +64,7 @@ const GundamModel = forwardRef(function GundamModel(
     captureTarget: null,
   });
   const manualRotationTargetY = useRef(0);
-  const scrubState = useRef({ active: false });
+  const scrubState = useRef({ active: false, releasing: false, releaseElapsed: 0 });
   const clickEnabled = interactive || basicInteractive;
   const dragEnabled = interactive || basicInteractive;
 
@@ -280,6 +281,9 @@ const GundamModel = forwardRef(function GundamModel(
         scrubState.current.active = true;
       }
 
+      scrubState.current.releasing = false;
+      scrubState.current.releaseElapsed = 0;
+
       const scrubProgress = THREE.MathUtils.clamp(
         scrubbedLifterProgress,
         0,
@@ -288,25 +292,60 @@ const GundamModel = forwardRef(function GundamModel(
       const blendIn = THREE.MathUtils.smoothstep(scrubProgress, 0, 0.08);
       const blendOut =
         1 - THREE.MathUtils.smoothstep(scrubProgress, 0.92, 1);
-      const lifterWeight = Math.min(blendIn, blendOut);
+      const lifterWeight = scrubbedLifterLandingMode
+        ? blendIn
+        : Math.min(blendIn, blendOut);
+      // The authored clip's very last keys transition toward its resting
+      // state. During the long Philosophy -> Playground flight, hold the
+      // stable late-flight pose until touchdown instead of showing that
+      // transition early.
+      const clipProgress = scrubbedLifterLandingMode
+        ? Math.min(scrubProgress, 0.92)
+        : scrubProgress;
 
       lifter.enabled = true;
       lifter.paused = true;
-      lifter.time = lifter.getClip().duration * scrubProgress;
+      lifter.time = lifter.getClip().duration * clipProgress;
       lifter.setEffectiveWeight(lifterWeight);
       idle.enabled = true;
       idle.setEffectiveWeight(1 - lifterWeight);
       mixer.update(0);
     } else if (scrubState.current.active) {
-      lifter?.stop();
-      if (idle) {
-        idle.enabled = true;
-        idle.setEffectiveWeight(1);
-        idle.setEffectiveTimeScale(1);
-        idle.setLoop(THREE.LoopRepeat, Infinity).play();
-      }
       scrubState.current.active = false;
+      if (scrubbedLifterLandingMode && lifter && idle) {
+        scrubState.current.releasing = true;
+        scrubState.current.releaseElapsed = 0;
+        idle.enabled = true;
+        idle.reset().setEffectiveWeight(0).setLoop(THREE.LoopRepeat, Infinity).play();
+      } else {
+        lifter?.stop();
+        if (idle) {
+          idle.enabled = true;
+          idle.setEffectiveWeight(1);
+          idle.setEffectiveTimeScale(1);
+          idle.setLoop(THREE.LoopRepeat, Infinity).play();
+        }
+        mixer.update(0);
+      }
+    } else if (scrubState.current.releasing && lifter && idle) {
+      scrubState.current.releaseElapsed += delta;
+      const releaseProgress = THREE.MathUtils.smoothstep(
+        scrubState.current.releaseElapsed,
+        0,
+        0.55
+      );
+      lifter.enabled = true;
+      lifter.paused = true;
+      lifter.setEffectiveWeight(1 - releaseProgress);
+      idle.enabled = true;
+      idle.setEffectiveWeight(releaseProgress);
       mixer.update(0);
+
+      if (releaseProgress >= 1) {
+        lifter.stop();
+        idle.setEffectiveWeight(1);
+        scrubState.current.releasing = false;
+      }
     }
 
     group.current.rotation.y = THREE.MathUtils.damp(

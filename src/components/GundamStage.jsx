@@ -22,6 +22,7 @@ import {
   HOME_STAGE,
   HOME_STAGE_KEYS,
   HOME_STAGES,
+  HOME_TARGETS,
 } from "../config/home.js";
 import PlaygroundContent from "./Playground.jsx";
 import DriftWall from "./DriftWall.jsx";
@@ -41,6 +42,8 @@ const DRIFT_WALL_ITEMS = [
   { image: "/images/drift-wall/drift-08.jpeg", focalPoint: "50% 57%" },
   { image: "/images/drift-wall/drift-09.jpeg", focalPoint: "50% 50%" },
   { image: "/images/drift-wall/drift-10.jpeg", focalPoint: "50% 57%" },
+  { image: "/images/drift-wall/drift-11.jpeg", focalPoint: "50% 38%" },
+  { image: "/images/drift-wall/drift-12.jpeg", focalPoint: "48% 43%" },
 ];
 
 function panelOpacity(progress, [start, visibleStart, visibleEnd, end]) {
@@ -147,6 +150,7 @@ export default function GundamStage({ gundamApiRef, children }) {
     previousProgress: 0,
     direction: 1,
     introSequencePlayed: false,
+    philosophyLandingPlayed: false,
   });
   const progress = useScrollProgress(wrapperRef);
   const currentStageIndex = getHomeStageIndex(
@@ -165,6 +169,23 @@ export default function GundamStage({ gundamApiRef, children }) {
     progress >= transitionRange.start &&
     introToPhilosophyProgress > 0.001 &&
     introToPhilosophyProgress < 0.999;
+  const philosophyExit = HOME_STAGE.sections.philosophy[1];
+  const philosophyToPlaygroundProgress = mapRange(
+    progress,
+    philosophyExit,
+    HOME_TARGETS.playground,
+    0,
+    1
+  );
+  const philosophyToPlaygroundInFlight =
+    !reducedMotion &&
+    progress > philosophyExit + 0.0005 &&
+    progress < HOME_TARGETS.playground - 0.0005;
+  const lifterScrubActive =
+    transitionInFlight || philosophyToPlaygroundInFlight;
+  const lifterScrubProgress = transitionInFlight
+    ? introToPhilosophyProgress
+    : philosophyToPlaygroundProgress;
   const transform = useMemo(() => {
     if (transitionOwnsTransform) {
       return getIntroToPhilosophyTransform(introToPhilosophyProgress, {
@@ -275,15 +296,54 @@ export default function GundamStage({ gundamApiRef, children }) {
   );
   const playgroundActive =
     currentStage.key === HOME_STAGE_KEYS.PLAYGROUND &&
-    playgroundOpacity > 0.4;
+    playgroundOpacity > 0.4 &&
+    !philosophyToPlaygroundInFlight;
   const basicInteractionActive =
-    !transitionInFlight &&
+    !lifterScrubActive &&
     ((currentStage.key === HOME_STAGE_KEYS.INTRO && introOpacity > 0.4) ||
     (currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
       introToPhilosophyProgress >= 0.999));
   const philosophyLanded =
     currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
     introToPhilosophyProgress >= 0.999;
+
+  useEffect(() => {
+    const state = choreography.current;
+
+    if (!philosophyLanded) {
+      if (introToPhilosophyProgress < 0.96) {
+        state.philosophyLandingPlayed = false;
+      }
+      return undefined;
+    }
+
+    if (!modelReady || state.philosophyLandingPlayed) return undefined;
+    state.philosophyLandingPlayed = true;
+
+    if (reducedMotion) {
+      window.dispatchEvent(new CustomEvent("gundam:philosophy-landed"));
+      return undefined;
+    }
+
+    let secondFrame;
+    const firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
+        gundamApiRef.current?.play(CLIPS.RIFLE);
+        window.dispatchEvent(new CustomEvent("gundam:philosophy-landed"));
+      });
+    });
+
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      if (secondFrame) cancelAnimationFrame(secondFrame);
+    };
+  }, [
+    gundamApiRef,
+    introToPhilosophyProgress,
+    modelReady,
+    philosophyLanded,
+    reducedMotion,
+  ]);
 
   const rotationDeg = Math.round(
     ((-transform.rotationY * 180) / Math.PI) % 360
@@ -370,8 +430,9 @@ export default function GundamStage({ gundamApiRef, children }) {
                 targetScale={transform.scale}
                 interactive={playgroundActive}
                 basicInteractive={basicInteractionActive}
-                scrubbedLifterProgress={introToPhilosophyProgress}
-                scrubbedLifterActive={transitionInFlight}
+                scrubbedLifterProgress={lifterScrubProgress}
+                scrubbedLifterActive={lifterScrubActive}
+                scrubbedLifterLandingMode={progress > philosophyExit}
                 reducedMotion={reducedMotion}
                 onReady={handleModelReady}
                 onSingleClick={() => {

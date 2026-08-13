@@ -114,16 +114,22 @@ const GUNDAM_KEYFRAMES = Object.freeze([
   PHILOSOPHY_LANDING_TRANSFORM,
   frame(0.38, 2.15, 0.04, 0, 1.02, 28, 0.82, 0.42),
 
-  frame(0.43, 2.55, 0.15, 0, 0.68, 18, 0.68, 0.18),
-  frame(0.7, 2.45, 0.1, 0, 0.64, 16, 0.62, 0.18),
-  frame(0.745, 2.35, 0.28, 0, 0.72, 22, 0.68, 0.2),
+  // Philosophy -> Playground: leave from the right, sweep left, then
+  // return to the same x/y landing point. Alternating y values create a
+  // restrained hover arc while the authored Lifter clip is scroll-scrubbed.
+  frame(0.43, 1.2, 0.28, -0.04, 0.78, 12, 0.72, 0.2),
+  frame(0.54, 0.05, 0.46, -0.08, 0.7, -4, 0.66, 0.18),
+  frame(0.64, -1.45, 0.22, -0.06, 0.66, -20, 0.64, 0.18),
+  frame(0.7, -1.75, 0.36, -0.04, 0.66, -24, 0.64, 0.18),
+  frame(0.745, -1.2, 0.18, -0.02, 0.74, -8, 0.7, 0.22),
 
-  frame(0.82, 2.1, 0.18, 0, 0.9, 36, 0.72, 0.28),
-  frame(0.89, 1.82, 0.08, 0, 1.08, 48, 0.9, 0.42),
+  frame(0.82, 0.1, 0.42, -0.06, 0.9, 18, 0.76, 0.3),
+  frame(0.89, 1.25, 0.2, -0.03, 1.08, 42, 0.9, 0.44),
 
-  frame(0.91, 1.74, 0.02, 0, 1.12, 53, 1, 0.58),
-  frame(0.935, 1.7, 0, 0, 1.18, 53, 1, 0.62),
-  frame(1, 1.7, 0, 0, 1.18, 53, 1, 0.62),
+  frame(0.91, 1.7, 0.34, -0.02, 1.12, 49, 1, 0.56),
+  frame(0.935, 2.03, 0.14, -0.01, 1.17, 52, 1, 0.6),
+  frame(HOME_TARGETS.playground, 2.15, 0.04, 0, 1.18, 53, 1, 0.62),
+  frame(1, 2.15, 0.04, 0, 1.18, 53, 1, 0.62),
 ]);
 
 const REDUCED_MOTION_TRANSFORMS = Object.freeze({
@@ -133,7 +139,7 @@ const REDUCED_MOTION_TRANSFORMS = Object.freeze({
   creative: frame(0, 0.6, 0.5, 0, 0.92, 48, 0.8, 0.18),
   projects: frame(0, 2.5, 0.12, 0, 0.66, 17, 0.52, 0.18),
   experience: frame(0, 2.05, 0.12, 0, 0.96, 40, 0.78, 0.34),
-  playground: frame(0, 1.7, 0, 0, 1.18, 53, 1, 0.62),
+  playground: frame(0, 2.15, 0.04, 0, 1.18, 53, 1, 0.62),
 });
 
 export function getHomeStageIndex(progress, previousIndex = null) {
@@ -354,18 +360,16 @@ function endpointFade(progress, fadeInEnd, fadeOutStart) {
 
 function adaptTransformForViewport(transform, stageKey, viewportWidth) {
   if (!Number.isFinite(viewportWidth)) {
-    return { ...transform, scale: transform.scale * 1.12 };
+    return { ...transform, scale: transform.scale * 1.28 };
   }
 
   if (viewportWidth <= 720) {
     const playground = stageKey === HOME_STAGE_KEYS.PLAYGROUND;
     return {
       ...transform,
-      x: playground
-        ? 0
-        : Math.min(0.3, Math.max(-0.3, transform.x * 0.12)),
-      y: transform.y + (playground ? 0.92 : 0.78),
-      scale: transform.scale * (playground ? 0.59 : 0.61),
+      x: Math.min(0.3, Math.max(-0.3, transform.x * 0.12)),
+      y: transform.y + 0.78,
+      scale: transform.scale * (playground ? 0.66 : 0.69),
     };
   }
 
@@ -374,11 +378,11 @@ function adaptTransformForViewport(transform, stageKey, viewportWidth) {
       ...transform,
       x: transform.x * 0.72,
       y: transform.y + 0.04,
-      scale: transform.scale * 0.93,
+      scale: transform.scale * 1.06,
     };
   }
 
-  return { ...transform, scale: transform.scale * 1.12 };
+  return { ...transform, scale: transform.scale * 1.28 };
 }
 
 function degreesToRadians(degrees) {

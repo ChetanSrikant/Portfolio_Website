@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import GlitchText from "./GlitchText.jsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BackgroundBeams from "./BackgroundBeams.jsx";
@@ -26,6 +27,7 @@ const PROOF_ITEMS = [
 
 const PROJECTS = [
   {
+    id: "tgsrtc",
     code: "SYS / 01",
     category: "Public-sector AI / AI4TG",
     title: "TGSRTC Public Transport Demand Platform",
@@ -40,6 +42,7 @@ const PROJECTS = [
     ],
   },
   {
+    id: "rag",
     code: "SYS / 02",
     category: "GenAI / Retrieval systems",
     title: "Conversational RAG Application",
@@ -54,6 +57,7 @@ const PROJECTS = [
     ],
   },
   {
+    id: "vision",
     code: "SYS / 03",
     category: "Computer vision / Search",
     title: "Computer Vision Image Search",
@@ -133,13 +137,27 @@ function PhilosophySection() {
           <span className={`eyebrow ${styles.philosophyLabel}`}>
             // philosophy.md
           </span>
-          <h2 id="philosophy-heading" className={styles.srOnly}>
-            Philosophy
+          <h2 id="philosophy-heading" className={styles.philosophyHeading}>
+            <GlitchText
+              speed={1}
+              enableShadows
+              enableOnHover
+              triggerOn="gundam:philosophy-landed"
+              className={styles.philosophyGlitch}
+            >
+              Build with intent.
+            </GlitchText>
           </h2>
           <p className={styles.philosophyStatement}>
-            Build systems that move with intent, adapt under pressure, and stay
-            understandable when complexity rises. AI supplies leverage.
-            Judgment gives it direction.
+            <GlitchText
+              speed={0.82}
+              enableShadows
+              enableOnHover
+              triggerOn="gundam:philosophy-landed"
+              className={styles.philosophyStatementGlitch}
+            >
+              Build systems that move with intent, adapt under pressure, and stay understandable when complexity rises. AI supplies leverage. Judgment gives it direction.
+            </GlitchText>
           </p>
         </div>
         <div className={styles.philosophyModelSpace} aria-hidden="true" />
@@ -213,14 +231,9 @@ function SelectedWork() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <details className={styles.projectDetails}>
-                  <summary>View project evidence <span aria-hidden="true">→</span></summary>
-                  <ul>
-                    {project.evidence.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </details>
+                <a className={styles.projectDetailsLink} href={`/work#${project.id}`}>
+                  Read the full case study <span aria-hidden="true">→</span>
+                </a>
               </div>
             </article>
           ))}

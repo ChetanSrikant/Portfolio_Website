@@ -120,12 +120,14 @@
 }
 
 .link:hover,
-.link:focus-visible {
+.link:focus-visible,
+.link[aria-current="page"] {
   color: var(--text-primary);
 }
 
 .link:hover::after,
-.link:focus-visible::after {
+.link:focus-visible::after,
+.link[aria-current="page"]::after {
   transform: scaleX(1);
   transform-origin: left;
 }

@@ -1,40 +1,21 @@
 import React from "react";
-import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";
 import styles from "./Footer.module.css";
 
 const FOOTER_GROUPS = [
   {
     title: "Explore",
     links: [
-      {
-        label: "Home",
-        action: () => window.scrollTo({ top: 0, behavior: "smooth" }),
-      },
-      {
-        label: "Philosophy",
-        action: () => scrollToStageProgress(HOME_TARGETS.philosophy),
-      },
-      {
-        label: "Selected work",
-        action: () => scrollToStageProgress(HOME_TARGETS.work),
-      },
+      { label: "Home", href: "/" },
+      { label: "About", href: "/about" },
+      { label: "Selected work", href: "/work" },
     ],
   },
   {
     title: "Journey",
     links: [
-      {
-        label: "Skills",
-        action: () => scrollToStageProgress(HOME_TARGETS.skills),
-      },
-      {
-        label: "Experience",
-        action: () => scrollToStageProgress(HOME_TARGETS.experience),
-      },
-      {
-        label: "Playground",
-        action: () => scrollToStageProgress(HOME_TARGETS.playground),
-      },
+      { label: "Projects", href: "/projects" },
+      { label: "Beyond", href: "/beyond" },
+      { label: "Playground", href: "/#final-playground" },
     ],
   },
   {
@@ -85,7 +66,7 @@ function FooterLink({ link }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ showGundamDisclaimer = true }) {
   const year = new Date().getFullYear();
 
   return (
@@ -152,9 +133,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className={styles.disclaimer}>
-          Fan-made ZGMF-X09A presentation. Not affiliated with Sunrise or Bandai.
-        </p>
+        {showGundamDisclaimer && (
+          <p className={styles.disclaimer}>
+            Fan-made ZGMF-X09A presentation. Not affiliated with Sunrise or Bandai.
+          </p>
+        )}
       </div>
     </footer>
   );

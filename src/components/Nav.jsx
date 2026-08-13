@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";
 import styles from "./Nav.module.css";
 
 const LINKS = [
-  { label: "Work", target: HOME_TARGETS.work },
-  { label: "Philosophy", target: HOME_TARGETS.philosophy },
-  { label: "Contact", target: HOME_TARGETS.contact },
+  { label: "About", href: "/about" },
+  { label: "Work", href: "/work" },
+  { label: "Projects", href: "/projects" },
+  { label: "Beyond", href: "/beyond" },
 ];
 
 export default function Nav({ visible = true }) {
@@ -37,14 +37,11 @@ export default function Nav({ visible = true }) {
   }, [visible]);
 
   const goHome = (event) => {
-    event.preventDefault();
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const goToStage = (target) => {
-    setMenuOpen(false);
-    scrollToStageProgress(target);
+    if (window.location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -59,7 +56,7 @@ export default function Nav({ visible = true }) {
       inert={visible ? undefined : ""}
     >
       <div className={styles.inner}>
-        <a href="#top" className={styles.brand} onClick={goHome}>
+        <a href="/" className={styles.brand} onClick={goHome}>
           <span className={styles.monogram} aria-hidden="true">
             CM
           </span>
@@ -84,14 +81,15 @@ export default function Nav({ visible = true }) {
           className={clsx(styles.links, menuOpen && styles.linksOpen)}
         >
           {LINKS.map((link) => (
-            <button
+            <a
               key={link.label}
-              type="button"
-              onClick={() => goToStage(link.target)}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
               className={styles.link}
+              aria-current={window.location.pathname === link.href ? "page" : undefined}
             >
               {link.label}
-            </button>
+            </a>
           ))}
 
           <a
