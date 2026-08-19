@@ -11,7 +11,7 @@
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  background: radial-gradient(ellipse 90% 70% at 50% 30%, #141414 0%, #0a0a0a 65%);
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, var(--stage-start) 0%, var(--stage-end) 65%);
 }
 
 .journeyContent {
@@ -39,7 +39,6 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  will-change: opacity;
 }
 
 .canvasLayer canvas {
@@ -329,14 +328,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
-}
-
-.modelLoading span {
-  width: 7px;
-  height: 7px;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
-  animation: loadingPulse 1s ease-in-out infinite;
 }
 
 .webglFallback {

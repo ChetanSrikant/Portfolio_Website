@@ -14,7 +14,7 @@
   position: absolute;
   inset: 0 0 0 58%;
   z-index: -2;
-  background: #210b08;
+  background: var(--hero-start);
 }
 
 .hero::after {
@@ -110,7 +110,7 @@
 
 .secondaryAction {
   border: 1px solid var(--border-strong);
-  background: rgba(10, 10, 10, 0.7);
+  background: color-mix(in srgb, var(--surface-0) 70%, transparent);
   color: var(--text-primary);
 }
 
@@ -137,7 +137,7 @@
   min-height: 500px;
   margin: 0;
   justify-self: end;
-  background: #160806;
+  background: var(--hero-end);
   overflow: hidden;
 }
 
@@ -281,7 +281,7 @@
 
   .hero::before {
     inset: 0;
-    background: linear-gradient(to bottom, #210b08 0%, var(--bg) 68%);
+    background: linear-gradient(to bottom, var(--hero-start) 0%, var(--bg) 68%);
   }
 
   .hero::after,

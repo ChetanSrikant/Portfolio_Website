@@ -3,6 +3,7 @@ import clsx from "clsx";
 import styles from "./Nav.module.css";
 
 const LINKS = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Work", href: "/work" },
   { label: "Projects", href: "/projects" },
@@ -86,7 +87,7 @@ export default function Nav({ visible = true }) {
               href={link.href}
               onClick={() => setMenuOpen(false)}
               className={styles.link}
-              aria-current={window.location.pathname === link.href ? "page" : undefined}
+              aria-current={(window.location.pathname.replace(/\/$/, "") || "/") === link.href ? "page" : undefined}
             >
               {link.label}
             </a>

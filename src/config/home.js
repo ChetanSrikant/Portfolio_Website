@@ -91,7 +91,7 @@ export const HOME_TARGETS = Object.freeze({
 
 const PHILOSOPHY_LANDING_TRANSFORM = frame(
   HOME_TARGETS.philosophy,
-  2.15,
+  2.65,
   0.04,
   0,
   1.02,
@@ -112,7 +112,7 @@ const GUNDAM_KEYFRAMES = Object.freeze([
   frame(0.295, -0.15, 0.34, 0, 0.82, 44, 0.9, 0.2),
 
   PHILOSOPHY_LANDING_TRANSFORM,
-  frame(0.38, 2.15, 0.04, 0, 1.02, 28, 0.82, 0.42),
+  frame(0.38, 2.65, 0.04, 0, 1.02, 28, 0.82, 0.42),
 
   // Philosophy -> Playground: leave from the right, sweep left, then
   // return to the same x/y landing point. Alternating y values create a
@@ -134,7 +134,7 @@ const GUNDAM_KEYFRAMES = Object.freeze([
 
 const REDUCED_MOTION_TRANSFORMS = Object.freeze({
   intro: frame(0, -1.88, 0, 0, 1.3, 11, 1, 0.52),
-  philosophy: frame(0, 2.15, 0.06, 0, 1.08, 28, 0.78, 0.42),
+  philosophy: frame(0, 2.65, 0.06, 0, 1.08, 28, 0.78, 0.42),
   skills: frame(0, 2.25, 0.08, 0, 0.78, 22, 0.6, 0.25),
   creative: frame(0, 0.6, 0.5, 0, 0.92, 48, 0.8, 0.18),
   projects: frame(0, 2.5, 0.12, 0, 0.66, 17, 0.52, 0.18),
@@ -309,9 +309,14 @@ function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {
   });
 }
 
+const introToPhilosophyPathCache = new Map();
+
 function createIntroToPhilosophyPath(viewportWidth) {
   const desktop = !Number.isFinite(viewportWidth) || viewportWidth > 1040;
   const mobile = Number.isFinite(viewportWidth) && viewportWidth <= 720;
+  const cacheKey = mobile ? "mobile" : desktop ? "desktop" : "tablet";
+  const cached = introToPhilosophyPathCache.get(cacheKey);
+  if (cached) return cached;
 
   const points = mobile
     ? [
@@ -321,7 +326,7 @@ function createIntroToPhilosophyPath(viewportWidth) {
         [-0.2, 0.32, -0.07],
         [0.52, 0.22, -0.05],
         [1.35, 0.12, -0.02],
-        [2.15, 0.04, 0],
+        [2.65, 0.04, 0],
       ]
     : desktop
       ? [
@@ -332,7 +337,7 @@ function createIntroToPhilosophyPath(viewportWidth) {
           [0.72, 0.48, -0.15],
           [1.22, 0.66, -0.1],
           [1.68, 0.36, -0.05],
-          [2.15, 0.04, 0],
+          [2.65, 0.04, 0],
         ]
       : [
           [-1.88, 0, 0],
@@ -341,15 +346,17 @@ function createIntroToPhilosophyPath(viewportWidth) {
           [-0.06, 0.52, -0.13],
           [0.68, 0.36, -0.1],
           [1.34, 0.44, -0.06],
-          [2.15, 0.04, 0],
+          [2.65, 0.04, 0],
         ];
 
-  return new THREE.CatmullRomCurve3(
+  const curve = new THREE.CatmullRomCurve3(
     points.map(([x, y, z]) => new THREE.Vector3(x, y, z)),
     false,
     "centripetal",
     0.42
   );
+  introToPhilosophyPathCache.set(cacheKey, curve);
+  return curve;
 }
 
 function endpointFade(progress, fadeInEnd, fadeOutStart) {

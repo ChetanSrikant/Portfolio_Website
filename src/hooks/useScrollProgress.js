@@ -1,39 +1,65 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
-/** Tracks normalized progress through the sticky Gundam wrapper. */
-export default function useScrollProgress(wrapperRef) {
-  const [progress, setProgress] = useState(0);
+/**
+ * Tracks normalized progress through the sticky Gundam wrapper without
+ * scheduling a React render for every scroll event. High-frequency consumers
+ * read the returned ref; semantic UI updates belong in `onProgress`.
+ */
+export default function useScrollProgress(wrapperRef, onProgress) {
+  const progressRef = useRef(0);
+  const callbackRef = useRef(onProgress);
 
   useEffect(() => {
-    const update = () => {
+    callbackRef.current = onProgress;
+  }, [onProgress]);
+
+  useEffect(() => {
+    let frame = 0;
+    let initialized = false;
+    let wrapperTop = 0;
+    let scrollableDistance = 1;
+
+    const measure = () => {
       const wrapper = wrapperRef.current;
       if (!wrapper) return;
-
-      const total = wrapper.offsetHeight - window.innerHeight;
-      if (total <= 0) return;
-
-      const value = Math.min(
-        1,
-        Math.max(0, -wrapper.getBoundingClientRect().top / total)
-      );
-      setProgress((current) =>
-        Math.abs(current - value) > 0.0005 ? value : current
-      );
+      wrapperTop = wrapper.offsetTop;
+      scrollableDistance = Math.max(1, wrapper.offsetHeight - window.innerHeight);
     };
 
+    const update = () => {
+      frame = 0;
+      const value = Math.min(
+        1,
+        Math.max(0, (window.scrollY - wrapperTop) / scrollableDistance)
+      );
+      if (initialized && Math.abs(progressRef.current - value) < 0.0002) return;
+      initialized = true;
+      progressRef.current = value;
+      callbackRef.current?.(value);
+    };
+
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    const handleResize = () => {
+      measure();
+      requestUpdate();
+    };
+
+    measure();
     update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    document.addEventListener("scroll", update, { passive: true, capture: true });
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-      document.removeEventListener("scroll", update, true);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", handleResize);
     };
   }, [wrapperRef]);
 
-  return progress;
+  return progressRef;
 }
 
 export function mapRange(value, inMin, inMax, outMin, outMax) {

@@ -1,184 +1,85 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
+import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import styles from "./PortfolioGlobe.module.css";
 
-const LOCATIONS = [
-  {
-    id: "india",
-    name: "India",
-    latitude: 22.35,
-    longitude: 78.66,
-    label: "Current base",
-    description: "The context for my education, engineering practice, and the systems I am building now.",
-  },
-];
+const ORIGIN = {
+  name:"India",
+  latitude:22.35,
+  longitude:78.66,
+  label:"Current base",
+  coordinates:"22.35° N / 78.66° E",
+  description:"The context for my education, engineering practice, and the software I am building now.",
+};
 
-export default function PortfolioGlobe({ locations = LOCATIONS }) {
-  const [selected, setSelected] = useState(locations[0] ?? null);
+export default function PortfolioGlobe({ location = ORIGIN, autoRotate = true, autoRotateSpeed = .28 }) {
+  const [interacting,setInteracting] = useState(false);
+  const [visible,setVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const reduced = useReducedMotionPreference();
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { rootMargin: "20% 0px", threshold: 0.01 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className={styles.section} aria-labelledby="globe-title">
-      <div className={styles.copy}>
-        <span className={styles.eyebrow}>// PERSPECTIVE</span>
-        <h2 id="globe-title" className={styles.title}>One place that shaped the perspective.</h2>
-        <p className={styles.description}>
-          This map only carries places with a verified connection to my work or life. It can grow when the story does.
-        </p>
-
-        <div className={styles.locationPicker} aria-label="Select a location">
-          {locations.map((location) => (
-            <button
-              key={location.id}
-              type="button"
-              className={selected?.id === location.id ? styles.locationButtonActive : styles.locationButton}
-              onClick={() => setSelected(location)}
-              aria-pressed={selected?.id === location.id}
-            >
-              <span>{location.name}</span>
-              <span>{location.label}</span>
-            </button>
-          ))}
+    <section ref={sectionRef} className={styles.section} aria-labelledby="globe-title">
+      <div className={styles.inner}>
+        <div className={styles.copy}>
+          <span className={styles.eyebrow}>Origin and perspective</span>
+          <h2 id="globe-title">Built from here. Looking outward.</h2>
+          <p className={styles.description}>One verified location is enough for now. The globe is a quiet reminder that where you build from shapes how you see the problem.</p>
+          <div className={styles.locationCard}>
+            <div><span>{location.label}</span><span>{location.coordinates}</span></div>
+            <strong>{location.name}</strong>
+            <p>{location.description}</p>
+          </div>
         </div>
-
-        <div className={styles.locationDetail} aria-live="polite">
-          {selected ? (
-            <>
-              <span className={styles.locationType}>{selected.label}</span>
-              <strong className={styles.locationName}>{selected.name}</strong>
-              <p className={styles.locationDescription}>{selected.description}</p>
-            </>
-          ) : (
-            <p className={styles.emptyState}>Verified location markers will appear here as the story grows.</p>
-          )}
+        <div className={styles.canvasWrap} aria-label="Interactive globe showing India. Drag to rotate." role="img">
+          <span className={styles.dragHint}>Drag to inspect</span>
+          <span className={styles.axisLabel}>N / 00</span>
+          <Canvas frameloop={visible ? "always" : "demand"} dpr={[1,1.5]} gl={{antialias:true,alpha:true,powerPreference:"high-performance"}}>
+            <PerspectiveCamera makeDefault position={[0,0,5.2]} fov={35}/>
+            <ambientLight intensity={.5}/><directionalLight position={[4,3,5]} intensity={2.1} color="#fff5df"/><pointLight position={[-4,1,-2]} intensity={7.5} color="#c9a24b"/>
+            <GlobeScene location={location} spin={visible && autoRotate && !reduced && !interacting} speed={autoRotateSpeed} reduced={reduced}/>
+            <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={.42} minPolarAngle={Math.PI*.28} maxPolarAngle={Math.PI*.72} onStart={() => setInteracting(true)} onEnd={() => setInteracting(false)}/>
+          </Canvas>
         </div>
-      </div>
-
-      <div className={styles.canvasWrap} aria-hidden="true">
-        <div className={styles.dragHint}>Drag to rotate</div>
-        <Canvas dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
-          <PerspectiveCamera makeDefault position={[0, 0, 5.2]} fov={35} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[4, 3, 5]} intensity={2} color="#fff5df" />
-          <pointLight position={[-4, 1, -2]} intensity={8} color="#c9a24b" />
-          <GlobeScene locations={locations} selected={selected} onSelect={setSelected} />
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            rotateSpeed={0.45}
-            minPolarAngle={Math.PI * 0.28}
-            maxPolarAngle={Math.PI * 0.72}
-          />
-        </Canvas>
       </div>
     </section>
   );
 }
 
-function GlobeScene({ locations, selected, onSelect }) {
+function GlobeScene({ location, spin, speed, reduced }) {
   const globeRef = useRef(null);
-  const reduceMotion = typeof window !== "undefined"
-    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  useFrame((_, delta) => {
-    if (!globeRef.current || reduceMotion) return;
-    globeRef.current.rotation.y += delta * 0.035;
-  });
-
-  return (
-    <group ref={globeRef}>
-      <GlobeBody />
-      {locations.map((location) => (
-        <LocationMarker
-          key={location.id}
-          location={location}
-          active={selected?.id === location.id}
-          reduceMotion={reduceMotion}
-          onSelect={() => onSelect(location)}
-        />
-      ))}
-    </group>
-  );
+  useFrame((_,delta) => { if(globeRef.current && spin) globeRef.current.rotation.y += delta * speed * .1; });
+  return <group ref={globeRef} rotation={[.08,-.3,-.04]}><GlobeBody/><LocationMarker location={location} reduced={reduced}/></group>;
 }
 
 function GlobeBody() {
-  return (
-    <group>
-      <mesh>
-        <sphereGeometry args={[1.62, 64, 64]} />
-        <meshStandardMaterial color="#090909" roughness={0.7} metalness={0.15} />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[1.635, 32, 24]} />
-        <meshBasicMaterial color="#777772" wireframe transparent opacity={0.12} />
-      </mesh>
-      <mesh scale={1.04}>
-        <sphereGeometry args={[1.62, 48, 48]} />
-        <meshBasicMaterial color="#c9a24b" transparent opacity={0.035} side={THREE.BackSide} />
-      </mesh>
-      <LatitudeLines />
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.65, 0.0035, 8, 128]} />
-        <meshBasicMaterial color="#c9a24b" transparent opacity={0.32} />
-      </mesh>
-    </group>
-  );
+  return <group>
+    <mesh><sphereGeometry args={[1.62,64,64]}/><meshStandardMaterial color="#090909" roughness={.76} metalness={.2}/></mesh>
+    <mesh><sphereGeometry args={[1.635,32,24]}/><meshBasicMaterial color="#8a857a" wireframe transparent opacity={.12}/></mesh>
+    <mesh scale={1.04}><sphereGeometry args={[1.62,48,48]}/><meshBasicMaterial color="#c9a24b" transparent opacity={.045} side={THREE.BackSide}/></mesh>
+    {[-60,-30,30,60].map((latitude) => { const phi=THREE.MathUtils.degToRad(latitude); return <mesh key={latitude} position={[0,1.64*Math.sin(phi),0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[1.64*Math.cos(phi),.0025,6,96]}/><meshBasicMaterial color="#ffffff" transparent opacity={.065}/></mesh>; })}
+    <mesh rotation={[Math.PI/2,0,0]}><torusGeometry args={[1.65,.0035,8,128]}/><meshBasicMaterial color="#c9a24b" transparent opacity={.32}/></mesh>
+  </group>;
 }
 
-function LatitudeLines() {
-  return [-60, -30, 30, 60].map((latitude) => {
-    const phi = THREE.MathUtils.degToRad(latitude);
-    const radius = 1.64 * Math.cos(phi);
-    const y = 1.64 * Math.sin(phi);
-    return (
-      <mesh key={latitude} position={[0, y, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[radius, 0.0025, 6, 96]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.07} />
-      </mesh>
-    );
-  });
+function LocationMarker({ location, reduced }) {
+  const markerRef=useRef(null); const haloRef=useRef(null);
+  const position=useMemo(() => latLonToVector3(location.latitude,location.longitude,1.68),[location.latitude,location.longitude]);
+  useFrame((state) => { if(!markerRef.current || !haloRef.current) return; const pulse=reduced?1:1+Math.sin(state.clock.elapsedTime*2.1)*.08; markerRef.current.scale.setScalar(pulse); haloRef.current.scale.setScalar(reduced?1.4:1.4+Math.sin(state.clock.elapsedTime*1.4)*.12); });
+  return <group position={position}><mesh ref={markerRef}><sphereGeometry args={[.045,18,18]}/><meshBasicMaterial color="#c9a24b"/></mesh><mesh ref={haloRef}><sphereGeometry args={[.09,16,16]}/><meshBasicMaterial color="#c9a24b" transparent opacity={.1}/></mesh></group>;
 }
 
-function LocationMarker({ location, active, reduceMotion, onSelect }) {
-  const markerRef = useRef(null);
-  const position = useMemo(
-    () => latLonToVector3(location.latitude, location.longitude, 1.68),
-    [location.latitude, location.longitude],
-  );
-
-  useFrame((state) => {
-    if (!markerRef.current) return;
-    const pulse = reduceMotion ? 1 : 1 + Math.sin(state.clock.elapsedTime * 2.2) * 0.08;
-    markerRef.current.scale.setScalar(active ? pulse * 1.25 : pulse);
-  });
-
-  return (
-    <group position={position}>
-      <mesh
-        ref={markerRef}
-        onClick={(event) => {
-          event.stopPropagation();
-          onSelect();
-        }}
-      >
-        <sphereGeometry args={[0.04, 18, 18]} />
-        <meshBasicMaterial color={active ? "#c9a24b" : "#f1eee6"} />
-      </mesh>
-      <mesh scale={active ? 1.7 : 1}>
-        <sphereGeometry args={[0.075, 16, 16]} />
-        <meshBasicMaterial color="#c9a24b" transparent opacity={active ? 0.16 : 0.07} />
-      </mesh>
-    </group>
-  );
-}
-
-function latLonToVector3(latitude, longitude, radius) {
-  const lat = THREE.MathUtils.degToRad(latitude);
-  const lon = THREE.MathUtils.degToRad(longitude);
-  return new THREE.Vector3(
-    -radius * Math.cos(lat) * Math.cos(lon),
-    radius * Math.sin(lat),
-    radius * Math.cos(lat) * Math.sin(lon),
-  );
-}
+function latLonToVector3(latitude,longitude,radius) { const lat=THREE.MathUtils.degToRad(latitude); const lon=THREE.MathUtils.degToRad(longitude); return new THREE.Vector3(-radius*Math.cos(lat)*Math.cos(lon),radius*Math.sin(lat),radius*Math.cos(lat)*Math.sin(lon)); }

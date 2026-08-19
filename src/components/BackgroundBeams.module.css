@@ -8,8 +8,8 @@
   border-bottom: 1px solid var(--border);
   padding: clamp(96px, 12vw, 180px) var(--edge-pad-x);
   background:
-    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.025), transparent 42%),
-    rgba(9, 9, 9, 0.76);
+    radial-gradient(circle at 50% 48%, var(--surface-faint), transparent 42%),
+    color-mix(in srgb, var(--surface-0) 76%, transparent);
 }
 
 .beams {

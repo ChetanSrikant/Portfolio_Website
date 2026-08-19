@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 /**
- * Splits text into words, revealing them with a staggered rise + blur-in.
+ * Splits text into words, revealing them with a compositor-only staggered rise.
  * Triggers once when scrolled into view. Used for headline moments across
  * the page (hero, section intros, the philosophy line).
  */
@@ -29,11 +29,10 @@ export default function SplitReveal({
   };
 
   const word = {
-    hidden: { y: "0.9em", opacity: 0, filter: "blur(6px)" },
+    hidden: { y: "0.9em", opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      filter: "blur(0px)",
       transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
     },
   };

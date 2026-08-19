@@ -20,6 +20,26 @@
   --accent-line: rgba(201, 162, 75, 0.32);
   --accent-glow: rgba(201, 162, 75, 0.45);
 
+  /* ---- Semantic surfaces ---- */
+  --surface-0: #0a0a0a;
+  --surface-1: #101010;
+  --surface-2: #151515;
+  --surface-3: #1b1b1b;
+  --surface-glass: rgba(10, 10, 10, 0.82);
+  --surface-glass-strong: rgba(10, 10, 10, 0.97);
+  --surface-soft: rgba(16, 16, 16, 0.92);
+  --surface-faint: rgba(255, 255, 255, 0.035);
+  --surface-hover: rgba(255, 255, 255, 0.065);
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --shadow-color: rgba(0, 0, 0, 0.38);
+  --on-accent: #090909;
+  --stage-start: #141414;
+  --stage-end: #0a0a0a;
+  --hero-start: #210b08;
+  --hero-end: #160806;
+  --media-text: #f5f3ee;
+  --media-text-muted: #c4c0b7;
+
   /* ---- Type ---- */
   --font-display: "Unbounded", sans-serif;
   --font-body: "Manrope", sans-serif;
@@ -32,6 +52,8 @@
 
   color-scheme: dark;
 }
+
+html { background: var(--bg); }
 
 * {
   box-sizing: border-box;

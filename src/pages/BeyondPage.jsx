@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InternalPageShell, { EditorialCTA, SectionHeader } from "../components/InternalPageShell.jsx";
+import GooeyInput from "../components/GooeyInput.jsx";
 import styles from "./InternalPages.module.css";
 
 const LIFE_ITEMS = [
@@ -17,14 +18,7 @@ function AskForm() {
   const [question, setQuestion] = useState("");
   const [status, setStatus] = useState("");
 
-  const submit = (event) => {
-    event.preventDefault();
-    const trimmed = question.trim();
-    if (!trimmed) {
-      setStatus("Enter a question before submitting.");
-      return;
-    }
-
+  const submit = (trimmed) => {
     setStatus("Opening your mail app with the question prepared.");
     const subject = encodeURIComponent("Question from the Beyond page");
     const body = encodeURIComponent(`${trimmed}\n\nSent from the portfolio Beyond page.`);
@@ -32,16 +26,12 @@ function AskForm() {
   };
 
   return (
-    <form className={styles.askForm} onSubmit={submit} noValidate>
-      <div className={styles.goo} aria-hidden="true" />
-      <label className={styles.eyebrow} htmlFor="beyond-question">Ask me anything</label>
-      <div className={styles.askField}>
-        <input id="beyond-question" value={question} onChange={(event) => { setQuestion(event.target.value); setStatus(""); }} placeholder="Type a question about the work or the person behind it" autoComplete="off" />
-        <button type="submit">Draft email</button>
-      </div>
+    <div className={styles.askForm}>
+      <span className={styles.eyebrow}>Ask me anything</span>
+      <GooeyInput value={question} onValueChange={(next) => { setQuestion(next); setStatus(""); }} onSubmit={submit} placeholder="Type a question about the work or the person behind it" submitLabel="Draft question email" />
       <p className={styles.formStatus} role="status">{status || "No automated assistant is simulated. Submitting prepares a real email."}</p>
       <div className={styles.promptRow} aria-label="Suggested questions">{PROMPTS.map((prompt) => <button key={prompt} type="button" onClick={() => { setQuestion(prompt); setStatus(""); }}>{prompt}</button>)}</div>
-    </form>
+    </div>
   );
 }
 

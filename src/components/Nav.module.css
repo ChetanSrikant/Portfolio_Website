@@ -16,7 +16,7 @@
 
 .nav.scrolled {
   border-color: var(--border);
-  background: rgba(10, 10, 10, 0.82);
+  background: var(--surface-glass);
   backdrop-filter: blur(18px) saturate(130%);
   -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(20px, 2.5vw, 36px);
+  gap: clamp(12px, 1.55vw, 25px);
 }
 
 .link,
@@ -197,7 +197,7 @@
     gap: 0;
     padding: 10px 20px 20px;
     border-bottom: 1px solid var(--border);
-    background: rgba(10, 10, 10, 0.97);
+    background: var(--surface-glass-strong);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     opacity: 0;

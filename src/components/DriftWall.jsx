@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useRef } from "react";
+import React, { forwardRef, memo, useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import styles from "./DriftWall.module.css";
 
 function seededRandom(seed) {
@@ -24,7 +24,7 @@ function shuffled(items, seed) {
   return result;
 }
 
-function DriftWall({
+const DriftWall = forwardRef(function DriftWall({
   items,
   columns = 5,
   tileWidth = 200,
@@ -44,8 +44,9 @@ function DriftWall({
   overlayColor = "#060010",
   active = true,
   opacity = 1,
-}) {
+}, forwardedRef) {
   const wallRef = useRef(null);
+  useImperativeHandle(forwardedRef, () => wallRef.current, []);
   const columnData = useMemo(
     () =>
       Array.from({ length: columns }, (_, columnIndex) => {
@@ -140,6 +141,6 @@ function DriftWall({
       <div className={styles.scrim} />
     </div>
   );
-}
+});
 
 export default memo(DriftWall);

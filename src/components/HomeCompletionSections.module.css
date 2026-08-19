@@ -27,7 +27,7 @@
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 0 var(--edge-pad-x);
-  background: rgba(12, 12, 12, 0.86);
+  background: color-mix(in srgb, var(--surface-1) 86%, transparent);
 }
 
 .proofGrid {
@@ -181,7 +181,7 @@
 .selectedWork {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 16%),
-    rgba(10, 10, 10, 0.82);
+    var(--surface-glass);
 }
 
 .sectionHeader {
@@ -239,7 +239,7 @@
   background:
     linear-gradient(rgba(201, 162, 75, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201, 162, 75, 0.025) 1px, transparent 1px),
-    #0f0f0f;
+    var(--surface-1);
   background-size: 34px 34px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
@@ -274,7 +274,7 @@
   place-items: center;
   border: 1px solid var(--border-strong);
   padding: 11px;
-  background: rgba(10, 10, 10, 0.82);
+  background: var(--surface-glass);
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: 9px;
@@ -415,7 +415,7 @@
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: clamp(52px, 8vw, 96px) 0;
-  background: rgba(13, 13, 13, 0.88);
+  background: color-mix(in srgb, var(--surface-1) 88%, transparent);
 }
 
 .velocityViewport {
@@ -450,7 +450,7 @@
   padding-bottom: clamp(144px, 16vw, 220px);
   background:
     radial-gradient(circle at 82% 22%, rgba(201, 162, 75, 0.055), transparent 26%),
-    rgba(10, 10, 10, 0.82);
+    var(--surface-glass);
 }
 
 .focusHeader {

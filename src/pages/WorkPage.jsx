@@ -78,8 +78,8 @@ function CaseStudy({ item, context, problem, role, pipeline, implementation, out
 }
 
 export default function WorkPage() {
-  const [lightboxItem, setLightboxItem] = useState(null);
-  const closeLightbox = useCallback(() => setLightboxItem(null), []);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const setLightbox = useCallback((index) => setLightboxIndex(index), []);
 
   return (
     <InternalPageShell title="Work">
@@ -101,12 +101,12 @@ export default function WorkPage() {
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.sectionInner}>
           <SectionHeader eyebrow="Technical evidence" title="What each artifact actually proves." copy="These are architecture and pipeline records. No screenshot or benchmark is implied where one has not been supplied." />
-          <div className={styles.evidenceGrid}>{EVIDENCE.map((item) => <button key={item.title} type="button" className={styles.evidenceCard} onClick={() => setLightboxItem(item)}><div className={styles.evidenceGraphic}>{item.type.toUpperCase()} / OPEN</div><div><h3>{item.title}</h3><p>{item.caption}</p></div></button>)}</div>
+          <div className={styles.evidenceGrid}>{EVIDENCE.map((item, index) => <button key={item.title} type="button" className={styles.evidenceCard} onClick={() => setLightboxIndex(index)}><div className={styles.evidenceGraphic}>{item.type.toUpperCase()} / OPEN</div><div><h3>{item.title}</h3><p>{item.caption}</p></div></button>)}</div>
         </div>
       </section>
 
       <EditorialCTA eyebrow="More builds" title="Looking for the smaller experiments?" copy="Projects is the faster, broader view of prototypes, product builds, and learning experiments." actions={[{ label: "Explore all projects", href: "/projects" }, { label: "Start a conversation", href: "mailto:chetansrikantmandiga@gmail.com" }]} />
-      <MediaLightbox item={lightboxItem} onClose={closeLightbox} />
+      <MediaLightbox items={EVIDENCE} index={lightboxIndex} onIndexChange={setLightbox} />
     </InternalPageShell>
   );
 }

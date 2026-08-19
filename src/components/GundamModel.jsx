@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import * as THREE from "three";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 
 const MODEL_URL = "/models/justice-gundam.glb";
 
@@ -39,6 +39,7 @@ const GundamModel = forwardRef(function GundamModel(
     scrubbedLifterProgress = 0,
     scrubbedLifterActive = false,
     scrubbedLifterLandingMode = false,
+    motionRef,
     reducedMotion = false,
     onReady,
     onSingleClick,
@@ -51,6 +52,9 @@ const GundamModel = forwardRef(function GundamModel(
   const group = useRef();
   const { scene, animations } = useGLTF(MODEL_URL);
   const { actions, mixer, names } = useAnimations(animations, group);
+  const renderer = useThree((state) => state.gl);
+  const rootScene = useThree((state) => state.scene);
+  const camera = useThree((state) => state.camera);
 
   const lastClickTime = useRef(0);
   const pendingSingleClick = useRef(null);
@@ -172,8 +176,36 @@ const GundamModel = forwardRef(function GundamModel(
   }, [actions]);
 
   useEffect(() => {
-    if (actions[CLIPS.IDLE]) onReady?.();
-  }, [actions, onReady]);
+    if (!actions[CLIPS.IDLE]) return undefined;
+
+    let cancelled = false;
+    let firstFrame = 0;
+    let secondFrame = 0;
+
+    const signalReady = () => {
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => {
+          if (!cancelled) onReady?.();
+        });
+      });
+    };
+
+    // Compile materials and upload GPU resources while the persistent Canvas
+    // is still transparent. The visible reveal therefore never pays the
+    // scene's first-frame shader cost.
+    if (typeof renderer.compileAsync === "function") {
+      renderer.compileAsync(rootScene, camera).then(signalReady, signalReady);
+    } else {
+      renderer.compile(rootScene, camera);
+      signalReady();
+    }
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+    };
+  }, [actions, camera, onReady, renderer, rootScene]);
 
   const removeFinishedHandler = () => {
     if (!activeFinishedHandler.current) return;
@@ -261,10 +293,19 @@ const GundamModel = forwardRef(function GundamModel(
   useFrame((_, delta) => {
     if (!group.current) return;
 
+    const motion = motionRef?.current;
+    const frameRotationY = motion?.rotationY ?? targetRotationY;
+    const frameRotationZ = motion?.rotationZ ?? targetRotationZ;
+    const framePosition = motion?.position ?? targetPosition;
+    const frameScale = motion?.scale ?? targetScale;
+    const frameScrubActive = motion?.lifterActive ?? scrubbedLifterActive;
+    const frameScrubProgress = motion?.lifterProgress ?? scrubbedLifterProgress;
+    const frameLandingMode = motion?.landingMode ?? scrubbedLifterLandingMode;
+
     const lifter = actions[CLIPS.LIFTER];
     const idle = actions[CLIPS.IDLE];
     const shouldScrub =
-      scrubbedLifterActive && !reducedMotion && lifter && idle;
+      frameScrubActive && !reducedMotion && lifter && idle;
 
     if (shouldScrub) {
       if (!scrubState.current.active) {
@@ -285,21 +326,21 @@ const GundamModel = forwardRef(function GundamModel(
       scrubState.current.releaseElapsed = 0;
 
       const scrubProgress = THREE.MathUtils.clamp(
-        scrubbedLifterProgress,
+        frameScrubProgress,
         0,
         1
       );
       const blendIn = THREE.MathUtils.smoothstep(scrubProgress, 0, 0.08);
       const blendOut =
         1 - THREE.MathUtils.smoothstep(scrubProgress, 0.92, 1);
-      const lifterWeight = scrubbedLifterLandingMode
+      const lifterWeight = frameLandingMode
         ? blendIn
         : Math.min(blendIn, blendOut);
       // The authored clip's very last keys transition toward its resting
       // state. During the long Philosophy -> Playground flight, hold the
       // stable late-flight pose until touchdown instead of showing that
       // transition early.
-      const clipProgress = scrubbedLifterLandingMode
+      const clipProgress = frameLandingMode
         ? Math.min(scrubProgress, 0.92)
         : scrubProgress;
 
@@ -312,7 +353,7 @@ const GundamModel = forwardRef(function GundamModel(
       mixer.update(0);
     } else if (scrubState.current.active) {
       scrubState.current.active = false;
-      if (scrubbedLifterLandingMode && lifter && idle) {
+      if (frameLandingMode && lifter && idle) {
         scrubState.current.releasing = true;
         scrubState.current.releaseElapsed = 0;
         idle.enabled = true;
@@ -350,37 +391,37 @@ const GundamModel = forwardRef(function GundamModel(
 
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
-      targetRotationY + manualRotationTargetY.current,
+      frameRotationY + manualRotationTargetY.current,
       dampFactor,
       delta
     );
     group.current.rotation.z = THREE.MathUtils.damp(
       group.current.rotation.z,
-      targetRotationZ,
+      frameRotationZ,
       shouldScrub ? Math.max(dampFactor, 7) : dampFactor,
       delta
     );
     group.current.position.x = THREE.MathUtils.damp(
       group.current.position.x,
-      targetPosition[0],
+      framePosition[0],
       shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     group.current.position.y = THREE.MathUtils.damp(
       group.current.position.y,
-      targetPosition[1],
+      framePosition[1],
       shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     group.current.position.z = THREE.MathUtils.damp(
       group.current.position.z,
-      targetPosition[2],
+      framePosition[2],
       shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
       delta
     );
     const dampedScale = THREE.MathUtils.damp(
       group.current.scale.x,
-      targetScale,
+      frameScale,
       shouldScrub ? Math.max(scaleDampFactor, 6) : scaleDampFactor,
       delta
     );
