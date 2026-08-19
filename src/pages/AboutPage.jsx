@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InternalPageShell from "../components/InternalPageShell.jsx";
-import LanguageSolarSystem from "../components/LanguageSolarSystem.jsx";
-import PortfolioGlobe from "../components/PortfolioGlobe.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import styles from "./AboutPage.module.css";
 
@@ -30,7 +28,20 @@ const SIDE_NOTES = [
 
 export default function AboutPage() {
   const pageRef = useRef(null);
+  const techVideoRef = useRef(null);
+  const [techVideoPlaying, setTechVideoPlaying] = useState(false);
   const reducedMotion = useReducedMotionPreference();
+
+  const toggleTechVideo = () => {
+    const video = techVideoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().catch(() => setTechVideoPlaying(false));
+    } else {
+      video.pause();
+    }
+  };
 
   useEffect(() => {
     const root = pageRef.current;
@@ -97,7 +108,51 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <LanguageSolarSystem />
+        <section className={styles.stackShowcase} aria-labelledby="stack-showcase-heading">
+          <div className={`${styles.inner} ${styles.stackShowcaseInner}`}>
+            <div className={styles.stackCopy} data-about-reveal>
+              <span className={styles.eyebrow}>Technology / working set</span>
+              <h2 id="stack-showcase-heading">A moving map of the tools I build with.</h2>
+              <p>The stack changes with the problem. I work across interface, application, data, and model layers, choosing the combination that keeps the final system useful and understandable.</p>
+              <ul className={styles.stackLayers} aria-label="Technology layers">
+                <li><span>01</span><strong>Interface</strong><small>Product surfaces and interaction</small></li>
+                <li><span>02</span><strong>Application</strong><small>Logic, APIs, and services</small></li>
+                <li><span>03</span><strong>Intelligence</strong><small>Models, retrieval, and data</small></li>
+              </ul>
+            </div>
+
+            <figure className={styles.stackMedia} data-about-reveal>
+              <div className={styles.stackMediaBar} aria-hidden="true">
+                <span>STACK_VISUAL / 01</span>
+                <span>16 SEC / LOOP</span>
+              </div>
+              <div className={styles.stackVideoFrame}>
+                <video
+                  ref={techVideoRef}
+                  src="/media/tech-stack-showcase.mp4"
+                  muted
+                  loop
+                  playsInline
+                  autoPlay={!reducedMotion}
+                  preload="metadata"
+                  onPlay={() => setTechVideoPlaying(true)}
+                  onPause={() => setTechVideoPlaying(false)}
+                  aria-label="Animated orbit of technologies used across frontend, backend, data, and AI projects"
+                />
+                <button
+                  type="button"
+                  className={styles.stackPlayback}
+                  onClick={toggleTechVideo}
+                  aria-label={techVideoPlaying ? "Pause technology animation" : "Play technology animation"}
+                >
+                  <span aria-hidden="true">{techVideoPlaying ? "Ⅱ" : "▶"}</span>
+                  {techVideoPlaying ? "Pause motion" : "Play motion"}
+                </button>
+              </div>
+              <figcaption><span>Frontend</span><span>Backend</span><span>Data</span><span>AI systems</span></figcaption>
+            </figure>
+          </div>
+        </section>
 
         <section className={styles.direction} aria-labelledby="direction-heading">
           <div className={styles.inner}>
@@ -105,8 +160,6 @@ export default function AboutPage() {
             <div className={styles.directionRail}>{DIRECTIONS.map(([status, title, copy], index) => <article key={status} className={styles.directionStep} data-about-reveal><div className={styles.directionMarker}>{String(index + 1).padStart(2, "0")}</div><span className={styles.directionStatus}>{status}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
           </div>
         </section>
-
-        <PortfolioGlobe />
 
         <section className={styles.beyond} aria-labelledby="beyond-heading">
           <div className={styles.inner}>
