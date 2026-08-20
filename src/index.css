@@ -20,7 +20,7 @@
   --accent-line: rgba(201, 162, 75, 0.32);
   --accent-glow: rgba(201, 162, 75, 0.45);
 
-  /* ---- Semantic surfaces ---- */
+  /* ---- Semantic surfaces, shared by both themes ---- */
   --surface-0: #0a0a0a;
   --surface-1: #101010;
   --surface-2: #151515;
@@ -53,7 +53,41 @@
   color-scheme: dark;
 }
 
-html { background: var(--bg); }
+html[data-theme="light"] {
+  --bg: #f2f0e9;
+  --bg-elevated: #e9e6dd;
+  --bg-elevated-2: #dedacf;
+  --border: #d5d0c4;
+  --border-strong: #bdb6a6;
+  --text-primary: #191816;
+  --text-secondary: #625e55;
+  --text-tertiary: #888174;
+  --accent: #8b6823;
+  --accent-bright: #6f4f12;
+  --accent-dim: rgba(139, 104, 35, 0.12);
+  --accent-line: rgba(139, 104, 35, 0.38);
+  --accent-glow: rgba(139, 104, 35, 0.28);
+  --surface-0: #f2f0e9;
+  --surface-1: #ebe8df;
+  --surface-2: #e3dfd5;
+  --surface-3: #d9d4c8;
+  --surface-glass: rgba(242, 240, 233, 0.84);
+  --surface-glass-strong: rgba(242, 240, 233, 0.97);
+  --surface-soft: rgba(233, 230, 221, 0.94);
+  --surface-faint: rgba(25, 24, 22, 0.035);
+  --surface-hover: rgba(25, 24, 22, 0.07);
+  --grid-line: rgba(25, 24, 22, 0.055);
+  --shadow-color: rgba(57, 48, 30, 0.15);
+  --on-accent: #fffdf7;
+  --stage-start: #e7e3da;
+  --stage-end: #f2f0e9;
+  --hero-start: #d8c9bd;
+  --hero-end: #e8dfd5;
+  --media-text: #f5f3ee;
+  --media-text-muted: #d3cec3;
+}
+
+html { background: var(--bg); transition: background-color 240ms ease, color 240ms ease; }
 
 * {
   box-sizing: border-box;
@@ -76,6 +110,7 @@ body {
 
 body {
   min-height: 100vh;
+  transition: background-color 240ms ease, color 240ms ease;
 }
 
 #root {

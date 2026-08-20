@@ -6,6 +6,24 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title">
+      <figure className={styles.heroMedia}>
+        <img
+          className={styles.portrait}
+          src="/images/hero-chetan-editorial.jpeg"
+          alt="Chetan Mandiga seated and smiling in a monochrome interior portrait"
+          width="1200"
+          height="1600"
+          fetchPriority="high"
+        />
+        <div className={styles.portraitIndex} aria-hidden="true">
+          PORTRAIT / 001
+        </div>
+        <figcaption className={styles.portraitCaption}>
+          <span>Chetan Mandiga</span>
+          <span>AI developer and product builder</span>
+        </figcaption>
+      </figure>
+
       <div className={styles.grid} aria-hidden="true" />
 
       <div className={styles.inner}>
@@ -43,23 +61,6 @@ export default function Hero() {
           </div>
         </div>
 
-        <figure className={styles.portraitFrame}>
-          <div className={styles.portraitIndex} aria-hidden="true">
-            PORTRAIT / 001
-          </div>
-          <img
-            className={styles.portrait}
-            src="/images/chetan-portrait.png"
-            alt="Portrait of Chetan Mandiga"
-            width="1024"
-            height="1536"
-            fetchpriority="high"
-          />
-          <figcaption className={styles.portraitCaption}>
-            <span>Chetan Mandiga</span>
-            <span>AI developer and product builder</span>
-          </figcaption>
-        </figure>
       </div>
 
       <div className={styles.scrollCue} aria-hidden="true">
