@@ -49,7 +49,13 @@ export default function SplitReveal({
         {words.map((w, i) => (
           <span
             key={i}
-            style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}
+            style={{
+              display: "inline-block",
+              overflow: "hidden",
+              verticalAlign: "bottom",
+              paddingBottom: "0.14em",
+              marginBottom: "-0.14em",
+            }}
           >
             <motion.span
               style={{ display: "inline-block" }}

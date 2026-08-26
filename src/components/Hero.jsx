@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SplitReveal from "./SplitReveal.jsx";
+import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";
 import styles from "./Hero.module.css";
+
+const CAPABILITIES = ["THINK", "RETRIEVE", "SEE", "ACT"];
+
+function CapabilityState() {
+  const [index, setIndex] = useState(0);
+  const reducedMotion = useReducedMotionPreference();
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % CAPABILITIES.length), 2200);
+    return () => window.clearInterval(timer);
+  }, [reducedMotion]);
+
+  return (
+    <p className={styles.capability} aria-label={`Systems that ${CAPABILITIES.join(", ").toLowerCase()}`}>
+      <span>SYSTEMS THAT</span>
+      <strong key={CAPABILITIES[index]}>{CAPABILITIES[index]}</strong>
+    </p>
+  );
+}
 
 export default function Hero() {
   return (
@@ -13,7 +34,7 @@ export default function Hero() {
           alt="Chetan Mandiga seated and smiling in a monochrome interior portrait"
           width="1200"
           height="1600"
-          fetchPriority="high"
+          fetchpriority="high"
         />
         <div className={styles.portraitIndex} aria-hidden="true">
           PORTRAIT / 001
@@ -29,6 +50,8 @@ export default function Hero() {
       <div className={styles.inner}>
         <div className={styles.copy}>
           <p className={styles.eyebrow}>AI · DEVELOPMENT · CREATIVE TECHNOLOGY</p>
+
+          <CapabilityState />
 
           <SplitReveal
             as="h1"

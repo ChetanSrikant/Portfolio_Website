@@ -8,7 +8,7 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 38% 44%, rgba(201, 162, 75, 0.055), transparent 34%),
+    radial-gradient(circle at 38% 44%, rgba(255,255,255,.025), transparent 34%),
     var(--bg);
 }
 
@@ -35,7 +35,7 @@
   width: min(34vw, 520px);
   aspect-ratio: 1;
   z-index: -1;
-  background: radial-gradient(circle, rgba(201, 162, 75, 0.09), transparent 68%);
+  background: radial-gradient(circle, rgba(255,255,255,.04), transparent 68%);
   pointer-events: none;
 }
 
@@ -183,9 +183,9 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: 50% 58%;
+  object-position: 50% 66%;
   filter: grayscale(1) contrast(1.06) brightness(0.78);
-  transform: scale(1.008);
+  transform: translate3d(0, -3%, 0) scale(1.06);
 }
 
 .portraitIndex {
@@ -362,7 +362,7 @@
   }
 
   .portrait {
-    object-position: 50% 54%;
+    object-position: 50% 62%;
     filter: grayscale(1) contrast(1.04) brightness(0.88);
   }
 
@@ -432,4 +432,130 @@
   .scrollLine {
     animation: none;
   }
+}
+
+/* Monochrome editorial system */
+.hero {
+  padding-top: clamp(112px, 13vh, 148px);
+  background: #000;
+}
+
+.hero::before {
+  inset: 0 0 0 45%;
+  background: linear-gradient(90deg, #000 0%, rgba(0,0,0,.96) 18%, rgba(0,0,0,.35) 56%, transparent 100%);
+}
+
+.hero::after { display: none; }
+
+.grid {
+  opacity: .48;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.inner {
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr);
+  align-items: end;
+}
+
+.copy { max-width: 920px; }
+
+.eyebrow {
+  margin-bottom: 17px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capability {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+
+.capability strong {
+  color: var(--accent-bright);
+  font-weight: 500;
+  animation: capabilityReveal 620ms var(--ease-out) both;
+}
+
+@keyframes capabilityReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.headline {
+  max-width: 10ch;
+  font-size: clamp(64px, 8.2vw, 126px);
+  line-height: .88;
+  letter-spacing: -.072em;
+}
+
+.sub {
+  max-width: 50ch;
+  margin-top: 36px;
+  font-size: clamp(16px, 1.25vw, 19px);
+}
+
+.actions { margin-top: 40px; gap: 12px; }
+
+.primaryAction,
+.secondaryAction {
+  min-height: 46px;
+  border-radius: 999px;
+  padding-inline: 21px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast);
+}
+
+.primaryAction { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.primaryAction:hover { border-color: var(--accent-bright); background: var(--accent-bright); }
+.secondaryAction { border-color: var(--border-default); background: transparent; }
+.secondaryAction:hover { border-color: var(--border-strong); background: rgba(255,255,255,.04); }
+
+.heroMedia { left: 53%; background: #080808; }
+.heroMedia::before {
+  background: linear-gradient(180deg, rgba(0,0,0,.32), transparent 24%, transparent 70%, rgba(0,0,0,.9));
+  box-shadow: inset 1px 0 0 var(--border-subtle);
+}
+.portrait { filter: grayscale(1) contrast(1.08) brightness(.74); }
+.scrollLine { background: linear-gradient(to right, var(--accent), transparent); }
+
+@media (max-width: 720px) {
+  .hero { padding-top: 68px; background: #000; }
+  .hero::before { background: linear-gradient(to bottom, #080808 0%, #000 68%); }
+  .headline { font-size: clamp(42px, 11vw, 58px); line-height: .94; letter-spacing: -.055em; }
+  .capability { margin-bottom: 18px; }
+  .heroMedia {
+    /* The late desktop `left` override otherwise survives the earlier mobile
+       reset and pushes most of the portrait outside the phone viewport. */
+    left: auto;
+    width: calc(100% - 32px);
+    margin-inline: 16px;
+    background: #080808;
+  }
+
+  .portrait {
+    object-position: 50% 64%;
+    transform: none;
+  }
+}
+
+@media (max-width: 440px) {
+  .hero {
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capability strong { animation: none; }
 }

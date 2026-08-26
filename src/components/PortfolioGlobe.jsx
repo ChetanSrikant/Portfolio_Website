@@ -68,7 +68,7 @@ function GlobeScene({ location, spin, speed, reduced }) {
 function GlobeBody() {
   return <group>
     <mesh><sphereGeometry args={[1.62,64,64]}/><meshStandardMaterial color="#090909" roughness={.76} metalness={.2}/></mesh>
-    <mesh><sphereGeometry args={[1.635,32,24]}/><meshBasicMaterial color="#8a857a" wireframe transparent opacity={.12}/></mesh>
+    <mesh><sphereGeometry args={[1.635,32,24]}/><meshBasicMaterial color="#777773" wireframe transparent opacity={.12}/></mesh>
     <mesh scale={1.04}><sphereGeometry args={[1.62,48,48]}/><meshBasicMaterial color="#c9a24b" transparent opacity={.045} side={THREE.BackSide}/></mesh>
     {[-60,-30,30,60].map((latitude) => { const phi=THREE.MathUtils.degToRad(latitude); return <mesh key={latitude} position={[0,1.64*Math.sin(phi),0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[1.64*Math.cos(phi),.0025,6,96]}/><meshBasicMaterial color="#ffffff" transparent opacity={.065}/></mesh>; })}
     <mesh rotation={[Math.PI/2,0,0]}><torusGeometry args={[1.65,.0035,8,128]}/><meshBasicMaterial color="#c9a24b" transparent opacity={.32}/></mesh>

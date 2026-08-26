@@ -3,6 +3,8 @@ import GlitchText from "./GlitchText.jsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BackgroundBeams from "./BackgroundBeams.jsx";
+import ProjectVisual from "./ProjectVisuals.jsx";
+import AmbientGlyphs from "./AmbientGlyphs.jsx";
 import styles from "./HomeCompletionSections.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -167,31 +169,7 @@ function PhilosophySection() {
 }
 
 function WorkflowVisual({ project }) {
-  return (
-    <figure className={styles.workflow}>
-      <div className={styles.workflowHeader}>
-        <span>{project.code}</span>
-        <span>Confirmed workflow</span>
-      </div>
-      <div
-        className={styles.workflowSteps}
-        role="img"
-        aria-label={`${project.title} workflow: ${project.steps.join(" to ")}`}
-      >
-        {project.steps.map((step, index) => (
-          <React.Fragment key={step}>
-            <span className={styles.workflowNode}>{step}</span>
-            {index < project.steps.length - 1 && (
-              <span className={styles.workflowConnector} aria-hidden="true" />
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-      <figcaption>
-        Code-native system view. No performance metrics are implied.
-      </figcaption>
-    </figure>
-  );
+  return <ProjectVisual project={project.id} />;
 }
 
 function SelectedWork() {
@@ -356,6 +334,7 @@ function CurrentFocus() {
 export default function HomeCompletionSections() {
   return (
     <div className={styles.completion}>
+      <AmbientGlyphs />
       <ProofStrip />
       <BackgroundBeams
         id="creative-interlude"

@@ -13,7 +13,6 @@ const MOVES = [
 
 const SHAKE_COOLDOWN_MS = 1100;
 const SHAKE_ACCEL_THRESHOLD = 17;
-const MOUSE_VELOCITY_THRESHOLD = 2.6;
 
 export default function PlaygroundContent({ gundamApiRef, active }) {
   const [motionSupported, setMotionSupported] = useState(false);
@@ -21,7 +20,6 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
   const [motionDenied, setMotionDenied] = useState(false);
   const [needsMotionPermission, setNeedsMotionPermission] = useState(false);
   const lastShakeRef = useRef(0);
-  const lastMouse = useRef(null);
 
   const trigger = useCallback(
     (key) => {
@@ -84,44 +82,6 @@ export default function PlaygroundContent({ gundamApiRef, active }) {
     window.addEventListener("devicemotion", onMotion);
     return () => window.removeEventListener("devicemotion", onMotion);
   }, [active, motionEnabled, trigger]);
-
-  useEffect(() => {
-    if (!active) {
-      lastMouse.current = null;
-      return undefined;
-    }
-
-    const onMove = (event) => {
-      if (event.buttons !== 0 || event.target.closest?.("button, a")) {
-        lastMouse.current = null;
-        return;
-      }
-
-      const now = performance.now();
-      if (lastMouse.current) {
-        const elapsed = now - lastMouse.current.time;
-        if (elapsed > 0) {
-          const distance = Math.hypot(
-            event.clientX - lastMouse.current.x,
-            event.clientY - lastMouse.current.y
-          );
-          const velocity = distance / elapsed;
-
-          if (
-            velocity > MOUSE_VELOCITY_THRESHOLD &&
-            now - lastShakeRef.current > SHAKE_COOLDOWN_MS
-          ) {
-            lastShakeRef.current = now;
-            trigger(CLIPS.BOOMERANG);
-          }
-        }
-      }
-      lastMouse.current = { x: event.clientX, y: event.clientY, time: now };
-    };
-
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, [active, trigger]);
 
   return (
     <div

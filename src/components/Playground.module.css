@@ -161,24 +161,29 @@
   }
 
   .dock {
-    display: flex;
+    display: grid;
     width: 100%;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 5px;
     padding: 7px;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
   }
 
-  .dock::-webkit-scrollbar {
-    display: none;
+  .control {
+    min-width: 0;
+    padding-inline: 5px;
+    font-size: 8.5px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
   }
 
-  .control,
   .controlAccent {
-    flex: 0 0 auto;
+    grid-column: 1 / -1;
+  }
+
+  .utilityButton,
+  .motionButton {
+    min-height: 44px;
   }
 
   .motionRow {

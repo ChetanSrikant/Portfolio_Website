@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import { gsap } from "gsap";
@@ -17,6 +17,7 @@ import {
   getGundamTransform,
   getIntroToPhilosophyTransform,
   getIntroToPhilosophyPathPoints,
+  getPhilosophyToPlaygroundTransform,
   getHomeStageIndex,
   HOME_CHOREOGRAPHY,
   HOME_STAGE,
@@ -91,17 +92,17 @@ function useViewportWidth() {
 function Lighting() {
   return (
     <>
-      <ambientLight intensity={0.35} />
-      <hemisphereLight args={["#3a3a42", "#0a0a0a", 0.4]} />
+      <ambientLight intensity={0.52} />
+      <hemisphereLight args={["#54545f", "#0a0a0a", 0.58]} />
       <directionalLight
         position={[4, 6, 4]}
-        intensity={1.6}
+        intensity={1.85}
         color="#fff3dd"
         castShadow
         shadow-mapSize={[1024, 1024]}
       />
-      <directionalLight position={[-3, 3, -5]} intensity={1.8} color="#c9a24b" />
-      <directionalLight position={[-5, 2, 3]} intensity={0.4} color="#6b7a8f" />
+      <directionalLight position={[-3, 3, -5]} intensity={2} color="#c9a24b" />
+      <directionalLight position={[-5, 2, 3]} intensity={0.68} color="#8697ad" />
     </>
   );
 }
@@ -135,6 +136,41 @@ function TransitionPathDebug({ viewportWidth }) {
   );
 }
 
+function MovingContactShadow({ motionRef, viewportWidth }) {
+  const shadowRef = useRef(null);
+
+  useFrame((_, delta) => {
+    if (!shadowRef.current) return;
+    const target = motionRef.current?.position ?? [0, 0, 0];
+    shadowRef.current.position.x = THREE.MathUtils.damp(
+      shadowRef.current.position.x,
+      target[0],
+      9,
+      delta
+    );
+    shadowRef.current.position.z = THREE.MathUtils.damp(
+      shadowRef.current.position.z,
+      target[2],
+      9,
+      delta
+    );
+  });
+
+  return (
+    <group ref={shadowRef}>
+      <ContactShadows
+        position={[0, 0.01, 0]}
+        opacity={0.3}
+        scale={12}
+        blur={2.4}
+        far={4}
+        resolution={viewportWidth <= 720 ? 256 : 512}
+        color="#000000"
+      />
+    </group>
+  );
+}
+
 export default function GundamStage({ gundamApiRef, children }) {
   const wrapperRef = useRef(null);
   const canvasLayerRef = useRef(null);
@@ -150,8 +186,8 @@ export default function GundamStage({ gundamApiRef, children }) {
   const [modelReady, setModelReady] = useState(false);
   const [initializationComplete, setInitializationComplete] = useState(false);
   const initializationCompleteRef = useRef(false);
-  const revealRunningRef = useRef(false);
   const transitionProgressRef = useRef(0);
+  const playgroundTransitionRef = useRef({ started: false, progress: 0 });
   const motionRef = useRef({
     rotationY: 0,
     rotationZ: 0,
@@ -160,6 +196,7 @@ export default function GundamStage({ gundamApiRef, children }) {
     lifterActive: false,
     lifterProgress: 0,
     landingMode: false,
+    settling: false,
   });
   const choreography = useRef({
     initialized: false,
@@ -170,7 +207,7 @@ export default function GundamStage({ gundamApiRef, children }) {
     philosophyLandingPlayed: false,
   });
   const transitionRange = HOME_CHOREOGRAPHY.introToPhilosophy;
-  const philosophyExit = HOME_STAGE.sections.philosophy[1];
+  const playgroundTransition = HOME_CHOREOGRAPHY.philosophyToPlayground;
   const initialUi = useMemo(() => ({
     stageIndex: 0,
     direction: 1,
@@ -191,6 +228,7 @@ export default function GundamStage({ gundamApiRef, children }) {
     const currentStageIndex = getHomeStageIndex(progress, previousUi.stageIndex);
     const currentStage = HOME_STAGES[currentStageIndex];
     const introProgress = transitionProgressRef.current;
+    const playgroundFlight = playgroundTransitionRef.current;
     const transitionOwnsTransform =
       !reducedMotion &&
       progress >= transitionRange.start &&
@@ -200,24 +238,31 @@ export default function GundamStage({ gundamApiRef, children }) {
       progress >= transitionRange.start &&
       introProgress > 0.001 &&
       introProgress < 0.999;
-    const philosophyToPlaygroundProgress = mapRange(
-      progress,
-      philosophyExit,
-      HOME_TARGETS.playground,
-      0,
-      1
-    );
     const philosophyToPlaygroundInFlight =
       !reducedMotion &&
-      progress > philosophyExit + 0.0005 &&
-      progress < HOME_TARGETS.playground - 0.0005;
+      playgroundFlight.started &&
+      playgroundFlight.progress < 0.999;
     const lifterActive = transitionInFlight || philosophyToPlaygroundInFlight;
     const lifterProgress = transitionInFlight
       ? introProgress
-      : philosophyToPlaygroundProgress;
-    const transform = transitionOwnsTransform
-      ? getIntroToPhilosophyTransform(introProgress, { reducedMotion, viewportWidth })
-      : getGundamTransform(progress, { reducedMotion, viewportWidth });
+      : playgroundFlight.progress;
+    const holdPhilosophyLanding =
+      !reducedMotion && introProgress >= 0.999 && !playgroundFlight.started;
+    const transform = philosophyToPlaygroundInFlight || playgroundFlight.progress >= 0.999
+      ? getPhilosophyToPlaygroundTransform(playgroundFlight.progress, {
+          reducedMotion,
+          viewportWidth,
+        })
+      : transitionOwnsTransform || holdPhilosophyLanding
+        ? getIntroToPhilosophyTransform(
+            holdPhilosophyLanding ? 1 : introProgress,
+            {
+              reducedMotion,
+              viewportWidth,
+              stageKey: currentStage.key,
+            }
+          )
+        : getGundamTransform(progress, { reducedMotion, viewportWidth });
 
     // ScrollTrigger is the sole high-frequency owner while the custom Intro
     // flight is active. The generic scroll observer still updates DOM panels,
@@ -232,7 +277,10 @@ export default function GundamStage({ gundamApiRef, children }) {
       motion.scale = transform.scale;
       motion.lifterActive = lifterActive;
       motion.lifterProgress = lifterProgress;
-      motion.landingMode = progress > philosophyExit;
+      motion.landingMode = playgroundFlight.started;
+      motion.settling =
+        (!transitionInFlight && introProgress >= 0.999) ||
+        playgroundFlight.progress >= 0.999;
     }
 
     const introOpacity = panelOpacity(progress, HOME_STAGE.panelFades.intro);
@@ -241,14 +289,18 @@ export default function GundamStage({ gundamApiRef, children }) {
     const playgroundActive =
       currentStage.key === HOME_STAGE_KEYS.PLAYGROUND &&
       playgroundOpacity > 0.4 &&
-      !philosophyToPlaygroundInFlight;
+      (reducedMotion || playgroundFlight.progress >= 0.999);
     const basicInteractionActive =
       initializationCompleteRef.current &&
       !lifterActive &&
       ((currentStage.key === HOME_STAGE_KEYS.INTRO && introOpacity > 0.4) ||
-        (currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY && introProgress >= 0.999));
+        (currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
+          introProgress >= 0.999 &&
+          !playgroundFlight.started));
     const philosophyLanded =
-      currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY && introProgress >= 0.999;
+      currentStage.key === HOME_STAGE_KEYS.PHILOSOPHY &&
+      introProgress >= 0.999 &&
+      !playgroundFlight.started;
     const introEntered =
       currentStage.key === HOME_STAGE_KEYS.INTRO &&
       progress >= HOME_STAGE.panelFades.intro[1];
@@ -273,11 +325,7 @@ export default function GundamStage({ gundamApiRef, children }) {
       progressFillRef.current.style.transform = `scaleX(${progress})`;
     }
     if (canvasLayerRef.current) {
-      if (!revealRunningRef.current) {
-        canvasLayerRef.current.style.opacity = initializationCompleteRef.current
-          ? String(transform.opacity)
-          : "0";
-      }
+      canvasLayerRef.current.style.opacity = String(transform.opacity);
       canvasLayerRef.current.style.pointerEvents =
         playgroundActive || basicInteractionActive ? "auto" : "none";
     }
@@ -304,7 +352,7 @@ export default function GundamStage({ gundamApiRef, children }) {
       basicInteractionActive,
       philosophyLanded,
       lifterActive,
-      landingMode: progress > philosophyExit,
+      landingMode: playgroundFlight.started,
       skillsActive: skillsOpacity > 0.02,
       skillsCaptionVisible: skillsOpacity > 0.18,
     };
@@ -313,7 +361,7 @@ export default function GundamStage({ gundamApiRef, children }) {
       uiRef.current = nextUi;
       setUi(nextUi);
     }
-  }, [philosophyExit, reducedMotion, transitionRange.start, viewportWidth]);
+  }, [reducedMotion, transitionRange.start, viewportWidth]);
 
   const progressRef = useScrollProgress(wrapperRef, applyProgress);
   const currentStage = HOME_STAGES[ui.stageIndex];
@@ -335,25 +383,16 @@ export default function GundamStage({ gundamApiRef, children }) {
       return undefined;
     }
 
-    revealRunningRef.current = true;
     const context = gsap.context(() => {
       const timeline = gsap.timeline({
         defaults: { ease: "power2.out" },
         onComplete: () => {
-          if (canvasLayerRef.current) canvasLayerRef.current.style.willChange = "";
-          revealRunningRef.current = false;
           initializationCompleteRef.current = true;
           setInitializationComplete(true);
         },
       });
 
       timeline
-        .set(canvasLayerRef.current, {
-          opacity: 0,
-          scale: 0.992,
-          transformOrigin: "50% 50%",
-          willChange: "transform, opacity",
-        })
         .set("[data-init-frame]", { opacity: 1 })
         .fromTo(
           "[data-init-status]",
@@ -367,23 +406,12 @@ export default function GundamStage({ gundamApiRef, children }) {
           { yPercent: 520, opacity: 1, duration: 1.05, ease: "power1.inOut" },
           0.2
         )
-        .to(
-          canvasLayerRef.current,
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.22,
-            ease: "power3.out",
-          },
-          0.58
-        )
         .to("[data-init-core]", { opacity: 1, scale: 1.7, duration: 0.18 }, 1.16)
         .to("[data-init-core]", { opacity: 0, scale: 3.2, duration: 0.34 }, 1.34)
         .to("[data-init-frame]", { opacity: 0, duration: 0.3 }, 1.55);
     }, initializationRef);
 
     return () => {
-      revealRunningRef.current = false;
       context.revert();
     };
   }, [initializationComplete, modelReady, reducedMotion, ui.introEntered]);
@@ -431,6 +459,54 @@ export default function GundamStage({ gundamApiRef, children }) {
 
     return () => context.revert();
   }, [applyProgress, progressRef, transitionRange.landingHold, transitionRange.start]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return undefined;
+
+    const philosophySection = wrapper.querySelector(
+      playgroundTransition.startSelector
+    );
+    const playgroundAnchor = wrapper.querySelector(
+      playgroundTransition.landingSelector
+    );
+    if (!philosophySection || !playgroundAnchor) return undefined;
+
+    const context = gsap.context(() => {
+      const transition = { progress: 0 };
+      const updateProgress = (value) => {
+        const next = Math.min(1, Math.max(0, value));
+        const flight = playgroundTransitionRef.current;
+        const started = next > 0.0005;
+        if (
+          Math.abs(next - flight.progress) < 0.0005 &&
+          started === flight.started
+        ) return;
+
+        flight.progress = next;
+        flight.started = started;
+        applyProgress(progressRef.current, true);
+      };
+
+      gsap.to(transition, {
+        progress: 1,
+        ease: "none",
+        scrollTrigger: {
+          id: "philosophy-to-playground-lifter-scrub",
+          trigger: philosophySection,
+          start: "bottom center",
+          endTrigger: playgroundAnchor,
+          end: "center center",
+          scrub: true,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => updateProgress(self.progress),
+          onRefresh: (self) => updateProgress(self.progress),
+        },
+      });
+    }, wrapper);
+
+    return () => context.revert();
+  }, [applyProgress, playgroundTransition, progressRef]);
 
   useEffect(() => {
     const state = choreography.current;
@@ -517,7 +593,7 @@ export default function GundamStage({ gundamApiRef, children }) {
           lift={64}
           fade={0.6}
           dim={0.55}
-          overlayColor="#060010"
+          overlayColor="#000000"
           active={ui.skillsActive}
           opacity={0}
         />
@@ -544,7 +620,7 @@ export default function GundamStage({ gundamApiRef, children }) {
         <div
           ref={canvasLayerRef}
           className={styles.canvasLayer}
-          style={{ opacity: 0, pointerEvents: "none" }}
+          style={{ opacity: 1, pointerEvents: "none" }}
           aria-hidden="true"
         >
           <Canvas
@@ -557,7 +633,11 @@ export default function GundamStage({ gundamApiRef, children }) {
               </div>
             }
           >
-            <PerspectiveCamera makeDefault position={[0, 1.75, 7.6]} fov={36} />
+            <PerspectiveCamera
+              makeDefault
+              position={[0, 1.75, 7.6]}
+              fov={viewportWidth <= 480 ? 52 : viewportWidth <= 720 ? 46 : 36}
+            />
             <Lighting />
             <Suspense fallback={<ModelLoading />}>
               <GundamModel
@@ -581,14 +661,9 @@ export default function GundamStage({ gundamApiRef, children }) {
                 onDoubleClick={() => gundamApiRef.current?.play(CLIPS.SHIELD)}
               />
               <TransitionPathDebug viewportWidth={viewportWidth} />
-              <ContactShadows
-                position={[0, 0.01, 0]}
-                opacity={0.3}
-                scale={12}
-                blur={2.4}
-                far={4}
-                resolution={viewportWidth <= 720 ? 256 : 512}
-                color="#000000"
+              <MovingContactShadow
+                motionRef={motionRef}
+                viewportWidth={viewportWidth}
               />
             </Suspense>
           </Canvas>

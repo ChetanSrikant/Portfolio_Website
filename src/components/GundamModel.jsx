@@ -301,6 +301,7 @@ const GundamModel = forwardRef(function GundamModel(
     const frameScrubActive = motion?.lifterActive ?? scrubbedLifterActive;
     const frameScrubProgress = motion?.lifterProgress ?? scrubbedLifterProgress;
     const frameLandingMode = motion?.landingMode ?? scrubbedLifterLandingMode;
+    const frameSettling = motion?.settling ?? false;
 
     const lifter = actions[CLIPS.LIFTER];
     const idle = actions[CLIPS.IDLE];
@@ -392,7 +393,7 @@ const GundamModel = forwardRef(function GundamModel(
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
       frameRotationY + manualRotationTargetY.current,
-      dampFactor,
+      frameSettling ? Math.max(dampFactor, 10) : dampFactor,
       delta
     );
     group.current.rotation.z = THREE.MathUtils.damp(
@@ -404,25 +405,33 @@ const GundamModel = forwardRef(function GundamModel(
     group.current.position.x = THREE.MathUtils.damp(
       group.current.position.x,
       framePosition[0],
-      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
+      shouldScrub || frameSettling
+        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
+        : positionDampFactor,
       delta
     );
     group.current.position.y = THREE.MathUtils.damp(
       group.current.position.y,
       framePosition[1],
-      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
+      shouldScrub || frameSettling
+        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
+        : positionDampFactor,
       delta
     );
     group.current.position.z = THREE.MathUtils.damp(
       group.current.position.z,
       framePosition[2],
-      shouldScrub ? Math.max(positionDampFactor, 7) : positionDampFactor,
+      shouldScrub || frameSettling
+        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
+        : positionDampFactor,
       delta
     );
     const dampedScale = THREE.MathUtils.damp(
       group.current.scale.x,
       frameScale,
-      shouldScrub ? Math.max(scaleDampFactor, 6) : scaleDampFactor,
+      shouldScrub || frameSettling
+        ? Math.max(scaleDampFactor, frameSettling ? 9 : 6)
+        : scaleDampFactor,
       delta
     );
     group.current.scale.setScalar(dampedScale);
@@ -496,7 +505,7 @@ const GundamModel = forwardRef(function GundamModel(
     drag.current.active = false;
     drag.current.pointerId = null;
     drag.current.captureTarget = null;
-    document.body.style.cursor = "grab";
+    document.body.style.cursor = "pointer";
   };
 
   return (
@@ -511,9 +520,7 @@ const GundamModel = forwardRef(function GundamModel(
       onPointerOver={(e) => {
         if (!clickEnabled) return;
         e.stopPropagation();
-        if (!drag.current.active) {
-          document.body.style.cursor = dragEnabled ? "grab" : "pointer";
-        }
+        if (!drag.current.active) document.body.style.cursor = "pointer";
         onHoverChange?.(true);
       }}
       onPointerOut={(e) => {

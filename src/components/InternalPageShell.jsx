@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import Nav from "./Nav.jsx";
+import FloatingDock from "./FloatingDock.jsx";
 import Footer from "./Footer.jsx";
+import AmbientGlyphs from "./AmbientGlyphs.jsx";
 import styles from "../pages/InternalPages.module.css";
 
 export function PageHero({ eyebrow, title, intro, meta, media }) {
@@ -54,7 +56,7 @@ export function EditorialCTA({ eyebrow, title, copy, actions }) {
   );
 }
 
-export default function InternalPageShell({ children, title }) {
+export default function InternalPageShell({ children, title, showAmbient = true, showDock = true }) {
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -81,7 +83,11 @@ export default function InternalPageShell({ children, title }) {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Nav visible />
-      <main id="main-content" ref={mainRef} className={styles.pageMain} tabIndex="-1">{children}</main>
+      {showDock ? <FloatingDock visible /> : null}
+      <main id="main-content" ref={mainRef} className={styles.pageMain} tabIndex="-1">
+        {showAmbient ? <AmbientGlyphs /> : null}
+        {children}
+      </main>
       <Footer showGundamDisclaimer={false} />
     </>
   );

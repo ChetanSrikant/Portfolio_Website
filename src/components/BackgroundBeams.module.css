@@ -9,7 +9,7 @@
   padding: clamp(96px, 12vw, 180px) var(--edge-pad-x);
   background:
     radial-gradient(circle at 50% 48%, var(--surface-faint), transparent 42%),
-    color-mix(in srgb, var(--surface-0) 76%, transparent);
+    color-mix(in srgb, var(--surface-0) 34%, transparent);
 }
 
 .beams {
@@ -89,8 +89,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, #090909 0%, transparent 20%, transparent 78%, #090909 100%),
-    radial-gradient(ellipse at center, transparent 25%, rgba(0, 0, 0, 0.72) 100%);
+    linear-gradient(to bottom, #090909 0%, transparent 16%, transparent 84%, #090909 100%),
+    radial-gradient(ellipse at center, transparent 32%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 .content {

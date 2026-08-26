@@ -77,6 +77,10 @@ export const HOME_CHOREOGRAPHY = Object.freeze({
     landingSelector: "#philosophy",
     landingHold: 0.14,
   }),
+  philosophyToPlayground: Object.freeze({
+    startSelector: "#philosophy",
+    landingSelector: "#final-playground",
+  }),
 });
 
 export const HOME_TARGETS = Object.freeze({
@@ -94,37 +98,37 @@ const PHILOSOPHY_LANDING_TRANSFORM = frame(
   2.65,
   0.04,
   0,
-  1.02,
+  1.08,
   28,
-  0.82,
-  0.42
+  1,
+  0.48
 );
 
 const GUNDAM_KEYFRAMES = Object.freeze([
   frame(0, -1.88, 0, 0, 1.3, 11, 1, 0.52),
   frame(0.105, -1.88, 0, 0, 1.3, 11, 1, 0.52),
 
-  frame(0.189, 2.25, 0.08, 0, 0.78, 22, 0.72, 0.25),
-  frame(0.215, 2.25, 0.1, 0, 0.76, 22, 0.72, 0.24),
+  frame(0.189, 2.25, 0.08, 0, 0.9, 22, 0.95, 0.34),
+  frame(0.215, 2.25, 0.1, 0, 0.88, 22, 0.94, 0.34),
 
-  frame(0.235, 2.05, 0.36, 0, 0.78, 38, 0.82, 0.2),
-  frame(0.265, 0.6, 0.5, 0, 0.86, 52, 1, 0.16),
-  frame(0.295, -0.15, 0.34, 0, 0.82, 44, 0.9, 0.2),
+  frame(0.235, 2.05, 0.36, 0, 0.9, 38, 0.95, 0.3),
+  frame(0.265, 0.6, 0.5, 0, 0.96, 52, 1, 0.3),
+  frame(0.295, -0.15, 0.34, 0, 0.94, 44, 0.98, 0.32),
 
   PHILOSOPHY_LANDING_TRANSFORM,
-  frame(0.38, 2.65, 0.04, 0, 1.02, 28, 0.82, 0.42),
+  frame(0.38, 2.65, 0.04, 0, 1.08, 28, 1, 0.48),
 
   // Philosophy -> Playground: leave from the right, sweep left, then
   // return to the same x/y landing point. Alternating y values create a
   // restrained hover arc while the authored Lifter clip is scroll-scrubbed.
-  frame(0.43, 1.2, 0.28, -0.04, 0.78, 12, 0.72, 0.2),
-  frame(0.54, 0.05, 0.46, -0.08, 0.7, -4, 0.66, 0.18),
-  frame(0.64, -1.45, 0.22, -0.06, 0.66, -20, 0.64, 0.18),
-  frame(0.7, -1.75, 0.36, -0.04, 0.66, -24, 0.64, 0.18),
-  frame(0.745, -1.2, 0.18, -0.02, 0.74, -8, 0.7, 0.22),
+  frame(0.43, 1.2, 0.28, -0.04, 0.92, 12, 0.96, 0.36),
+  frame(0.54, 0.05, 0.46, -0.08, 0.86, -4, 0.94, 0.32),
+  frame(0.64, -1.45, 0.22, -0.06, 0.84, -20, 0.92, 0.3),
+  frame(0.7, -1.75, 0.36, -0.04, 0.84, -24, 0.92, 0.3),
+  frame(0.745, -1.2, 0.18, -0.02, 0.9, -8, 0.94, 0.34),
 
-  frame(0.82, 0.1, 0.42, -0.06, 0.9, 18, 0.76, 0.3),
-  frame(0.89, 1.25, 0.2, -0.03, 1.08, 42, 0.9, 0.44),
+  frame(0.82, 0.1, 0.42, -0.06, 1, 18, 0.96, 0.4),
+  frame(0.89, 1.25, 0.2, -0.03, 1.1, 42, 1, 0.5),
 
   frame(0.91, 1.7, 0.34, -0.02, 1.12, 49, 1, 0.56),
   frame(0.935, 2.03, 0.14, -0.01, 1.17, 52, 1, 0.6),
@@ -134,11 +138,11 @@ const GUNDAM_KEYFRAMES = Object.freeze([
 
 const REDUCED_MOTION_TRANSFORMS = Object.freeze({
   intro: frame(0, -1.88, 0, 0, 1.3, 11, 1, 0.52),
-  philosophy: frame(0, 2.65, 0.06, 0, 1.08, 28, 0.78, 0.42),
-  skills: frame(0, 2.25, 0.08, 0, 0.78, 22, 0.6, 0.25),
-  creative: frame(0, 0.6, 0.5, 0, 0.92, 48, 0.8, 0.18),
-  projects: frame(0, 2.5, 0.12, 0, 0.66, 17, 0.52, 0.18),
-  experience: frame(0, 2.05, 0.12, 0, 0.96, 40, 0.78, 0.34),
+  philosophy: frame(0, 2.65, 0.06, 0, 1.08, 28, 1, 0.48),
+  skills: frame(0, 2.25, 0.08, 0, 0.9, 22, 0.95, 0.34),
+  creative: frame(0, 0.6, 0.5, 0, 0.96, 48, 1, 0.3),
+  projects: frame(0, 2.5, 0.12, 0, 0.9, 17, 0.94, 0.34),
+  experience: frame(0, 2.05, 0.12, 0, 1, 40, 0.96, 0.42),
   playground: frame(0, 2.15, 0.04, 0, 1.18, 53, 1, 0.62),
 });
 
@@ -215,7 +219,11 @@ export function getGundamTransform(
 
 export function getIntroToPhilosophyTransform(
   transitionProgress,
-  { reducedMotion = false, viewportWidth = null } = {}
+  {
+    reducedMotion = false,
+    viewportWidth = null,
+    stageKey = HOME_STAGE_KEYS.PHILOSOPHY,
+  } = {}
 ) {
   const t = clamp01(transitionProgress);
   const intro = GUNDAM_KEYFRAMES[1];
@@ -253,7 +261,7 @@ export function getIntroToPhilosophyTransform(
         smoothStep(t)
       ),
     },
-    HOME_STAGE_KEYS.PHILOSOPHY,
+    stageKey,
     viewportWidth
   );
 }
@@ -307,6 +315,39 @@ function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {
     opacity,
     shadowOpacity,
   });
+}
+
+/**
+ * Replays the existing Philosophy -> Playground keyframes against a local
+ * 0..1 flight progress. GundamStage drives this progress from the real DOM
+ * section anchors so layout changes cannot move either landing point.
+ */
+export function getPhilosophyToPlaygroundTransform(
+  transitionProgress,
+  { reducedMotion = false, viewportWidth = null } = {}
+) {
+  const t = clamp01(transitionProgress);
+  const start = HOME_STAGE.sections.philosophy[1];
+  const end = HOME_TARGETS.playground;
+  const transform = getGundamTransform(lerp(start, end, t), {
+    reducedMotion,
+    viewportWidth,
+  });
+
+  /* The authored Lifter silhouette is much wider than Idle. On a phone, pull
+     it back only while airborne, then let the normal landing scale return once
+     the clip releases. Desktop choreography remains exactly unchanged. */
+  if (
+    Number.isFinite(viewportWidth) &&
+    viewportWidth <= 720 &&
+    !reducedMotion &&
+    t > 0.001 &&
+    t < 0.999
+  ) {
+    return { ...transform, scale: transform.scale * 0.76 };
+  }
+
+  return transform;
 }
 
 const introToPhilosophyPathCache = new Map();
@@ -371,12 +412,25 @@ function adaptTransformForViewport(transform, stageKey, viewportWidth) {
   }
 
   if (viewportWidth <= 720) {
-    const playground = stageKey === HOME_STAGE_KEYS.PLAYGROUND;
+    /* A portrait viewport has a fraction of the desktop camera's horizontal
+       world space. Keep the authored path/rotation, but give every editorial
+       stop its own safe mobile composition so wide poses remain on-canvas and
+       do not sit directly behind the section's primary copy. */
+    const mobileLayout = {
+      [HOME_STAGE_KEYS.INTRO]: { y: 0.9, scale: 0.82 },
+      [HOME_STAGE_KEYS.SKILLS]: { y: -0.3, scale: 0.72 },
+      [HOME_STAGE_KEYS.CREATIVE]: { y: -0.5, scale: 0.68 },
+      [HOME_STAGE_KEYS.PHILOSOPHY]: { y: 2.9, scale: 0.58 },
+      [HOME_STAGE_KEYS.PROJECTS]: { y: -0.42, scale: 0.66 },
+      [HOME_STAGE_KEYS.EXPERIENCE]: { y: -0.08, scale: 0.7 },
+      [HOME_STAGE_KEYS.PLAYGROUND]: { y: 2.55, scale: 0.64 },
+    }[stageKey] ?? { y: 0, scale: 0.7 };
+
     return {
       ...transform,
-      x: Math.min(0.3, Math.max(-0.3, transform.x * 0.12)),
-      y: transform.y + 0.78,
-      scale: transform.scale * (playground ? 0.66 : 0.69),
+      x: Math.min(0.08, Math.max(-0.08, transform.x * 0.04)),
+      y: mobileLayout.y + transform.y * 0.12,
+      scale: transform.scale * mobileLayout.scale,
     };
   }
 
