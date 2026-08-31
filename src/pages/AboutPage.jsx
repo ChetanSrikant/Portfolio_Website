@@ -23,6 +23,42 @@ const CURIOSITIES = [
   ["Interaction design", "A system only becomes useful when someone can understand what it is doing and what to do next."],
 ];
 
+const PROFESSIONAL_CHAPTERS = [
+  {
+    period: "2021 - 2025",
+    organization: "BML Munjal University",
+    role: "B.Tech, Computer Science and Engineering",
+    location: "Gurugram, India",
+    summary: "Built a computer science foundation while an entrepreneurship minor kept users, value, and delivery in the same frame.",
+    tags: ["Computer science", "Entrepreneurship"],
+  },
+  {
+    period: "May - Jul 2023",
+    organization: "DRDO",
+    role: "Project Intern",
+    location: "Hyderabad, India",
+    summary: "Designed Tkinter interfaces for RS-422 device communication, streamlining technical workflows and reducing communication errors.",
+    tags: ["Python", "Tkinter", "RS-422"],
+  },
+  {
+    period: "Mar - Aug 2025",
+    organization: "Innodatatics",
+    role: "Full Stack Data Scientist",
+    location: "Hyderabad, India",
+    summary: "Developed two AI data platforms: an enterprise forecasting dashboard and a TGSRTC public transport demand prediction system.",
+    tags: ["AI forecasting", "Dashboards", "CRISP-ML(Q)", "Git workflows"],
+    achievement: "Winner, Telangana AI Rising / AI4TG Grand Challenge",
+  },
+  {
+    period: "Aug 2025 - Present",
+    organization: "HCLTech",
+    role: "Systems Engineer, IAM Cloud",
+    location: "Noida, India",
+    summary: "Support Active Directory and Azure AD environments across provisioning, access control, authentication, and hybrid identity operations.",
+    tags: ["Active Directory", "Azure AD", "IAM", "Production systems"],
+  },
+];
+
 function ExplorationArtifact({ className, title, children }) {
   return (
     <article className={`${styles.explorationArtifact} ${className}`} data-panel>
@@ -90,14 +126,13 @@ export default function AboutPage() {
         scrollTrigger: { trigger: `.${styles.realWorld}`, start: "top 64%", once: true },
       });
       journey
-        .from(`.${styles.journeyFill}`, {
-          scaleX: 0,
+        .from(`.${styles.timelineFill}`, {
           scaleY: 0,
           duration: 1.3,
           ease: "power3.inOut",
         })
-        .from(`.${styles.journeyStep}`, { y: 14, autoAlpha: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, "-=0.8")
-        .from(`.${styles.experienceMarker}`, { y: 12, autoAlpha: 0, duration: 0.5, stagger: 0.12 }, "-=0.35");
+        .from(`.${styles.timelineEntry}`, { y: 18, autoAlpha: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.8")
+        .from(`.${styles.timelineDirection}`, { y: 12, autoAlpha: 0, duration: 0.5 }, "-=0.3");
 
       const refresh = () => ScrollTrigger.refresh();
       document.fonts?.ready?.then(refresh);
@@ -112,7 +147,7 @@ export default function AboutPage() {
   }, [reducedMotion]);
 
   return (
-    <InternalPageShell title="About" showAmbient={false}>
+    <InternalPageShell title="About" showAmbient={false} footerVariant="about">
       <div ref={pageRef} className={styles.page}>
         <header id="origin" className={styles.hero} tabIndex="-1">
           <div className={styles.heroCopy}>
@@ -124,7 +159,7 @@ export default function AboutPage() {
             <p data-opening-copy>Computer science gave me the starting point. Projects, constraints, and people taught me what engineering asks for.</p>
           </div>
           <figure className={styles.heroPortrait}>
-            <img src="/images/hero-chetan-editorial.jpeg" alt="Chetan Mandiga seated in a black-and-white portrait" />
+            <img src="/images/about-hero-campus.png" alt="Chetan Mandiga on the BML Munjal University campus" fetchpriority="high" />
             <span className={styles.portraitCurtain} aria-hidden="true" />
           </figure>
         </header>
@@ -136,7 +171,7 @@ export default function AboutPage() {
           </div>
           <StoryWorkspace label="Education archive" meta="2021 - 2025" className={styles.educationWorkspace}>
             <div className={styles.educationImage} data-panel>
-              <img src="/images/drift-wall/drift-11.jpeg" alt="Chetan on the BML Munjal University campus" loading="lazy" />
+              <img src="/images/about-education-convocation.png" alt="Chetan Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
             </div>
             <div className={styles.educationIdentity} data-panel>
               <span>BML Munjal University</span>
@@ -157,11 +192,11 @@ export default function AboutPage() {
 
           <StoryWorkspace label="Exploration workspace" meta="Learning through making" className={styles.explorationWorkspace}>
             <div className={styles.explorationGrid}>
-              <ExplorationArtifact className={styles.artifactPython} title="Python + software development">Python made ideas quick enough to test. Software development made me ask how those ideas could become stable systems. Problem solving connected both.</ExplorationArtifact>
-              <ExplorationArtifact className={styles.artifactWeb} title="Web + project building">Interfaces turned abstract logic into something another person could use. Projects made the whole path concrete.</ExplorationArtifact>
-              <ExplorationArtifact className={styles.artifactAi} title="AI / ML + data">Data introduced patterns and uncertainty. AI introduced a new way to ask what software could infer, generate, and adapt to.</ExplorationArtifact>
-              <ExplorationArtifact className={styles.artifactVision} title="Computer vision">Images and video became data that software could reason about.</ExplorationArtifact>
-              <ExplorationArtifact className={styles.artifactBusiness} title="Entrepreneurship">Ideas also need people, timing, value, and a reason to exist.</ExplorationArtifact>
+              <ExplorationArtifact className={styles.artifactPython} title="Python + software development">I used Python to connect retrieval, embeddings, model inference, and application state in a conversational RAG workflow.</ExplorationArtifact>
+              <ExplorationArtifact className={styles.artifactWeb} title="Web + project building">For the TGSRTC forecasting challenge, I helped turn model outputs into an interface stakeholders could inspect and understand.</ExplorationArtifact>
+              <ExplorationArtifact className={styles.artifactAi} title="AI / ML + data">Forecasting and retrieval projects taught me to treat data quality, evaluation, and failure handling as part of the product.</ExplorationArtifact>
+              <ExplorationArtifact className={styles.artifactVision} title="Computer vision">I built a YOLOv11 workflow that detects objects, indexes labels, and returns relevant images through a simple search interface.</ExplorationArtifact>
+              <ExplorationArtifact className={styles.artifactBusiness} title="Entrepreneurship">My entrepreneurship minor keeps product value, users, and delivery constraints in the same frame as the engineering.</ExplorationArtifact>
             </div>
           </StoryWorkspace>
 
@@ -190,26 +225,36 @@ export default function AboutPage() {
         <section id="real-world" className={styles.realWorld} tabIndex="-1" aria-labelledby="real-world-title">
           <div className={styles.realWorldStatement} data-reveal>
             <span className={styles.chapterLabel}>REAL WORLD / 04</span>
-            <h2 id="real-world-title">Then the problems stopped being assignments.<br /><strong>They became real.</strong></h2>
-          </div>
-          <div className={styles.journey} aria-label="Progression from classroom learning to real systems">
-            <span className={styles.journeyTrack} aria-hidden="true"><i className={styles.journeyFill} /></span>
-            {["Classroom", "Experiments", "Internships", "Live projects", "Real systems"].map((step) => (
-              <span key={step} className={styles.journeyStep}>{step}</span>
-            ))}
+            <h2 id="real-world-title">The work moved beyond assignments.<br /><strong>The stakes became real.</strong></h2>
           </div>
           <p className={styles.realWorldCopy} data-reveal>College taught me how to learn and build. Real-world environments added constraints, collaboration, users, reliability, and responsibility.</p>
-          <div className={styles.experienceMarkers} aria-label="Professional chapter markers">
-            {[
-              ["DRDO", "Research environment"],
-              ["Innodatatics", "Applied AI environment"],
-              ["HCLTech", "Enterprise environment"],
-            ].map(([name, context]) => (
-              <div key={name} className={styles.experienceMarker}>
-                <strong>{name}</strong>
-                <span>{context}</span>
-              </div>
-            ))}
+          <div className={styles.timelineShell} aria-label="Education and professional journey">
+            <span className={styles.timelineTrack} aria-hidden="true"><i className={styles.timelineFill} /></span>
+            <ol className={styles.timeline}>
+              {PROFESSIONAL_CHAPTERS.map((chapter) => (
+                <li key={chapter.organization} className={styles.timelineEntry}>
+                  <time>{chapter.period}</time>
+                  <span className={styles.timelineNode} aria-hidden="true" />
+                  <article>
+                    <div className={styles.timelineHeading}>
+                      <div>
+                        <span>{chapter.role}</span>
+                        <h3>{chapter.organization}</h3>
+                      </div>
+                      <small>{chapter.location}</small>
+                    </div>
+                    <p>{chapter.summary}</p>
+                    <ContextChips items={chapter.tags} label={`${chapter.organization} technologies and context`} />
+                    {chapter.achievement && <strong className={styles.timelineAchievement}>{chapter.achievement}</strong>}
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className={styles.timelineDirection}>
+            <span>Current direction</span>
+            <p>AI system engineering, scalable platforms, and cloud-based AI deployment.</p>
+            <a href="#today">See what I am exploring now <span aria-hidden="true">↓</span></a>
           </div>
         </section>
 
@@ -267,16 +312,9 @@ export default function AboutPage() {
         </section>
 
         <section className={styles.closing} aria-label="Personal closing statement">
-          <p data-reveal>I do not think becoming an engineer has been one perfectly straight path. Most of it has been curiosity, building something, discovering what I do not understand yet, and using the next project to close that gap.</p>
+          <p data-reveal>That journey now shapes the systems I choose to build.</p>
         </section>
 
-        <section className={styles.finalCta} aria-labelledby="about-final-title">
-          <div data-reveal>
-            <span>Enough about me.</span>
-            <h2 id="about-final-title">Here is what I have built.</h2>
-            <a href="/work">Explore the work <span aria-hidden="true">↗</span></a>
-          </div>
-        </section>
       </div>
     </InternalPageShell>
   );

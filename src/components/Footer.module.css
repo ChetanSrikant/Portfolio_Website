@@ -24,6 +24,15 @@
   gap: clamp(56px, 7vw, 108px);
 }
 
+.topWithoutStatement {
+  grid-template-columns: 1fr;
+}
+
+.topWithoutStatement .navigation {
+  width: min(100%, 760px);
+  margin-left: auto;
+}
+
 .statement {
   max-width: 680px;
 }

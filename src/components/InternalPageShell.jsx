@@ -56,7 +56,7 @@ export function EditorialCTA({ eyebrow, title, copy, actions }) {
   );
 }
 
-export default function InternalPageShell({ children, title, showAmbient = true, showDock = true, footerVariant }) {
+export default function InternalPageShell({ children, title, showAmbient = true, showDock = true, footerVariant, showFooterStatement = true }) {
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function InternalPageShell({ children, title, showAmbient = true,
         {showAmbient ? <AmbientGlyphs /> : null}
         {children}
       </main>
-      <Footer showGundamDisclaimer={false} variant={footerVariant || title.toLowerCase()} />
+      <Footer showGundamDisclaimer={false} showStatement={showFooterStatement} variant={footerVariant || title.toLowerCase()} />
     </>
   );
 }

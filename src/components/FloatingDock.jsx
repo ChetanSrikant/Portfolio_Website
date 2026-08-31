@@ -15,7 +15,7 @@ const ICON_PATHS = {
 
 const BASE_ITEMS = [
   { id: "home", label: "Home", href: "/" },
-  { id: "about", label: "About", href: "/about" },
+  { id: "about", label: "About Me", href: "/about" },
   { id: "work", label: "Work", href: "/work" },
   { id: "projects", label: "Projects", href: "/projects" },
   { id: "beyond", label: "Beyond", href: "/beyond" },

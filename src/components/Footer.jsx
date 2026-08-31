@@ -45,7 +45,7 @@ const FOOTER_VARIANTS = {
     actionHref: "mailto:chetansrikantmandiga@gmail.com?subject=Let%27s%20build%20something",
   },
   about: {
-    eyebrow: "// Next chapter",
+    eyebrow: "// Continue exploring",
     title: <>Enough about me.<br />Here’s what I’ve built.</>,
     description: "Continue into the systems, decisions, and working software behind the story.",
     actionLabel: "Explore selected work",
@@ -104,7 +104,7 @@ function FooterLink({ link }) {
   );
 }
 
-export default function Footer({ showGundamDisclaimer = true, variant = "home" }) {
+export default function Footer({ showGundamDisclaimer = true, showStatement = true, variant = "home" }) {
   const year = new Date().getFullYear();
   const content = FOOTER_VARIANTS[variant] || FOOTER_VARIANTS.home;
 
@@ -116,25 +116,27 @@ export default function Footer({ showGundamDisclaimer = true, variant = "home" }
       </div>
 
       <div className={styles.inner}>
-        <div className={styles.top}>
-          <section className={styles.statement} aria-labelledby="footer-title">
-            <span className={styles.eyebrow}>{content.eyebrow}</span>
-            <h2 id="footer-title" className={styles.title}>
-              {content.title}
-            </h2>
-            <p className={styles.description}>
-              {content.description}
-            </p>
-            <a
-              className={styles.contactAction}
-              href={content.actionHref}
-            >
-              <span>{content.actionLabel}</span>
-              <span className={styles.actionArrow} aria-hidden="true">
-                ↗
-              </span>
-            </a>
-          </section>
+        <div className={`${styles.top} ${showStatement ? "" : styles.topWithoutStatement}`}>
+          {showStatement && (
+            <section className={styles.statement} aria-labelledby="footer-title">
+              <span className={styles.eyebrow}>{content.eyebrow}</span>
+              <h2 id="footer-title" className={styles.title}>
+                {content.title}
+              </h2>
+              <p className={styles.description}>
+                {content.description}
+              </p>
+              <a
+                className={styles.contactAction}
+                href={content.actionHref}
+              >
+                <span>{content.actionLabel}</span>
+                <span className={styles.actionArrow} aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </section>
+          )}
 
           <nav className={styles.navigation} aria-label="Footer navigation">
             {FOOTER_GROUPS.map((group) => (
