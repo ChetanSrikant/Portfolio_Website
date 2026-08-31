@@ -719,12 +719,12 @@ export default function GundamStage({ gundamApiRef, children }) {
           aria-hidden="true"
         >
           <div className={styles.introBlock}>
-            <span className="eyebrow">ZGMF-X09A / online</span>
+            <span className="eyebrow">Mobile suit / online</span>
             <h2 className={styles.introHeadline}>
-              Meet the machine that <span className={styles.accent}>runs this portfolio.</span>
+              This is Chetan Srikant's <span className={styles.accent}>playground. Step in.</span>
             </h2>
             <p className={styles.introCopy}>
-              One rig, seven authored movements, and a scroll-linked mission path.
+              A closer look at the work, curiosity, and experiments behind the portfolio.
             </p>
           </div>
         </div>
