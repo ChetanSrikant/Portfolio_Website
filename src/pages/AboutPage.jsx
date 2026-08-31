@@ -1,7 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InternalPageShell from "../components/InternalPageShell.jsx";
+import ConvocationGallery from "../components/about/ConvocationGallery.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import {
   ContextChips,
@@ -21,6 +23,117 @@ const CURIOSITIES = [
   ["Automation", "Repeated effort often reveals a process that software can make calmer and more dependable."],
   ["DSA / problem solving", "Fundamentals sharpen the way I reason about constraints, tradeoffs, and edge cases."],
   ["Interaction design", "A system only becomes useful when someone can understand what it is doing and what to do next."],
+];
+
+const CONVOCATION_GALLERY = [
+  {
+    type: "image",
+    src: "/images/about-education-convocation.png",
+    alt: "Chetan Mandiga receiving recognition at the 2025 convocation",
+    caption: "Recognition at BML Munjal University's 2025 convocation.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-01.jpeg",
+    alt: "Chetan Mandiga with a friend outside the BML Munjal University campus after convocation",
+    caption: "Convocation day with a friend on campus.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-02.jpeg",
+    alt: "Chetan Mandiga holding his degree folder and convocation keepsake on campus",
+    caption: "Degree folder in hand after the ceremony.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-03.jpeg",
+    alt: "Chetan Mandiga standing with a friend outside the university after convocation",
+    caption: "A campus portrait with a friend.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-04.jpeg",
+    alt: "Chetan Mandiga and a classmate holding their convocation documents inside the ceremony venue",
+    caption: "Inside the ceremony venue with a classmate.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-05.jpeg",
+    alt: "Graduates celebrating together by tossing their convocation stoles into the air",
+    caption: "The graduating group celebrates together.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-06.jpeg",
+    alt: "Chetan Mandiga celebrating with friends inside the convocation venue",
+    caption: "A celebration with friends after the ceremony.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-07.jpeg",
+    alt: "Chetan Mandiga standing with a university faculty member after convocation",
+    caption: "A photograph with a university faculty member.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-08.jpeg",
+    alt: "Chetan Mandiga taking a selfie in front of the BML Munjal University campus",
+    caption: "A convocation-day campus selfie.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-09.jpeg",
+    alt: "Chetan Mandiga with fellow graduates and university faculty on campus",
+    caption: "Graduates and faculty together on campus.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-10.jpeg",
+    alt: "Chetan Mandiga taking a selfie with a fellow graduate outside the campus building",
+    caption: "A courtyard selfie with a fellow graduate.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-11.jpeg",
+    alt: "Chetan Mandiga taking a close selfie with a friend beneath colourful campus decorations",
+    caption: "A final-day selfie beneath the campus decorations.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-12.jpeg",
+    alt: "Chetan Mandiga holding convocation gifts and a certificate outside the ceremony building",
+    caption: "Convocation gifts and the certificate after the ceremony.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-13.jpeg",
+    alt: "Chetan Mandiga speaking with university faculty members after convocation",
+    caption: "A conversation with faculty after the ceremony.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-14.jpeg",
+    alt: "Chetan Mandiga taking a courtyard selfie with a fellow graduate",
+    caption: "A courtyard selfie before leaving campus.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-15.jpeg",
+    alt: "Chetan Mandiga standing beneath a campus banner after convocation",
+    caption: "A portrait outside the ceremony building.",
+  },
+  {
+    type: "image",
+    src: "/media/convocation-gallery/convocation-16.jpeg",
+    alt: "Chetan Mandiga speaking with a faculty member in the campus courtyard",
+    caption: "One more conversation before the day ended.",
+  },
+  {
+    type: "video",
+    src: "/media/convocation-gallery/convocation-video.mp4",
+    alt: "Convocation day video from BML Munjal University",
+    caption: "A short video from convocation day.",
+  },
 ];
 
 const PROFESSIONAL_CHAPTERS = [
@@ -71,8 +184,25 @@ function ExplorationArtifact({ className, title, children }) {
 export default function AboutPage() {
   const pageRef = useRef(null);
   const languageVideoRef = useRef(null);
+  const galleryTriggerRef = useRef(null);
   const [activeCuriosity, setActiveCuriosity] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [portraitExpanded, setPortraitExpanded] = useState(false);
   const reducedMotion = useReducedMotionPreference();
+
+  const movePortraitSpotlight = (event) => {
+    if (reducedMotion || portraitExpanded) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty("--spot-x", `${event.clientX - bounds.left}px`);
+    event.currentTarget.style.setProperty("--spot-y", `${event.clientY - bounds.top}px`);
+  };
+
+  const togglePortrait = () => setPortraitExpanded((expanded) => !expanded);
+
+  const closeGallery = () => {
+    setGalleryOpen(false);
+    window.requestAnimationFrame(() => galleryTriggerRef.current?.focus());
+  };
 
   useEffect(() => {
     const video = languageVideoRef.current;
@@ -158,8 +288,39 @@ export default function AboutPage() {
             </h1>
             <p data-opening-copy>Computer science gave me the starting point. Projects, constraints, and people taught me what engineering asks for.</p>
           </div>
-          <figure className={styles.heroPortrait}>
-            <img src="/images/about-hero-campus.png" alt="Chetan Mandiga on the BML Munjal University campus" fetchpriority="high" />
+          <figure
+            className={`${styles.heroPortrait} ${portraitExpanded ? styles.portraitExpanded : ""}`}
+            tabIndex="0"
+            role="button"
+            aria-pressed={portraitExpanded}
+            aria-label="Portrait of Chetan Mandiga. Move across the image to reveal colour, or activate it to keep the colour visible."
+            onPointerMove={movePortraitSpotlight}
+            onClick={togglePortrait}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                togglePortrait();
+              }
+            }}
+          >
+            <span className={styles.portraitVisual}>
+              <img
+                className={styles.portraitBase}
+                src="/images/about-hero-campus.png"
+                alt="Chetan Mandiga on the BML Munjal University campus"
+                fetchpriority="high"
+              />
+              <img
+                className={styles.portraitColor}
+                src="/images/about-hero-campus.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>
+            <span className={styles.portraitRing} aria-hidden="true" />
+            <figcaption className={styles.portraitHint}>
+              {portraitExpanded ? "Colour / held" : "Move / reveal colour"}
+            </figcaption>
             <span className={styles.portraitCurtain} aria-hidden="true" />
           </figure>
         </header>
@@ -170,9 +331,21 @@ export default function AboutPage() {
             <h2 id="education-title">Four years of figuring out what kind of engineer I wanted to become.</h2>
           </div>
           <StoryWorkspace label="Education archive" meta="2021 - 2025" className={styles.educationWorkspace}>
-            <div className={styles.educationImage} data-panel>
+            <button
+              ref={galleryTriggerRef}
+              type="button"
+              className={styles.educationImage}
+              aria-haspopup="dialog"
+              aria-label="Open the 2025 convocation photo and video gallery"
+              onClick={() => setGalleryOpen(true)}
+              data-panel
+            >
               <img src="/images/about-education-convocation.png" alt="Chetan Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
-            </div>
+              <span className={styles.educationGalleryHint}>
+                <span>Open convocation gallery</span>
+                <small>17 photos + 1 video</small>
+              </span>
+            </button>
             <div className={styles.educationIdentity} data-panel>
               <span>BML Munjal University</span>
               <h3>Computer Science &amp; Engineering</h3>
@@ -315,6 +488,9 @@ export default function AboutPage() {
           <p data-reveal>That journey now shapes the systems I choose to build.</p>
         </section>
 
+        {galleryOpen && typeof document !== "undefined"
+          ? createPortal(<ConvocationGallery items={CONVOCATION_GALLERY} onClose={closeGallery} />, document.body)
+          : null}
       </div>
     </InternalPageShell>
   );
