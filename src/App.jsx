@@ -6,7 +6,6 @@ const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
 const WorkPage = lazy(() => import("./pages/WorkPage.jsx"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage.jsx"));
 const BeyondPage = lazy(() => import("./pages/BeyondPage.jsx"));
-const StrikeCompanion = lazy(() => import("./components/StrikeCompanion.jsx"));
 
 const PAGE_ROUTES = {
   "/about": AboutPage,
@@ -15,6 +14,18 @@ const PAGE_ROUTES = {
   "/beyond": BeyondPage,
   "/credentials": CredentialsPage,
 };
+
+function RouteLoader() {
+  return (
+    <div className="route-loading" role="status" aria-live="polite">
+      <div className="route-loading__mark" aria-hidden="true">CM</div>
+      <div className="route-loading__copy">
+        <span>Loading portfolio</span>
+        <span className="route-loading__line" aria-hidden="true"><i /></span>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
@@ -27,9 +38,8 @@ export default function App() {
   else content = <NotFoundPage />;
 
   return (
-    <Suspense fallback={<div className="route-loading" role="status" aria-label="Loading page" />}>
+    <Suspense fallback={<RouteLoader />}>
       {content}
-      {path !== "/" ? <StrikeCompanion /> : null}
     </Suspense>
   );
 }

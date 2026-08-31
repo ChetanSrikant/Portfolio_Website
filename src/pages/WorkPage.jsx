@@ -5,7 +5,7 @@ import SystemIllustration from "../components/SystemIllustration.jsx";
 import styles from "./InternalPages.module.css";
 
 const CASES = [
-  { id: "tgsrtc", number: "01", title: "TGSRTC Public Transport Demand Platform", category: "Applied AI / Forecasting", problem: "Turn transport-demand data into a workflow for forecast, exploration, and planning." },
+  { id: "tgsrtc", number: "01", title: "TGSRTC Public Transport Demand Platform", category: "Applied AI / Forecasting / Decision Support", problem: "Make public-transport forecasting outputs easier to inspect, explore, and communicate." },
   { id: "rag", number: "02", title: "Conversational RAG Application", category: "GenAI / Retrieval", problem: "Keep multi-turn answers grounded in retrieved source material." },
   { id: "vision", number: "03", title: "Computer Vision Image Search", category: "Vision / Retrieval", problem: "Make image collections searchable through detected visual content." },
 ];
@@ -68,11 +68,20 @@ function AgentWorkspace() {
   );
 }
 
-function CaseStudy({ item, context, problem, role, pipeline, implementation, outcome, lesson, visual, children }) {
+function CaseStudy({ item, context, contextLabel = "Context", problem, role, roleLabel = "Role", recognition, pipeline, implementation, outcome, lesson, visual, children }) {
   return (
     <section id={item.id} className={`${styles.section} ${styles.caseStudy}`}>
       <div className={styles.sectionInner}>
         <div className={styles.caseTitle}><span className={styles.number}>{item.number} / CASE STUDY</span><div><span className={styles.eyebrow}>{item.category}</span><h2>{item.title}</h2></div></div>
+        {recognition ? (
+          <aside className={styles.recognitionBand} aria-label="Public recognition">
+            <span>{recognition.marker}</span>
+            <div>
+              <strong>{recognition.title}</strong>
+              <p>{recognition.copy}</p>
+            </div>
+          </aside>
+        ) : null}
         {visual && (
           <figure className={styles.caseProductVisual}>
             <div className={styles.caseProductCopy}>
@@ -85,9 +94,9 @@ function CaseStudy({ item, context, problem, role, pipeline, implementation, out
           </figure>
         )}
         <div className={styles.caseMetaGrid}>
-          <article className={styles.caseMeta}><h3>Context</h3><p>{context}</p></article>
+          <article className={styles.caseMeta}><h3>{contextLabel}</h3><p>{context}</p></article>
           <article className={styles.caseMeta}><h3>Problem</h3><p>{problem}</p></article>
-          <article className={styles.caseMeta}><h3>Role</h3><p>{role}</p></article>
+          <article className={styles.caseMeta}><h3>{roleLabel}</h3><p>{role}</p></article>
         </div>
         <Pipeline steps={pipeline} />
         <div className={styles.caseNotes}><div><h3>Implementation</h3><p>{implementation}</p></div><div><h3>Outcome and lesson</h3><p>{outcome} {lesson}</p></div></div>
@@ -112,7 +121,23 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <CaseStudy item={CASES[0]} context="Public transport demand planning requires moving from historical ridership information to a forecast that a planner can inspect and interpret." problem="Create a coherent workflow connecting data preparation, demand forecasting, interactive exploration, and a domain-focused assistant." role="Built the applied-AI workflow and product interface represented here. Adoption, accuracy, and organizational impact are intentionally not claimed without verified evidence." pipeline={["Ridership and routes", "Prepare", "Forecast", "Explore", "Plan"]} implementation="The platform organizes the forecasting workflow around a Streamlit interface, keeping forecasts and guided interpretation close to the planning task instead of presenting a model output in isolation." outcome="The verified result is a working demand-analysis workflow combining forecasting, interactive analysis, and an assistant layer." lesson="The next evidence priority is a documented evaluation set and clearer comparison between model choices." />
+      <CaseStudy
+        item={CASES[0]}
+        contextLabel="Team context"
+        context="The solution was developed by the Innodatatics team during my internship as its entry for the TGSRTC public-transport challenge. The recognition belongs to the team."
+        problem="The challenge explored how AI-driven forecasting could help people understand and optimize public transport utilization for TGSRTC."
+        roleLabel="My contribution"
+        role="As part of the winning team, I contributed substantially to the web application used to surface and communicate the forecasting results. I focused on turning forecast outputs and related insights into an interface stakeholders could explore and understand."
+        recognition={{
+          marker: "Winning solution",
+          title: "Winner — Telangana AI Rising / AI4TG Grand Challenge",
+          copy: "Challenge: Optimizing Public Transport Utilization with AI. Innodatatics was publicly recognized as the winning team for this transport use case.",
+        }}
+        pipeline={["Data and forecasting output", "Web application", "Visual exploration", "Stakeholder interpretation"]}
+        implementation="My work centered on the application and presentation layer: structuring forecast outputs so they could be inspected, compared, and communicated clearly through the web experience."
+        outcome="The team solution was selected as the winning entry in its challenge category."
+        lesson="The project reinforced that a forecast becomes useful when people can interpret it through a clear, dependable interface."
+      />
 
       <CaseStudy item={CASES[1]} context="Document-grounded assistants need retrieval and conversation state to cooperate across multiple turns." problem="Preserve conversational context while retrieving relevant chunks and keeping generated answers connected to source material." role="Implemented the application flow using Streamlit, LangGraph state, Hugging Face embeddings, retrieval, and Groq inference." pipeline={["User question", "Streamlit", "LangGraph state", "Retriever", "HF embeddings", "Relevant chunks", "Groq", "Grounded response"]} implementation="LangGraph holds the conversational state. The retriever uses Hugging Face embeddings to select document chunks, and Groq inference generates a response from that context." outcome="The result is a multi-turn retrieval application whose architecture makes state, retrieval, and generation explicit." lesson="Future work would expand evaluation around retrieval quality, source coverage, and failure handling." visual={RAG_PRODUCT_VISUAL}><AgentWorkspace /></CaseStudy>
 

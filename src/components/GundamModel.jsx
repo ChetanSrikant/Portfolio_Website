@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 import * as THREE from "three";
@@ -24,6 +25,7 @@ export const CLIPS = {
 const DOUBLE_CLICK_MS = 280;
 const DRAG_THRESHOLD_PX = 6;
 const DRAG_RADIANS_PER_PX = 0.009;
+const MANUAL_LIFTER_CLIP = `${CLIPS.LIFTER}-MANUAL`;
 
 const GundamModel = forwardRef(function GundamModel(
   {
@@ -51,7 +53,35 @@ const GundamModel = forwardRef(function GundamModel(
 ) {
   const group = useRef();
   const { scene, animations } = useGLTF(MODEL_URL);
-  const { actions, mixer, names } = useAnimations(animations, group);
+  const playableAnimations = useMemo(() => {
+    const lifter = animations.find((clip) => clip.name === CLIPS.LIFTER);
+    const idle = animations.find((clip) => clip.name === CLIPS.IDLE);
+    if (!lifter || !idle) return animations;
+
+    // The authored Lifter action translates the rig root and several detached
+    // accessories to support the scroll-flight composition. Played raw in the
+    // fixed Playground camera, those translations pull the model apart. The
+    // manual variant keeps Idle's assembled positions and scales, but retains
+    // Lifter's authored rotations so the action reads clearly without parts
+    // leaving the rig. Automatic scroll choreography still uses the untouched
+    // original Lifter clip below.
+    const idleTracks = new Map(idle.tracks.map((track) => [track.name, track]));
+    const manualTracks = lifter.tracks.map((track) => {
+      if (track.name.endsWith(".position") || track.name.endsWith(".scale")) {
+        const stableTrack = idleTracks.get(track.name);
+        if (stableTrack) return stableTrack.clone();
+      }
+      return track.clone();
+    });
+    const manualLifter = new THREE.AnimationClip(
+      MANUAL_LIFTER_CLIP,
+      lifter.duration,
+      manualTracks
+    );
+
+    return [...animations, manualLifter];
+  }, [animations]);
+  const { actions, mixer } = useAnimations(playableAnimations, group);
   const renderer = useThree((state) => state.gl);
   const rootScene = useThree((state) => state.scene);
   const camera = useThree((state) => state.camera);
@@ -225,9 +255,16 @@ const GundamModel = forwardRef(function GundamModel(
   // Plays authored one-shots in order, then returns to the repeating Idle.
   // A new play/playSequence/playIdle request safely interrupts the sequence.
   const playSequence = (clipNames) => {
-    const queue = clipNames.filter(
-      (clipName) => clipName !== CLIPS.IDLE && actions[clipName]
-    );
+    const queue = clipNames
+      .filter((clipName) => clipName !== CLIPS.IDLE)
+      .map((clipName) => ({
+        clipName,
+        actionName:
+          clipName === CLIPS.LIFTER && actions[MANUAL_LIFTER_CLIP]
+            ? MANUAL_LIFTER_CLIP
+            : clipName,
+      }))
+      .filter(({ actionName }) => actions[actionName]);
     if (!queue.length) {
       playIdle();
       return;
@@ -236,12 +273,12 @@ const GundamModel = forwardRef(function GundamModel(
     removeFinishedHandler();
 
     const playAt = (index) => {
-      const clipName = queue[index];
-      const target = actions[clipName];
+      const { clipName, actionName } = queue[index];
+      const target = actions[actionName];
       if (!target) return;
 
       Object.entries(actions).forEach(([name, action]) => {
-        if (name !== clipName) action?.fadeOut(0.3);
+        if (name !== actionName) action?.fadeOut(0.3);
       });
 
       target.reset();
@@ -282,7 +319,7 @@ const GundamModel = forwardRef(function GundamModel(
     play: playOnce,
     playSequence,
     playIdle,
-    clipNames: names,
+    clipNames: animations.map((clip) => clip.name),
     resetRotation: () => {
       manualRotationTargetY.current = 0;
     },

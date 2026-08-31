@@ -5,13 +5,15 @@ import SystemIllustration from "../components/SystemIllustration.jsx";
 import styles from "./InternalPages.module.css";
 
 const PROJECTS = [
-  { slug: "zap-ride-hailing", title: "ZAP Ride-Hailing", year: "Build", category: "Full-stack", summary: "A product-oriented ride-hailing application exploring booking flows and service interactions.", role: "Full-stack product implementation", technologies: ["Application UI", "Backend flow", "Product logic"], repository: null, demo: null, featured: true, lessons: "Complex products become manageable when user states and system states are designed together.", visual: "linear-gradient(145deg,#3a190f,#b35422 46%,#17100d)", image: "/images/projects/zap-ride-hailing.webp", imagePosition: "center center" },
-  { slug: "loop-chat", title: "LOOP Chat", year: "Build", category: "Full-stack", summary: "A communication product exploring messaging behavior, interface state, and backend coordination.", role: "Full-stack application implementation", technologies: ["Messaging UI", "Application state", "Backend"], repository: null, demo: null, featured: true, lessons: "Realtime-feeling interfaces depend on explicit state and clear feedback, even before scale enters the problem.", visual: "linear-gradient(145deg,#0c2631,#176b75 48%,#101519)", image: "/images/projects/loop-chat.webp", imagePosition: "center center" },
-  { slug: "driver-drowsiness", title: "Driver Drowsiness", year: "Experiment", category: "Computer Vision", summary: "A safety-focused computer-vision experiment for detecting visual signs associated with drowsiness.", role: "Computer vision experimentation", technologies: ["Computer vision", "Detection", "Alert flow"], repository: null, demo: null, featured: false, lessons: "A prototype can explore signal and alert logic, but it must not be mistaken for an automotive or medical safety system.", visual: "linear-gradient(145deg,#101b2a,#355c88 45%,#0d1117)", image: "/images/projects/driver-drowsiness.webp", imagePosition: "center center" },
-  { slug: "creditworthy-borrower", title: "Creditworthy Borrower", year: "Experiment", category: "Machine Learning", summary: "A structured-data workflow exploring borrower classification without presenting unverified evaluation claims.", role: "Machine-learning workflow", technologies: ["Data preparation", "Classification", "Evaluation workflow"], repository: null, demo: null, featured: false, lessons: "Financial classification requires careful attention to data quality, fairness, and evaluation context.", visual: "linear-gradient(145deg,#172116,#66764b 50%,#11130f)", image: "/images/projects/creditworthy-borrower.webp", imagePosition: "center center" },
-  { slug: "sentiment-classifier", title: "Sentiment Classifier", year: "Experiment", category: "AI / GenAI", summary: "An NLP experiment mapping text input to sentiment classes and exposing the prediction through a simple interface.", role: "NLP and interface experimentation", technologies: ["NLP", "Classification", "Python"], repository: null, demo: null, featured: false, lessons: "Simple labels hide ambiguity, so examples and failure cases matter as much as the prediction itself.", visual: "linear-gradient(145deg,#271733,#7c3f88 46%,#160f1b)", image: "/images/projects/sentiment-classifier.webp", imagePosition: "center center" },
-  { slug: "voice-order-agent", title: "Voice-to-Order Agent", year: "Experiment", category: "AI / GenAI", summary: "An applied-AI interface experiment turning spoken input into a structured order intent.", role: "Applied-AI interaction design", technologies: ["Voice input", "Intent extraction", "Structured output"], repository: null, demo: null, featured: true, lessons: "The useful boundary is not transcription alone; it is reliable conversion into an inspectable action structure.", visual: "linear-gradient(145deg,#071423,#2458a5 46%,#120d23)", image: "/images/projects/voice-order-agent-v3.jpg", imagePosition: "center center" },
+  { slug: "zap-ride-hailing", title: "ZAP Ride-Hailing", year: "2025", category: "Full-stack", summary: "A full-stack ride-hailing application covering account access, trip input, vehicle selection, and booking states.", role: "Full-stack product implementation", technologies: ["React", "Express", "MongoDB", "JWT"], repository: "https://github.com/ChetanSrikant/Zap", sourceStatus: "Public repository", demo: null, featured: true, lessons: "Complex products become manageable when user states and system states are designed together.", visual: "linear-gradient(145deg,#3a190f,#b35422 46%,#17100d)", image: "/images/projects/zap-ride-hailing.webp", imagePosition: "center center" },
+  { slug: "loop-chat", title: "LOOP Chat", year: "2024", category: "Full-stack", summary: "A React and Firebase communication product built around messaging, authentication, shared state, and media actions.", role: "Full-stack application implementation", technologies: ["React", "Firebase", "React Router"], repository: "https://github.com/ChetanSrikant/Loop", sourceStatus: "Public repository", demo: null, featured: true, lessons: "Realtime-feeling interfaces depend on explicit state and clear feedback, even before scale enters the problem.", visual: "linear-gradient(145deg,#0c2631,#176b75 48%,#101519)", image: "/images/projects/loop-chat.webp", imagePosition: "center center" },
+  { slug: "driver-drowsiness", title: "Driver Drowsiness", year: "2024", category: "Computer Vision", summary: "A notebook-based computer-vision experiment using camera input and eye-region detection to explore drowsiness alert logic.", role: "Computer vision experimentation", technologies: ["OpenCV", "TensorFlow / Keras", "NumPy"], repository: "https://github.com/ChetanSrikant/Drowsiness-Detection-system", sourceStatus: "Public repository", demo: null, featured: false, lessons: "A prototype can explore signal and alert logic, but it must not be mistaken for an automotive or medical safety system.", visual: "linear-gradient(145deg,#101b2a,#355c88 45%,#0d1117)", image: "/images/projects/driver-drowsiness.webp", imagePosition: "center center" },
+  { slug: "creditworthy-borrower", title: "Creditworthy Borrower", year: "2023", category: "Machine Learning", summary: "A scikit-learn and Streamlit workflow for preparing borrower data, running classification, and reviewing model output.", role: "Machine-learning workflow", technologies: ["Scikit-learn", "Streamlit", "NumPy"], repository: "https://github.com/ChetanSrikant/Identifying_Creditworthy_Borrowers", sourceStatus: "Public repository", demo: null, featured: false, lessons: "Financial classification requires careful attention to data quality, fairness, and evaluation context.", visual: "linear-gradient(145deg,#172116,#66764b 50%,#11130f)", image: "/images/projects/creditworthy-borrower.webp", imagePosition: "center center" },
+  { slug: "sentiment-classifier", title: "Sentiment Classifier", year: "Prototype", category: "AI / GenAI", summary: "An NLP experiment mapping text input to sentiment classes and exposing the prediction through a simple interface.", role: "NLP and interface experimentation", technologies: ["Python", "NLP", "Classification"], repository: null, sourceStatus: "Private prototype", demo: null, featured: false, lessons: "Simple labels hide ambiguity, so examples and failure cases matter as much as the prediction itself.", visual: "linear-gradient(145deg,#271733,#7c3f88 46%,#160f1b)", image: "/images/projects/sentiment-classifier.webp", imagePosition: "center center" },
+  { slug: "voice-order-agent", title: "Voice-to-Order Agent", year: "Prototype", category: "AI / GenAI", summary: "An applied-AI interaction prototype that converts spoken input into a structured order for review.", role: "Applied-AI interaction design", technologies: ["Voice input", "Intent extraction", "Structured output"], repository: null, sourceStatus: "Private prototype", demo: null, featured: true, lessons: "The useful boundary is not transcription alone; it is reliable conversion into an inspectable action structure.", visual: "linear-gradient(145deg,#071423,#2458a5 46%,#120d23)", image: "/images/projects/voice-order-agent-v3.jpg", imagePosition: "center center" },
 ];
+
+const PUBLIC_REPOSITORY_COUNT = PROJECTS.filter((project) => project.repository).length;
 
 const CASE_STUDIES = {
   "zap-ride-hailing": {
@@ -116,7 +118,7 @@ export default function ProjectsPage() {
           hoverRepulsionStrength={0.24}
         />
         <div className={styles.shaderHeroVeil} aria-hidden="true" />
-        <PageHero eyebrow="Projects / Experiments" title="Products, prototypes, and things I built to learn." intro="A faster view of software projects and AI experiments across different problem types. Work contains the deeper case studies." meta={`${PROJECTS.length} verified project entries`} />
+        <PageHero eyebrow="Projects / Experiments" title="Products, prototypes, and things I built to learn." intro="A faster view of software projects and AI experiments across different problem types. Work contains the deeper case studies." meta={`${PROJECTS.length} project entries / ${PUBLIC_REPOSITORY_COUNT} public repositories`} />
         <span className={styles.shaderFieldLabel} aria-hidden="true">GRID FIELD / POINTER REACTIVE</span>
       </div>
 
@@ -157,6 +159,7 @@ export default function ProjectsPage() {
                       <p>{project.summary}</p>
                       <div className={styles.techRow}>{project.technologies.map((technology) => <span key={technology}>/{technology}</span>)}</div>
                       <p><strong>Role:</strong> {project.role}<br /><strong>Lesson:</strong> {project.lessons}</p>
+                      <span className={styles.projectSourceState}>{project.repository ? "GitHub source available" : project.sourceStatus}</span>
                       <span className={styles.projectOpenHint}>Open case study</span>
                     </div>
                   </div>
@@ -169,8 +172,8 @@ export default function ProjectsPage() {
 
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={`${styles.sectionInner} ${styles.splitGrid}`}>
-          <div><span className={styles.eyebrow}>Data model</span><h2>One structure, six distinct builds.</h2></div>
-          <div className={styles.prose}><p>Every entry carries a slug, title, category, summary, role, technologies, link state, featured state, and lesson. Repository and demo links remain absent until verified URLs are supplied.</p><p><strong>No scale, adoption, certification, or accuracy metrics are claimed.</strong> The presentation focuses on the problem and the learning each build supports.</p></div>
+          <div><span className={styles.eyebrow}>Source and context</span><h2>Six builds. Four public codebases.</h2></div>
+          <div className={styles.prose}><p>The public repositories open the implementation behind ZAP, LOOP, Driver Drowsiness, and Creditworthy Borrower. Each entry also names the concrete stack, build focus, contribution, and lesson.</p><p>The Sentiment Classifier and Voice-to-Order Agent remain private prototypes, so they are presented through their verified project material rather than linked to unrelated repositories.</p></div>
         </div>
       </section>
 
@@ -197,6 +200,13 @@ export default function ProjectsPage() {
               <span>{detailProject.category} / {detailProject.year}</span>
               <h2 id="project-case-study-title">{detailProject.title}</h2>
               <p>{detailProject.summary}</p>
+              {detailProject.repository ? (
+                <a className={styles.projectRepositoryLink} href={detailProject.repository} target="_blank" rel="noopener noreferrer">
+                  View repository on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <span className={styles.projectRepositoryStatus}>{detailProject.sourceStatus}</span>
+              )}
             </header>
 
             <figure className={styles.projectModalMedia}>
@@ -229,8 +239,8 @@ export default function ProjectsPage() {
                 <p>{detailProject.lessons}</p>
               </section>
               <section>
-                <h3>Evidence boundary</h3>
-                <p>This case study does not claim verified scale, adoption, certification, accuracy, or production impact.</p>
+                <h3>Source status</h3>
+                <p>{detailProject.repository ? "The implementation is available in the linked public GitHub repository." : "This build is currently presented as a private prototype; no unrelated repository is substituted for it."}</p>
               </section>
             </div>
           </section>

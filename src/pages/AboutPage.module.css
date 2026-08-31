@@ -353,23 +353,56 @@
 .artifactBusiness { grid-column: 1 / 13; grid-row: 3; }
 .artifactBusiness > span { max-width: none; }
 
-.railHeading {
-  margin: clamp(72px, 10vw, 140px) 0 32px;
-  display: flex;
+.languageFeature {
+  margin-top: clamp(72px, 10vw, 140px);
+  display: grid;
+  grid-template-columns: minmax(260px, 0.58fr) minmax(420px, 0.92fr);
   align-items: end;
-  justify-content: space-between;
-  gap: 32px;
+  gap: clamp(36px, 7vw, 112px);
 }
 
-.railHeading h3 {
-  font-size: clamp(28px, 3vw, 46px);
-  line-height: 1.04;
+.languageFeatureCopy {
+  padding-bottom: clamp(8px, 1.6vw, 24px);
 }
 
-.railHeading p {
-  max-width: 34ch;
+.languageFeatureCopy h3 {
+  max-width: 10ch;
+  font-size: clamp(36px, 4.6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.languageFeatureCopy p {
+  max-width: 39ch;
+  margin-top: 28px;
   color: var(--about-muted);
-  font-size: 13px;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.72;
+}
+
+.languageFeatureMedia {
+  position: relative;
+  width: min(100%, 820px);
+  margin: 0;
+  justify-self: end;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 1px solid var(--about-line-strong);
+  background: var(--about-surface-strong);
+}
+
+.languageFeatureMedia video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.82) contrast(1.04) brightness(0.9);
+  transition: transform 800ms var(--ease-out), filter 400ms ease;
+}
+
+.languageFeatureMedia:hover video {
+  filter: saturate(0.94) contrast(1.02) brightness(0.96);
+  transform: scale(1.012);
 }
 
 .artifactRail {
@@ -1077,22 +1110,24 @@
     font-size: clamp(25px, 7vw, 38px);
   }
 
-  .railHeading {
-    align-items: start;
-    flex-direction: column;
+  .languageFeature {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
-  .artifactItem,
-  .artifactItem:nth-child(2n) {
-    flex-basis: min(86vw, 390px);
+  .languageFeatureCopy {
+    padding-bottom: 0;
   }
 
-  .artifactCard {
-    min-height: 480px;
+  .languageFeatureCopy h3,
+  .languageFeatureCopy p {
+    max-width: none;
   }
 
-  .artifactMedia {
-    min-height: 382px;
+  .languageFeatureMedia {
+    width: 100%;
+    justify-self: stretch;
+    aspect-ratio: 1;
   }
 
   .realWorld {
@@ -1270,6 +1305,7 @@
 
   .educationImage img,
   .explorationArtifact,
+  .languageFeatureMedia video,
   .artifactCard,
   .artifactMedia img,
   .artifactMedia video,
@@ -1281,6 +1317,7 @@
 
   .educationWorkspace:hover .educationImage img,
   .explorationArtifact:hover,
+  .languageFeatureMedia:hover video,
   .artifactCard:hover,
   .artifactCard:focus-visible {
     transform: none;

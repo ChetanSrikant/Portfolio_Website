@@ -36,6 +36,44 @@ const FOOTER_GROUPS = [
   },
 ];
 
+const FOOTER_VARIANTS = {
+  home: {
+    eyebrow: "// Next step",
+    title: <>Build useful systems.<br />Explain the evidence clearly.</>,
+    description: "Open to software engineering, AI application, backend, and automation opportunities.",
+    actionLabel: "Start a conversation",
+    actionHref: "mailto:chetansrikantmandiga@gmail.com?subject=Let%27s%20build%20something",
+  },
+  about: {
+    eyebrow: "// Next chapter",
+    title: <>Enough about me.<br />Here’s what I’ve built.</>,
+    description: "Continue into the systems, decisions, and working software behind the story.",
+    actionLabel: "Explore selected work",
+    actionHref: "/work",
+  },
+  work: {
+    eyebrow: "// Continue exploring",
+    title: <>The case studies are only part of the archive.</>,
+    description: "Browse the product builds, prototypes, and experiments behind the deeper case studies.",
+    actionLabel: "Explore all projects",
+    actionHref: "/projects",
+  },
+  projects: {
+    eyebrow: "// Start something",
+    title: <>Have a problem worth turning into a working system?</>,
+    description: "I’m open to software engineering, applied AI, backend, and automation opportunities.",
+    actionLabel: "Start a conversation",
+    actionHref: "mailto:chetansrikantmandiga@gmail.com?subject=Project%20conversation",
+  },
+  beyond: {
+    eyebrow: "// Back to the work",
+    title: <>Curiosity matters most when it becomes something real.</>,
+    description: "See how those interests translate into products, experiments, and applied AI systems.",
+    actionLabel: "Explore selected work",
+    actionHref: "/work",
+  },
+};
+
 function FooterLink({ link }) {
   const content = (
     <>
@@ -66,8 +104,9 @@ function FooterLink({ link }) {
   );
 }
 
-export default function Footer({ showGundamDisclaimer = true }) {
+export default function Footer({ showGundamDisclaimer = true, variant = "home" }) {
   const year = new Date().getFullYear();
+  const content = FOOTER_VARIANTS[variant] || FOOTER_VARIANTS.home;
 
   return (
     <footer className={styles.footer} id="footer">
@@ -79,21 +118,18 @@ export default function Footer({ showGundamDisclaimer = true }) {
       <div className={styles.inner}>
         <div className={styles.top}>
           <section className={styles.statement} aria-labelledby="footer-title">
-            <span className={styles.eyebrow}>// Next step</span>
+            <span className={styles.eyebrow}>{content.eyebrow}</span>
             <h2 id="footer-title" className={styles.title}>
-              Build useful systems.
-              <br />
-              Explain the evidence clearly.
+              {content.title}
             </h2>
             <p className={styles.description}>
-              Open to software engineering, AI application, backend, and
-              automation opportunities.
+              {content.description}
             </p>
             <a
               className={styles.contactAction}
-              href="mailto:chetansrikantmandiga@gmail.com?subject=Let%27s%20build%20something"
+              href={content.actionHref}
             >
-              <span>Start a conversation</span>
+              <span>{content.actionLabel}</span>
               <span className={styles.actionArrow} aria-hidden="true">
                 ↗
               </span>

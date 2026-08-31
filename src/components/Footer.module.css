@@ -335,7 +335,7 @@
 .footer::before { opacity: .45; filter: grayscale(1); }
 .eyebrow { color: var(--accent-bright); }
 .groupTitle, .role, .meta { color: var(--text-secondary); }
-.statement { max-width: 12ch; letter-spacing: -.06em; }
+.statement { max-width: 760px; }
 .contactAction {
   border-color: var(--accent);
   background: var(--accent);

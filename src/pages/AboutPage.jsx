@@ -1,10 +1,9 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InternalPageShell from "../components/InternalPageShell.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import {
-  ArtifactRail,
   ContextChips,
   LessonFold,
   StoryWorkspace,
@@ -12,49 +11,6 @@ import {
 import styles from "./AboutPage.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const ARTIFACTS = [
-  {
-    title: "Campus frame",
-    context: "BML Munjal University",
-    src: "/images/drift-wall/drift-11.jpeg",
-    alt: "Chetan standing on the BML Munjal University campus",
-    description: "A place where computer science, entrepreneurship, and years of experimentation began to connect.",
-    position: "50% 35%",
-  },
-  {
-    title: "Working set",
-    context: "Technology in motion",
-    src: "/media/tech-stack-showcase.mp4",
-    alt: "Animated overview of technologies explored across software and AI work",
-    description: "The tools changed with the problem. The habit of learning across layers stayed consistent.",
-    type: "video",
-  },
-  {
-    title: "Everyday references",
-    context: "Personal archive",
-    src: "/images/drift-wall/drift-07.jpeg",
-    alt: "A personal photograph from Chetan's visual archive",
-    description: "Ordinary spaces became a source of visual references beyond code and coursework.",
-    position: "50% 28%",
-  },
-  {
-    title: "Outside the screen",
-    context: "Personal archive",
-    src: "/images/drift-wall/drift-06.jpeg",
-    alt: "A night photograph from Chetan's personal archive",
-    description: "Curiosity kept moving through places, images, and experiences that had nothing to do with a framework.",
-    position: "50% 38%",
-  },
-  {
-    title: "Perspective",
-    context: "Personal archive",
-    src: "/images/drift-wall/drift-12.jpeg",
-    alt: "Black-and-white portrait of Chetan seated in front of a horse",
-    description: "The references that shape the work are not always technical.",
-    position: "50% 40%",
-  },
-];
 
 const CURIOSITIES = [
   ["AI applications", "I am interested in the point where model capability becomes a useful product experience."],
@@ -78,8 +34,23 @@ function ExplorationArtifact({ className, title, children }) {
 
 export default function AboutPage() {
   const pageRef = useRef(null);
+  const languageVideoRef = useRef(null);
   const [activeCuriosity, setActiveCuriosity] = useState(0);
   const reducedMotion = useReducedMotionPreference();
+
+  useEffect(() => {
+    const video = languageVideoRef.current;
+    if (!video) return undefined;
+
+    if (reducedMotion) {
+      video.pause();
+      video.currentTime = 0;
+      return undefined;
+    }
+
+    video.play().catch(() => {});
+    return () => video.pause();
+  }, [reducedMotion]);
 
   useLayoutEffect(() => {
     const root = pageRef.current;
@@ -194,11 +165,26 @@ export default function AboutPage() {
             </div>
           </StoryWorkspace>
 
-          <div className={styles.railHeading} data-reveal>
-            <h3>Artifacts from the wider journey</h3>
-            <p>Drag, swipe, or use the wheel. Open any frame for context.</p>
-          </div>
-          <ArtifactRail artifacts={ARTIFACTS} />
+          <article className={styles.languageFeature} aria-labelledby="language-feature-title" data-reveal>
+            <div className={styles.languageFeatureCopy}>
+              <h3 id="language-feature-title">Languages became working material.</h3>
+              <p>I learned each one by putting it under pressure: prototypes, interfaces, data experiments, and systems that had to behave beyond the demo.</p>
+            </div>
+            <figure className={styles.languageFeatureMedia}>
+              <video
+                ref={languageVideoRef}
+                key={reducedMotion ? "reduced-motion" : "motion"}
+                src="/media/tech-stack-showcase.mp4"
+                autoPlay={!reducedMotion}
+                controls={reducedMotion}
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Programming languages and technologies moving across the screen"
+              />
+            </figure>
+          </article>
         </section>
 
         <section id="real-world" className={styles.realWorld} tabIndex="-1" aria-labelledby="real-world-title">
