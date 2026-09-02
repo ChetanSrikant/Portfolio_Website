@@ -24,6 +24,33 @@
   padding-bottom: 90px;
 }
 
+.workAetherHero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #000;
+}
+
+.workAetherHero .pageHero {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+.workHeroField {
+  opacity: .94;
+}
+
+.workHeroVeil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.12) 50%, transparent 82%),
+    linear-gradient(180deg, rgba(0,0,0,.08), transparent 58%, rgba(0,0,0,.28));
+}
+
 .shaderHero {
   position: relative;
   isolation: isolate;
@@ -434,10 +461,584 @@
 .promptRow button { border-radius:999px; border-color:var(--border-default); background:transparent; }
 @media(max-width:700px){.pageHero,.section,.editorialCta{padding-block:clamp(96px,22vw,130px)}.pageHero{min-height:88dvh;padding-top:120px}.heroCopy h1,.heroGridWide .heroCopy h1{font-size:clamp(40px,10.5vw,58px);line-height:.95;letter-spacing:-.05em}.sectionHeader h2{font-size:clamp(38px,9.5vw,54px);line-height:.97}.caseMetaGrid{grid-template-columns:1fr}.caseMeta{min-height:0;border-right:0;border-bottom:1px solid var(--border-subtle);padding-inline:0}.evidenceCard{grid-template-columns:1fr}.editorialCta{min-height:60dvh}}
 
-/* Projects keeps its earlier interactive gallery treatment. */
-.shaderHero { background:var(--surface-0); }
+/* Projects keeps its interactive grid inside the shared true-black hero system. */
+.shaderHero { background:#000; }
 .shaderHero .pageHero { min-height:92dvh; padding-top:150px; padding-bottom:90px; }
 .shaderHero .heroGridWide .heroCopy h1 { max-width:15ch; font-size:clamp(52px,6.2vw,96px); line-height:.94; letter-spacing:-.055em; }
-.projectGridBloom { opacity:.58; filter:none; }
-.shaderHeroVeil { background:linear-gradient(90deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.5) 44%,rgba(10,10,10,.2) 100%),linear-gradient(180deg,rgba(10,10,10,.18),transparent 42%,rgba(10,10,10,.72)); }
+.projectGridBloom { opacity:.7; filter:brightness(.98) saturate(1.08); }
+.shaderHeroVeil { background:linear-gradient(90deg,rgba(0,0,0,.76) 0%,rgba(0,0,0,.44) 42%,rgba(0,0,0,.14) 72%,rgba(0,0,0,.06) 100%),linear-gradient(180deg,rgba(0,0,0,.14),transparent 42%,rgba(0,0,0,.68)); }
 @media(max-width:700px){.shaderHero .pageHero{min-height:88dvh;padding-top:120px;padding-bottom:96px}.shaderHero .heroGridWide .heroCopy h1{font-size:clamp(40px,10.5vw,58px);line-height:.95}}
+
+/* Work page: compact engineering dossier */
+.workOpening {
+  position: relative;
+  isolation: isolate;
+}
+
+.workOpening .workAetherHero {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+}
+
+.workPage .pageHero {
+  min-height: 100svh;
+  padding-top: clamp(118px, 12vw, 162px);
+  padding-bottom: clamp(82px, 9vw, 124px);
+}
+
+.workPage .heroGridWide .heroCopy h1 {
+  max-width: 14ch;
+  font-size: clamp(52px, 6.6vw, 92px);
+  line-height: .91;
+}
+
+.workPage .section,
+.workPage .editorialCta {
+  padding-block: clamp(94px, 10vw, 152px);
+}
+
+.workIndexSection {
+  position: relative;
+  z-index: 3;
+  min-height: 84svh;
+  box-shadow: 0 -34px 90px rgba(0, 0, 0, .5);
+  background:
+    linear-gradient(rgba(10,10,10,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,10,10,.028) 1px, transparent 1px),
+    #f0ede5 !important;
+  background-size: 56px 56px !important;
+  color: #0a0a0a;
+}
+
+.workIndexSection::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: rgba(10, 10, 10, .28);
+}
+
+.workIndexRail {
+  position: absolute;
+  inset: 0 var(--edge-pad-x) auto;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(10, 10, 10, .16);
+  color: rgba(10, 10, 10, .52);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.workIndexSection > .sectionInner {
+  position: relative;
+  padding-top: 24px;
+}
+
+.workIndexSection .eyebrow,
+.workIndexSection .number {
+  color: #72510c;
+}
+
+.workIndexSection .sectionHeader h2,
+.workIndexSection .caseIndex strong {
+  color: #0a0a0a;
+}
+
+.workIndexSection .caseIndex {
+  margin-top: clamp(38px, 5vw, 62px);
+  border-color: rgba(10,10,10,.25);
+}
+
+.workIndexSection .caseIndex a {
+  min-height: 106px;
+  border-color: rgba(10,10,10,.15);
+}
+
+.workIndexSection .caseIndex a:hover,
+.workIndexSection .caseIndex a:focus-visible {
+  color: #72510c;
+}
+
+.workIndexSection .caseIndex small {
+  color: rgba(10,10,10,.56);
+}
+
+.workPage .caseStudy[data-case="rag"] {
+  background: #0b0b0b;
+}
+
+.workPage .caseTitle {
+  grid-template-columns: 72px minmax(0, 1fr);
+  padding-bottom: clamp(34px, 4vw, 52px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.workPage .caseTitle h2 {
+  max-width: 17ch;
+  font-size: clamp(44px, 5.1vw, 72px);
+  line-height: .94;
+}
+
+.workPage .recognitionBand {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: clamp(34px, 4vw, 52px);
+  border: 1px solid rgba(10,10,10,.18);
+  padding: clamp(28px, 3.2vw, 44px);
+  background: #f0ede5;
+  color: #0a0a0a;
+  box-shadow: none;
+}
+
+.workPage .recognitionBand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(10,10,10,.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,10,10,.032) 1px, transparent 1px);
+  background-size: 42px 42px;
+  pointer-events: none;
+}
+
+.workPage .recognitionBand > span {
+  color: #72510c;
+}
+
+.workPage .recognitionBand strong {
+  color: #0a0a0a;
+}
+
+.workPage .recognitionBand p {
+  color: rgba(10,10,10,.68);
+}
+
+.workPage .caseMetaGrid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, .82fr) minmax(0, 1.28fr);
+  margin-top: clamp(34px, 4vw, 52px);
+}
+
+.workPage .caseMeta {
+  min-height: 0;
+  padding: clamp(22px, 2.4vw, 32px);
+}
+
+.workPage .caseMeta p {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.68;
+}
+
+.caseMediaPlate {
+  display: grid;
+  grid-template-columns: minmax(210px, .34fr) minmax(0, .66fr);
+  gap: clamp(30px, 5vw, 78px);
+  align-items: center;
+  margin-top: clamp(38px, 5vw, 62px);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-block: clamp(24px, 3vw, 38px);
+}
+
+.caseMediaCopy > strong {
+  display: block;
+  max-width: 13ch;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(27px, 3vw, 42px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.caseMediaCopy > p {
+  max-width: 38ch;
+  margin-top: 18px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.caseMediaGrid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.caseMediaGrid:has(.caseMediaItem:only-child) {
+  grid-template-columns: minmax(220px, 390px);
+  justify-content: end;
+}
+
+.caseMediaItem {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #050505;
+}
+
+.caseMediaItem img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  object-fit: cover;
+  filter: saturate(.72) contrast(1.05);
+  transition: transform 520ms var(--ease-out), filter 320ms ease;
+}
+
+.caseMediaItem:hover img {
+  transform: scale(1.018);
+  filter: saturate(.96) contrast(1.02);
+}
+
+.caseMediaItem .caseMediaContain {
+  object-fit: contain;
+}
+
+.caseMediaItem figcaption {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 11px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.workPage .pipeline {
+  margin-top: clamp(42px, 5vw, 62px);
+}
+
+.workPage .caseNotes {
+  gap: clamp(38px, 7vw, 100px);
+  margin-top: clamp(42px, 5vw, 62px);
+  padding-top: 30px;
+}
+
+.tgsrtcPublicRecord {
+  display: grid;
+  grid-template-columns: minmax(250px, .58fr) minmax(0, 1.42fr);
+  justify-content: space-between;
+  gap: clamp(42px, 5vw, 82px);
+  align-items: start;
+  margin-top: clamp(72px, 8vw, 118px);
+  border-top: 1px solid var(--border-default);
+  padding-top: clamp(30px, 4vw, 48px);
+}
+
+.tgsrtcPublicRecordCopy {
+  max-width: 510px;
+  padding-top: clamp(10px, 7vw, 96px);
+}
+
+.tgsrtcPublicRecordCopy h3 {
+  max-width: 11ch;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.4vw, 64px);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.05em;
+  text-wrap: balance;
+}
+
+.tgsrtcPublicRecordCopy p {
+  max-width: 43ch;
+  margin-top: 28px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.tgsrtcPublicRecordLinks {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.tgsrtcPublicRecordCopy a {
+  width: fit-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(224, 187, 99, .52);
+  color: var(--text-primary);
+  font-size: 12px;
+  text-decoration: none;
+  transition: border-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast) var(--ease-out);
+}
+
+.tgsrtcPublicRecordCopy a:hover,
+.tgsrtcPublicRecordCopy a:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-bright);
+  transform: translateY(-1px);
+}
+
+.linkedinPostGrid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 504px));
+  justify-content: end;
+  align-items: start;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.linkedinPostShell {
+  width: min(100%, 504px);
+  border: 1px solid rgba(224, 187, 99, .28);
+  background: #090909;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .32);
+}
+
+.linkedinPostHeader {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.linkedinPostHeader span:first-child {
+  color: var(--accent-bright);
+}
+
+.linkedinPostViewport {
+  position: relative;
+  min-height: var(--linkedin-post-height);
+  overflow: hidden;
+  background: #f4f2ee;
+}
+
+.linkedinPostViewportPrimary {
+  --linkedin-post-height: 627px;
+}
+
+.linkedinPostViewportSecondary {
+  --linkedin-post-height: 541px;
+}
+
+.linkedinPostLoading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(10, 10, 10, .48);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.linkedinPostViewport iframe {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: var(--linkedin-post-height);
+  display: block;
+  border: 0;
+  background: #f4f2ee;
+}
+
+@media (max-width: 1180px) {
+  .tgsrtcPublicRecord {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .tgsrtcPublicRecordCopy {
+    max-width: 650px;
+    padding-top: 0;
+  }
+
+  .linkedinPostGrid {
+    justify-content: start;
+  }
+}
+
+.workPage .agentWorkspace {
+  margin-top: clamp(42px, 5vw, 62px);
+}
+
+.workPage .agentBody {
+  min-height: 270px;
+}
+
+.workEvidenceSection .sectionHeader h2 {
+  font-size: clamp(44px, 5.1vw, 72px);
+}
+
+.workPage .evidenceGrid {
+  margin-top: 44px;
+}
+
+.workPage .evidenceCard {
+  min-height: 132px;
+  grid-template-columns: minmax(180px, .45fr) minmax(0, 1.55fr);
+  gap: clamp(24px, 4vw, 64px);
+  padding-block: 22px;
+}
+
+.workPage .evidenceGraphic {
+  min-height: 78px;
+}
+
+@media (max-width: 900px) {
+  .caseMediaPlate {
+    grid-template-columns: 1fr;
+  }
+
+  .caseMediaCopy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, .8fr);
+    gap: 30px;
+    align-items: end;
+  }
+
+  .caseMediaCopy > p {
+    margin-top: 0;
+  }
+
+}
+
+@media (max-width: 700px) {
+  .workOpening .workAetherHero {
+    position: relative;
+    min-height: auto;
+  }
+
+  .workPage .pageHero {
+    min-height: 84svh;
+    padding-top: 118px;
+    padding-bottom: 72px;
+  }
+
+  .workIndexSection {
+    min-height: 0;
+    box-shadow: 0 -18px 46px rgba(0, 0, 0, .36);
+  }
+
+  .workIndexRail {
+    height: 38px;
+  }
+
+  .workPage .heroGridWide .heroCopy h1 {
+    font-size: clamp(40px, 10.5vw, 56px);
+  }
+
+  .workPage .section,
+  .workPage .editorialCta {
+    padding-block: clamp(82px, 20vw, 112px);
+  }
+
+  .workIndexSection .caseIndex a {
+    min-height: 112px;
+  }
+
+  .workPage .caseTitle {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .workPage .caseTitle h2 {
+    font-size: clamp(40px, 11vw, 54px);
+  }
+
+  .workPage .caseMetaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .workPage .caseMeta {
+    padding-inline: 0;
+  }
+
+  .caseMediaCopy {
+    display: block;
+  }
+
+  .caseMediaCopy > p {
+    margin-top: 18px;
+  }
+
+  .caseMediaGrid,
+  .caseMediaGrid:has(.caseMediaItem:only-child) {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82%, 310px);
+    justify-content: start;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    padding-bottom: 8px;
+  }
+
+  .caseMediaItem {
+    scroll-snap-align: start;
+  }
+
+  .workPage .evidenceCard {
+    grid-template-columns: 1fr;
+  }
+
+  .tgsrtcPublicRecord {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .tgsrtcPublicRecordCopy {
+    max-width: 560px;
+    padding-top: 0;
+  }
+
+  .tgsrtcPublicRecordCopy h3 {
+    font-size: clamp(38px, 10vw, 52px);
+  }
+
+  .linkedinPostShell {
+    justify-self: center;
+  }
+
+  .linkedinPostGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workOpening .workAetherHero {
+    position: relative;
+    min-height: auto;
+  }
+
+  .caseMediaItem img {
+    transition: none;
+  }
+
+  .caseMediaItem:hover img {
+    transform: none;
+  }
+
+  .tgsrtcPublicRecordCopy a {
+    transition: none;
+  }
+}

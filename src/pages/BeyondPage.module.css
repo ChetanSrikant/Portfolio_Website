@@ -106,6 +106,7 @@
 
 .manifesto,
 .influenceSection,
+.paperSection,
 .archiveSection,
 .bridgeSection,
 .contactSection,
@@ -115,6 +116,26 @@
 }
 
 .manifesto { background: #000; }
+
+.manifesto,
+.contactSection,
+.finalCta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.manifestoField {
+  opacity: .96;
+}
+
+.archiveField {
+  opacity: .8;
+}
+
+.finalField {
+  opacity: .84;
+}
 
 .manifestoInner,
 .sectionIntro,
@@ -127,6 +148,13 @@
   width: 100%;
   max-width: var(--content-width);
   margin-inline: auto;
+}
+
+.manifestoInner,
+.contactInner,
+.finalCta > :not(.finalField) {
+  position: relative;
+  z-index: 1;
 }
 
 .manifestoInner {
@@ -158,6 +186,101 @@
 }
 
 .influenceSection { background: var(--bg-secondary); }
+
+.paperSection {
+  position: relative;
+  overflow: hidden;
+  background: #08080a;
+}
+
+.paperInner {
+  width: 100%;
+  max-width: var(--content-width);
+  display: grid;
+  grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+  gap: clamp(48px, 8vw, 126px);
+  align-items: center;
+  margin-inline: auto;
+}
+
+.paperCopy h2 {
+  max-width: 9ch;
+  margin-top: 24px;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6.4vw, 96px);
+  font-weight: 650;
+  letter-spacing: -.065em;
+  line-height: .9;
+  text-wrap: balance;
+}
+
+.paperCopy > p {
+  max-width: 44ch;
+  margin-top: 30px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.76;
+}
+
+.paperCopy dl {
+  margin-top: 42px;
+  border-top: 1px solid var(--border-default);
+}
+
+.paperCopy dl > div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-block: 13px;
+}
+
+.paperCopy dt,
+.paperCopy dd,
+.paperStageRail,
+.paperNote {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.paperCopy dt { color: var(--accent-bright); }
+.paperCopy dd { margin: 0; color: var(--text-muted); }
+
+.paperStage {
+  min-width: 0;
+  border: 1px solid var(--border-default);
+  background: #08080a;
+  box-shadow: 0 44px 100px -62px rgba(224, 187, 99, .34);
+}
+
+.paperStageRail {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-inline: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.paperFrame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 430px;
+}
+
+.paperNote {
+  margin: 0;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  line-height: 1.65;
+  text-transform: none;
+}
 
 .sectionIntro h2,
 .archiveHeading h2,
@@ -213,7 +336,12 @@
   line-height: 1.72;
 }
 
-.archiveSection { overflow: hidden; background: #000; }
+.archiveSection {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #000;
+}
 .archiveHeading { display: grid; grid-template-columns: 1.4fr .6fr; gap: 60px; align-items: end; }
 .archiveHeading .eyebrow { grid-column: 1 / -1; }
 .archiveHeading h2 { max-width: 11ch; }
@@ -225,6 +353,12 @@
   grid-auto-rows: 74px;
   gap: 16px;
   margin-top: clamp(72px, 9vw, 136px);
+}
+
+.archiveHeading,
+.archiveGrid {
+  position: relative;
+  z-index: 1;
 }
 
 .archiveWide { grid-column: 1 / span 7; grid-row: span 7; }
@@ -338,6 +472,8 @@
   .bridgeInner { grid-template-columns: 64px 1fr; }
   .bridgeInner ul { grid-column: 2; }
   .contactInner { grid-template-columns: 1fr; }
+  .paperInner { grid-template-columns: 1fr; }
+  .paperCopy h2 { max-width: 11ch; }
   .askForm { max-width: 720px; }
 }
 
@@ -349,7 +485,7 @@
   .heroFooter { grid-template-columns: 1fr; gap: 26px; margin-top: 58px; }
   .heroFooter a { width: fit-content; }
   .heroIndex { display: none; }
-  .manifesto,.influenceSection,.archiveSection,.bridgeSection,.contactSection,.finalCta { padding: 96px 20px 112px; }
+  .manifesto,.influenceSection,.paperSection,.archiveSection,.bridgeSection,.contactSection,.finalCta { padding: 96px 20px 112px; }
   .manifestoLead { font-size: clamp(38px, 11vw, 54px); }
   .influenceRow { grid-template-columns: 38px 1fr; padding-block: 28px; }
   .influenceRow h3,.influenceRow p { grid-column: 2; }
@@ -360,6 +496,8 @@
   .archiveWide { height: 360px; }
   .archiveSound { height: 340px; }
   .bridgeInner { grid-template-columns: 1fr; }
+  .paperFrame { min-height: 520px; aspect-ratio: 4 / 5; }
+  .paperStageRail { align-items: flex-start; flex-direction: column; gap: 5px; padding-block: 12px; }
   .bridgeInner ul { grid-column: auto; margin-top: 26px; }
   .finalCta { min-height: 68dvh; flex-direction: column; align-items: stretch; justify-content: flex-end; }
   .contactLinks { min-width: 0; }

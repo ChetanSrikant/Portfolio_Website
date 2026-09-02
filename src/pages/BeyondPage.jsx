@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import InternalPageShell from "../components/InternalPageShell.jsx";
+import AetherField from "../components/AetherField.jsx";
 import GooeyInput from "../components/GooeyInput.jsx";
+import { ThreeDPaper } from "../shaders/3d-paper/ThreeDPaper.tsx";
+import "@designcodeio/threeui/style.css";
 import styles from "./BeyondPage.module.css";
 
 const INFLUENCES = [
@@ -96,7 +99,7 @@ function AskForm() {
         submitLabel="Prepare question email"
       />
       <p className={styles.formStatus} role="status">
-        {status || "Submitting opens a real email—no simulated assistant in between."}
+        {status || "Submitting opens a real email. No simulated assistant in between."}
       </p>
       <div className={styles.promptRow} aria-label="Suggested questions">
         {PROMPTS.map((prompt) => (
@@ -133,6 +136,7 @@ export default function BeyondPage() {
 
       <div>
         <section id="field-notes" className={styles.manifesto}>
+          <AetherField className={styles.manifestoField} density={1.16} intensity={1} />
           <Reveal className={styles.manifestoInner}>
             <span className={styles.eyebrow}>A wider frame / 01</span>
             <p className={styles.manifestoLead}>
@@ -163,11 +167,32 @@ export default function BeyondPage() {
           </div>
         </section>
 
+        <section className={styles.paperSection} aria-labelledby="material-study-title">
+          <div className={styles.paperInner}>
+            <Reveal className={styles.paperCopy}>
+              <span className={styles.eyebrow}>Personal signal / 03</span>
+              <h2 id="material-study-title">Ideas should feel tangible.</h2>
+              <p>I build AI products and interfaces that turn dense systems into experiences people can understand, trust, and use. This glass field note captures that belief: structure beneath the surface, movement with intent.</p>
+              <dl>
+                <div><dt>Focus</dt><dd>Applied AI + product</dd></div>
+                <div><dt>Method</dt><dd>Systems into interfaces</dd></div>
+                <div><dt>Explore</dt><dd>Drag + hover</dd></div>
+              </dl>
+            </Reveal>
+            <div className={styles.paperStage}>
+              <div className={styles.paperStageRail} aria-hidden="true"><span>Interactive builder profile</span><span>Chetan / 3D field note</span></div>
+              <ThreeDPaper className={styles.paperFrame} />
+              <p className={styles.paperNote}>A personal identity study in glass, light, and motion. Drag to inspect it; move the pointer to shape the light.</p>
+            </div>
+          </div>
+        </section>
+
         <section className={styles.archiveSection}>
+          <AetherField className={styles.archiveField} density={0.92} intensity={0.9} />
           <div className={styles.archiveHeading}>
-            <span className={styles.eyebrow}>Personal archive / 03</span>
+            <span className={styles.eyebrow}>Personal archive / 04</span>
             <h2>Proof that life rarely stays inside the grid.</h2>
-            <p>Fragments, experiments, places, and imagined moments—kept for atmosphere rather than documentation.</p>
+            <p>Fragments, experiments, places, and imagined moments, kept for atmosphere rather than documentation.</p>
           </div>
           <div className={styles.archiveGrid}>
             {ARCHIVE.map((item, index) => (
@@ -183,7 +208,7 @@ export default function BeyondPage() {
 
         <section className={styles.bridgeSection}>
           <Reveal className={styles.bridgeInner}>
-            <span className={styles.bridgeNumber}>04</span>
+            <span className={styles.bridgeNumber}>05</span>
             <div>
               <span className={styles.eyebrow}>Back to the work</span>
               <h2>These interests do not sit beside the process. They shape it.</h2>
@@ -200,7 +225,7 @@ export default function BeyondPage() {
         <section className={styles.contactSection}>
           <div className={styles.contactInner}>
             <Reveal>
-              <span className={styles.eyebrow}>Open channel / 05</span>
+              <span className={styles.eyebrow}>Open channel / 06</span>
               <h2>Ask the question the portfolio did not answer.</h2>
             </Reveal>
             <Reveal delay={100}>
@@ -210,8 +235,9 @@ export default function BeyondPage() {
         </section>
 
         <section className={styles.finalCta}>
+          <AetherField className={styles.finalField} density={0.88} intensity={0.88} />
           <div>
-            <span className={styles.eyebrow}>Continue the conversation</span>
+            <span className={styles.eyebrow}>Continue the conversation / 07</span>
             <h2>Work, ideas,<br />or the spaces between.</h2>
           </div>
           <nav className={styles.contactLinks} aria-label="Contact links">

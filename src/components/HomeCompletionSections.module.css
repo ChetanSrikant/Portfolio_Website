@@ -10,6 +10,10 @@
   pointer-events: auto;
 }
 
+.selectedWork {
+  pointer-events: none;
+}
+
 .inner {
   width: 100%;
   max-width: var(--content-width);
@@ -101,11 +105,11 @@
   display: grid;
   align-items: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 0;
   padding: clamp(104px, 12vw, 170px) var(--edge-pad-x);
   background:
-    linear-gradient(90deg, rgba(9, 9, 9, 0.94) 0 49%, rgba(9, 9, 9, 0.14) 66%, transparent 100%),
-    rgba(9, 9, 9, 0.18);
+    linear-gradient(90deg, rgba(9, 9, 9, 0.84) 0 43%, rgba(9, 9, 9, 0.12) 64%, transparent 100%),
+    rgba(9, 9, 9, 0.08);
   pointer-events: none;
 }
 
@@ -184,9 +188,9 @@
 }
 
 .selectedWork {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 16%),
-    var(--surface-glass);
+  position: relative;
+  overflow: clip;
+  background: transparent;
 }
 
 .sectionHeader {
@@ -369,6 +373,7 @@
   letter-spacing: 0.07em;
   text-transform: uppercase;
   transition: color 180ms ease;
+  pointer-events: auto;
 }
 
 .projectDetailsLink:hover,
@@ -712,6 +717,7 @@
   padding-block:clamp(130px,16vw,230px);
   background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.08) 12% 88%,rgba(0,0,0,.3));
 }
+.selectedWork { background:transparent; }
 .sectionTitle { max-width:13ch; font-size:clamp(52px,6.5vw,96px); line-height:.92; letter-spacing:-.062em; }
 .sectionHeader { border-bottom:1px solid var(--border-subtle); }
 .projectList { gap:0; }

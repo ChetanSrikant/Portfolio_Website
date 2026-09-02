@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import "@designcodeio/threeui/style.css";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
@@ -30,6 +31,7 @@ import DriftWall from "./DriftWall.jsx";
 import DecryptedText from "./DecryptedText.jsx";
 import styles from "./GundamStage.module.css";
 import KineticTextLoader from "./KineticTextLoader.jsx";
+import CursorReactiveConstellationField from "./CursorReactiveConstellationField.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -575,6 +577,7 @@ export default function GundamStage({ gundamApiRef, children }) {
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
+        <CursorReactiveConstellationField reducedMotion={reducedMotion} />
         <DriftWall
           ref={driftWallRef}
           items={DRIFT_WALL_ITEMS}

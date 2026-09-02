@@ -28,7 +28,7 @@
 
 .editorialLayer {
   position: relative;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .landingSpacer {
@@ -39,6 +39,10 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+}
+
+.canvasLayer * {
+  pointer-events: inherit !important;
 }
 
 .canvasLayer canvas {
