@@ -1,0 +1,2942 @@
+[
+  {
+    "route": "/",
+    "data": {
+      "title": "Chetan — Portfolio",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nPORTRAIT / 001\nCHETAN MANDIGA\nAI DEVELOPER AND PRODUCT BUILDER\n\nAI · DEVELOPMENT · CREATIVE TECHNOLOGY\n\nSYSTEMS THAT\nRETRIEVE\n\nI build intelligence into products.\n\nI turn ambitious ideas into reliable software through applied AI, product thinking, and memorable interaction design.\n\nExplore my work\nStart a conversation\nENTER THE MACHINE WORLD\nCURRENT MODE / BUILD\nBASE / INDIA\nINTRO\nUNIT / ZGMF-X09A\nHEADING / 11°\nMOBILE SUIT / ONLINE\nThis is Chetan Srikant's playground. Step in.\n\nA closer look at the work, curiosity, and experiments behind the portfolio.\n\nCONTROL SURFACE / LIVE\n07 AUTHORED ACTIONS\nGUNDAM PLAYGROUND\n\nDrag to inspect. Click for saber, double-click for shield, or choose an authored movement below.\n\nBeam Saber\nShield\nRifle\nBoomerang\nLifter\nHold Pose\nShake\nRETURN TO IDLE\nRESET VIEW\nEnable device motion for shake-to-throw.\nENABLE MOTION\nAreas of practice\n01\nAI APPLICATIONS\n\nGenAI · Retrieval · Computer vision · Forecasting\n\n02\nSOFTWARE DEVELOPMENT\n\nAPIs · Full-stack applications · Product interfaces\n\n03\nBUILDING END TO END\n\nModels · Logic · Systems · Product experience\n\nBETWEEN DISCIPLINES\nI build where AI, software, and imagination meet.\n\nFrom experiments to usable products, I turn ideas into things people can actually interact with.\n\n// PHILOSOPHY.MD\nBuild with intent.\n\nBuild systems that move with intent, adapt under pressure, and stay understandable when complexity rises. AI supplies leverage. Judgment gives it direction.\n\nSELECTED WORK / 03\nThree systems worth opening first.\n\nCurated technical work, presented without invented metrics or placeholder outcomes.\n\nPUBLIC-SECTOR AI / AI4TG\nTGSRTC Public Transport Demand Platform\n\nAn applied AI platform for public-transport demand planning, combining forecasting, interactive analysis, and a domain-focused assistant.\n\nFORECASTING\nINTERACTIVE ANALYSIS\nAI ASSISTANT\nREAD THE FULL CASE STUDY\n→\nGENAI / RETRIEVAL SYSTEMS\nConversational RAG Application\n\nA multi-turn retrieval application with persistent conversation state, Hugging Face embeddings, Groq inference, and a Streamlit interface.\n\nLANGGRAPH\nHUGGING FACE\nGROQ\nSTREAMLIT\nREAD THE FULL CASE STUDY\n→\nCOMPUTER VISION / SEARCH\nComputer Vision Image Search\n\nA visual-search workflow that detects objects with YOLOv11, indexes image content, and retrieves relevant images through a simple interface.\n\nYOLOV11\nPYTHON\nSTREAMLIT\nREAD THE FULL CASE STUDY\n→\n\nAI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · BUILD · EXPERIMENT · SHIP · LEARN · CREATE ·\n\nAI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · AI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · AI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION ·\nBUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE ·\nCURRENT DIRECTION\nWhat I’m focused on now.\n01\nAI applications\n\nBuilding more production-minded AI experiences.\n\n02\nSoftware development\n\nImproving architecture and end-to-end implementation.\n\n03\nDSA\n\nStrengthening fundamentals and problem solving.\n\n04\nExperimentation\n\nTrying new tools, interfaces, agents, and creative ideas.\n\nHave a difficult problem with an unclear path?\n\nLET’S MAP IT ↗\n// NEXT STEP\nBuild useful systems.\nExplain the evidence clearly.\n\nOpen to software engineering, AI application, backend, and automation opportunities.\n\nStart a conversation\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.\n\nFAN-MADE ZGMF-X09A PRESENTATION. NOT AFFILIATED WITH SUNRISE OR BANDAI.",
+      "audit": {
+        "cls": 0.10360868626243971,
+        "lcp": 1956,
+        "long": [
+          59,
+          50,
+          55,
+          84,
+          116,
+          341,
+          175,
+          92,
+          78,
+          1244
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "READ THE FULL CASE STUDY\n→",
+          "href": "/work#tgsrtc"
+        },
+        {
+          "text": "READ THE FULL CASE STUDY\n→",
+          "href": "/work#rag"
+        },
+        {
+          "text": "READ THE FULL CASE STUDY\n→",
+          "href": "/work#vision"
+        },
+        {
+          "text": "LET’S MAP IT ↗",
+          "href": "mailto:chetansrikantmandiga@gmail.com"
+        },
+        {
+          "text": "Start a conversation\n↗",
+          "href": "mailto:chetansrikantmandiga@gmail.com?subject=Let%27s%20build%20something"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "I build intelligence into products.",
+          "y": 251.953125
+        },
+        {
+          "text": "This is Chetan Srikant's playground. Step in.",
+          "y": 1276.390625
+        },
+        {
+          "text": "Areas of practice",
+          "y": 3150
+        },
+        {
+          "text": "I build where AI, software, and imagination meet.",
+          "y": 3552.09375
+        },
+        {
+          "text": "Build with intent.",
+          "y": 4456.15625
+        },
+        {
+          "text": "Three systems worth opening first.",
+          "y": 5379.140625
+        },
+        {
+          "text": "What I’m focused on now.",
+          "y": 9128.40625
+        },
+        {
+          "text": "Build useful systems.\nExplain the evidence clearly.",
+          "y": 12014.1875
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 202.39999997615814
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 99.80000007152557
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 11035,
+          "duration": 63.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/HomePage-DjxsYHcE.js",
+          "size": 17413,
+          "duration": 49.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 427,
+          "duration": 28.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/react-three-fiber.esm-DShaZ9Xn.js",
+          "size": 217760,
+          "duration": 154.80000007152557
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ScrollTrigger-CiEuWA-R.js",
+          "size": 45469,
+          "duration": 90.29999995231628
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CqAAADjj.js",
+          "size": 7806,
+          "duration": 63
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ContactShadows-B7qZXqEW.js",
+          "size": 22751,
+          "duration": 82.20000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CYH2XoI6.css",
+          "size": 1384,
+          "duration": 60.200000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/HomePage-ZceSjhBS.css",
+          "size": 11442,
+          "duration": 73.89999997615814
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/style-KFe7gUMZ.css",
+          "size": 26455,
+          "duration": 89.39999997615814
+        },
+        {
+          "name": "http://127.0.0.1:4173/favicon.svg",
+          "size": 433,
+          "duration": 16.399999976158142
+        },
+        {
+          "name": "http://127.0.0.1:4173/models/justice-gundam.glb",
+          "size": 4409192,
+          "duration": 66.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/hero-chetan-editorial.jpeg",
+          "size": 147279,
+          "duration": 13
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-04.jpeg",
+          "size": 90676,
+          "duration": 39.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-05.jpeg",
+          "size": 169730,
+          "duration": 40.700000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-03.jpeg",
+          "size": 265568,
+          "duration": 64
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-06.jpeg",
+          "size": 109378,
+          "duration": 50.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-08.jpeg",
+          "size": 95289,
+          "duration": 57.90000009536743
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-02.jpeg",
+          "size": 259025,
+          "duration": 79.29999995231628
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-10.jpeg",
+          "size": 99850,
+          "duration": 88.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-12.jpeg",
+          "size": 110451,
+          "duration": 94.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-01.jpeg",
+          "size": 223692,
+          "duration": 104.20000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-11.jpeg",
+          "size": 221009,
+          "duration": 116.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-07.jpeg",
+          "size": 100176,
+          "duration": 107
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-09.jpeg",
+          "size": 101180,
+          "duration": 106.69999992847443
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 14241,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 13730,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 13012,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 11509,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 12644,
+        "overflow": [
+          {
+            "tag": "IMG",
+            "class": "_portrait_128hl_359",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 12690,
+        "overflow": [
+          {
+            "tag": "IMG",
+            "class": "_portrait_128hl_359",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_column_8gz3a_73",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_group_8gz3a_101",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_tile_8gz3a_113",
+            "text": ""
+          }
+        ]
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 12690,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Explore my work",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Start a conversation",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Beam Saber",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Shield",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Rifle",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Boomerang",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Lifter",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Hold Pose",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Shake",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "RETURN TO IDLE",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "RESET VIEW",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "ENABLE MOTION",
+          "label": null,
+          "pressed": null
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/about",
+    "data": {
+      "title": "About | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nABOUT / 01\nI followed curiosity\nuntil ideas became real.\n\nComputer science gave me the starting point. Projects, constraints, and people taught me what engineering asks for.\n\nMOVE / REVEAL COLOUR\nEDUCATION ARCHIVE\n2021 - 2025\nEXPLORATION WORKSPACE\nLEARNING THROUGH MAKING\nInterfaces matter because someone eventually has to use the system.\n+\nCURRENT CURIOSITY\nSELECT A DIRECTION\n01\nAI applications\n02\nBackend systems\n03\nAgents\n04\nComputer vision\n05\nGenerative AI\n06\nAutomation\n07\nDSA / problem solving\n08\nInteraction design\nCURRENT FOCUS\nAI applications\n\nI am interested in the point where model capability becomes a useful product experience.\n\n// CONTINUE EXPLORING\nEnough about me.\nHere’s what I’ve built.\n\nContinue into the systems, decisions, and working software behind the story.\n\nExplore selected work\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0,
+        "lcp": 704,
+        "long": [
+          221,
+          75,
+          77
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": null,
+          "href": "#today"
+        },
+        {
+          "text": "Explore selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "I followed curiosity\nuntil ideas became real.",
+          "y": 390.75
+        },
+        {
+          "text": "",
+          "y": 1123.59375
+        },
+        {
+          "text": "",
+          "y": 2368.984375
+        },
+        {
+          "text": "",
+          "y": 4708.5625
+        },
+        {
+          "text": "",
+          "y": 7757.015625
+        },
+        {
+          "text": "",
+          "y": 9406.671875
+        },
+        {
+          "text": "Enough about me.\nHere’s what I’ve built.",
+          "y": 11309.140625
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 17.199999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 11035,
+          "duration": 8.899999976158142
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AboutPage-Cch7QwYF.js",
+          "size": 202760,
+          "duration": 81.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ScrollTrigger-CiEuWA-R.js",
+          "size": 45469,
+          "duration": 10.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 427,
+          "duration": 12.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AboutPage-BWL46prw.css",
+          "size": 7810,
+          "duration": 22.100000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/style-KFe7gUMZ.css",
+          "size": 26455,
+          "duration": 16
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/about-hero-campus.png",
+          "size": 2355634,
+          "duration": 229.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/about-education-convocation.png",
+          "size": 1578013,
+          "duration": 63.39999997615814
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 12108,
+        "overflow": []
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 11679,
+        "overflow": []
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 12272,
+        "overflow": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 10109,
+        "overflow": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 11810,
+        "overflow": []
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 12211,
+        "overflow": []
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 12211,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "OPEN CONVOCATION GALLERY\n17 PHOTOS + 1 VIDEO",
+          "label": "Open the 2025 convocation photo and video gallery",
+          "pressed": null
+        },
+        {
+          "text": "01\nAI applications",
+          "label": null,
+          "pressed": "true"
+        },
+        {
+          "text": "02\nBackend systems",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "03\nAgents",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "04\nComputer vision",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "05\nGenerative AI",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "06\nAutomation",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "07\nDSA / problem solving",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "08\nInteraction design",
+          "label": null,
+          "pressed": "false"
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/work",
+    "data": {
+      "title": "Work | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nSELECTED WORK\nNot just what I built. How it works and what supports it.\n\nThree case studies focused on context, architecture, implementation decisions, and evidence without unsupported impact claims.\n\nAPPLIED AI / RETRIEVAL / COMPUTER VISION\nCASE FILES / 01—03\nSCROLL TO EXAMINE\nCASE STUDY INDEX\nThree systems, examined beyond the surface.\n01\nTGSRTC Public Transport Demand Platform\nApplied AI / Forecasting / Decision Support\nMake public-transport forecasting outputs easier to inspect, explore, and communicate.\n02\nConversational RAG Application\nGenAI / Retrieval\nKeep multi-turn answers grounded in retrieved source material.\n03\nComputer Vision Image Search\nVision / Retrieval\nMake image collections searchable through detected visual content.\n01 / CASE STUDY\nAPPLIED AI / FORECASTING / DECISION SUPPORT\nTGSRTC Public Transport Demand Platform\nWINNING SOLUTION\nWinner — Telangana AI Rising / AI4TG Grand Challenge\n\nChallenge: Optimizing Public Transport Utilization with AI. Innodatatics was publicly recognized as the winning team for this transport use case.\n\nTEAM CONTEXT\n\nThe solution was developed by the Innodatatics team during my internship as its entry for the TGSRTC public-transport challenge. The recognition belongs to the team.\n\nPROBLEM\n\nThe challenge explored how AI-driven forecasting could help people understand and optimize public transport utilization for TGSRTC.\n\nMY CONTRIBUTION\n\nAs part of the winning team, I contributed substantially to the web application used to surface and communicate the forecasting results. I focused on turning forecast outputs and related insights into an interface stakeholders could explore and understand.\n\nSYSTEM / VERIFIED FLOW\nARCHITECTURE RECORD\n01\nDATA AND FORECASTING OUTPUT\nINPUT\n02\nWEB APPLICATION\nPROCESS\n03\nVISUAL EXPLORATION\nPROCESS\n04\nSTAKEHOLDER INTERPRETATION\nOUTPUT\nSTATE / WAITING\n4 NODES\nImplementation\n\nMy work centered on the application and presentation layer: structuring forecast outputs so they could be inspected, compared, and communicated clearly through the web experience.\n\nOutcome and lesson\n\nThe team solution was selected as the winning entry in its challenge category. The project reinforced that a forecast becomes useful when people can interpret it through a clear, dependable interface.\n\nPUBLIC RECORD\nThe recognition, in its original context.\n\nThese posts document the team, the challenge, and the winning solution. They are included here as external evidence alongside the technical case study.\n\nOpen the recognition post\nOpen the winning-solution post\nLINKEDIN\nRECOGNITION POST\nLOADING RECOGNITION POST\nLINKEDIN\nWINNING SOLUTION\nLOADING WINNING-SOLUTION POST\n02 / CASE STUDY\nGENAI / RETRIEVAL\nConversational RAG Application\nCONTEXT\n\nDocument-grounded assistants need retrieval and conversation state to cooperate across multiple turns.\n\nPROBLEM\n\nPreserve conversational context while retrieving relevant chunks and keeping generated answers connected to source material.\n\nROLE\n\nImplemented the application flow using Streamlit, LangGraph state, Hugging Face embeddings, retrieval, and Groq inference.\n\nPRODUCT VIEW\nGrounded answers, visible sources.\n\nA visual interpretation of the verified retrieval flow: question, sources, grounded answer, and conversation state in one inspectable interface.\n\nINTERFACE STUDY / NOT A PRODUCTION SCREENSHOT\nSYSTEM / VERIFIED FLOW\nARCHITECTURE RECORD\n01\nUSER QUESTION\nINPUT\n02\nSTREAMLIT\nPROCESS\n03\nLANGGRAPH STATE\nPROCESS\n04\nRETRIEVER\nPROCESS\n05\nHF EMBEDDINGS\nPROCESS\n06\nRELEVANT CHUNKS\nPROCESS\n07\nGROQ\nPROCESS\n08\nGROUNDED RESPONSE\nOUTPUT\nSTATE / WAITING\n8 NODES\nImplementation\n\nLangGraph holds the conversational state. The retriever uses Hugging Face embeddings to select document chunks, and Groq inference generates a response from that context.\n\nOutcome and lesson\n\nThe result is a multi-turn retrieval application whose architecture makes state, retrieval, and generation explicit. Future work would expand evaluation around retrieval quality, source coverage, and failure handling.\n\nAI AGENT WORKSPACE\nPROCESS STATE / 1 OF 5\n01 / Question received\n02 / Retrieving\n03 / Context selected\n04 / Generating\n05 / Response grounded\nQuestion received\n\nThe interface accepts a user question and passes it into the conversation state.\n\n03 / CASE STUDY\nVISION / RETRIEVAL\nComputer Vision Image Search\nCONTEXT\n\nLarge image collections are difficult to search when their useful information exists only inside the pixels.\n\nPROBLEM\n\nDetect visual objects, convert detections into searchable metadata, and return relevant images through a simple interface.\n\nROLE\n\nBuilt the detection, indexing, query, and Streamlit presentation workflow described here.\n\nVISUAL EVIDENCE / SEARCH PIPELINE\nFrom pixels to an inspectable index.\n\nThree compact records show the source context, the object collection, and the detection metadata that supports visual retrieval.\n\n01 / SOURCE CONTEXT\n02 / OBJECT COLLECTION\n03 / DETECTION METADATA\nSYSTEM / VERIFIED FLOW\nARCHITECTURE RECORD\n01\nIMAGE COLLECTION\nINPUT\n02\nYOLOV11\nPROCESS\n03\nOBJECT INDEX\nPROCESS\n04\nQUERY\nPROCESS\n05\nRANK\nPROCESS\n06\nRESULTS\nOUTPUT\nSTATE / WAITING\n6 NODES\nImplementation\n\nYOLOv11 detects objects in source images. Detection labels become an index that a query can match before the interface presents relevant images.\n\nOutcome and lesson\n\nThe verified result is a visual-search workflow connecting detection to retrieval. The limitations are tied to detector coverage, ambiguous labels, and the need for stronger ranking when many images share the same object class.\n\nTECHNICAL EVIDENCE\nWhat each artifact actually proves.\n\nThese are architecture and pipeline records. No screenshot or benchmark is implied where one has not been supplied.\n\nARCHITECTURE / OPEN\nForecasting decision flow\n\nShows the supported path from transport data to forecast interpretation. It does not claim operational deployment.\n\nARCHITECTURE / OPEN\nStateful RAG pipeline\n\nDocuments the retrieval and generation boundaries used by the conversational RAG application.\n\nPIPELINE / OPEN\nVisual retrieval flow\n\nExplains how detected objects become searchable image metadata and results.\n\nMORE BUILDS\nLooking for the smaller experiments?\n\nProjects is the faster, broader view of prototypes, product builds, and learning experiments.\n\nExplore all projects\nStart a conversation\n// CONTINUE EXPLORING\nThe case studies are only part of the archive.\n\nBrowse the product builds, prototypes, and experiments behind the deeper case studies.\n\nExplore all projects\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0,
+        "lcp": 760,
+        "long": [
+          52,
+          82,
+          280,
+          290
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "01\nTGSRTC Public Transport Demand Platform\nApplied AI / Forecasting / Decision Support\nMake public-transport forecasting outputs easier to inspect, explore, and communicate.",
+          "href": "#tgsrtc"
+        },
+        {
+          "text": "02\nConversational RAG Application\nGenAI / Retrieval\nKeep multi-turn answers grounded in retrieved source material.",
+          "href": "#rag"
+        },
+        {
+          "text": "03\nComputer Vision Image Search\nVision / Retrieval\nMake image collections searchable through detected visual content.",
+          "href": "#vision"
+        },
+        {
+          "text": "Open the recognition post",
+          "href": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7347936780177874944"
+        },
+        {
+          "text": "Open the winning-solution post",
+          "href": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7346432007914037248"
+        },
+        {
+          "text": "Explore all projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Start a conversation",
+          "href": "mailto:chetansrikantmandiga@gmail.com"
+        },
+        {
+          "text": "Explore all projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "Not just what I built. How it works and what supports it.",
+          "y": 386.40625
+        },
+        {
+          "text": "Three systems, examined beyond the surface.",
+          "y": 1185.59375
+        },
+        {
+          "text": "TGSRTC Public Transport Demand Platform",
+          "y": 2167.84375
+        },
+        {
+          "text": "Conversational RAG Application",
+          "y": 4638.59375
+        },
+        {
+          "text": "Computer Vision Image Search",
+          "y": 6867.640625
+        },
+        {
+          "text": "What each artifact actually proves.",
+          "y": 8588.421875
+        },
+        {
+          "text": "Looking for the smaller experiments?",
+          "y": 9576.484375
+        },
+        {
+          "text": "The case studies are only part of the archive.",
+          "y": 10198.015625
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 0,
+          "duration": 21.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 0,
+          "duration": 32.799999952316284
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/WorkPage-DeSKdHwV.js",
+          "size": 7936,
+          "duration": 98.79999995231628
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ScrollTrigger-CiEuWA-R.js",
+          "size": 0,
+          "duration": 97.29999995231628
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AetherField-6Om0sjsQ.js",
+          "size": 1572,
+          "duration": 98.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 0,
+          "duration": 115.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AetherField-Bb0N86XC.css",
+          "size": 223,
+          "duration": 72.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/SystemIllustration-6t-wtGtN.js",
+          "size": 853,
+          "duration": 100.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/SystemIllustration-uPbDlDLJ.css",
+          "size": 1048,
+          "duration": 102.69999992847443
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/WorkPage-CG67Wozi.css",
+          "size": 842,
+          "duration": 109.29999995231628
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/RobotCompanion-DgDG2Rqo.js",
+          "size": 6141,
+          "duration": 48.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/react-three-fiber.esm-DShaZ9Xn.js",
+          "size": 217760,
+          "duration": 33.09999990463257
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ContactShadows-B7qZXqEW.js",
+          "size": 22751,
+          "duration": 24.700000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/work/conversational-rag-phone.png",
+          "size": 841913,
+          "duration": 80.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/work/computer-vision/vision-times-square.webp",
+          "size": 132350,
+          "duration": 47.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/work/computer-vision/vision-object-collection.webp",
+          "size": 102694,
+          "duration": 55.39999997615814
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/work/computer-vision/vision-detections.webp",
+          "size": 114990,
+          "duration": 56.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/models/cute-robot-companion.glb",
+          "size": 1843572,
+          "duration": 33.800000071525574
+        },
+        {
+          "name": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7347936780177874944?collapsed=1",
+          "size": 0,
+          "duration": 3071.399999976158
+        },
+        {
+          "name": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7346432007914037248?collapsed=1",
+          "size": 0,
+          "duration": 3111
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 14749,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "03\nVISUAL EXPLORATION\nPROCESS"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "03"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "VISUAL EXPLORATION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PROCESS"
+          },
+          {
+            "tag": "SPAN",
+            "class": "_connector_tslyh_79",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "04\nSTAKEHOLDER INTERPRETATION\nOUTPUT"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "04"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "STAKEHOLDER INTERPRETATION"
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 13973,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "04\nSTAKEHOLDER INTERPRETATION\nOUTPUT"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "04"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "STAKEHOLDER INTERPRETATION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "OUTPUT"
+          },
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "04\nRETRIEVER\nPROCESS"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "04"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "RETRIEVER"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PROCESS"
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 10811,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "01\nUSER QUESTION\nINPUT"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "01"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "USER QUESTION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "INPUT"
+          },
+          {
+            "tag": "DIV",
+            "class": "_node_tslyh_49",
+            "text": "08\nGROUNDED RESPONSE\nOUTPUT"
+          },
+          {
+            "tag": "SMALL",
+            "class": "",
+            "text": "08"
+          },
+          {
+            "tag": "STRONG",
+            "class": "",
+            "text": "GROUNDED RESPONSE"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "OUTPUT"
+          }
+        ]
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 10165,
+        "overflow": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 10725,
+        "overflow": []
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 10844,
+        "overflow": []
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 10844,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "01 / Question received",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "02 / Retrieving",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "03 / Context selected",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "04 / Generating",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "05 / Response grounded",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "ARCHITECTURE / OPEN\nForecasting decision flow\n\nShows the supported path from transport data to forecast interpretation. It does not claim operational deployment.",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "ARCHITECTURE / OPEN\nStateful RAG pipeline\n\nDocuments the retrieval and generation boundaries used by the conversational RAG application.",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "PIPELINE / OPEN\nVisual retrieval flow\n\nExplains how detected objects become searchable image metadata and results.",
+          "label": null,
+          "pressed": null
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/projects",
+    "data": {
+      "title": "Projects | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nPROJECTS / EXPERIMENTS\nProducts, prototypes, and things I built to learn.\n\nA faster view of software projects and AI experiments across different problem types. Work contains the deeper case studies.\n\n6 PROJECT ENTRIES / 4 PUBLIC REPOSITORIES\nGRID FIELD / POINTER REACTIVE\nFILTER AND DISCOVER\nBreadth without the noise.\n\nSelect a filter, hover or focus to preview a project, then choose it to open the complete case study.\n\nAll\nFull-stack\nComputer Vision\nMachine Learning\nAI / GenAI\n01 / Full-stack\nZAP Ride-Hailing\n\nA full-stack ride-hailing application covering account access, trip input, vehicle selection, and booking states.\n\n/React\n/Express\n/MongoDB\n/JWT\n\nRole: Full-stack product implementation\nLesson: Complex products become manageable when user states and system states are designed together.\n\nGITHUB SOURCE AVAILABLE\nOPEN CASE STUDY\n02 / Full-stack\nLOOP Chat\n\nA React and Firebase communication product built around messaging, authentication, shared state, and media actions.\n\n/React\n/Firebase\n/React Router\n\nRole: Full-stack application implementation\nLesson: Realtime-feeling interfaces depend on explicit state and clear feedback, even before scale enters the problem.\n\nGITHUB SOURCE AVAILABLE\nOPEN CASE STUDY\n03 / Computer Vision\nDriver Drowsiness\n\nA notebook-based computer-vision experiment using camera input and eye-region detection to explore drowsiness alert logic.\n\n/OpenCV\n/TensorFlow / Keras\n/NumPy\n\nRole: Computer vision experimentation\nLesson: A prototype can explore signal and alert logic, but it must not be mistaken for an automotive or medical safety system.\n\nGITHUB SOURCE AVAILABLE\nOPEN CASE STUDY\n04 / Machine Learning\nCreditworthy Borrower\n\nA scikit-learn and Streamlit workflow for preparing borrower data, running classification, and reviewing model output.\n\n/Scikit-learn\n/Streamlit\n/NumPy\n\nRole: Machine-learning workflow\nLesson: Financial classification requires careful attention to data quality, fairness, and evaluation context.\n\nGITHUB SOURCE AVAILABLE\nOPEN CASE STUDY\n05 / AI / GenAI\nSentiment Classifier\n\nAn NLP experiment mapping text input to sentiment classes and exposing the prediction through a simple interface.\n\n/Python\n/NLP\n/Classification\n\nRole: NLP and interface experimentation\nLesson: Simple labels hide ambiguity, so examples and failure cases matter as much as the prediction itself.\n\nPRIVATE PROTOTYPE\nOPEN CASE STUDY\n06 / AI / GenAI\nVoice-to-Order Agent\n\nAn applied-AI interaction prototype that converts spoken input into a structured order for review.\n\n/Voice input\n/Intent extraction\n/Structured output\n\nRole: Applied-AI interaction design\nLesson: The useful boundary is not transcription alone; it is reliable conversion into an inspectable action structure.\n\nPRIVATE PROTOTYPE\nOPEN CASE STUDY\nSOURCE AND CONTEXT\nSix builds. Four public codebases.\n\nThe public repositories open the implementation behind ZAP, LOOP, Driver Drowsiness, and Creditworthy Borrower. Each entry also names the concrete stack, build focus, contribution, and lesson.\n\nThe Sentiment Classifier and Voice-to-Order Agent remain private prototypes, so they are presented through their verified project material rather than linked to unrelated repositories.\n\nDEEP EVIDENCE\nNeed the architecture, decisions, and constraints?\n\nThe Work page examines three flagship systems in more depth.\n\nRead selected work\nAbout my approach\n// START SOMETHING\nHave a problem worth turning into a working system?\n\nI’m open to software engineering, applied AI, backend, and automation opportunities.\n\nStart a conversation\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0,
+        "lcp": 468,
+        "long": [
+          70,
+          143,
+          419
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Read selected work",
+          "href": "/work"
+        },
+        {
+          "text": "About my approach",
+          "href": "/about"
+        },
+        {
+          "text": "Start a conversation\n↗",
+          "href": "mailto:chetansrikantmandiga@gmail.com?subject=Project%20conversation"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "Products, prototypes, and things I built to learn.",
+          "y": 347.796875
+        },
+        {
+          "text": "Breadth without the noise.",
+          "y": 1101.59375
+        },
+        {
+          "text": "ZAP Ride-Hailing",
+          "y": 1734.421875
+        },
+        {
+          "text": "LOOP Chat",
+          "y": 1944.1875
+        },
+        {
+          "text": "Driver Drowsiness",
+          "y": 1944.1875
+        },
+        {
+          "text": "Creditworthy Borrower",
+          "y": 1944.1875
+        },
+        {
+          "text": "Sentiment Classifier",
+          "y": 1944.1875
+        },
+        {
+          "text": "Voice-to-Order Agent",
+          "y": 1868.59375
+        },
+        {
+          "text": "Six builds. Four public codebases.",
+          "y": 2531.375
+        },
+        {
+          "text": "Need the architecture, decisions, and constraints?",
+          "y": 3240.71875
+        },
+        {
+          "text": "Have a problem worth turning into a working system?",
+          "y": 4012.78125
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 45.800000071525574
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 0,
+          "duration": 26.300000071525574
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ProjectsPage-Dgo9C7II.js",
+          "size": 7434,
+          "duration": 25.100000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/react-three-fiber.esm-DShaZ9Xn.js",
+          "size": 217760,
+          "duration": 38.199999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 427,
+          "duration": 18.600000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/SystemIllustration-6t-wtGtN.js",
+          "size": 853,
+          "duration": 25.600000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/SystemIllustration-uPbDlDLJ.css",
+          "size": 1048,
+          "duration": 18.799999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ProjectsPage-4iZwNm6I.css",
+          "size": 270,
+          "duration": 28.299999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/zap-ride-hailing.webp",
+          "size": 132742,
+          "duration": 80.39999997615814
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/loop-chat.webp",
+          "size": 60530,
+          "duration": 75.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/driver-drowsiness.webp",
+          "size": 25004,
+          "duration": 77.20000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/creditworthy-borrower.webp",
+          "size": 63756,
+          "duration": 77.90000009536743
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/sentiment-classifier.webp",
+          "size": 40538,
+          "duration": 75.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/projects/voice-order-agent-v3.jpg",
+          "size": 230149,
+          "duration": 145.19999992847443
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 6330,
+        "overflow": [
+          {
+            "tag": "BUTTON",
+            "class": "_filterButton_1xriz_475 ",
+            "text": "Machine Learning"
+          },
+          {
+            "tag": "BUTTON",
+            "class": "_filterButton_1xriz_475 ",
+            "text": "AI / GenAI"
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 6000,
+        "overflow": [
+          {
+            "tag": "BUTTON",
+            "class": "_filterButton_1xriz_475 ",
+            "text": "Machine Learning"
+          },
+          {
+            "tag": "BUTTON",
+            "class": "_filterButton_1xriz_475 ",
+            "text": "AI / GenAI"
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 3886,
+        "overflow": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 3892,
+        "overflow": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 4597,
+        "overflow": []
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 4618,
+        "overflow": []
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 4618,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "All",
+          "label": null,
+          "pressed": "true"
+        },
+        {
+          "text": "Full-stack",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "Computer Vision",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "Machine Learning",
+          "label": null,
+          "pressed": "false"
+        },
+        {
+          "text": "AI / GenAI",
+          "label": null,
+          "pressed": "false"
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/beyond",
+    "data": {
+      "title": "Beyond | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nBEYOND / 00\nOff\nscript.\n\nThe work tells you what I can build. This is where the instincts behind it come from.\n\nEXPLORE THE FIELD NOTES\n↓\nPERSON / PROCESS / PLAY\n01\n02\n03\n04\n05\n06\n07\nBEYOND / 01\nA life outside the viewport.\n\nSome things I build.\nSome things I collect.\nSome things I simply enjoy.\n\nThe interesting parts rarely fit into a job title.\n\nFRAGMENTS / IN MOTION\nTRACKSIDE / HELMET DOWN\nDifferent frames.\nSame person.\n\nWork is one part of the picture. The rest keeps it honest.\n\nBEYOND / 02\nThings I keep coming back to.\n01\nSPACE\n\nLooking upward has always made everything down here feel a little smaller.\n\n02\nGUNDAM\n\nMachines, engineering, design, and probably more plastic runners than necessary.\n\n03\nSTORIES\n\nAnime, films, games and fictional worlds that refuse to leave my head.\n\n04\nBUILDING\n\nEven away from work, I somehow end up making something.\n\nBEYOND / 03\nPersonal archive.\n\nA few frames that stayed.\n\nSCROLL TO EXPLORE / ← → KEYS\nSTREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE / ARCHIVE\nHYDERABAD\nPLACE\nNCC\nARCHIVE\nBASKETBALL\nARCHIVE / SPORT\nDESK DETAIL\nEVERYDAY SYSTEM\nBEYOND / 04\nRight now.\nUPDATED / SEPTEMBER 2026\nBUILDING\nSmall experiments that probably started with “what if...”\nLEARNING\nAI systems, software engineering and whatever rabbit hole came next.\nREADING\nBooks, articles and ideas worth keeping around.\nWATCHING\nStories, animation and worlds with ridiculous amounts of detail.\nLISTENING\nWhatever survives the repeat button this month.\nHYDERABAD / PLACE\nNot everything I care about\nneeds to become a project.\n\nAND THAT'S PROBABLY THE POINT.\n\n// BACK TO THE WORK\nCuriosity matters most when it becomes something real.\n\nSee how those interests translate into products, experiments, and applied AI systems.\n\nExplore selected work\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0,
+        "lcp": 480,
+        "long": [
+          106
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "EXPLORE THE FIELD NOTES\n↓",
+          "href": "#field-notes"
+        },
+        {
+          "text": "01",
+          "href": "#field-notes"
+        },
+        {
+          "text": "02",
+          "href": "#zoom-parallax"
+        },
+        {
+          "text": "03",
+          "href": "#interests"
+        },
+        {
+          "text": "04",
+          "href": "#personal-archive"
+        },
+        {
+          "text": "05",
+          "href": "#right-now"
+        },
+        {
+          "text": "06",
+          "href": "#micro-detail"
+        },
+        {
+          "text": "07",
+          "href": "#final-statement"
+        },
+        {
+          "text": "Explore selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "Off\nscript.",
+          "y": 357.6875
+        },
+        {
+          "text": "A life outside the viewport.",
+          "y": 1158.7451171875
+        },
+        {
+          "text": "Different frames.\nSame person.",
+          "y": 4070.609130859375
+        },
+        {
+          "text": "Things I keep coming back to.",
+          "y": 4585.453125
+        },
+        {
+          "text": "Personal archive.",
+          "y": 5933.53125
+        },
+        {
+          "text": "Right now.",
+          "y": 9295.78125
+        },
+        {
+          "text": "Not everything I care about\nneeds to become a project.",
+          "y": 12055.1416015625
+        },
+        {
+          "text": "Curiosity matters most when it becomes something real.",
+          "y": 12739.734375
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 11.299999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 0,
+          "duration": 5.700000047683716
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/BeyondPage-BYBmM6wh.js",
+          "size": 8960,
+          "duration": 17.299999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AetherField-6Om0sjsQ.js",
+          "size": 1572,
+          "duration": 8
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 427,
+          "duration": 14.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/AetherField-Bb0N86XC.css",
+          "size": 223,
+          "duration": 15.399999976158142
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/BeyondPage-Dd2brVF3.css",
+          "size": 4830,
+          "duration": 18.600000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/drift-wall/drift-12.jpeg",
+          "size": 0,
+          "duration": 5.899999976158142
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/go-kart-trackside-display.webp",
+          "size": 99332,
+          "duration": 26.600000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/college-friends-display.webp",
+          "size": 113416,
+          "duration": 26.200000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/hyderabad-sunset-display.webp",
+          "size": 83064,
+          "duration": 26.300000071525574
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/ncc-portrait-display.webp",
+          "size": 59732,
+          "duration": 27.600000023841858
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/basketball-award-display.webp",
+          "size": 69576,
+          "duration": 42.299999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/diet-coke-wall-display.webp",
+          "size": 46114,
+          "duration": 24.199999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/go-kart-trackside-lqip.webp",
+          "size": 158,
+          "duration": 32.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/hyderabad-sunset-lqip.webp",
+          "size": 130,
+          "duration": 33.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/college-friends-lqip.webp",
+          "size": 154,
+          "duration": 35.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/ncc-portrait-lqip.webp",
+          "size": 160,
+          "duration": 36.299999952316284
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/basketball-award-lqip.webp",
+          "size": 154,
+          "duration": 37.300000071525574
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/diet-coke-wall-lqip.webp",
+          "size": 122,
+          "duration": 38.60000002384186
+        },
+        {
+          "name": "http://127.0.0.1:4173/images/beyond/motorcycle-street-lqip.webp",
+          "size": 110,
+          "duration": 41.39999997615814
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 8348,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "TRACKSIDE"
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 8515,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PLAY / MOTION"
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 8756,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "TRACKSIDE\nPLAY / MOTION"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PLAY / MOTION"
+          }
+        ]
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 11462,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "COLLEGE\nPEOPLE / ARCHIVE"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "COLLEGE\nPEOPLE / ARCHIVE"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PEOPLE / ARCHIVE"
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 13323,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "COLLEGE\nPEOPLE / ARCHIVE"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "COLLEGE\nPEOPLE / ARCHIVE"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "PEOPLE / ARCHIVE"
+          }
+        ]
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 12468,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "class": "_track_wt9wj_7",
+            "text": "STREET\nOBSERVED ALONG THE WAY\nTRACKSIDE\nPLAY / MOTION\nCOLLEGE\nPEOPLE /"
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGURE",
+            "class": "_figure_wt9wj_8",
+            "text": "BASKETBALL\nARCHIVE / SPORT"
+          },
+          {
+            "tag": "DIV",
+            "class": "_frame_wt9wj_9",
+            "text": ""
+          },
+          {
+            "tag": "SPAN",
+            "class": "_progressiveImage_2su37_51  ",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "class": "",
+            "text": ""
+          },
+          {
+            "tag": "FIGCAPTION",
+            "class": "",
+            "text": "BASKETBALL\nARCHIVE / SPORT"
+          },
+          {
+            "tag": "SPAN",
+            "class": "",
+            "text": "ARCHIVE / SPORT"
+          }
+        ]
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 12468,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/credentials",
+    "data": {
+      "title": "Credentials | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\nCREDENTIALS / DEFERRED\nThe credentials page is being assembled with verified evidence.\n\nThis route is intentionally reserved. Until the supporting records are ready, the résumé remains the authoritative credential document.\n\nNO FABRICATED CERTIFICATIONS OR CLAIMS\nAVAILABLE NOW\nUse the verified routes.\nOpen résumé\nRead selected work\n// NEXT STEP\nBuild useful systems.\nExplain the evidence clearly.\n\nOpen to software engineering, AI application, backend, and automation opportunities.\n\nStart a conversation\n↗\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0,
+        "lcp": 212,
+        "long": []
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Home",
+          "href": "/"
+        },
+        {
+          "text": "About Me",
+          "href": "/about"
+        },
+        {
+          "text": "Work",
+          "href": "/work"
+        },
+        {
+          "text": "Projects",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond",
+          "href": "/beyond"
+        },
+        {
+          "text": "Résumé (opens in a new tab)",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Open résumé",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Read selected work",
+          "href": "/work"
+        },
+        {
+          "text": "Start a conversation\n↗",
+          "href": "mailto:chetansrikantmandiga@gmail.com?subject=Let%27s%20build%20something"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "The credentials page is being assembled with verified evidence.",
+          "y": 277.59375
+        },
+        {
+          "text": "Use the verified routes.",
+          "y": 1345.0625
+        },
+        {
+          "text": "Build useful systems.\nExplain the evidence clearly.",
+          "y": 1884.5
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 10.700000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 0,
+          "duration": 4.600000023841858
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 2397,
+        "overflow": []
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 2363,
+        "overflow": []
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 2269,
+        "overflow": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 2129,
+        "overflow": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 2468,
+        "overflow": []
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 2533,
+        "overflow": []
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 2533,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "route": "/missing-page",
+    "data": {
+      "title": "Page not found | Chetan Mandiga",
+      "text": "Skip to content\nCM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER\nHOME\nABOUT ME\nWORK\nPROJECTS\nBEYOND\nRÉSUMÉ\n↗\n404 / ROUTE UNAVAILABLE\nThis page isn't here. The Gundam is.\n\nTry an authored move, inspect the model, or return to the portfolio.\n\nReturn home\n/MISSING-PAGE\nCONTROL SURFACE / LIVE\n07 AUTHORED ACTIONS\nGUNDAM PLAYGROUND\n\nDrag to inspect. Click for saber, double-click for shield, or choose an authored movement below.\n\nBeam Saber\nShield\nRifle\nBoomerang\nLifter\nHold Pose\nShake\nRETURN TO IDLE\nRESET VIEW\nEnable device motion for shake-to-throw.\nENABLE MOTION\nEXPLORE\nHome\n↗\nAbout\n↗\nSelected work\n↗\nJOURNEY\nProjects\n↗\nBeyond\n↗\nPlayground\n↗\nCONNECT\nGitHub\n↗\nLinkedIn\n↗\nRésumé\n↗\nChetan Srikant Mandiga\nSoftware, systems, automation, and applied AI.\n© 2026\n•\nBUILT WITH CURIOSITY.",
+      "audit": {
+        "cls": 0.0026651104955370884,
+        "lcp": 376,
+        "long": [
+          100,
+          53,
+          708
+        ]
+      },
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "#main-content"
+        },
+        {
+          "text": "CM\nChetan Mandiga\nAI DEVELOPER · PRODUCT BUILDER",
+          "href": "/"
+        },
+        {
+          "text": "HOME",
+          "href": "/"
+        },
+        {
+          "text": "ABOUT ME",
+          "href": "/about"
+        },
+        {
+          "text": "WORK",
+          "href": "/work"
+        },
+        {
+          "text": "PROJECTS",
+          "href": "/projects"
+        },
+        {
+          "text": "BEYOND",
+          "href": "/beyond"
+        },
+        {
+          "text": "RÉSUMÉ\n↗",
+          "href": "/resume.pdf"
+        },
+        {
+          "text": "Return home",
+          "href": "/"
+        },
+        {
+          "text": "Home\n↗",
+          "href": "/"
+        },
+        {
+          "text": "About\n↗",
+          "href": "/about"
+        },
+        {
+          "text": "Selected work\n↗",
+          "href": "/work"
+        },
+        {
+          "text": "Projects\n↗",
+          "href": "/projects"
+        },
+        {
+          "text": "Beyond\n↗",
+          "href": "/beyond"
+        },
+        {
+          "text": "Playground\n↗",
+          "href": "/#final-playground"
+        },
+        {
+          "text": "GitHub\n↗",
+          "href": "https://github.com/ChetanSrikant"
+        },
+        {
+          "text": "LinkedIn\n↗",
+          "href": "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/"
+        },
+        {
+          "text": "Résumé\n↗",
+          "href": "/resume.pdf"
+        }
+      ],
+      "headings": [
+        {
+          "text": "This page isn't here. The Gundam is.",
+          "y": 366.625
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "size": 1052,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+          "size": 91267,
+          "duration": 23.200000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+          "size": 0,
+          "duration": 10.599999904632568
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "size": 31432,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+          "size": 24836,
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2",
+          "size": 22288,
+          "duration": 0
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/NotFoundPage-BbfhRxTG.js",
+          "size": 1352,
+          "duration": 32.699999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/react-three-fiber.esm-DShaZ9Xn.js",
+          "size": 217760,
+          "duration": 56.199999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CqAAADjj.js",
+          "size": 7806,
+          "duration": 23.5
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/ContactShadows-B7qZXqEW.js",
+          "size": 22751,
+          "duration": 39.90000009536743
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+          "size": 427,
+          "duration": 49
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CYH2XoI6.css",
+          "size": 1384,
+          "duration": 29.699999928474426
+        },
+        {
+          "name": "http://127.0.0.1:4173/assets/NotFoundPage-DEDo-_hi.css",
+          "size": 1207,
+          "duration": 51.200000047683716
+        },
+        {
+          "name": "http://127.0.0.1:4173/models/justice-gundam.glb",
+          "size": 4409192,
+          "duration": 24.899999976158142
+        }
+      ],
+      "missingAlt": []
+    },
+    "sizes": [
+      {
+        "width": 320,
+        "scrollWidth": 305,
+        "height": 2271,
+        "overflow": []
+      },
+      {
+        "width": 375,
+        "scrollWidth": 360,
+        "height": 2254,
+        "overflow": []
+      },
+      {
+        "width": 768,
+        "scrollWidth": 753,
+        "height": 2170,
+        "overflow": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "height": 1716,
+        "overflow": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 1822,
+        "overflow": []
+      },
+      {
+        "width": 2560,
+        "scrollWidth": 2545,
+        "height": 1832,
+        "overflow": []
+      }
+    ],
+    "bottom": {
+      "broken": [],
+      "height": 1832,
+      "buttons": [
+        {
+          "text": "Menu",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Beam Saber",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Shield",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Rifle",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Boomerang",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Lifter",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Hold Pose",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "Shake",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "RETURN TO IDLE",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "RESET VIEW",
+          "label": null,
+          "pressed": null
+        },
+        {
+          "text": "ENABLE MOTION",
+          "label": null,
+          "pressed": null
+        }
+      ]
+    },
+    "errors": [],
+    "failed": []
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "audit": {
+    "cls": 0.017872916110558374,
+    "lcp": 8100,
+    "long": [
+      53,
+      52,
+      109,
+      182,
+      513,
+      297,
+      76,
+      375,
+      362,
+      77,
+      50
+    ]
+  },
+  "text": "Skip to content\nCM\nChetan Mandiga\nMENU\nCHETAN MANDIGA\n\nAI · DEVELOPMENT · CREATIVE TECHNOLOGY\n\nSYSTEMS THAT\nACT\n\nI build intelligence into products.\n\nI turn ambitious ideas into reliable software through applied AI, product thinking, and memorable interaction design.\n\nExplore my work\nStart a conversation\nENTER THE MACHINE WORLD\nINITIALIZING GUNDAM MODEL\nI\nN\nI\nT\nI\nA\nL\nI\nZ\nI\nN\nG\n \nU\nN\nI\nT\nMOBILE SUIT / ONLINE\nThis is Chetan Srikant's playground. Step in.\n\nA closer look at the work, curiosity, and experiments behind the portfolio.\n\nGUNDAM PLAYGROUND\n\nDrag to inspect. Click for saber, double-click for shield, or choose an authored movement below.\n\nBeam Saber\nShield\nRifle\nBoomerang\nLifter\nHold Pose\nShake\nRETURN TO IDLE\nRESET VIEW\nEnable device motion for shake-to-throw.\nENABLE MOTION\nAreas of practice\n01\nAI APPLICATIONS\n\nGenAI · Retrieval · Computer vision · Forecasting\n\n02\nSOFTWARE DEVELOPMENT\n\nAPIs · Full-stack applications · Product interfaces\n\n03\nBUILDING END TO END\n\nModels · Logic · Systems · Product experience\n\nBETWEEN DISCIPLINES\nI build where AI, software, and imagination meet.\n\nFrom experiments to usable products, I turn ideas into things people can actually interact with.\n\n// PHILOSOPHY.MD\nBuild with intent.\n\nBuild systems that move with intent, adapt under pressure, and stay understandable when complexity rises. AI supplies leverage. Judgment gives it direction.\n\nSELECTED WORK / 03\nThree systems worth opening first.\n\nCurated technical work, presented without invented metrics or placeholder outcomes.\n\nPUBLIC-SECTOR AI / AI4TG\nTGSRTC Public Transport Demand Platform\n\nAn applied AI platform for public-transport demand planning, combining forecasting, interactive analysis, and a domain-focused assistant.\n\nFORECASTING\nINTERACTIVE ANALYSIS\nAI ASSISTANT\nREAD THE FULL CASE STUDY\n→\nGENAI / RETRIEVAL SYSTEMS\nConversational RAG Application\n\nA multi-turn retrieval application with persistent conversation state, Hugging Face embeddings, Groq inference, and a Streamlit interface.\n\nLANGGRAPH\nHUGGING FACE\nGROQ\nSTREAMLIT\nREAD THE FULL CASE STUDY\n→\nCOMPUTER VISION / SEARCH\nComputer Vision Image Search\n\nA visual-search workflow that detects objects with YOLOv11, indexes image content, and retrieves relevant images through a simple interface.\n\nYOLOV11\nPYTHON\nSTREAMLIT\nREAD THE FULL CASE STUDY\n→\n\nAI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · BUILD · EXPERIMENT · SHIP · LEARN · CREATE ·\n\nAI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · AI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION · AI · SOFTWARE · DEVELOPMENT · GENERATIVE AI · COMPUTER VISION ·\nBUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE · BUILD · EXPERIMENT · SHIP · LEARN · CREATE ·\nCURRENT DIRECTION\nWhat I’m focused on now.\n01\nAI applications\n\nBuilding more production-minded AI experiences.\n\n02\nSoftware development\n\nImproving architecture and end-to-end implementation.\n\n03\n",
+  "resources": [
+    {
+      "name": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+      "size": 1052,
+      "duration": 175
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/index-Bk9RJmCM.js",
+      "size": 91267,
+      "duration": 702.0999999046326
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/index-C9g5odAb.css",
+      "size": 11035,
+      "duration": 291.60000002384186
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/HomePage-DjxsYHcE.js",
+      "size": 17413,
+      "duration": 666.6000000238419
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/useReducedMotionPreference-B6jj26rb.js",
+      "size": 427,
+      "duration": 183.10000002384186
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/react-three-fiber.esm-DShaZ9Xn.js",
+      "size": 217760,
+      "duration": 2156.100000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/ScrollTrigger-CiEuWA-R.js",
+      "size": 45469,
+      "duration": 1252.1000000238419
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CqAAADjj.js",
+      "size": 7806,
+      "duration": 427.89999997615814
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/ContactShadows-B7qZXqEW.js",
+      "size": 22751,
+      "duration": 862.3999999761581
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/KineticTextLoader-CYH2XoI6.css",
+      "size": 1384,
+      "duration": 428.10000002384186
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/HomePage-ZceSjhBS.css",
+      "size": 11442,
+      "duration": 917.8999999761581
+    },
+    {
+      "name": "http://127.0.0.1:4173/assets/style-KFe7gUMZ.css",
+      "size": 26455,
+      "duration": 1195.3999999761581
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/hero-chetan-editorial.jpeg",
+      "size": 147279,
+      "duration": 4619.199999928474
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-12.jpeg",
+      "size": 110451,
+      "duration": 3612.100000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-08.jpeg",
+      "size": 95289,
+      "duration": 3255
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-02.jpeg",
+      "size": 259025,
+      "duration": 7984.600000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-09.jpeg",
+      "size": 101180,
+      "duration": 3428.399999976158
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-03.jpeg",
+      "size": 265568,
+      "duration": 11129.400000095367
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-07.jpeg",
+      "size": 100176,
+      "duration": 6511
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-10.jpeg",
+      "size": 99850,
+      "duration": 6687.600000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-06.jpeg",
+      "size": 109378,
+      "duration": 7952.100000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-01.jpeg",
+      "size": 223692,
+      "duration": 12658.100000023842
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-05.jpeg",
+      "size": 169730,
+      "duration": 11684.699999928474
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-11.jpeg",
+      "size": 221009,
+      "duration": 13365.699999928474
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/drift-wall/drift-04.jpeg",
+      "size": 90676,
+      "duration": 10814.200000047684
+    },
+    {
+      "name": "http://127.0.0.1:4173/images/work/computer-vision/vision-times-square.webp",
+      "size": 132350,
+      "duration": 13199
+    }
+  ]
+}

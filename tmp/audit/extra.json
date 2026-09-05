@@ -1,0 +1,24 @@
+{
+  "ctaHit": {
+    "button": {
+      "x": 20,
+      "y": 838.578125,
+      "w": 320,
+      "h": 46
+    },
+    "hit": "<div class=\"_dock_um10p_45\"><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/\" tabindex=\"0\" aria-current=\"page\" aria-label=\"Home\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m3 10 9-7 9 7\"></path><path d=\"M5 9v11h14V9M9 20v-6h6v6\"></path></svg></span><span class=\"_tooltip_um10p_162\">Home</span></a></div><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/about\" tabindex=\"0\" aria-label=\"About Me\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"3\"></circle><path d=\"M5 21c.7-4.4 3-6.5 7-6.5s6.3 2.1 7 6.5\"></path></svg></span><span class=\"_tooltip_um10p_162\">About Me</span></a></div><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/work\" tabindex=\"0\" aria-label=\"Work\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h7l2 2h9v11H3z\"></path><path d=\"M3 10h18\"></path></svg></span><span class=\"_tooltip_um10p_162\">Work</span></a></div><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/projects\" tabindex=\"0\" aria-label=\"Projects\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"></rect><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"></rect><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"></rect><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"></rect></svg></span><span class=\"_tooltip_um10p_162\">Projects</span></a></div><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/beyond\" tabindex=\"0\" aria-label=\"Beyond\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"8\"></circle><path d=\"m9 15 2-6 4 4-6 2Z\"></path></svg></span><span class=\"_tooltip_um10p_162\">Beyond</span></a></div><div class=\"_itemWrap_um10p_115\" style=\"width: 42px; height: 42px;\"><a class=\"_item_um10p_81\" href=\"/resume.pdf\" target=\"_blank\" rel=\"noopener noreferrer\" tabindex=\"0\" aria-label=\"Résumé (opens in a new tab)\"><span class=\"_icon_um10p_116\" style=\"width: 18px; height: 18px;\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 2h8l4 4v16H6z\"></path><path d=\"M14 2v5h5M9 12h6M9 16h6\"></path></svg></span><span class=\"_tooltip_um10p_162\">Résumé</span></a></div></div>",
+    "covered": true
+  },
+  "menu": {
+    "expanded": "true",
+    "links": "hidden"
+  },
+  "projectTabs": [
+    "Close",
+    "Close",
+    "Close",
+    "Close"
+  ],
+  "repository": "https://github.com/ChetanSrikant/Zap",
+  "errors": []
+}

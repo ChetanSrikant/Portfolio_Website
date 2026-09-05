@@ -1,0 +1,102 @@
+{
+  "workCTA": {
+    "y": 5238,
+    "visible": [
+      "This is Chetan Srikant's playground. Step in.",
+      "Three systems worth opening first."
+    ],
+    "navHidden": "true"
+  },
+  "contactCTA": {
+    "y": 9627,
+    "visible": [
+      "This is Chetan Srikant's playground. Step in."
+    ],
+    "text": "CURRENT DIRECTION\nWhat I’m focused on now.\n01\nAI applications\n\nBuilding more production-minded AI experiences.\n\n02\nSoftware development\n\nImproving architecture and end-to-end implementation.\n\n03\nDSA\n\nStrengthening fundamentals and problem solving.\n\n0"
+  },
+  "reducedBeyond": {
+    "stacking": "false",
+    "carousel": "false"
+  },
+  "reducedScrollStart": 0,
+  "reducedScroll150ms": 141,
+  "reducedScrollEnd": 5282,
+  "modalTabs": [
+    {
+      "text": "Previous artifact",
+      "inside": true,
+      "outline": "rgb(255, 255, 255) solid 3px"
+    },
+    {
+      "text": "Next artifact",
+      "inside": true,
+      "outline": "rgb(255, 255, 255) solid 3px"
+    },
+    {
+      "text": "ARCHITECTURE\nForecasting decision flow\nTRANSPORT DATA\n↓\nPREPARATION\n↓\nFORECAST\n↓\nINTERACTIVE ANALYSIS\n↓\nPLANNING CONTEXT\nShows the supported path from transport data to forecast interpretation. It does not claim operational deployment.\n01 / 03",
+      "inside": true,
+      "outline": "rgb(244, 244, 240) auto 3px"
+    },
+    {
+      "text": "Explore all projects\n↗",
+      "inside": false,
+      "outline": "rgb(201, 162, 75) solid 1px"
+    },
+    {
+      "text": "Home\n↗",
+      "inside": false,
+      "outline": "rgb(244, 244, 240) none 3px"
+    },
+    {
+      "text": "About\n↗",
+      "inside": false,
+      "outline": "rgb(244, 244, 240) none 3px"
+    }
+  ],
+  "escapeCloses": true,
+  "moves": [
+    {
+      "label": "Beam Saber",
+      "disabled": false,
+      "outline": "rgb(160, 160, 155) none 3px"
+    },
+    {
+      "label": "Shield",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    },
+    {
+      "label": "Rifle",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    },
+    {
+      "label": "Boomerang",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    },
+    {
+      "label": "Lifter",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    },
+    {
+      "label": "Hold Pose",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    },
+    {
+      "label": "Reset view",
+      "disabled": false,
+      "outline": "rgb(201, 162, 75) solid 2px"
+    }
+  ],
+  "frames": {
+    "count": 180,
+    "over33": 1,
+    "max": 33.5,
+    "mean": 16.717777777512865
+  },
+  "errors": [],
+  "failed": []
+}

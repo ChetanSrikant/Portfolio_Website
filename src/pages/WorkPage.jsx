@@ -46,14 +46,14 @@ const VISION_PRODUCT_VISUAL = {
   copy: "Three compact records show the source context, the object collection, and the detection metadata that supports visual retrieval.",
   items: [
     {
-      src: "/images/work/computer-vision/vision-times-square.webp",
-      alt: "A city street scene used as visual-search source context",
-      caption: "01 / Source context",
+      src: "/images/work/computer-vision/vision-detection-city.png",
+      alt: "Object-detection result identifying buildings, people, bags, a bicycle, and a pushcart in a city square",
+      caption: "01 / Urban detection result",
     },
     {
-      src: "/images/work/computer-vision/vision-object-collection.webp",
-      alt: "A collection of varied objects arranged for visual-search reference",
-      caption: "02 / Object collection",
+      src: "/images/work/computer-vision/vision-detection-interior.png",
+      alt: "Object-detection result identifying furniture and household objects in an interior scene",
+      caption: "02 / Interior detection result",
     },
     {
       src: "/images/work/computer-vision/vision-detections.webp",
