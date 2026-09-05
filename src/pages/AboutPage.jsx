@@ -1,10 +1,13 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InternalPageShell from "../components/InternalPageShell.jsx";
+import CursorReactiveConstellationField from "../components/CursorReactiveConstellationField.jsx";
 import ConvocationGallery from "../components/about/ConvocationGallery.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
+import { ThreeDPaper } from "../shaders/3d-paper/ThreeDPaper.tsx";
+import "@designcodeio/threeui/style.css";
 import {
   ContextChips,
   LessonFold,
@@ -23,6 +26,15 @@ const CURIOSITIES = [
   ["Automation", "Repeated effort often reveals a process that software can make calmer and more dependable."],
   ["DSA / problem solving", "Fundamentals sharpen the way I reason about constraints, tradeoffs, and edge cases."],
   ["Interaction design", "A system only becomes useful when someone can understand what it is doing and what to do next."],
+];
+
+const LANGUAGE_MARKS = [
+  { name: "Python", src: "https://cdn.simpleicons.org/python/e0bb63" },
+  { name: "JavaScript", src: "https://cdn.simpleicons.org/javascript/e0bb63" },
+  { name: "React", src: "https://cdn.simpleicons.org/react/e0bb63" },
+  { name: "Node.js", src: "https://cdn.simpleicons.org/nodedotjs/e0bb63" },
+  { name: "TensorFlow", src: "https://cdn.simpleicons.org/tensorflow/e0bb63" },
+  { name: "OpenCV", src: "https://cdn.simpleicons.org/opencv/e0bb63" },
 ];
 
 const CONVOCATION_GALLERY = [
@@ -183,7 +195,6 @@ function ExplorationArtifact({ className, title, children }) {
 
 export default function AboutPage() {
   const pageRef = useRef(null);
-  const languageVideoRef = useRef(null);
   const galleryTriggerRef = useRef(null);
   const [activeCuriosity, setActiveCuriosity] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -203,20 +214,6 @@ export default function AboutPage() {
     setGalleryOpen(false);
     window.requestAnimationFrame(() => galleryTriggerRef.current?.focus());
   };
-
-  useEffect(() => {
-    const video = languageVideoRef.current;
-    if (!video) return undefined;
-
-    if (reducedMotion) {
-      video.pause();
-      video.currentTime = 0;
-      return undefined;
-    }
-
-    video.play().catch(() => {});
-    return () => video.pause();
-  }, [reducedMotion]);
 
   useLayoutEffect(() => {
     const root = pageRef.current;
@@ -279,6 +276,13 @@ export default function AboutPage() {
   return (
     <InternalPageShell title="About" showAmbient={false} footerVariant="about">
       <div ref={pageRef} className={styles.page}>
+        <div className={styles.constellationBackdrop}>
+          <CursorReactiveConstellationField
+            reducedMotion={reducedMotion}
+            connectionOpacity={0.2}
+            connectionLineWidth={1.25}
+          />
+        </div>
         <header id="origin" className={styles.hero} tabIndex="-1">
           <div className={styles.heroCopy}>
             <span className={styles.chapterLabel} data-opening-copy>ABOUT / 01</span>
@@ -378,29 +382,46 @@ export default function AboutPage() {
               <h3 id="language-feature-title">Languages became working material.</h3>
               <p>I learned each one by putting it under pressure: prototypes, interfaces, data experiments, and systems that had to behave beyond the demo.</p>
             </div>
-            <figure className={styles.languageFeatureMedia}>
-              <video
-                ref={languageVideoRef}
-                key={reducedMotion ? "reduced-motion" : "motion"}
-                src="/media/tech-stack-showcase.mp4"
-                autoPlay={!reducedMotion}
-                controls={reducedMotion}
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                aria-label="Programming languages and technologies moving across the screen"
-              />
-            </figure>
+          <figure className={styles.languageFeatureMedia}>
+            <video
+              key={reducedMotion ? "reduced-motion" : "motion"}
+              src="/media/tech-stack-showcase.mp4"
+              autoPlay={!reducedMotion}
+              controls={reducedMotion}
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              aria-label="Programming languages and technologies moving across the screen"
+            />
+          </figure>
+            <ul className={styles.languageMarks} aria-label="Languages and tools used across projects">
+              {LANGUAGE_MARKS.map((mark) => (
+                <li key={mark.name} aria-label={mark.name} title={mark.name}>
+                  <img src={mark.src} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+                </li>
+              ))}
+            </ul>
           </article>
         </section>
 
         <section id="real-world" className={styles.realWorld} tabIndex="-1" aria-labelledby="real-world-title">
-          <div className={styles.realWorldStatement} data-reveal>
-            <span className={styles.chapterLabel}>REAL WORLD / 04</span>
-            <h2 id="real-world-title">The work moved beyond assignments.<br /><strong>The stakes became real.</strong></h2>
+          <div className={styles.realWorldLead}>
+            <div className={styles.realWorldLeadCopy}>
+              <div className={styles.realWorldStatement} data-reveal>
+                <span className={styles.chapterLabel}>REAL WORLD / 04</span>
+                <h2 id="real-world-title">The work moved beyond assignments.<br /><strong>The stakes became real.</strong></h2>
+              </div>
+              <p className={styles.realWorldCopy} data-reveal>College taught me how to learn and build. Real-world environments added constraints, collaboration, users, reliability, and responsibility.</p>
+            </div>
+            <div className={styles.realWorldPaper} data-reveal>
+              <div className={styles.paperStageRail} aria-hidden="true">
+                <span>Interactive builder profile</span>
+                <span>Drag + hover</span>
+              </div>
+              <ThreeDPaper className={styles.realWorldPaperFrame} />
+            </div>
           </div>
-          <p className={styles.realWorldCopy} data-reveal>College taught me how to learn and build. Real-world environments added constraints, collaboration, users, reliability, and responsibility.</p>
           <div className={styles.timelineShell} aria-label="Education and professional journey">
             <span className={styles.timelineTrack} aria-hidden="true"><i className={styles.timelineFill} /></span>
             <ol className={styles.timeline}>

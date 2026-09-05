@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Footer.module.css";
 
 const FOOTER_GROUPS = [
@@ -83,14 +82,6 @@ function FooterLink({ link }) {
       </span>
     </>
   );
-
-  if (link.action) {
-    return (
-      <button type="button" className={styles.link} onClick={link.action}>
-        {content}
-      </button>
-    );
-  }
 
   return (
     <a

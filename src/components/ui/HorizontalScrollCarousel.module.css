@@ -1,0 +1,22 @@
+.root { position: relative; margin-top: 48px; background: var(--bg); }
+.viewport { position: relative; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--accent-dim) transparent; padding: 40px 0 20px; }
+.root[data-animated="true"] .viewport { position: sticky; top: 0; height: 100dvh; display: flex; align-items: center; overflow: hidden; padding-block: 100px 80px; }
+.viewport:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+.hint { position: absolute; top: 8px; left: 0; color: var(--text-muted); font: 8px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+.root[data-animated="true"] .hint { top: 100px; }
+.track { display: flex; gap: 20px; width: max-content; }
+.figure { flex: 0 0 auto; width: clamp(290px, 33vw, 450px); margin: 0; }
+.frame { height: clamp(280px, 52dvh, 450px); overflow: hidden; background: var(--bg-secondary); border-radius: 4px; }
+.frame img { object-position: center 35%; }
+.figure[data-kind="street"] .frame img { object-position: center 54%; transform: scale(1.8); }
+.figure figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; color: var(--text-secondary); font: 8px/1.6 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+.figure figcaption span:last-child { color: var(--text-muted); text-align: right; }
+@media (max-width: 900px) {
+  .viewport { scroll-snap-type: x mandatory; }
+  .figure { width: min(76vw, 420px); scroll-snap-align: start; }
+  .frame { height: clamp(270px, 55vh, 400px); }
+  .track { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewport { scroll-snap-type: x proximity; }
+}

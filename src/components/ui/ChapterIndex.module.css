@@ -1,0 +1,70 @@
+.index {
+  position: fixed;
+  top: 50%;
+  right: clamp(16px, 2vw, 32px);
+  z-index: 70;
+  display: grid;
+  gap: 12px;
+  padding: 6px 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-50% + 8px));
+  transition: opacity 240ms ease, transform 320ms cubic-bezier(.2,.75,.2,1);
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -11px;
+  width: 1px;
+  background: rgba(248,245,238,.12);
+}
+
+.index a {
+  position: relative;
+  color: rgba(248,245,238,.3);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: .1em;
+  line-height: 1;
+  transition: color 180ms ease;
+}
+
+.index a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -13px;
+  width: 5px;
+  height: 1px;
+  background: transparent;
+  transform: translateY(-50%);
+}
+
+.index a:hover,
+.index a:focus-visible,
+.index .active {
+  color: rgba(248,245,238,.9);
+}
+
+.index .active::before {
+  background: var(--accent-bright);
+}
+
+@media (max-width: 980px) {
+  .index { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index,
+  .index a {
+    transition: none;
+  }
+}

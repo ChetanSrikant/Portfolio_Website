@@ -1,0 +1,7 @@
+.stack { position: relative; }
+.item { position: relative; padding-bottom: 18px; }
+.surface { transform-origin: center top; background: var(--bg-elevated); border: 1px solid var(--border-default); padding: 28px clamp(20px, 4vw, 60px); }
+.stack[data-stacking="true"] { padding-bottom: 56px; }
+.stack[data-stacking="true"] .item { position: sticky; padding-bottom: 48px; }
+.stack[data-stacking="true"] .surface { min-height: 250px; display: grid; align-items: center; }
+@media (max-width: 900px) { .surface { padding: 12px 22px; } }

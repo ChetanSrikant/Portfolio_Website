@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Nav from "./Nav.jsx";
 import FloatingDock from "./FloatingDock.jsx";
 import Footer from "./Footer.jsx";

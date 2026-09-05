@@ -131,7 +131,7 @@ function TgsrtcPublicRecord() {
             <span>LinkedIn</span>
             <span>Recognition post</span>
           </div>
-          <div className={`${styles.linkedinPostViewport} ${styles.linkedinPostViewportPrimary}`}>
+          <div className={styles.linkedinPostViewport}>
             <span className={styles.linkedinPostLoading}>Loading recognition post</span>
             <iframe
               src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7347936780177874944?collapsed=1"
@@ -149,11 +149,11 @@ function TgsrtcPublicRecord() {
             <span>LinkedIn</span>
             <span>Winning solution</span>
           </div>
-          <div className={`${styles.linkedinPostViewport} ${styles.linkedinPostViewportSecondary}`}>
+          <div className={styles.linkedinPostViewport}>
             <span className={styles.linkedinPostLoading}>Loading winning-solution post</span>
             <iframe
               src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7346432007914037248?collapsed=1"
-              height="541"
+              height="627"
               width="504"
               frameBorder="0"
               allowFullScreen

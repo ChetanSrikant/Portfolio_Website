@@ -6,7 +6,6 @@
  */
 import * as THREE from "three";
 
-export const INTRO_HEADING_DEG = 11;
 export const HERO_NAV_THRESHOLD = 0.25;
 
 export const HOME_STAGE_KEYS = Object.freeze({
@@ -279,10 +278,6 @@ export function getIntroToPhilosophyPathPoints(viewportWidth, divisions = 64) {
     });
 }
 
-export function getStageLabel(progress) {
-  return getHomeStage(progress).label;
-}
-
 export function scrollToStageProgress(fraction) {
   const wrapper = document.getElementById("gundam-wrapper");
   if (!wrapper) return;
@@ -291,17 +286,6 @@ export function scrollToStageProgress(fraction) {
   const total = wrapper.offsetHeight - window.innerHeight;
   const target = wrapper.offsetTop + total * clampedFraction;
   window.scrollTo({ top: target, behavior: "smooth" });
-}
-
-export function scrollToFinalPlayground() {
-  const wrapper = document.getElementById("gundam-wrapper");
-  if (!wrapper) return;
-
-  const total = wrapper.offsetHeight - window.innerHeight;
-  window.scrollTo({
-    top: wrapper.offsetTop + total * HOME_TARGETS.playground,
-    behavior: "auto",
-  });
 }
 
 function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {

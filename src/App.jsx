@@ -1,11 +1,12 @@
-import React, { Suspense, lazy } from "react";
-import { CredentialsPage, NotFoundPage } from "./pages/RouteStatusPage.jsx";
+import { Suspense, lazy } from "react";
+import { CredentialsPage } from "./pages/RouteStatusPage.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
 const WorkPage = lazy(() => import("./pages/WorkPage.jsx"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage.jsx"));
 const BeyondPage = lazy(() => import("./pages/BeyondPage.jsx"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage.jsx"));
 
 const PAGE_ROUTES = {
   "/about": AboutPage,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SplitReveal from "./SplitReveal.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";

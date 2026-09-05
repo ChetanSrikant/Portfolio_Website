@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360">
+  <defs>
+    <radialGradient id="moon" cx="32%" cy="22%" r="76%">
+      <stop stop-color="#b5bdc5"/>
+      <stop offset=".44" stop-color="#656f7a"/>
+      <stop offset=".8" stop-color="#252c36"/>
+      <stop offset="1" stop-color="#080b11"/>
+    </radialGradient>
+    <clipPath id="edge"><circle cx="950" cy="334" r="250"/></clipPath>
+  </defs>
+  <path fill="#0b0e15" d="M0 0h1440v360H0z"/>
+  <g fill="#abb9c8">
+    <circle cx="154" cy="64" r="1"/><circle cx="332" cy="232" r=".8"/>
+    <circle cx="461" cy="53" r="1.1"/><circle cx="559" cy="157" r=".7"/>
+    <circle cx="631" cy="91" r="1.4"/><circle cx="729" cy="28" r=".8"/>
+    <circle cx="807" cy="62" r="1"/><circle cx="934" cy="34" r=".6"/>
+    <circle cx="1127" cy="58" r="1.4"/><circle cx="1284" cy="177" r="1"/>
+    <circle cx="1367" cy="42" r=".8"/><circle cx="1244" cy="307" r="1.2"/>
+    <circle cx="562" cy="304" r="1"/><circle cx="385" cy="114" r=".6"/>
+  </g>
+  <circle cx="950" cy="334" r="250" fill="url(#moon)"/>
+  <g clip-path="url(#edge)" fill="#27303b" opacity=".3">
+    <ellipse cx="851" cy="149" rx="45" ry="16" transform="rotate(-24 851 149)"/>
+    <ellipse cx="776" cy="251" rx="30" ry="40" transform="rotate(26 776 251)"/>
+    <ellipse cx="979" cy="206" rx="53" ry="42"/>
+    <ellipse cx="906" cy="316" rx="72" ry="39" transform="rotate(22 906 316)"/>
+    <ellipse cx="1083" cy="285" rx="27" ry="50"/>
+  </g>
+  <g clip-path="url(#edge)" fill="none" stroke="#b5bdc5" opacity=".17">
+    <ellipse cx="851" cy="149" rx="48" ry="18" transform="rotate(-24 851 149)"/>
+    <ellipse cx="979" cy="206" rx="56" ry="45"/>
+    <circle cx="871" cy="245" r="19"/><circle cx="1038" cy="144" r="12"/>
+  </g>
+</svg>

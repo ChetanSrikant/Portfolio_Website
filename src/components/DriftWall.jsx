@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useMemo, useRef } from "react";
+import { forwardRef, memo, useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import styles from "./DriftWall.module.css";
 
 function seededRandom(seed) {

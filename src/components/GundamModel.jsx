@@ -1,8 +1,7 @@
-import React, {
+import {
   forwardRef,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
 } from "react";
 import * as THREE from "three";
@@ -25,7 +24,6 @@ export const CLIPS = {
 const DOUBLE_CLICK_MS = 280;
 const DRAG_THRESHOLD_PX = 6;
 const DRAG_RADIANS_PER_PX = 0.009;
-const MANUAL_LIFTER_CLIP = `${CLIPS.LIFTER}-MANUAL`;
 
 const GundamModel = forwardRef(function GundamModel(
   {
@@ -53,35 +51,7 @@ const GundamModel = forwardRef(function GundamModel(
 ) {
   const group = useRef();
   const { scene, animations } = useGLTF(MODEL_URL);
-  const playableAnimations = useMemo(() => {
-    const lifter = animations.find((clip) => clip.name === CLIPS.LIFTER);
-    const idle = animations.find((clip) => clip.name === CLIPS.IDLE);
-    if (!lifter || !idle) return animations;
-
-    // The authored Lifter action translates the rig root and several detached
-    // accessories to support the scroll-flight composition. Played raw in the
-    // fixed Playground camera, those translations pull the model apart. The
-    // manual variant keeps Idle's assembled positions and scales, but retains
-    // Lifter's authored rotations so the action reads clearly without parts
-    // leaving the rig. Automatic scroll choreography still uses the untouched
-    // original Lifter clip below.
-    const idleTracks = new Map(idle.tracks.map((track) => [track.name, track]));
-    const manualTracks = lifter.tracks.map((track) => {
-      if (track.name.endsWith(".position") || track.name.endsWith(".scale")) {
-        const stableTrack = idleTracks.get(track.name);
-        if (stableTrack) return stableTrack.clone();
-      }
-      return track.clone();
-    });
-    const manualLifter = new THREE.AnimationClip(
-      MANUAL_LIFTER_CLIP,
-      lifter.duration,
-      manualTracks
-    );
-
-    return [...animations, manualLifter];
-  }, [animations]);
-  const { actions, mixer } = useAnimations(playableAnimations, group);
+  const { actions, mixer } = useAnimations(animations, group);
   const renderer = useThree((state) => state.gl);
   const rootScene = useThree((state) => state.scene);
   const camera = useThree((state) => state.camera);
@@ -259,10 +229,7 @@ const GundamModel = forwardRef(function GundamModel(
       .filter((clipName) => clipName !== CLIPS.IDLE)
       .map((clipName) => ({
         clipName,
-        actionName:
-          clipName === CLIPS.LIFTER && actions[MANUAL_LIFTER_CLIP]
-            ? MANUAL_LIFTER_CLIP
-            : clipName,
+        actionName: clipName,
       }))
       .filter(({ actionName }) => actions[actionName]);
     if (!queue.length) {
@@ -427,48 +394,52 @@ const GundamModel = forwardRef(function GundamModel(
       }
     }
 
+    const targetRotationDamping = frameSettling
+      ? Math.max(dampFactor, 10)
+      : shouldScrub
+        ? Math.max(dampFactor, 7)
+        : dampFactor;
+    const targetPositionDamping = shouldScrub || frameSettling
+      ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
+      : positionDampFactor;
+    const targetScaleDamping = shouldScrub || frameSettling
+      ? Math.max(scaleDampFactor, frameSettling ? 9 : 6)
+      : scaleDampFactor;
+
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
       frameRotationY + manualRotationTargetY.current,
-      frameSettling ? Math.max(dampFactor, 10) : dampFactor,
+      targetRotationDamping,
       delta
     );
     group.current.rotation.z = THREE.MathUtils.damp(
       group.current.rotation.z,
       frameRotationZ,
-      shouldScrub ? Math.max(dampFactor, 7) : dampFactor,
+      targetRotationDamping,
       delta
     );
     group.current.position.x = THREE.MathUtils.damp(
       group.current.position.x,
       framePosition[0],
-      shouldScrub || frameSettling
-        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
-        : positionDampFactor,
+      targetPositionDamping,
       delta
     );
     group.current.position.y = THREE.MathUtils.damp(
       group.current.position.y,
       framePosition[1],
-      shouldScrub || frameSettling
-        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
-        : positionDampFactor,
+      targetPositionDamping,
       delta
     );
     group.current.position.z = THREE.MathUtils.damp(
       group.current.position.z,
       framePosition[2],
-      shouldScrub || frameSettling
-        ? Math.max(positionDampFactor, frameSettling ? 10 : 7)
-        : positionDampFactor,
+      targetPositionDamping,
       delta
     );
     const dampedScale = THREE.MathUtils.damp(
       group.current.scale.x,
       frameScale,
-      shouldScrub || frameSettling
-        ? Math.max(scaleDampFactor, frameSettling ? 9 : 6)
-        : scaleDampFactor,
+      targetScaleDamping,
       delta
     );
     group.current.scale.setScalar(dampedScale);

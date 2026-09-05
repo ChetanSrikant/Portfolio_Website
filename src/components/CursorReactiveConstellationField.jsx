@@ -5,8 +5,12 @@ import styles from "./CursorReactiveConstellationField.module.css";
 const POINTER_MESSAGE = "portfolio:particle-pointer";
 const BRIDGE_MARKER = "data-portfolio-pointer-bridge";
 
-function patchParticleDriftSource(source) {
+function patchParticleDriftSource(source, connectionOpacity, connectionLineWidth) {
   if (!source || source.includes(BRIDGE_MARKER)) return source;
+
+  const safeConnectionOpacity = Math.min(1, Math.max(0, connectionOpacity));
+  const safeConnectionLineWidth = Math.min(4, Math.max(0.25, connectionLineWidth));
+  const connectionStroke = `ctx.strokeStyle = \`rgba(210, 205, 190, \${${safeConnectionOpacity} * (1 - d/120)})\`;`;
 
   const pointerBridge = `
 <script ${BRIDGE_MARKER}>
@@ -36,8 +40,9 @@ function patchParticleDriftSource(source) {
     )
     .replace(
       "ctx.strokeStyle = `rgba(156, 163, 175, ${0.15 * (1 - d/120)})`;",
-      "ctx.strokeStyle = `rgba(210, 205, 190, ${0.08 * (1 - d/120)})`;",
+      connectionStroke,
     )
+    .replace("ctx.lineWidth = 0.5;", `ctx.lineWidth = ${safeConnectionLineWidth};`)
     .replace(
       "let dist = Math.hypot(mouse.x - n.x, mouse.y - n.y);",
       "let dist = Math.hypot(mouse.x - n.x, mouse.y - n.y); const strength = Math.max(0, 1 - dist / 180);",
@@ -69,7 +74,11 @@ function patchParticleDriftSource(source) {
     .replace("</body>", `${pointerBridge}\n</body>`);
 }
 
-export default function CursorReactiveConstellationField({ reducedMotion = false }) {
+export default function CursorReactiveConstellationField({
+  reducedMotion = false,
+  connectionOpacity = 0.08,
+  connectionLineWidth = 0.5,
+}) {
   const hostRef = useRef(null);
   const iframeRef = useRef(null);
   const [patchedSource, setPatchedSource] = useState("");
@@ -79,8 +88,8 @@ export default function CursorReactiveConstellationField({ reducedMotion = false
     const source = iframe?.getAttribute("srcdoc");
     if (!iframe || !source) return;
 
-    setPatchedSource(patchParticleDriftSource(source));
-  }, []);
+    setPatchedSource(patchParticleDriftSource(source, connectionOpacity, connectionLineWidth));
+  }, [connectionLineWidth, connectionOpacity]);
 
   useEffect(() => {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");

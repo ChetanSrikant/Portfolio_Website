@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CLIPS } from "./GundamModel.jsx";
 import styles from "./Playground.module.css";
 

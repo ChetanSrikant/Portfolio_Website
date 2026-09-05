@@ -1,4 +1,4 @@
-import React, {
+import {
   Suspense,
   useCallback,
   useEffect,
@@ -24,14 +24,12 @@ import {
   HOME_STAGE,
   HOME_STAGE_KEYS,
   HOME_STAGES,
-  HOME_TARGETS,
 } from "../config/home.js";
 import PlaygroundContent from "./Playground.jsx";
 import DriftWall from "./DriftWall.jsx";
 import DecryptedText from "./DecryptedText.jsx";
 import styles from "./GundamStage.module.css";
 import KineticTextLoader from "./KineticTextLoader.jsx";
-import CursorReactiveConstellationField from "./CursorReactiveConstellationField.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,7 +136,7 @@ function TransitionPathDebug({ viewportWidth }) {
   );
 }
 
-function MovingContactShadow({ motionRef, viewportWidth }) {
+function MovingContactShadow({ motionRef, viewportWidth, reducedQuality = false }) {
   const shadowRef = useRef(null);
 
   useFrame((_, delta) => {
@@ -166,14 +164,17 @@ function MovingContactShadow({ motionRef, viewportWidth }) {
         scale={12}
         blur={2.4}
         far={4}
-        resolution={viewportWidth <= 720 ? 256 : 512}
+        resolution={reducedQuality || viewportWidth <= 720 ? 256 : 512}
         color="#000000"
       />
     </group>
   );
 }
 
-export default function GundamStage({ gundamApiRef, children }) {
+export default function GundamStage({
+  gundamApiRef,
+  children,
+}) {
   const wrapperRef = useRef(null);
   const canvasLayerRef = useRef(null);
   const initializationRef = useRef(null);
@@ -577,7 +578,7 @@ export default function GundamStage({ gundamApiRef, children }) {
       aria-label="Interactive Gundam portfolio experience"
     >
       <div className={styles.sticky}>
-        <CursorReactiveConstellationField reducedMotion={reducedMotion} />
+        <div className={styles.lightweightBackground} aria-hidden="true" />
         <DriftWall
           ref={driftWallRef}
           items={DRIFT_WALL_ITEMS}

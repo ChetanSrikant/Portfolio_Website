@@ -1,4 +1,3 @@
-import React from "react";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import styles from "./KineticTextLoader.module.css";
 

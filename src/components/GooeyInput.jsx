@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import { useId, useState } from "react";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import styles from "./GooeyInput.module.css";
 

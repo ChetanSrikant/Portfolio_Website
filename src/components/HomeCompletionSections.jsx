@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import GlitchText from "./GlitchText.jsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,12 +36,6 @@ const PROJECTS = [
     summary:
       "An applied AI platform for public-transport demand planning, combining forecasting, interactive analysis, and a domain-focused assistant.",
     stack: ["Forecasting", "Interactive analysis", "AI assistant"],
-    steps: ["Ridership + routes", "Forecast", "Explore", "Plan"],
-    evidence: [
-      "Forecasting workflow for demand analysis",
-      "Interactive planning and analysis layer",
-      "Domain-focused assistant for guided exploration",
-    ],
   },
   {
     id: "rag",
@@ -51,12 +45,6 @@ const PROJECTS = [
     summary:
       "A multi-turn retrieval application with persistent conversation state, Hugging Face embeddings, Groq inference, and a Streamlit interface.",
     stack: ["LangGraph", "Hugging Face", "Groq", "Streamlit"],
-    steps: ["Source docs", "Embeddings", "Retrieve", "State", "Answer"],
-    evidence: [
-      "LangGraph conversation-state management",
-      "Hugging Face embeddings for retrieval",
-      "Groq inference over retrieved document chunks",
-    ],
   },
   {
     id: "vision",
@@ -66,12 +54,6 @@ const PROJECTS = [
     summary:
       "A visual-search workflow that detects objects with YOLOv11, indexes image content, and retrieves relevant images through a simple interface.",
     stack: ["YOLOv11", "Python", "Streamlit"],
-    steps: ["Image", "Detect", "Index", "Query", "Results"],
-    evidence: [
-      "YOLOv11 object-detection stage",
-      "Searchable visual-content index",
-      "Query and retrieval interface",
-    ],
   },
 ];
 

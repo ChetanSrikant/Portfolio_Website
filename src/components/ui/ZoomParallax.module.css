@@ -1,0 +1,227 @@
+.root {
+  position: relative;
+  height: 260vh;
+  min-height: 1800px;
+  background: var(--bg);
+}
+
+.entryLabel {
+  position: absolute;
+  top: 30px;
+  left: var(--edge-pad-x);
+  z-index: 6;
+  color: rgba(224,187,99,.72);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.composition {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.tile {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+}
+
+.zoomPlane {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0b0b;
+  box-shadow: inset 0 0 0 1px rgba(248,245,238,.12);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.progressiveImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  background-color: #0b0b0b;
+  background-image: var(--image-placeholder);
+  background-position: center;
+  background-size: cover;
+}
+
+.progressiveImage img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.progressiveImage.imageLoaded img {
+  opacity: 1;
+}
+
+.tile figcaption,
+.staticFigure figcaption {
+  color: rgba(248,245,238,.52);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: .13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.tile figcaption {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  white-space: nowrap;
+}
+
+.exitVeil {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.tile[data-layout="primary"] {
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: clamp(430px, 42vw, 680px);
+  aspect-ratio: 1599 / 899;
+  transform: translate(-50%, -50%);
+}
+
+.tile[data-layout="city"] {
+  top: 8%;
+  left: 6%;
+  width: clamp(150px, 15vw, 238px);
+  aspect-ratio: 736 / 981;
+}
+
+.tile[data-layout="group"] {
+  right: 4%;
+  bottom: 7%;
+  width: clamp(300px, 28vw, 450px);
+  aspect-ratio: 1280 / 720;
+}
+
+.tile[data-layout="ncc"] {
+  bottom: 9%;
+  left: 8%;
+  width: clamp(110px, 10vw, 165px);
+  aspect-ratio: 1084 / 1445;
+}
+
+.tile[data-layout="basketball"] {
+  top: 8%;
+  right: 8%;
+  width: clamp(95px, 9vw, 145px);
+  aspect-ratio: 906 / 1599;
+}
+
+.tile[data-layout="detail"] {
+  top: 17%;
+  left: 27%;
+  width: clamp(105px, 10vw, 158px);
+  aspect-ratio: 736 / 1308;
+}
+
+.staticRoot {
+  padding: 20px var(--edge-pad-x) 96px;
+  background: var(--bg);
+}
+
+.staticGallery {
+  width: 100%;
+  max-width: var(--content-width);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px 18px;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.staticFigure {
+  width: 100%;
+  margin: 0;
+}
+
+.staticFigure .progressiveImage {
+  height: auto;
+  aspect-ratio: var(--static-ratio, 4 / 5);
+  background-color: #0b0b0b;
+  box-shadow: inset 0 0 0 1px rgba(248,245,238,.12);
+}
+
+.staticFigure figcaption {
+  margin-top: 10px;
+}
+
+.staticFigure[data-index="0"] {
+  grid-column: 1 / -1;
+  --static-ratio: 1599 / 899;
+}
+
+.staticFigure[data-index="1"] { --static-ratio: 736 / 981; }
+.staticFigure[data-index="2"] {
+  grid-column: 1 / -1;
+  --static-ratio: 1280 / 720;
+}
+.staticFigure[data-index="3"] { width: 78%; --static-ratio: 1084 / 1445; }
+.staticFigure[data-index="4"] { width: 72%; justify-self: end; --static-ratio: 906 / 1599; }
+.staticFigure[data-index="5"] { width: 82%; --static-ratio: 736 / 1308; }
+.staticFigure[data-index="6"] { width: 78%; justify-self: end; --static-ratio: 1080 / 1920; }
+
+@media (max-width: 1050px) {
+  .root {
+    height: 245vh;
+  }
+
+  .tile[data-layout="primary"] { width: clamp(390px, 48vw, 520px); }
+  .tile[data-layout="city"] { left: 4%; width: clamp(130px, 17vw, 180px); }
+  .tile[data-layout="group"] { right: 3%; width: clamp(250px, 31vw, 340px); }
+  .tile[data-layout="ncc"] { left: 5%; width: clamp(95px, 12vw, 130px); }
+  .tile[data-layout="basketball"] { right: 5%; width: clamp(82px, 10vw, 112px); }
+  .tile[data-layout="detail"] { left: 23%; width: clamp(92px, 12vw, 128px); }
+}
+
+@media (max-width: 700px) {
+  .entryLabel { display: none; }
+
+  .staticRoot {
+    padding: 12px 20px 76px;
+  }
+
+  .staticGallery {
+    gap: 58px 14px;
+  }
+
+  .staticFigure[data-index="1"] { width: 90%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoomPlane {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .progressiveImage img {
+    transition: none;
+  }
+}
