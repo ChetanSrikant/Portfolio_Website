@@ -9,6 +9,8 @@ import styles from "./InternalPages.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const RobotCompanion = React.lazy(() => import("../components/RobotCompanion.jsx"));
+
 const CASES = [
   { id: "tgsrtc", number: "01", title: "TGSRTC Public Transport Demand Platform", category: "Applied AI / Forecasting / Decision Support", problem: "Make public-transport forecasting outputs easier to inspect, explore, and communicate." },
   { id: "rag", number: "02", title: "Conversational RAG Application", category: "GenAI / Retrieval", problem: "Keep multi-turn answers grounded in retrieved source material." },
@@ -24,14 +26,15 @@ const RAG_STATES = [
 ];
 
 const RAG_PRODUCT_VISUAL = {
-  eyebrow: "Product view / Conceptual",
+  eyebrow: "Product view",
   title: "Grounded answers, visible sources.",
   copy: "A visual interpretation of the verified retrieval flow: question, sources, grounded answer, and conversation state in one inspectable interface.",
+  modelSrc: "/models/cute-robot-companion.glb",
   items: [
     {
       src: "/images/work/conversational-rag-phone.png",
-      alt: "Conceptual dark-mode Conversational RAG interface displayed on a phone held in one hand",
-      caption: "Interface study / conceptual, not a production screenshot",
+      alt: "Dark-mode Conversational RAG interface displayed on a phone held in one hand",
+      caption: "Interface study / not a production screenshot",
       fit: "contain",
     },
   ],
@@ -186,12 +189,17 @@ function CaseStudy({ item, context, contextLabel = "Context", problem, role, rol
           <article className={styles.caseMeta}><h3>{roleLabel}</h3><p>{role}</p></article>
         </div>
         {visual ? (
-          <section className={styles.caseMediaPlate} aria-label={`${item.title} visual evidence`}>
+          <section className={`${styles.caseMediaPlate} ${visual.modelSrc ? styles.caseMediaPlateWithModel : ""}`} aria-label={`${item.title} visual evidence`}>
             <div className={styles.caseMediaCopy}>
               <span className={styles.eyebrow}>{visual.eyebrow}</span>
               <strong>{visual.title}</strong>
               <p>{visual.copy}</p>
             </div>
+            {visual.modelSrc ? (
+              <React.Suspense fallback={<div className={styles.robotModelFallback} aria-hidden="true" />}>
+                <RobotCompanion className={styles.robotModelBetween} />
+              </React.Suspense>
+            ) : null}
             <div className={styles.caseMediaGrid}>
               {visual.items.map((media) => (
                 <figure className={styles.caseMediaItem} key={media.src}>

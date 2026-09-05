@@ -628,6 +628,37 @@
   object-fit: contain;
 }
 
+.caseMediaPlateWithModel {
+  grid-template-columns: minmax(280px, .36fr) minmax(210px, .24fr) minmax(280px, .4fr);
+  grid-template-areas: "copy model media";
+  gap: clamp(24px, 3vw, 56px);
+}
+
+.caseMediaPlateWithModel .caseMediaCopy {
+  grid-area: copy;
+}
+
+.caseMediaPlateWithModel .caseMediaGrid {
+  grid-area: media;
+}
+
+.robotModelBetween,
+.robotModelFallback {
+  grid-area: model;
+  min-width: 0;
+  width: 100%;
+  height: clamp(260px, 24vw, 380px);
+}
+
+.robotModelBetween {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.robotModelBetween:active {
+  cursor: grabbing;
+}
+
 .caseMediaItem figcaption {
   min-height: 36px;
   display: flex;
@@ -829,6 +860,13 @@
     grid-template-columns: 1fr;
   }
 
+  .caseMediaPlateWithModel {
+    grid-template-columns: minmax(180px, .38fr) minmax(0, .62fr);
+    grid-template-areas:
+      "copy copy"
+      "model media";
+  }
+
   .caseMediaCopy {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(220px, .8fr);
@@ -895,6 +933,19 @@
 
   .caseMediaCopy {
     display: block;
+  }
+
+  .caseMediaPlateWithModel {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "model"
+      "media";
+  }
+
+  .robotModelBetween,
+  .robotModelFallback {
+    height: min(78vw, 340px);
   }
 
   .caseMediaCopy > p {
