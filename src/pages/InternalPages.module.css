@@ -427,11 +427,11 @@
   min-height: 84svh;
   box-shadow: 0 -34px 90px rgba(0, 0, 0, .5);
   background:
-    linear-gradient(rgba(10,10,10,.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10,10,10,.028) 1px, transparent 1px),
-    #f0ede5 !important;
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+    var(--bg-secondary) !important;
   background-size: 56px 56px !important;
-  color: #0a0a0a;
+  color: var(--text-primary);
 }
 
 .workIndexSection::before {
@@ -439,7 +439,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 1px;
-  background: rgba(10, 10, 10, .28);
+  background: var(--border-default);
 }
 
 .workIndexRail {
@@ -449,8 +449,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(10, 10, 10, .16);
-  color: rgba(10, 10, 10, .52);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: .16em;
@@ -464,31 +464,31 @@
 
 .workIndexSection .eyebrow,
 .workIndexSection .number {
-  color: #72510c;
+  color: var(--accent-bright);
 }
 
 .workIndexSection .sectionHeader h2,
 .workIndexSection .caseIndex strong {
-  color: #0a0a0a;
+  color: var(--text-primary);
 }
 
 .workIndexSection .caseIndex {
   margin-top: clamp(38px, 5vw, 62px);
-  border-color: rgba(10,10,10,.25);
+  border-color: var(--border-default);
 }
 
 .workIndexSection .caseIndex a {
   min-height: 106px;
-  border-color: rgba(10,10,10,.15);
+  border-color: var(--border-subtle);
 }
 
 .workIndexSection .caseIndex a:hover,
 .workIndexSection .caseIndex a:focus-visible {
-  color: #72510c;
+  color: var(--accent-bright);
 }
 
 .workIndexSection .caseIndex small {
-  color: rgba(10,10,10,.56);
+  color: var(--text-secondary);
 }
 
 .workPage .caseStudy[data-case="rag"] {

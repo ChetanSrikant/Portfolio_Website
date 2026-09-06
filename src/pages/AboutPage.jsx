@@ -162,8 +162,8 @@ const PROFESSIONAL_CHAPTERS = [
     organization: "DRDO",
     role: "Project Intern",
     location: "Hyderabad, India",
-    summary: "Designed Tkinter interfaces for RS-422 device communication, streamlining technical workflows and reducing communication errors.",
-    tags: ["Python", "Tkinter", "RS-422"],
+    summary: "Worked as a Project Intern.",
+    tags: [],
   },
   {
     period: "Mar - Aug 2025",
@@ -438,7 +438,9 @@ export default function AboutPage() {
                       <small>{chapter.location}</small>
                     </div>
                     <p>{chapter.summary}</p>
-                    <ContextChips items={chapter.tags} label={`${chapter.organization} technologies and context`} />
+                    {chapter.tags.length > 0 && (
+                      <ContextChips items={chapter.tags} label={`${chapter.organization} technologies and context`} />
+                    )}
                     {chapter.achievement && <strong className={styles.timelineAchievement}>{chapter.achievement}</strong>}
                   </article>
                 </li>
