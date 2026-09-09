@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { getRouteSeo } from "../config/seo.js";
 import Nav from "./Nav.jsx";
 import FloatingDock from "./FloatingDock.jsx";
 import Footer from "./Footer.jsx";
@@ -60,7 +61,7 @@ export default function InternalPageShell({ children, title, showAmbient = true,
   const mainRef = useRef(null);
 
   useEffect(() => {
-    document.title = `${title} | Chetan Mandiga`;
+    document.title = getRouteSeo(window.location.pathname).title;
     const frame = window.requestAnimationFrame(() => {
       const hash = decodeURIComponent(window.location.hash.slice(1));
       const target = hash ? document.getElementById(hash) : null;

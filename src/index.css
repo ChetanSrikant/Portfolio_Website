@@ -13,7 +13,7 @@
   --text-primary: #f4f4f0;
   --text-secondary: #a0a09b;
   --text-tertiary: #666663;
-  --text-muted: #666663;
+  --text-muted: #858580;
 
   /* Signature gold / bronze accent from the original visual system. */
   --accent: #c9a24b;
@@ -41,9 +41,9 @@
   --media-text-muted: #a0a09b;
 
   /* ---- Type ---- */
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Manrope", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  --font-body: "Manrope", "Manrope Fallback", sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
 
   /* ---- Layout ---- */
   --content-width: 1500px;
@@ -67,7 +67,7 @@ html[data-theme="light"] {
   --text-primary: #0a0a0a;
   --text-secondary: #555552;
   --text-tertiary: #777773;
-  --text-muted: #777773;
+  --text-muted: #686864;
   --accent: #8b6823;
   --accent-bright: #6f4f12;
   --accent-dim: rgba(139, 104, 35, 0.12);

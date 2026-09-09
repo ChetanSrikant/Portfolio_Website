@@ -307,14 +307,14 @@
 }
 .brandCopy strong { font-family: var(--font-display); font-size: 11px; font-weight: 700; }
 .brandCopy small { color: var(--text-muted); }
-.link, .menuToggle { color: var(--text-muted); font-size: 9px; letter-spacing: .14em; }
+.link, .menuToggle { color: var(--text-muted); font-size: 11px; letter-spacing: .12em; }
 .link::after { bottom: 5px; background: var(--accent); }
 .resumeLink {
   min-height: 38px;
   border-color: var(--border-default);
   background: transparent;
   color: var(--text-secondary);
-  font-size: 9px;
+  font-size: 11px;
 }
 .resumeLink:hover { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
 

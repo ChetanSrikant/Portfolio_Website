@@ -1,0 +1,134 @@
+{
+  "/images/drift-wall/drift-01.jpeg": {
+    "src": "/images/drift-wall/drift-01-480.webp",
+    "srcSet": "/images/drift-wall/drift-01-240.webp 240w, /images/drift-wall/drift-01-480.webp 480w"
+  },
+  "/images/drift-wall/drift-02.jpeg": {
+    "src": "/images/drift-wall/drift-02-480.webp",
+    "srcSet": "/images/drift-wall/drift-02-240.webp 240w, /images/drift-wall/drift-02-480.webp 480w"
+  },
+  "/images/drift-wall/drift-03.jpeg": {
+    "src": "/images/drift-wall/drift-03-480.webp",
+    "srcSet": "/images/drift-wall/drift-03-240.webp 240w, /images/drift-wall/drift-03-480.webp 480w"
+  },
+  "/images/drift-wall/drift-04.jpeg": {
+    "src": "/images/drift-wall/drift-04-480.webp",
+    "srcSet": "/images/drift-wall/drift-04-240.webp 240w, /images/drift-wall/drift-04-480.webp 480w"
+  },
+  "/images/drift-wall/drift-05.jpeg": {
+    "src": "/images/drift-wall/drift-05-480.webp",
+    "srcSet": "/images/drift-wall/drift-05-240.webp 240w, /images/drift-wall/drift-05-480.webp 480w"
+  },
+  "/images/drift-wall/drift-06.jpeg": {
+    "src": "/images/drift-wall/drift-06-480.webp",
+    "srcSet": "/images/drift-wall/drift-06-240.webp 240w, /images/drift-wall/drift-06-480.webp 480w"
+  },
+  "/images/drift-wall/drift-07.jpeg": {
+    "src": "/images/drift-wall/drift-07-480.webp",
+    "srcSet": "/images/drift-wall/drift-07-240.webp 240w, /images/drift-wall/drift-07-480.webp 480w"
+  },
+  "/images/drift-wall/drift-08.jpeg": {
+    "src": "/images/drift-wall/drift-08-480.webp",
+    "srcSet": "/images/drift-wall/drift-08-240.webp 240w, /images/drift-wall/drift-08-480.webp 480w"
+  },
+  "/images/drift-wall/drift-09.jpeg": {
+    "src": "/images/drift-wall/drift-09-480.webp",
+    "srcSet": "/images/drift-wall/drift-09-240.webp 240w, /images/drift-wall/drift-09-480.webp 480w"
+  },
+  "/images/drift-wall/drift-10.jpeg": {
+    "src": "/images/drift-wall/drift-10-480.webp",
+    "srcSet": "/images/drift-wall/drift-10-240.webp 240w, /images/drift-wall/drift-10-480.webp 480w"
+  },
+  "/images/drift-wall/drift-11.jpeg": {
+    "src": "/images/drift-wall/drift-11-480.webp",
+    "srcSet": "/images/drift-wall/drift-11-240.webp 240w, /images/drift-wall/drift-11-480.webp 480w"
+  },
+  "/images/drift-wall/drift-12.jpeg": {
+    "src": "/images/drift-wall/drift-12-480.webp",
+    "srcSet": "/images/drift-wall/drift-12-240.webp 240w, /images/drift-wall/drift-12-480.webp 480w"
+  },
+  "/media/convocation-gallery/convocation-01.jpeg": {
+    "src": "/media/convocation-gallery/convocation-01-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-01-480.webp 480w, /media/convocation-gallery/convocation-01-960.webp 960w, /media/convocation-gallery/convocation-01-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-02.jpeg": {
+    "src": "/media/convocation-gallery/convocation-02-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-02-480.webp 480w, /media/convocation-gallery/convocation-02-960.webp 899w"
+  },
+  "/media/convocation-gallery/convocation-03.jpeg": {
+    "src": "/media/convocation-gallery/convocation-03-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-03-480.webp 480w, /media/convocation-gallery/convocation-03-960.webp 899w"
+  },
+  "/media/convocation-gallery/convocation-04.jpeg": {
+    "src": "/media/convocation-gallery/convocation-04-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-04-480.webp 480w, /media/convocation-gallery/convocation-04-960.webp 960w, /media/convocation-gallery/convocation-04-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-05.jpeg": {
+    "src": "/media/convocation-gallery/convocation-05-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-05-480.webp 480w, /media/convocation-gallery/convocation-05-960.webp 960w, /media/convocation-gallery/convocation-05-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-06.jpeg": {
+    "src": "/media/convocation-gallery/convocation-06-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-06-480.webp 480w, /media/convocation-gallery/convocation-06-960.webp 960w, /media/convocation-gallery/convocation-06-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-07.jpeg": {
+    "src": "/media/convocation-gallery/convocation-07-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-07-480.webp 480w, /media/convocation-gallery/convocation-07-960.webp 899w"
+  },
+  "/media/convocation-gallery/convocation-08.jpeg": {
+    "src": "/media/convocation-gallery/convocation-08-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-08-480.webp 480w, /media/convocation-gallery/convocation-08-960.webp 960w, /media/convocation-gallery/convocation-08-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-09.jpeg": {
+    "src": "/media/convocation-gallery/convocation-09-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-09-480.webp 480w, /media/convocation-gallery/convocation-09-960.webp 960w, /media/convocation-gallery/convocation-09-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-10.jpeg": {
+    "src": "/media/convocation-gallery/convocation-10-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-10-480.webp 480w, /media/convocation-gallery/convocation-10-960.webp 960w, /media/convocation-gallery/convocation-10-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-11.jpeg": {
+    "src": "/media/convocation-gallery/convocation-11-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-11-480.webp 480w, /media/convocation-gallery/convocation-11-960.webp 960w, /media/convocation-gallery/convocation-11-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-12.jpeg": {
+    "src": "/media/convocation-gallery/convocation-12-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-12-480.webp 480w, /media/convocation-gallery/convocation-12-960.webp 899w"
+  },
+  "/media/convocation-gallery/convocation-13.jpeg": {
+    "src": "/media/convocation-gallery/convocation-13-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-13-480.webp 480w, /media/convocation-gallery/convocation-13-960.webp 720w"
+  },
+  "/media/convocation-gallery/convocation-14.jpeg": {
+    "src": "/media/convocation-gallery/convocation-14-1440.webp",
+    "srcSet": "/media/convocation-gallery/convocation-14-480.webp 480w, /media/convocation-gallery/convocation-14-960.webp 960w, /media/convocation-gallery/convocation-14-1440.webp 1440w"
+  },
+  "/media/convocation-gallery/convocation-15.jpeg": {
+    "src": "/media/convocation-gallery/convocation-15-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-15-480.webp 480w, /media/convocation-gallery/convocation-15-960.webp 899w"
+  },
+  "/media/convocation-gallery/convocation-16.jpeg": {
+    "src": "/media/convocation-gallery/convocation-16-960.webp",
+    "srcSet": "/media/convocation-gallery/convocation-16-480.webp 480w, /media/convocation-gallery/convocation-16-960.webp 720w"
+  },
+  "/images/about-hero-campus.png": {
+    "src": "/images/about-hero-campus-1440.webp",
+    "srcSet": "/images/about-hero-campus-480.webp 480w, /images/about-hero-campus-960.webp 960w, /images/about-hero-campus-1440.webp 1440w"
+  },
+  "/images/about-education-convocation.png": {
+    "src": "/images/about-education-convocation-1440.webp",
+    "srcSet": "/images/about-education-convocation-480.webp 480w, /images/about-education-convocation-960.webp 960w, /images/about-education-convocation-1440.webp 969w"
+  },
+  "/images/beyond/hyderabad-bridge.png": {
+    "src": "/images/beyond/hyderabad-bridge-1440.webp",
+    "srcSet": "/images/beyond/hyderabad-bridge-480.webp 480w, /images/beyond/hyderabad-bridge-960.webp 960w, /images/beyond/hyderabad-bridge-1440.webp 1200w"
+  },
+  "/images/work/computer-vision/vision-detection-city.png": {
+    "src": "/images/work/computer-vision/vision-detection-city-960.webp",
+    "srcSet": "/images/work/computer-vision/vision-detection-city-480.webp 480w, /images/work/computer-vision/vision-detection-city-960.webp 710w"
+  },
+  "/images/work/computer-vision/vision-detection-interior.png": {
+    "src": "/images/work/computer-vision/vision-detection-interior-960.webp",
+    "srcSet": "/images/work/computer-vision/vision-detection-interior-480.webp 480w, /images/work/computer-vision/vision-detection-interior-960.webp 822w"
+  }
+}

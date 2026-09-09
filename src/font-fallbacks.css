@@ -1,0 +1,25 @@
+/* Fallbacks measured from the delivered fonts and Windows system fonts. */
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial');
+  size-adjust: 93.7220%;
+  ascent-override: 104.9913%;
+  descent-override: 31.1560%;
+  line-gap-override: 0.0000%;
+}
+@font-face {
+  font-family: 'Manrope Fallback';
+  src: local('Arial');
+  size-adjust: 104.1356%;
+  ascent-override: 102.3665%;
+  descent-override: 28.8086%;
+  line-gap-override: 0.0000%;
+}
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  src: local('Courier New');
+  size-adjust: 130.0693%;
+  ascent-override: 78.4197%;
+  descent-override: 23.0646%;
+  line-gap-override: 0.0000%;
+}

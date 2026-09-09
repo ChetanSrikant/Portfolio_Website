@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
 import AetherField from "../components/AetherField.jsx";
-import StackingCards, { StackingCardItem } from "../components/ui/StackingCards.jsx";
 import { FlowSection } from "../components/ui/StoryScroll.jsx";
 import { HorizontalScrollCarousel } from "../components/ui/HorizontalScrollCarousel.jsx";
 import InternalPageShell from "../components/InternalPageShell.jsx";
@@ -299,16 +298,14 @@ export default function BeyondPage() {
             <h2 id="now-title">Right now.</h2>
             <span className={styles.updated}>Updated / {updatedLabel}</span>
           </Reveal>
-          <StackingCards totalCards={RIGHT_NOW.length} className={styles.nowList}>
-            {RIGHT_NOW.map((item, index) => (
-              <StackingCardItem key={item.category} index={index}>
-                <dl className={styles.nowRow}>
+          <div className={styles.nowList}>
+            {RIGHT_NOW.map((item) => (
+                <dl key={item.category} className={styles.nowRow}>
                   <dt>{item.category}</dt>
                   <dd>{item.content}</dd>
                 </dl>
-              </StackingCardItem>
             ))}
-          </StackingCards>
+          </div>
         </section>
 
         <section id="micro-detail" className={styles.microDetail} aria-label="A small frame from Hyderabad">

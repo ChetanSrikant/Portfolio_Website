@@ -8,8 +8,13 @@ function Icon({ name }) {
 }
 
 export default function MediaLightbox({ items = [], index = null, onIndexChange }) {
+  const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const previousFocus = useRef(null);
+  const indexRef = useRef(index);
+  const changeRef = useRef(onIndexChange);
+  indexRef.current = index;
+  changeRef.current = onIndexChange;
   const open = index !== null && Boolean(items[index]);
   const item = open ? items[index] : null;
 
@@ -20,9 +25,31 @@ export default function MediaLightbox({ items = [], index = null, onIndexChange 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event) => {
-      if (event.key === "Escape") onIndexChange(null);
-      if (event.key === "ArrowRight") onIndexChange((index + 1) % items.length);
-      if (event.key === "ArrowLeft") onIndexChange((index - 1 + items.length) % items.length);
+      if (event.key === "Escape") {
+        changeRef.current(null);
+        return;
+      }
+      if (event.key === "ArrowRight") changeRef.current((indexRef.current + 1) % items.length);
+      if (event.key === "ArrowLeft") changeRef.current((indexRef.current - 1 + items.length) % items.length);
+      if (event.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = [...dialogRef.current.querySelectorAll(
+        "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])",
+      )].filter((element) => !element.hasAttribute("hidden"));
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!dialogRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
@@ -31,12 +58,12 @@ export default function MediaLightbox({ items = [], index = null, onIndexChange 
       window.removeEventListener("keydown", onKeyDown);
       previousFocus.current?.focus?.();
     };
-  }, [index, items.length, onIndexChange, open]);
+  }, [items.length, open]);
 
   return (
     <AnimatePresence>
       {open && item && (
-        <motion.div className={styles.backdrop} role="dialog" aria-modal="true" aria-labelledby="lightbox-title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.target === event.currentTarget) onIndexChange(null); }}>
+        <motion.div ref={dialogRef} className={styles.backdrop} role="dialog" aria-modal="true" aria-labelledby="lightbox-title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.target === event.currentTarget) onIndexChange(null); }}>
           <button ref={closeRef} className={`${styles.control} ${styles.close}`} type="button" onClick={() => onIndexChange(null)} aria-label="Close media viewer"><Icon name="close" /></button>
           {items.length > 1 && <>
             <button className={`${styles.control} ${styles.previous}`} type="button" onClick={() => onIndexChange((index - 1 + items.length) % items.length)} aria-label="Previous artifact"><Icon name="previous" /></button>

@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ProgressiveImage } from "./ZoomParallax.jsx";
 import styles from "./HorizontalScrollCarousel.module.css";
 
-export function HorizontalScrollCarousel({ images }) {
+export function HorizontalScrollCarousel({ images, scrollLinked = true }) {
   const targetRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
@@ -14,11 +14,11 @@ export function HorizontalScrollCarousel({ images }) {
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 901px) and (prefers-reduced-motion: no-preference)");
-    const update = () => setAnimated(query.matches);
+    const update = () => setAnimated(scrollLinked && query.matches);
     update();
     query.addEventListener("change", update);
     return () => query.removeEventListener("change", update);
-  }, []);
+  }, [scrollLinked]);
 
   useLayoutEffect(() => {
     const measure = () => setTravel(Math.max(0, trackRef.current.scrollWidth - viewportRef.current.clientWidth));

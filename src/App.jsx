@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
+import { getRouteSeo, normalizePagePath } from "./config/seo.js";
 import { CredentialsPage } from "./pages/RouteStatusPage.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
@@ -29,7 +30,10 @@ function RouteLoader() {
 }
 
 export default function App() {
-  const path = window.location.pathname.replace(/\/$/, "") || "/";
+  const path = normalizePagePath(window.location.pathname);
+  useEffect(() => {
+    document.title = getRouteSeo(path).title;
+  }, [path]);
   const Page = PAGE_ROUTES[path];
 
   let content;

@@ -1,5 +1,6 @@
 import { forwardRef, memo, useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import styles from "./DriftWall.module.css";
+import ResponsiveImage from "./ResponsiveImage.jsx";
 
 function seededRandom(seed) {
   let value = seed >>> 0;
@@ -43,6 +44,7 @@ const DriftWall = forwardRef(function DriftWall({
   dim = 0.55,
   overlayColor = "#000000",
   active = true,
+  loadMedia = true,
   opacity = 1,
 }, forwardedRef) {
   const wallRef = useRef(null);
@@ -107,7 +109,7 @@ const DriftWall = forwardRef(function DriftWall({
         opacity,
       }}
     >
-      <div className={styles.plane}>
+      {loadMedia && <div className={styles.plane}>
         {columnData.map((column, columnIndex) => (
           <div
             key={columnIndex}
@@ -124,8 +126,9 @@ const DriftWall = forwardRef(function DriftWall({
               <div key={copy} className={styles.group}>
                 {column.items.map((item, itemIndex) => (
                   <figure key={`${copy}-${item.image}-${itemIndex}`} className={styles.tile}>
-                    <img
-                      src={item.image}
+                    <ResponsiveImage
+                      sizes="200px"
+                      src={loadMedia ? item.image : undefined}
                       alt=""
                       loading="lazy"
                       draggable="false"
@@ -137,7 +140,7 @@ const DriftWall = forwardRef(function DriftWall({
             ))}
           </div>
         ))}
-      </div>
+      </div>}
       <div className={styles.scrim} />
     </div>
   );

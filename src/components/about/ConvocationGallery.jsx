@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useReducedMotionPreference from "../../hooks/useReducedMotionPreference.js";
 import styles from "./ConvocationGallery.module.css";
+import ResponsiveImage from "../ResponsiveImage.jsx";
 
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
@@ -29,7 +30,7 @@ function GalleryMedia({ item, eager = false, decorative = false }) {
       />
     );
   }
-  return <img className={styles.media} src={item.src} alt={decorative ? "" : item.alt} loading={eager ? "eager" : "lazy"} />;
+  return <ResponsiveImage className={styles.media} src={item.src} alt={decorative ? "" : item.alt} sizes={decorative ? "240px" : "(max-width: 720px) 100vw, 960px"} loading={eager ? "eager" : "lazy"} />;
 }
 
 function StaticGallery({ items, onSelect }) {

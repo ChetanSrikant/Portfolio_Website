@@ -6,8 +6,6 @@
  */
 import * as THREE from "three";
 
-export const HERO_NAV_THRESHOLD = 0.25;
-
 export const HOME_STAGE_KEYS = Object.freeze({
   INTRO: "intro",
   PHILOSOPHY: "philosophy",
@@ -285,7 +283,8 @@ export function scrollToStageProgress(fraction) {
   const clampedFraction = clamp01(fraction);
   const total = wrapper.offsetHeight - window.innerHeight;
   const target = wrapper.offsetTop + total * clampedFraction;
-  window.scrollTo({ top: target, behavior: "smooth" });
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: target, behavior: reducedMotion ? "auto" : "smooth" });
 }
 
 function frame(progress, x, y, z, scale, headingDeg, opacity, shadowOpacity) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SplitReveal from "./SplitReveal.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
-import { HOME_TARGETS, scrollToStageProgress } from "../config/home.js";
 import styles from "./Hero.module.css";
 
 const CAPABILITIES = ["THINK", "RETRIEVE", "SEE", "ACT"];
@@ -70,17 +69,16 @@ export default function Hero() {
             <button
               type="button"
               className={styles.primaryAction}
-              onClick={() => scrollToStageProgress(HOME_TARGETS.work)}
+              onClick={() => document.getElementById("selected-work")?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })}
             >
               Explore my work
             </button>
-            <button
-              type="button"
+            <a
               className={styles.secondaryAction}
-              onClick={() => scrollToStageProgress(HOME_TARGETS.contact)}
+              href="mailto:chetansrikantmandiga@gmail.com"
             >
               Start a conversation
-            </button>
+            </a>
           </div>
         </div>
 

@@ -388,10 +388,12 @@
 }
 
 .nowList {
-  margin-top: clamp(64px, 7vw, 98px);
+  margin-top: clamp(36px, 4vw, 56px);
+  border-top: 1px solid var(--border-default);
 }
 
 .nowRow {
+  border-bottom: 1px solid var(--border-subtle);
   margin: 0;
   display: grid;
   grid-template-columns: minmax(170px, .34fr) minmax(0, 1.66fr);

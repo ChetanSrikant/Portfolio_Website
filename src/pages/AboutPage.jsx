@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import ResponsiveImage from "../components/ResponsiveImage.jsx";
+import ViewportVideo from "../components/ViewportVideo.jsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InternalPageShell from "../components/InternalPageShell.jsx";
@@ -7,7 +9,6 @@ import CursorReactiveConstellationField from "../components/CursorReactiveConste
 import ConvocationGallery from "../components/about/ConvocationGallery.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import { ThreeDPaper } from "../shaders/3d-paper/ThreeDPaper.tsx";
-import "@designcodeio/threeui/style.css";
 import {
   ContextChips,
   LessonFold,
@@ -142,7 +143,7 @@ const CONVOCATION_GALLERY = [
   },
   {
     type: "video",
-    src: "/media/convocation-gallery/convocation-video.mp4",
+    src: "/media/convocation-gallery/convocation-video-delivery.mp4",
     alt: "Convocation day video from BML Munjal University",
     caption: "A short video from convocation day.",
   },
@@ -308,13 +309,13 @@ export default function AboutPage() {
             }}
           >
             <span className={styles.portraitVisual}>
-              <img
+              <ResponsiveImage
                 className={styles.portraitBase}
                 src="/images/about-hero-campus.png"
                 alt="Chetan Mandiga on the BML Munjal University campus"
                 fetchpriority="high"
               />
-              <img
+              <ResponsiveImage
                 className={styles.portraitColor}
                 src="/images/about-hero-campus.png"
                 alt=""
@@ -344,7 +345,7 @@ export default function AboutPage() {
               onClick={() => setGalleryOpen(true)}
               data-panel
             >
-              <img src="/images/about-education-convocation.png" alt="Chetan Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
+              <ResponsiveImage src="/images/about-education-convocation.png" alt="Chetan Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
               <span className={styles.educationGalleryHint}>
                 <span>Open convocation gallery</span>
                 <small>17 photos + 1 video</small>
@@ -383,9 +384,10 @@ export default function AboutPage() {
               <p>I learned each one by putting it under pressure: prototypes, interfaces, data experiments, and systems that had to behave beyond the demo.</p>
             </div>
           <figure className={styles.languageFeatureMedia}>
-            <video
+            <ViewportVideo
               key={reducedMotion ? "reduced-motion" : "motion"}
-              src="/media/tech-stack-showcase.mp4"
+              src="/media/tech-stack-showcase-delivery.mp4"
+              poster="/media/tech-stack-poster.webp"
               autoPlay={!reducedMotion}
               controls={reducedMotion}
               loop

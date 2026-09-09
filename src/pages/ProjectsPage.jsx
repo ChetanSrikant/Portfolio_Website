@@ -61,6 +61,7 @@ export default function ProjectsPage() {
   const [activeSlug, setActiveSlug] = useState(PROJECTS[0].slug);
   const [detailSlug, setDetailSlug] = useState(null);
   const closeButtonRef = useRef(null);
+  const dialogRef = useRef(null);
   const triggerRef = useRef(null);
   const filtered = useMemo(() => filter === "All" ? PROJECTS : PROJECTS.filter((project) => project.category === filter), [filter]);
   const detailProject = detailSlug ? PROJECTS.find((project) => project.slug === detailSlug) : null;
@@ -71,10 +72,25 @@ export default function ProjectsPage() {
     const previousOverflow = document.body.style.overflow;
     const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
     const onKeyDown = (event) => {
-      if (event.key === "Escape") setDetailSlug(null);
-      if (event.key === "Tab") {
+      if (event.key === "Escape") {
+        setDetailSlug(null);
+        return;
+      }
+      if (event.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = [...dialogRef.current.querySelectorAll(
+        "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])",
+      )].filter((element) => !element.hasAttribute("hidden"));
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        closeButtonRef.current?.focus();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -187,6 +203,7 @@ export default function ProjectsPage() {
           }}
         >
           <section
+            ref={dialogRef}
             className={styles.projectModalPanel}
             role="dialog"
             aria-modal="true"

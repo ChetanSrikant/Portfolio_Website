@@ -10,9 +10,10 @@ const LINKS = [
   { label: "Beyond", href: "/beyond" },
 ];
 
-export default function Nav({ visible = true }) {
+export default function Nav({ visible = true, hideOnScroll = false }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isVisible = visible && !(hideOnScroll && scrolled);
 
   useEffect(() => {
     const onScroll = () => {
@@ -34,14 +35,15 @@ export default function Nav({ visible = true }) {
   }, []);
 
   useEffect(() => {
-    if (!visible) setMenuOpen(false);
-  }, [visible]);
+    if (!isVisible) setMenuOpen(false);
+  }, [isVisible]);
 
   const goHome = (event) => {
     setMenuOpen(false);
     if (window.location.pathname === "/") {
       event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
     }
   };
 
@@ -50,11 +52,11 @@ export default function Nav({ visible = true }) {
       className={clsx(
         styles.nav,
         scrolled && styles.scrolled,
-        !visible && styles.navHidden
+        !isVisible && styles.navHidden
       )}
       aria-label="Primary navigation"
-      aria-hidden={!visible}
-      inert={visible ? undefined : ""}
+      aria-hidden={!isVisible}
+      inert={isVisible ? undefined : ""}
     >
       <div className={styles.inner}>
         <a href="/" className={styles.brand} onClick={goHome}>
@@ -62,7 +64,7 @@ export default function Nav({ visible = true }) {
             CM
           </span>
           <span className={styles.brandCopy}>
-            <strong>Chetan Mandiga</strong>
+            <strong>Chetan Srikant Mandiga</strong>
             <small>AI developer · Product builder</small>
           </span>
         </a>

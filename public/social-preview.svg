@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b0c0d"/>
+  <path d="M72 95H1128M72 528H1128" stroke="#353633"/>
+  <text x="72" y="67" fill="#b7b7ae" font-family="Consolas, monospace" font-size="18" letter-spacing="3">CHETAN MANDIGA / PORTFOLIO</text>
+  <text x="72" y="244" fill="#f3f1e9" font-family="Arial, sans-serif" font-size="88" font-weight="700" letter-spacing="-4">Chetan Mandiga</text>
+  <text x="76" y="327" fill="#d7b879" font-family="Arial, sans-serif" font-size="34">Data Science &amp; Software Engineering</text>
+  <text x="76" y="399" fill="#a3a59e" font-family="Arial, sans-serif" font-size="24">Systems. Experiments. Evidence.</text>
+  <text x="72" y="577" fill="#b7b7ae" font-family="Consolas, monospace" font-size="18" letter-spacing="2">SELECTED WORK / PROJECTS / ABOUT</text>
+  <path d="M1062 548L1082 563L1062 578M1093 581H1125" fill="none" stroke="#d7b879" stroke-width="4"/>
+</svg>

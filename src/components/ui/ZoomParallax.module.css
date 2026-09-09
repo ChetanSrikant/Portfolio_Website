@@ -1,7 +1,7 @@
 .root {
   position: relative;
-  height: 260vh;
-  min-height: 1800px;
+  height: 220dvh;
+  min-height: 1400px;
   background: var(--bg);
 }
 

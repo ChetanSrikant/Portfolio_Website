@@ -9,6 +9,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
 const MODEL_URL = "/models/justice-gundam.glb";
+// GLTF scenes are cached across mounts; camera readiness must not normalize
+// an already scaled scene again.
+const normalizedScenes = new WeakSet();
 
 // Clip names baked into the rig.
 export const CLIPS = {
@@ -120,6 +123,7 @@ const GundamModel = forwardRef(function GundamModel(
   // Normalize scale/position regardless of the glb's authored units, and
   // tune materials (grounded shadows, punchy beam-saber glow).
   useEffect(() => {
+    if (!normalizedScenes.has(scene)) {
     const box = new THREE.Box3().setFromObject(scene);
     const size = new THREE.Vector3();
     box.getSize(size);
@@ -145,6 +149,8 @@ const GundamModel = forwardRef(function GundamModel(
     scene.position.x -= center2.x;
     scene.position.y -= box2.min.y;
     scene.position.z -= center2.z;
+    normalizedScenes.add(scene);
+    }
 
     scene.traverse((obj) => {
       if (obj.isMesh) {
@@ -542,6 +548,5 @@ const GundamModel = forwardRef(function GundamModel(
   );
 });
 
-useGLTF.preload(MODEL_URL);
 
 export default GundamModel;

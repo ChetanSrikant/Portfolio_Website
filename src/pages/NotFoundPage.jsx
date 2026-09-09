@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from "react";
+import { Component, Suspense, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
 import InternalPageShell from "../components/InternalPageShell.jsx";
@@ -7,6 +7,14 @@ import PlaygroundContent from "../components/Playground.jsx";
 import KineticTextLoader from "../components/KineticTextLoader.jsx";
 import useReducedMotionPreference from "../hooks/useReducedMotionPreference.js";
 import styles from "./RouteStatusPage.module.css";
+
+class PlaygroundBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() {
+    return this.state.failed ? <p role="status">The 3D model could not load. <a href="/">Return to the portfolio</a>.</p> : this.props.children;
+  }
+}
 
 function NotFoundLighting() {
   return (
@@ -37,6 +45,7 @@ export default function NotFoundPage() {
         </div>
 
         <div className={styles.playArea}>
+          <PlaygroundBoundary>
           <div className={styles.modelViewport} aria-label="Interactive Justice Gundam model">
             {!modelReady && (
               <div className={styles.loadingOverlay} role="status">
@@ -74,6 +83,7 @@ export default function NotFoundPage() {
               </Suspense>
             </Canvas>
           </div>
+          </PlaygroundBoundary>
           <PlaygroundContent gundamApiRef={gundamApiRef} active={modelReady} />
         </div>
       </section>

@@ -6,7 +6,6 @@ import {
   useRef,
   useState,
 } from "react";
-import "@designcodeio/threeui/style.css";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Html, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
@@ -176,6 +175,22 @@ export default function GundamStage({
   children,
 }) {
   const wrapperRef = useRef(null);
+  const [renderVisible, setRenderVisible] = useState(true);
+  useEffect(() => {
+    let inView = true;
+    const update = () => setRenderVisible(inView && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      update();
+    }, { rootMargin: "200px" });
+    observer.observe(wrapperRef.current);
+    document.addEventListener("visibilitychange", update);
+    update();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
   const canvasLayerRef = useRef(null);
   const initializationRef = useRef(null);
   const introPanelRef = useRef(null);
@@ -222,6 +237,7 @@ export default function GundamStage({
     landingMode: false,
     skillsActive: false,
     skillsCaptionVisible: false,
+    skillsMediaEnabled: false,
   }), []);
   const [ui, setUi] = useState(initialUi);
   const uiRef = useRef(initialUi);
@@ -358,6 +374,9 @@ export default function GundamStage({
       landingMode: playgroundFlight.started,
       skillsActive: skillsOpacity > 0.02,
       skillsCaptionVisible: skillsOpacity > 0.18,
+      skillsMediaEnabled:
+        previousUi.skillsMediaEnabled ||
+        progress >= Math.max(0, HOME_STAGE.panelFades.skillsBackdrop[0] - 0.025),
     };
     const changed = Object.keys(nextUi).some((key) => nextUi[key] !== previousUi[key]);
     if (changed) {
@@ -599,6 +618,7 @@ export default function GundamStage({
           dim={0.55}
           overlayColor="#000000"
           active={ui.skillsActive}
+          loadMedia={ui.skillsMediaEnabled}
           opacity={0}
         />
         {ui.skillsCaptionVisible && (
@@ -628,6 +648,7 @@ export default function GundamStage({
           aria-hidden="true"
         >
           <Canvas
+            frameloop={renderVisible ? "always" : "never"}
             shadows
             dpr={viewportWidth <= 720 ? [1, 1.35] : [1, 1.75]}
             gl={{ antialias: true, powerPreference: "high-performance" }}
@@ -685,8 +706,8 @@ export default function GundamStage({
               <div className={styles.initReadout}>
                 <span data-init-status>UNIT / ZGMF-X09A</span>
                 <strong data-init-status>INITIALIZING</strong>
-                <span data-init-status>ARMOR BUS · ONLINE</span>
-                <span data-init-status>OPTICS · SYNCED</span>
+                <span data-init-status>GLB · LOADED</span>
+                <span data-init-status>RENDERER · READY</span>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import styles from "./ZoomParallax.module.css";
+import ResponsiveImage from "../ResponsiveImage.jsx";
 
 const SCALE_TARGETS = [3.7, 4.8, 3.3, 5.2, 4.6, 4.1, 3.5];
 
@@ -42,7 +43,7 @@ export function ProgressiveImage({
       className={`${styles.progressiveImage} ${isLoaded ? styles.imageLoaded : ""} ${className}`}
       style={{ "--image-placeholder": placeholder ? `url(${placeholder})` : "none" }}
     >
-      <img
+      <ResponsiveImage
         ref={imageRef}
         src={src}
         alt={alt}

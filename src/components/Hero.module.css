@@ -103,12 +103,16 @@
 
 .primaryAction,
 .secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 48px;
   border-radius: 2px;
   padding: 0 20px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 600;
+  text-decoration: none;
   white-space: nowrap;
   transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
@@ -313,7 +317,7 @@
     inset: auto;
     z-index: 0;
     width: calc(100% - 32px);
-    height: clamp(270px, 44dvh, 390px);
+    height: clamp(240px, 34dvh, 320px);
     margin: 0 16px;
   }
 

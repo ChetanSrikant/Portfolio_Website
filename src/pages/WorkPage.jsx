@@ -46,12 +46,12 @@ const VISION_PRODUCT_VISUAL = {
   copy: "Three compact records show the source context, the object collection, and the detection metadata that supports visual retrieval.",
   items: [
     {
-      src: "/images/work/computer-vision/vision-detection-city.png",
+      src: "/images/work/computer-vision/vision-detection-city-960.webp",
       alt: "Object-detection result identifying buildings, people, bags, a bicycle, and a pushcart in a city square",
       caption: "01 / Urban detection result",
     },
     {
-      src: "/images/work/computer-vision/vision-detection-interior.png",
+      src: "/images/work/computer-vision/vision-detection-interior-960.webp",
       alt: "Object-detection result identifying furniture and household objects in an interior scene",
       caption: "02 / Interior detection result",
     },
@@ -75,31 +75,21 @@ function Pipeline({ steps }) {
 
 function AgentWorkspace() {
   const [active, setActive] = useState(0);
-  const [visible, setVisible] = useState(false);
-  const workspaceRef = React.useRef(null);
-
-  useEffect(() => {
-    const node = workspaceRef.current;
-    if (!node || !("IntersectionObserver" in window)) return undefined;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: .25 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % RAG_STATES.length), 2400);
-    return () => window.clearInterval(timer);
-  }, [visible]);
 
   return (
-    <div ref={workspaceRef} className={styles.agentWorkspace}>
-      <div className={styles.agentHeader}><span>AI agent workspace</span><span>Process state / {active + 1} of {RAG_STATES.length}</span></div>
+    <div className={styles.agentWorkspace}>
+      <div className={styles.agentHeader}><span>Architecture walkthrough / illustrative, not a live run</span><span>Stage / {active + 1} of {RAG_STATES.length}</span></div>
       <div className={styles.agentBody}>
         <div className={styles.agentSteps} role="tablist" aria-label="RAG process states">
-          {RAG_STATES.map(([label], index) => <button key={label} type="button" role="tab" aria-selected={active === index} className={`${styles.agentStep} ${active === index ? styles.agentStepActive : ""}`} onClick={() => setActive(index)}>{String(index + 1).padStart(2, "0")} / {label}</button>)}
+          {RAG_STATES.map(([label], index) => <button key={label} id={`rag-stage-${index}`} type="button" role="tab" aria-selected={active === index} aria-controls="rag-stage-panel" tabIndex={active === index ? 0 : -1} className={`${styles.agentStep} ${active === index ? styles.agentStepActive : ""}`} onClick={() => setActive(index)} onKeyDown={(event) => {
+            if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === "Home" ? 0 : event.key === "End" ? RAG_STATES.length - 1 : (index + (["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : -1) + RAG_STATES.length) % RAG_STATES.length;
+            setActive(next);
+            document.getElementById(`rag-stage-${next}`)?.focus();
+          }}>{String(index + 1).padStart(2, "0")} / {label}</button>)}
         </div>
-        <div className={styles.agentOutput} role="tabpanel" aria-live="polite"><strong>{RAG_STATES[active][0]}</strong><p>{RAG_STATES[active][1]}</p></div>
+        <div id="rag-stage-panel" className={styles.agentOutput} role="tabpanel" aria-labelledby={`rag-stage-${active}`} tabIndex={0}><strong>{RAG_STATES[active][0]}</strong><p>{RAG_STATES[active][1]}</p></div>
       </div>
     </div>
   );
