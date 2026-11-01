@@ -209,6 +209,42 @@
   letter-spacing: -0.025em;
 }
 
+.bottomRight {
+  display: grid;
+  justify-items: end;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.socialLink {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: var(--surface-faint);
+}
+
+.socialLink:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent-line);
+  background: var(--accent-dim);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .role {
   color: var(--text-tertiary);
   font-size: 13px;
@@ -310,6 +346,11 @@
 
   .meta {
     flex-wrap: wrap;
+  }
+
+  .bottomRight {
+    align-self: stretch;
+    margin-left: 0;
   }
 
   .title {

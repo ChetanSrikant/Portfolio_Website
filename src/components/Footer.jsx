@@ -1,4 +1,11 @@
+import { GitHubLogoIcon, LinkedInLogoIcon, InstagramLogoIcon } from "@radix-ui/react-icons";
 import styles from "./Footer.module.css";
+
+const SOCIAL_LINKS = [
+  { label: "GitHub", href: "https://github.com/ChetanSrikant", external: true, Icon: GitHubLogoIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/", external: true, Icon: LinkedInLogoIcon },
+  { label: "Instagram", href: "https://www.instagram.com/chetan_srikant/", external: true, Icon: InstagramLogoIcon },
+];
 
 const FOOTER_GROUPS = [
   {
@@ -20,16 +27,7 @@ const FOOTER_GROUPS = [
   {
     title: "Connect",
     links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/ChetanSrikant",
-        external: true,
-      },
-      {
-        label: "LinkedIn",
-        href: "https://www.linkedin.com/in/chetan-srikant-mandiga-514784248/",
-        external: true,
-      },
+      ...SOCIAL_LINKS,
       { label: "Résumé", href: "/resume.pdf", external: true },
     ],
   },
@@ -155,10 +153,27 @@ export default function Footer({ showGundamDisclaimer = true, showStatement = tr
             </span>
           </div>
 
-          <div className={styles.meta}>
-            <span>© {year}</span>
-            <span className={styles.metaDot} aria-hidden="true">•</span>
-            <span>Built with curiosity.</span>
+          <div className={styles.bottomRight}>
+            <nav className={styles.socials} aria-label="Social profiles">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  className={styles.socialLink}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${label} (opens in a new tab)`}
+                  title={label}
+                >
+                  <Icon width={20} height={20} aria-hidden="true" focusable="false" />
+                </a>
+              ))}
+            </nav>
+            <div className={styles.meta}>
+              <span>© {year}</span>
+              <span className={styles.metaDot} aria-hidden="true">•</span>
+              <span>Built with curiosity.</span>
+            </div>
           </div>
         </div>
 
