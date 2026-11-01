@@ -30,7 +30,7 @@ export default function Hero() {
         <img
           className={styles.portrait}
           src="/images/hero-chetan-editorial.jpeg"
-          alt="Chetan Mandiga seated and smiling in a monochrome interior portrait"
+          alt="Chetan Srikant Mandiga seated and smiling in a monochrome interior portrait"
           width="1200"
           height="1600"
           fetchpriority="high"
@@ -39,7 +39,7 @@ export default function Hero() {
           PORTRAIT / 001
         </div>
         <figcaption className={styles.portraitCaption}>
-          <span>Chetan Mandiga</span>
+          <span>Chetan Srikant Mandiga</span>
           <span>AI developer and product builder</span>
         </figcaption>
       </figure>

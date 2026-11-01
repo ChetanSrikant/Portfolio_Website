@@ -101,7 +101,7 @@ export default function Nav({ visible = true, hideOnScroll = false }) {
             target="_blank"
             rel="noreferrer"
             onClick={() => setMenuOpen(false)}
-            aria-label="Open Chetan Mandiga's résumé in a new tab"
+            aria-label="Open Chetan Srikant Mandiga's résumé in a new tab"
           >
             Résumé
             <span aria-hidden="true">↗</span>

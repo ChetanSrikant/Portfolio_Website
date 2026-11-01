@@ -32,18 +32,18 @@ export function renderSeo(html, pathname, origin) {
     meta("og:title", page.title, true),
     meta("og:description", page.description, true),
     meta("og:type", "website", true),
-    meta("og:site_name", "Chetan Mandiga", true),
+    meta("og:site_name", "Chetan Srikant Mandiga", true),
     ...(known && origin ? [meta("og:url", `${origin}${path}`, true)] : []),
     meta("og:image", image, true),
     meta("og:image:type", "image/png", true),
     meta("og:image:width", "1200", true),
     meta("og:image:height", "630", true),
-    meta("og:image:alt", "Chetan Mandiga — Data Science & Software Engineering", true),
+    meta("og:image:alt", "Chetan Srikant Mandiga — Data Science & Software Engineering", true),
     meta("twitter:card", "summary_large_image"),
     meta("twitter:title", page.title),
     meta("twitter:description", page.description),
     meta("twitter:image", image),
-    meta("twitter:image:alt", "Chetan Mandiga — Data Science & Software Engineering"),
+    meta("twitter:image:alt", "Chetan Srikant Mandiga — Data Science & Software Engineering"),
   ].join("\n");
   let result = html.replace(/<!-- SEO:START -->[\s\S]*?<!-- SEO:END -->/, `<!-- SEO:START -->\n${tags}\n    <!-- SEO:END -->`);
   if (path !== "/") result = result.replace(/\s*<link[^>]+href="\/images\/hero-chetan-editorial.jpeg"[^>]*>/, "");

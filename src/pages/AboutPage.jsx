@@ -42,31 +42,31 @@ const CONVOCATION_GALLERY = [
   {
     type: "image",
     src: "/images/about-education-convocation.png",
-    alt: "Chetan Mandiga receiving recognition at the 2025 convocation",
+    alt: "Chetan Srikant Mandiga receiving recognition at the 2025 convocation",
     caption: "Recognition at BML Munjal University's 2025 convocation.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-01.jpeg",
-    alt: "Chetan Mandiga with a friend outside the BML Munjal University campus after convocation",
+    alt: "Chetan Srikant Mandiga with a friend outside the BML Munjal University campus after convocation",
     caption: "Convocation day with a friend on campus.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-02.jpeg",
-    alt: "Chetan Mandiga holding his degree folder and convocation keepsake on campus",
+    alt: "Chetan Srikant Mandiga holding his degree folder and convocation keepsake on campus",
     caption: "Degree folder in hand after the ceremony.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-03.jpeg",
-    alt: "Chetan Mandiga standing with a friend outside the university after convocation",
+    alt: "Chetan Srikant Mandiga standing with a friend outside the university after convocation",
     caption: "A campus portrait with a friend.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-04.jpeg",
-    alt: "Chetan Mandiga and a classmate holding their convocation documents inside the ceremony venue",
+    alt: "Chetan Srikant Mandiga and a classmate holding their convocation documents inside the ceremony venue",
     caption: "Inside the ceremony venue with a classmate.",
   },
   {
@@ -78,67 +78,67 @@ const CONVOCATION_GALLERY = [
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-06.jpeg",
-    alt: "Chetan Mandiga celebrating with friends inside the convocation venue",
+    alt: "Chetan Srikant Mandiga celebrating with friends inside the convocation venue",
     caption: "A celebration with friends after the ceremony.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-07.jpeg",
-    alt: "Chetan Mandiga standing with a university faculty member after convocation",
+    alt: "Chetan Srikant Mandiga standing with a university faculty member after convocation",
     caption: "A photograph with a university faculty member.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-08.jpeg",
-    alt: "Chetan Mandiga taking a selfie in front of the BML Munjal University campus",
+    alt: "Chetan Srikant Mandiga taking a selfie in front of the BML Munjal University campus",
     caption: "A convocation-day campus selfie.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-09.jpeg",
-    alt: "Chetan Mandiga with fellow graduates and university faculty on campus",
+    alt: "Chetan Srikant Mandiga with fellow graduates and university faculty on campus",
     caption: "Graduates and faculty together on campus.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-10.jpeg",
-    alt: "Chetan Mandiga taking a selfie with a fellow graduate outside the campus building",
+    alt: "Chetan Srikant Mandiga taking a selfie with a fellow graduate outside the campus building",
     caption: "A courtyard selfie with a fellow graduate.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-11.jpeg",
-    alt: "Chetan Mandiga taking a close selfie with a friend beneath colourful campus decorations",
+    alt: "Chetan Srikant Mandiga taking a close selfie with a friend beneath colourful campus decorations",
     caption: "A final-day selfie beneath the campus decorations.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-12.jpeg",
-    alt: "Chetan Mandiga holding convocation gifts and a certificate outside the ceremony building",
+    alt: "Chetan Srikant Mandiga holding convocation gifts and a certificate outside the ceremony building",
     caption: "Convocation gifts and the certificate after the ceremony.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-13.jpeg",
-    alt: "Chetan Mandiga speaking with university faculty members after convocation",
+    alt: "Chetan Srikant Mandiga speaking with university faculty members after convocation",
     caption: "A conversation with faculty after the ceremony.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-14.jpeg",
-    alt: "Chetan Mandiga taking a courtyard selfie with a fellow graduate",
+    alt: "Chetan Srikant Mandiga taking a courtyard selfie with a fellow graduate",
     caption: "A courtyard selfie before leaving campus.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-15.jpeg",
-    alt: "Chetan Mandiga standing beneath a campus banner after convocation",
+    alt: "Chetan Srikant Mandiga standing beneath a campus banner after convocation",
     caption: "A portrait outside the ceremony building.",
   },
   {
     type: "image",
     src: "/media/convocation-gallery/convocation-16.jpeg",
-    alt: "Chetan Mandiga speaking with a faculty member in the campus courtyard",
+    alt: "Chetan Srikant Mandiga speaking with a faculty member in the campus courtyard",
     caption: "One more conversation before the day ended.",
   },
   {
@@ -291,14 +291,14 @@ export default function AboutPage() {
               <span className={styles.lineMask}><span data-opening-line>I followed curiosity</span></span>
               <span className={styles.lineMask}><span data-opening-line>until ideas became real.</span></span>
             </h1>
-            <p data-opening-copy>Computer science gave me the starting point. Projects, constraints, and people taught me what engineering asks for.</p>
+            <p data-opening-copy>I’m Chetan Srikant Mandiga, an AI developer and software engineer. Computer science gave me the starting point. Projects, constraints, and people taught me what engineering asks for.</p>
           </div>
           <figure
             className={`${styles.heroPortrait} ${portraitExpanded ? styles.portraitExpanded : ""}`}
             tabIndex="0"
             role="button"
             aria-pressed={portraitExpanded}
-            aria-label="Portrait of Chetan Mandiga. Move across the image to reveal colour, or activate it to keep the colour visible."
+            aria-label="Portrait of Chetan Srikant Mandiga. Move across the image to reveal colour, or activate it to keep the colour visible."
             onPointerMove={movePortraitSpotlight}
             onClick={togglePortrait}
             onKeyDown={(event) => {
@@ -312,7 +312,7 @@ export default function AboutPage() {
               <ResponsiveImage
                 className={styles.portraitBase}
                 src="/images/about-hero-campus.png"
-                alt="Chetan Mandiga on the BML Munjal University campus"
+                alt="Chetan Srikant Mandiga on the BML Munjal University campus"
                 fetchpriority="high"
               />
               <ResponsiveImage
@@ -345,7 +345,7 @@ export default function AboutPage() {
               onClick={() => setGalleryOpen(true)}
               data-panel
             >
-              <ResponsiveImage src="/images/about-education-convocation.png" alt="Chetan Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
+              <ResponsiveImage src="/images/about-education-convocation.png" alt="Chetan Srikant Mandiga receiving recognition at the 2025 convocation" loading="lazy" />
               <span className={styles.educationGalleryHint}>
                 <span>Open convocation gallery</span>
                 <small>17 photos + 1 video</small>

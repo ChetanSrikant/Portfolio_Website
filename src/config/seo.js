@@ -1,35 +1,35 @@
 // Shared by the HTML build and the browser title update.
 export const ROUTE_SEO = {
   "/": {
-    title: "Chetan's Portfolio",
-    description: "Explore Chetan Mandiga's portfolio: data science, machine learning, and software engineering projects, with case studies, technical evidence, and a downloadable resume.",
+    title: "Chetan Srikant Mandiga | AI Developer & Software Engineer",
+    description: "Explore Chetan Srikant Mandiga's portfolio: data science, machine learning, and software engineering projects, with case studies, technical evidence, and a downloadable resume.",
   },
   "/about": {
-    title: "About Chetan Mandiga | Background & Experience",
-    description: "Get to know Chetan Mandiga: education, technical interests, and the experiences behind his approach to data science and software engineering.",
+    title: "About Chetan Srikant Mandiga | Background & Experience",
+    description: "Get to know Chetan Srikant Mandiga: education, technical interests, and the experiences behind his approach to data science and software engineering.",
   },
   "/work": {
-    title: "Work | Chetan Mandiga",
-    description: "Explore Chetan Mandiga's selected work through project case studies, implementation details, and visual evidence of the systems he builds.",
+    title: "Work | Chetan Srikant Mandiga",
+    description: "Explore Chetan Srikant Mandiga's selected work through project case studies, implementation details, and visual evidence of the systems he builds.",
   },
   "/projects": {
-    title: "Projects | Chetan Mandiga",
-    description: "Browse Chetan Mandiga's data science, machine learning, and software projects, including technical context and links to inspect the work.",
+    title: "Projects | Chetan Srikant Mandiga",
+    description: "Browse Chetan Srikant Mandiga's data science, machine learning, and software projects, including technical context and links to inspect the work.",
   },
   "/beyond": {
-    title: "Beyond the Work | Chetan Mandiga",
-    description: "A personal look beyond Chetan Mandiga's technical work: space, Gundam, stories, building, and photographs from his personal archive.",
+    title: "Beyond the Work | Chetan Srikant Mandiga",
+    description: "A personal look beyond Chetan Srikant Mandiga's technical work: space, Gundam, stories, building, and photographs from his personal archive.",
   },
   "/credentials": {
-    title: "Credentials | Chetan Mandiga",
-    description: "Chetan Mandiga's credentials page is being assembled. View the current resume for his background and experience.",
+    title: "Credentials | Chetan Srikant Mandiga",
+    description: "Chetan Srikant Mandiga's credentials page is being assembled. View the current resume for his background and experience.",
     noindex: true,
   },
 };
 
 export const NOT_FOUND_SEO = {
-  title: "Page Not Found | Chetan Mandiga",
-  description: "This page isn't here. Explore the Gundam playground or return to Chetan Mandiga's portfolio.",
+  title: "Page Not Found | Chetan Srikant Mandiga",
+  description: "This page isn't here. Explore the Gundam playground or return to Chetan Srikant Mandiga's portfolio.",
   noindex: true,
 };
 

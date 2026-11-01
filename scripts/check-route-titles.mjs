@@ -9,7 +9,7 @@ for (const request of ["/", "/index.html", "/?ref=test", "/index.html?ref=test#t
   assert.equal(route, "/");
   assert.equal(getRouteSeo(request), ROUTE_SEO["/"]);
   const rendered = renderSeo(html, route, "");
-  assert(rendered.includes("<title>Chetan&#39;s Portfolio</title>"));
+  assert(rendered.includes("<title>Chetan Srikant Mandiga | AI Developer &amp; Software Engineer</title>"));
   assert(!rendered.includes("Page Not Found"));
   assert(!rendered.includes("noindex"));
 }
